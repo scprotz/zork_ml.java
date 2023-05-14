@@ -61,13 +61,14 @@ public class DMain
 			"open bottle", "pour water in bucket", 
 			"disembark bucket", "e", "take all",
 			"eat eat-me cake", "e", "throw red cake at pool", "take spices", "w", "eat blue cake",
-			"drop orange cake", "nw", "read green paper", "tell robot 'go east'", "e",
-			"tell robot 'push triangular button'", "tell robot 'go south'", "s", "take sphere",
-			"tell robot 'lift cage'", "take sphere", "n", "w", "se", "w", "get in bucket",
-			"get water", "disembark bucket", "w", "w", "d", "n", "open box", "take violin", "w", "w",
-			"w", "u", "turn off lamp", "put sphere in trophy case", "put necklace in trophy case",
-			"put spices in trophy case", "put violin in trophy case", "drop bottle",
-			"drop green paper",
+			"drop orange cake", "nw", "read green paper", 
+//			"tell robot 'east'", "e",
+//			"tell robot 'push triangular button'", "tell robot 'go south'", "s", "take sphere",
+//			"tell robot 'lift cage'", "take sphere", "n", "w", "se", "w", "get in bucket",
+//			"get water", "disembark bucket", "w", "w", "d", "n", "open box", "take violin", "w", "w",
+//			"w", "u", "turn off lamp", "put sphere in trophy case", "put necklace in trophy case",
+//			"put spices in trophy case", "put violin in trophy case", "drop bottle",
+//			"drop green paper",
 			// FINAL //
 			"LOOK"
 

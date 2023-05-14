@@ -41,7 +41,6 @@ public class Sverbs
 		boolean ret_val;
 
 		/* Local variables */
-		boolean f;
 //	   final char []z, []z2;
 		char z;
 		char z2;
@@ -403,7 +402,7 @@ public class Sverbs
 					return ret_val;
 
 				case 10100:
-					f = game.dsub.rmdesc_(3);
+					game.dsub.rmdesc_(3);
 					/* !MOVED, DESCRIBE. */
 					return ret_val;
 
@@ -513,9 +512,9 @@ public class Sverbs
 					/* !START ALARM. */
 					game.dsub.rspeak_(668);
 					/* !DISORIENT HIM. */
-					f = game.dso2.moveto_(vars.screen_1.scolrm, vars.play_1.winner);
+					game.dso2.moveto_(vars.screen_1.scolrm, vars.play_1.winner);
 					/* !INTO ROOM. */
-					f = game.dsub.rmdesc_(3);
+					game.dsub.rmdesc_(3);
 					/* !DESCRIBE. */
 					return ret_val;
 
@@ -582,9 +581,9 @@ public class Sverbs
 					/* !CANCEL ALARM. */
 					game.dsub.rspeak_(668);
 					/* !DISORIENT HIM. */
-					f = game.dso2.moveto_(vars.rindex_1.bkbox, vars.play_1.winner);
+					game.dso2.moveto_(vars.rindex_1.bkbox, vars.play_1.winner);
 					/* !BACK IN BOX ROOM. */
-					f = game.dsub.rmdesc_(3);
+					game.dsub.rmdesc_(3);
 					return ret_val;
 
 				/* V87-- RING. A JOKE. */

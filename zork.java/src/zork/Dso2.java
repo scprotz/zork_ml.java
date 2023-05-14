@@ -37,8 +37,6 @@ public class Dso2
 	    lnr = (vars.rooms_1.rflag[nr - 1] & Vars.RLAND) != 0;
 	    j = vars.advs_1.avehic[who - 1];
 	/* 						!HIS VEHICLE */
-
-	    int GOTO = 100;
 	    
 	    if (j == 0) 
 	    {
