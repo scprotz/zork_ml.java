@@ -1,0 +1,2507 @@
+# Mainframe Zork walkthrough in 16 parts, made for the Mainframe Zork page on www.deblauweschicht.nl.
+
+# Constructed for use with the last MDL version of the game that was published by Infocom on 22 July 1981, with occasional notes concerning the Inform implementation.
+
+# For playing, consider for example:
+# - the original MDL version with Matthew Rusotto's Confusion emulator
+#   (for as near an authentic experience as one can have, without an 
+#   actual PDP-10),
+# - or Jeff Claar's port to C++
+#   (look and feel of the original, but with the benefit of multiple and
+#   named saves),
+# - or Ethan Dick's implementation in Inform
+#   (with modern features, such as a status line).
+
+
+# Sources for this document:
+#  A walkthrough for version 3.1 by David Horowitz, posted at the rec.games.int-fiction newsgroup on 23 Sep 1994 
+#  A hint sheet by one "Josh" at the University of New Mexico, dated 14 Aug 1984
+#  A map by Steven Roy, published in the the November 1982 issue of DEC Professional journal
+#  A map by IF-author Dave Lebling, published in an article by Elizabeth Woyke in the MIT Technology Review on August 22, 2017
+
+
+
+# ** EXTREME SPOILER ALERT **
+
+
+
+
+# Mainframe Zork is a text adventure which was later developed into and commercially released as the Zork Trilogy. Veterans of the latter will recognize most elements of the earlier game as they play it, but may be surprised by some of the twists and turns. Most points are earned by collecting treasures and putting them in the trophy case.
+
+# The thief is a problematic force in the Great Underground Empire. In some occasions he might abduct some vital items from the player, the most serious being the light source. If such an incident occurs, it might be prudent to revert to an earlier game state. Save often!
+
+# At the same time, the thief is the only one who can open the egg. In order to convey this item to him, it is simply left in the cellar under the white house in order for him to find it. After we have dealt with him later, we can retrieve it. However, he needs time to open it. Therefore the confrontation with the thief is programmed to take place in the second half of the walkthrough. If it turns out that he still hasn't opened or even found it, postpone the confrontation.
+
+# If -- through some mishap -- we meet our end prematurely, we may beseech the mercy of the gods by praying at the Altar.
+
+# The following sequences are deferred to the latter part of this walkthrough, for reasons of necessity, habit, or curiosity.
+#    - Dealing with the thief
+#    - The bank puzzle
+#    - The royal puzzle
+
+
+# PART I, on the surface (egg)
+# ----------------------------
+
+# In the beginning we find ourselves in the usual location -- in front of the White House. Get egg, find way into house, and all that. The paths in the forest run a bit differently though. At the end of this section we will be ready to enter the Great Underground Empire.
+
+# West of House
+
+# (Note: as playing this incarnation is an excursion in computer gaming history, we might as well have a look at the leaflet in the mailbox.)
+
+> open mailbox
+
+> read leaflet
+
+# (Note: and now on with the rest of the game.)
+
+# take mat
+
+> n
+
+# North of House
+
+> n
+
+# Forest
+
+> climb tree
+
+# Up a Tree
+
+> take egg
+
+> d
+
+# Forest
+
+# (Note: deviating geography manifests itself here.)
+
+> w
+
+# North of House
+
+> e
+
+# Behind House
+
+> open window
+
+> w
+
+# Kitchen
+
+> w
+
+# Living Room
+
+> read report
+
+# drop report and mat and leaflet
+> drop report
+> drop leaflet
+
+> take lantern
+
+> move rug
+
+> open trap door
+
+# Points gained: 15
+# Total points : 15
+
+
+# PART II, going underground (painting)
+# -------------------------------------
+
+# A short first excursion into the Great Underground Empire. We go in through the trap door and return with our first storeable treasure through a narrow chimney that leads from below to the Kitchen.
+
+> d
+
+# Darkness
+
+# (Note: interesting. In Zork I the trap door is closed and barred immediately after descending. In this version however, it is still possible to climb back up as long as you haven't turned on your lamp -- but you won't get far without doing so, of course.)
+
+# Cellar
+
+> turn on lamp
+
+> put down egg
+
+> s
+
+# West of Chasm
+
+> s
+
+# Gallery
+
+> take painting
+
+> s
+
+# Studio
+
+> u
+
+# (Note: the chimney is of a size that restricts the number of items that the player can bring along. You may need to leave some things behind in order to climb through it.)
+
+# Kitchen
+
+> turn off lamp
+
+> w
+
+# Living Room
+
+> open trophy case
+
+> put painting in case
+
+# Points gained: 36
+# Total points : 51
+
+
+# PART III, another way to the surface (bag of coins)
+# ---------------------------------------------------
+
+# We deal with the troll and venture into the maze for more treasure and an alternative route to the surface. If you want to map the maze yourself, take lots of stuff with you to help you mark visited rooms!
+
+> get sword
+
+> open trap door
+
+> d
+
+# Darkness
+
+> turn on lamp
+
+# Cellar
+
+> e
+
+# Troll Room
+
+# (Note: repeat the following action as often as is necessary, but save your game first.)
+
+> kill troll with sword
+> kill troll with sword
+> kill troll with sword
+> kill troll with sword
+> kill troll with sword
+
+
+> s
+
+# (Note: you have now entered the maze.)
+
+# Maze
+
+> s
+
+# Maze
+
+> e
+
+# Maze
+
+> u
+
+# Maze
+
+> take keys
+
+> take bag
+
+> sw
+
+# Maze
+
+> u
+
+# Maze
+
+> e
+
+# Maze
+
+> ne
+
+# Grating Room
+
+> unlock grate with key
+
+> open grate
+
+> turn off lamp
+
+> u
+
+# Clearing
+
+# (Note: we shall return to the maze later on in the game. Other quests remain there still.)
+
+# (Note: from now on, the trap door in the Living Room will no longer be closed and barred behind us.)
+
+> sw 
+
+# Behind House
+
+> w
+
+# Kitchen
+
+> take bottle
+
+> drop sword
+> drop keys
+
+> w
+
+# Living Room
+
+> put bag in case
+
+# Points gained: 15
+# Total points : 66
+
+
+# PART IV, the carousel (pearl necklace, spices, sphere, violin)
+# --------------------------------------------------------------
+
+# In which we restore sense to a spinning room and pick up quite a few treasures along the way. There is also a robot.
+
+> open trap door
+
+> d
+
+# Darkness
+
+> turn on lamp
+
+# Cellar
+
+# (Note: the trap door is not closed behind you any more.)
+
+> e
+
+# The Troll Room
+
+> n
+
+# East-West Passage
+
+> e
+
+# Round Room
+
+# (Note: save your game here for the reason explained below.)
+# (Note: this room spins and it has the effect of randomizing your exit direction until the spinning is stopped; you may want to go south, but you may end up to the west. In Zork II, this room makes an appearance in the same capacity, but is named the Carousel Room there.)
+
+> s
+
+# (Note: if you are now in a room other than the "Engravings Cave", either restore your game and try again or follow the instructions below to return to the Round Room...
+
+#    East-West Passage: > e
+#                 Maze: > n,w,e,e
+#      Winding Passage: > e,n,n,w
+#           Grail Room: > w
+#  North-South Passage: > s
+#          Deep Canyon: > s
+
+# ...and then try again.)
+
+# Engravings Cave
+
+> se
+
+# Riddle Room
+
+> well
+
+> e
+
+# Pearl Room
+
+> get necklace
+
+> e
+
+# Circular Room
+
+> get in bucket
+
+> open bottle
+
+> pour water in bucket
+
+# Top of Well
+
+> leave bucket
+
+> e
+
+# Tea Room
+
+> take all
+
+> eat eat-me cake
+
+# (Note: you shrink because of this.)
+
+# Posts Room
+
+> e
+
+# Pool Room
+
+> throw red cake at pool
+
+> take spices
+
+# (Note: the flask with the skull-and-crossbones marking contains poisonous fumes and seems to serve no purpose; a red herring?)
+
+> w
+
+# Posts Room
+
+> eat blue cake
+
+# Tea Room
+
+> drop orange cake
+
+> nw
+
+> read green paper
+
+# (Note: the way of addressing the robot depends on the version that we are playing, and that is described on the piece of paper. We use the MDL commands here. In the inform version the proper form is "robot, <action>" rather than "tell robot, '<action>'".)
+
+# Low Room
+
+> tell robot 'go east'
+
+> e
+
+# Machine Room
+
+> tell robot 'push triangular button'
+
+# (Note: Inform understands "press triangular button" as well, but the MDL interpreter may be picky here.)
+
+# (Note: this has made the circular room stop spinning.)
+
+> tell robot 'go south'
+
+> s
+
+# Dingy closet
+
+> take sphere
+
+# (Note: this is exciting!)
+
+> tell robot 'lift cage'
+
+> take sphere
+
+# (Note: the spherer is a so-called "palantir" (of Tolkien fame); look that up if you want to know what it does.)
+
+> n
+
+# Machine Room
+
+> w
+
+# Low Room
+
+> se
+
+# (Note: the electromagnetic disturbance caused by the disabling of the motor that turned the round room causes your compass to spin. Keep trying until to get back to the Tea Room.)
+
+# Tea Room
+
+> w
+
+# Top of Well
+
+> get in bucket
+
+# (Note: in Inform, the following action must be preceeded by "open bottle".)
+
+> get water
+
+# Circular Room
+
+> leave bucket
+
+> w
+
+# Pearl room
+
+> w
+
+# Riddle Room
+
+> d
+
+# Engravings Cave
+
+> n
+
+# Round Room
+
+# (Note: a box has appeared since we last were here.)
+
+> open box
+
+> take violin
+
+> w
+
+# East-West Passage
+
+> w
+
+# The Troll Room
+
+> w
+
+# Cellar
+
+> u
+
+# Living Room
+
+> turn off lamp
+
+> put sphere in trophy case
+
+> put necklace in trophy case
+
+> put spices in trophy case
+
+> put violin in trophy case
+
+> drop bottle
+> drop green paper
+
+# Points gained: 71
+# Total points : 137
+
+
+# PART V, some sites of religious significance (grail, platinum bar, trident)
+# ---------------------------------------------------------------------------
+
+# Wherein we eventually visit Hades itself. In order to be successful there, we will have to obtain objects from a variety of other locations first.
+
+> d
+
+# Cellar
+
+> turn on lamp
+
+> e
+
+# The Troll Room
+
+> n
+
+# East-West passage
+
+> e
+
+# Round Room
+
+> e
+
+# Grail Room
+
+> take grail
+
+> u
+
+# Temple
+
+> turn off lamp
+
+> take brass bell
+
+> e
+
+# Altar
+
+> take book
+> take candles
+
+> w
+
+# Temple
+
+> w
+
+# Grail Room
+
+> w
+
+# Round Room
+
+> ne
+
+# North-South Passage
+
+> ne
+
+# Loud Room
+
+> echo
+
+> take platium bar
+
+> u
+
+# Damp Cave
+
+> e
+
+# Dam
+
+> n
+
+# Dam Lobby
+
+> take guidebook
+
+# (Note: for a later section.)
+
+> take matchbook 
+
+> read matchbook
+
+> send for brochure
+
+> s
+
+# Dam
+
+> s
+
+# Deep Canyon
+
+> s
+
+# Round Room
+
+> se
+
+# Winding Passage
+
+> e
+
+# Mirror Room
+
+> e
+
+# Cave
+
+> d
+
+# Entrance to Hades
+
+> ring bell
+
+# (Note: as a result the candles fall to the ground and go out.)
+
+> take candles
+
+> light match
+
+> light candles with match
+
+> read black book
+
+> e
+
+# Land of the Living Dead
+
+# (Note: that's it for now. Unlike Zork I, there are no treasures to be had here.)
+
+> w
+
+# Entrance to Hades
+
+> u
+
+# Cave
+
+# (Note: your candles are providing the light until here. It may be that they are blown out again in this location; in that case, re-light them or use your lantern.)
+
+> w
+
+# Mirror Room
+
+# (Note: to expediate Part VI, we make a small detour to collect a certain tool. Also, this way we get to use the mirror at least once, magically transporting us to lands beyond FCD #3.)
+
+> touch mirror
+
+# Mirror Room (#2)
+
+> e
+
+# Cave
+
+> d
+
+# Atlantis Room
+
+> take trident
+
+> se
+
+# Reservoir North
+
+# take pump
+
+> n
+
+# Atlantis Room
+
+> u
+
+# Cave
+
+> n
+
+# Mirror Room
+
+> w
+
+# Cold Passage
+
+> w
+
+# Slide Room
+
+# (Note: there is a quick way back to the cellar here.)
+
+> d
+
+# Cellar
+
+> u
+
+# Living Room
+
+# (Note: the following depends on the light source you have been using in this part.)
+
+> turn off lamp
+# OR
+> extinguish candles
+
+> put trident in case
+
+> put platinum bar in case
+
+> put grail in case
+
+> drop black book
+> drop matchbook
+> drop candles
+> drop guidebook
+
+# Points gained: 74
+# Total points : 211
+
+
+
+# PART VI, wherein we go down the river (statue, emerald, pot of gold)
+# --------------------------------------------------------------------
+
+# An exciting aquatic outing, boldly going where no-one would think of.
+
+> d
+
+# Cellar
+
+> turn on lamp
+
+> e
+
+# The Troll Room
+
+> n
+
+# East-West Passage
+
+> e
+
+# Round Room
+
+> nw
+
+# Deep Canyon
+
+> e
+
+# Dam
+
+> d
+
+# Dam Base
+
+> inflate pile with pump
+
+> take stick
+
+> put stick in boat
+
+# (Note: in other versions of the game, it is possible to get in the boat first, and then take the stick while boarded. If we would have taken the stick and then boarded the boat, we would have punctured the vessel. This can be repaired by plugging the boat with the glue in the tube that lies in the maintenance room north of the Dam Lobby, but it's a hassle.)
+
+> get in boat
+
+> launch
+
+# Frigid River
+
+> read label
+
+> drop label
+
+> d
+
+# Frigid River
+
+> d
+
+# Frigid River
+
+> w
+
+# Rocky Shore
+
+> disembark
+
+> nw
+
+# Small Cave
+
+> take shovel
+
+> s
+
+# Rocky Shore
+
+> board boat
+
+> launch
+
+# Frigid River
+
+> d
+
+# Frigid River
+
+> take buoy
+
+> w
+
+# Sandy Beach
+
+> disembark
+
+> take stick
+
+> open buoy
+
+> take emerald
+
+> drop buoy
+
+> dig in sand with shovel
+
+> dig in sand with shovel
+
+> dig in sand with shovel
+
+> dig in sand with shovel
+
+# (Note: dig 4 times in some location along a river; who would have thought of this?)
+
+> take statue
+
+> s
+
+# Shore
+
+> s
+
+# Aragain Falls
+
+# (Note: the barrel is a red herring. There will be no waterfall-riding here.)
+
+> wave stick
+
+> e
+
+# Rainbow Room
+
+> turn off lamp
+
+> e
+
+# End of Rainbow
+
+> take pot
+
+> se
+
+# Canyon Bottom
+
+> u
+
+# Rocky Ledge
+
+> u
+
+# Canyon View
+
+# (Note: it is confusing how the Frigid River runs here.)
+
+> s
+
+# Forest
+
+> w
+
+# Forest
+
+> n
+
+# South of House
+
+> e
+
+# Behind House
+
+> w
+
+# Kitchen
+
+> drop stick
+> drop pump
+> drop shovel
+
+> w
+
+# Living Room
+
+# (Note: around this time there will be a noise from the front of the house. We'll look at that later.)
+
+> put statue in case
+
+> put emerald in case
+
+> put pot in case
+
+# Points gained: 58
+# Total points : 269
+
+
+# PART VII, in which we open the dam (trunk of jewels, blue crystal sphere, torch)
+# --------------------------------------------------------------------------------
+
+# Our lantern has limited functional life. For this reason and others, we set out to find an alternative light source. Also, we drain a particular area of water.
+
+> e
+
+# Kitchen
+
+> u
+
+# Attic
+
+> turn on lamp
+
+> take rope
+> take brick
+> take knife
+
+> d
+
+# Kitchen
+
+> turn off lamp
+
+> w
+
+# Living Room
+
+> drop knife
+> drop brick
+
+> take mat
+
+> d
+
+> turn on lamp
+
+# Cellar
+
+> e
+
+# The Troll Room
+
+> n
+
+# East-West Passage
+
+> e
+
+# Round Room
+
+> nw
+
+# Deep Canyon
+
+> e
+
+# Dam
+
+> n
+
+# Dam Lobby
+
+> n
+
+# Maintenance Room
+
+> take wrench
+> take screwdriver
+
+> push yellow button
+
+> s
+
+# Dam Lobby
+
+> s
+
+# Dam
+
+> turn bolt with wrench
+
+> s
+
+# Deep Canyon
+
+> nw
+
+# Reservoir South
+
+> n
+
+# Reservoir
+
+> take trunk
+
+> s
+
+# Reservoir South
+
+> s
+
+# Deep Ravine
+
+> w
+
+# Rocky Crawl
+
+> e
+
+# Dome Room
+
+> tie rope to railing
+
+> climb down rope
+
+# Torch Room
+
+> turn off lamp
+
+> drop wrench
+
+> take torch
+
+> w
+
+# Tiny Room
+
+> open lid
+
+> look through keyhole
+
+> put mat under door
+
+> put screwdriver in keyhole
+
+> pull mat
+
+> take key
+
+> take screwdriver
+
+> open lid
+
+> unlock door with key
+
+> open door
+
+> n
+
+# Dreary Room
+
+> take sphere
+
+> s
+
+# Tiny Room
+
+> e
+
+# Torch Room
+
+> d
+
+# North-South Crawlway
+
+# (Note: it is important that we keep the rope. We'll go back to collect it straight away.)
+
+> e
+
+# The Troll Room
+
+> w
+
+# Cellar
+
+> u
+
+# Living Room
+
+> put chest in case
+
+> put blue sphere in case
+
+> drop iron key
+
+# Points gained: 52
+# Total points : 321
+
+
+# PART VIII, thief's end (egg, clockwork canary, chalice)
+# -------------------------------------------------------
+
+# We have amassed more than 200 points and attained the rank of Adventurer or higher. Assuming that the thief has appropriated (and unlocked) the ornate egg by this stage, we can confront him.
+
+> take knife
+
+> d
+
+# Cellar
+
+> e
+
+# The Troll Room
+
+> s
+
+# Maze
+
+> s
+
+# Maze
+
+> e
+
+# Maze
+
+> u
+
+# Maze (adventurer)
+
+> sw
+
+# Maze
+
+> e
+
+# Maze
+
+> s
+
+# Maze
+
+> ne
+
+# Cyclops Room
+
+> odysseus
+
+# (Note: stating the name of this Greek hero terrifies the cyclops into a panicky retreat.)
+
+# (Note: we are about to meet the Thief, and he is a deadly enemy. Save your game here.)
+
+> u
+
+# Treasure Room
+
+> kill thief with knife
+
+# (Note: repeat until dead. This can be epic.)
+
+> take chalice
+
+> take egg
+
+> take clockwork canary
+
+# (Note: and take any other items of interest that the thief has purloined.)
+
+# (Note: if the egg and the clockwork canary do not appear here, the thief hasn't had enough time to either find the egg or to open it. Review actions and postpone this part. Alternatively, we might seek out the thief earlier in the game, and simply give him the egg.)
+
+> d
+
+# Cyclops Room
+
+> n
+
+# Strange Passage
+
+> e
+
+# Living Room
+
+> put egg in case
+
+> put chalice in case
+
+> drop knife
+> drop clockwork canary
+> drop rope
+
+# Points gained: 66
+# Total points : 387
+
+
+# Part IX, exploring the mines to extract yet more treasures (jade figurine, huge diamond, sapphire bracelet)
+# -----------------------------------------------------------------------------------------------------------
+
+# To the north of the Reservoir lie the dangerous mines. We venture inside to obtain what lies within. This involves, amongst other hazards, another maze.
+
+> e
+
+# Kitchen
+
+> open sack
+
+> take garlic
+
+> w
+
+> d
+
+# Cellar
+
+> e
+
+# The Troll Room
+
+> n
+
+# East-West Passage
+
+> e
+
+# Round Room
+
+> se
+
+# Winding Passage
+
+> e
+
+# Mirror Room
+
+> touch mirror
+
+# Mirror Room
+
+> w
+
+# Cold Passage
+
+> w
+
+# Slide Room
+
+> drop rope
+
+> n
+
+# Mine Entrance
+
+> ne
+
+# Shaft Room
+
+> n
+
+# Wooden Tunnel
+
+> ne
+
+# Coal mine
+
+> n
+
+# Coal mine
+
+> ne
+
+# Coal mine
+
+> nw
+
+# Coal mine
+
+> d
+
+# Ladder Top
+
+> d
+
+# Ladder Bottom
+
+> ne
+
+# Dead End
+
+> take coal
+
+> s
+
+# Ladder Bottom
+
+> u
+
+# Ladder Bottom
+
+> u
+
+# Coal mine
+
+> e
+
+# Coal mine
+
+> e
+
+# Wooden Tunnel
+
+> s
+
+# Shaft Room
+
+> put torch and screwdriver and coal in basket
+
+# (Note: with our friend the thief eliminated, we can leave our things unattended.)
+
+> lower basket
+
+> turn on lamp
+
+> n
+
+# Wooden Tunnel
+
+> ne
+
+# Coal mine
+
+> n
+
+# Coal mine
+
+> ne
+
+# Coal mine
+
+> nw
+
+# Coal mine
+
+> d
+
+# Ladder Top
+
+> d
+
+# Ladder Bottom
+
+> s
+
+# Timber Room
+
+> drop lamp
+> drop garlic
+
+# (Note: very restricted passage ahead.)
+
+> sw
+
+# Lower Shaft
+
+> take coal
+> take screwdriver
+> take torch
+
+> e
+
+# Machine Room
+
+> open lid
+
+> put coal in machine
+
+> close lid
+
+> turn switch with screwdriver
+
+> open lid
+
+> look in machine
+
+> take diamond
+
+> nw
+
+# Lower Shaft
+
+> put diamond and torch and screwdriver in basket
+
+> ne
+
+# Timber Room
+
+> take garlic
+> take lantern
+> take timber
+
+> n
+
+# Ladder Bottom
+
+> u
+
+# Ladder Top
+
+> u
+
+# Coal mine
+
+> e
+
+# Coal mine
+
+> e
+
+# Wooden Tunnel
+
+> w
+
+# Smelly Room
+
+> d
+
+# Gas Room
+
+> take bracelet
+
+> u
+
+# Smelly Room
+
+> e
+
+# Wooden Tunnel
+
+> s
+
+# Shaft Room
+
+> raise basket
+
+> turn off lamp
+
+
+# --- here! ---
+
+> drop timber
+
+# (Note: otherwise our load will be too heavy)
+
+> take diamond
+> take torch
+
+> w
+
+# Mine Entrance
+
+> nw
+
+# Squeaky Room
+
+> w
+
+# Bat Room
+
+# (Note: this is where the garlic comes in.)
+
+> take jade figurine
+
+> e
+
+# Squeaky Room
+
+> s
+
+# Mine Entrance
+
+> s
+
+# Slide Room
+
+> d
+
+# Cellar
+
+> u
+
+# Living Room
+
+> put figurine in case
+
+> put diamond in case
+
+> put bracelet in case
+
+> drop garlic
+> drop screwdriver
+
+# Points gained: 44
+# Total points : 431
+
+
+# Part X, a loose end (red crystal sphere)
+# ----------------------------------------
+
+# We have another task near the mines; we'll finish that before moving on.
+
+> drop lamp
+
+# (Note: we don't want to be carrying too much for this one.)
+
+> d
+
+# Cellar
+
+> e
+
+# The Troll Room
+
+> n
+
+# East-West Passage
+
+> d
+
+# Deep Ravine
+
+> w
+
+# Rocky Crawl
+
+> e
+
+# Dome Room
+
+> untie rope
+
+> take rope
+
+> e
+
+# Rocky Crawl
+
+> w
+
+# Deep Ravine
+
+> s
+
+# East-West Passage
+
+> e
+
+# Round Room
+
+> se
+
+# Winding Passage
+
+> e
+
+# Mirror Room
+
+> touch mirror
+
+# Mirror Room
+
+> w
+
+# Cold Passage
+
+> w
+
+# Slide Room
+
+> n
+
+# Mine Entrance
+
+> ne
+
+# Shaft Room
+
+> take timber
+
+> w
+
+# Mine Entrance
+
+> s
+
+# Slide Room
+
+> drop timber
+
+> tie rope to timber
+
+> d
+
+# Slide
+
+> d
+
+# Slide
+
+> d
+
+# Slide
+
+> e
+
+# Slide Ledge
+
+> s
+
+# Sooty Room
+
+> take red crystal sphere
+
+> n
+
+# Slide Ledge
+
+> d
+
+# Cellar
+
+> u
+
+# Living Room
+
+> put red sphere in case
+
+# Points gained: 15
+# Total points : 446
+
+
+# Part XI, the coffin (gold coffin)
+# ---------------------------------
+
+# The gold coffin is a large object that doesn't just fit anywhere. A special route must be taken to get it to the surface.
+
+> d
+
+# Cellar
+
+> e
+
+# The Troll Room
+
+> n
+
+# East-West Passage
+
+> d
+
+# Deep Ravine
+
+> w
+
+# Rocky Crawl
+
+> nw
+
+# Egyptian Room
+
+> get coffin
+
+> u
+
+# Glacier Room
+
+> n
+
+# Stream View
+
+> e
+
+# Reservoir South
+
+> n
+
+# Reservoir
+
+> n
+
+# Reservoir North
+
+> n
+
+# Atlantis Room
+
+> u
+
+# Cave
+
+> n
+
+# Mirror Room
+
+> w
+
+# Cold Passage
+
+> w
+
+# Slide Room
+
+> untie rope
+
+> take rope
+
+> d
+
+# Cellar
+
+> u
+
+> put coffin in case
+
+> drop rope
+
+# Points gained: 10
+# Total points : 456
+
+
+# Part XII, the Bank of Zork (Portrait, Zorkmid bills)
+# ----------------------------------------------------
+
+# Now comes the infamous bank puzzle. The lay-out of the bank area is initially easily mapped, but the *order* in which we do things is important.
+
+> d
+
+# Cellar
+
+> s
+
+# West of Chasm
+
+> s
+
+# Gallery
+
+> w
+
+# Bank Entrance
+
+> ne
+
+# East Teller's Room
+
+> e
+
+# Safety Depository
+
+> s
+
+# Chairman's Office
+
+> take portrait
+
+> n
+
+# Safety Depository
+
+> drop portrait
+
+> go through curtain
+
+# Small Room
+
+> go through south wall
+
+# Safety Depository
+
+> go through curtain
+
+# Vault
+
+> take bills
+
+> go through north wall
+
+# Safety Depository
+
+> drop bills
+
+> w
+
+# West Teller's Room
+
+> w
+
+# Safety Depository
+
+> take all
+
+> go through curtain
+
+# Viewing Room
+
+> s
+
+# Bank Entrance
+
+> s
+
+# Gallery
+
+> n
+
+# West of Chasm
+
+> w
+
+# Cellar
+
+> u
+
+# Living Room
+
+> put bills in case
+
+> put portait in case
+
+# (Note: the operation of the curtain is dependent on the room last visited before entering the Safety Despository.
+
+  - If we came from the Chairman's Office, the curtain leads to a Small Room, which can be exited by going through the south wall;
+  - If we came from the Small Room and go through the curtain again, we arrive in the Vault, to be exited through the north wall;
+  - If we came from one of the Teller Rooms, going through the curtain leads to one of the Viewing Rooms.
+
+# By taking the two treasures via the third route, it is possible to leave the bank unhindered.)
+
+# Points gained: 40
+# Total points : 496
+
+
+# Part XIII, the Royal Puzzle (gold card)
+# ---------------------------------------
+
+> w
+
+# Strange Passage
+
+> s
+
+# Cyclops Room
+
+> u
+
+# Treasure Room
+
+> e
+
+# Small Square Room
+
+> d
+
+# Room in a Puzzle
+
+# (Note: and now we find ourselves in a prehistoric version of Sokoban. It is known as the "royal puzzle" in Zork III.)
+# (Note: execute the sequence of steps below in order to get the treasure and leave the maze.)
+# (Note: the treasure itself can be used to leave the maze via a separate door, but the treasure is lost in that case.)
+
+> push east wall
+> s
+> sw
+> push south wall
+> n
+> ne
+> nw
+> push south wall
+> push south wall
+> e
+> se
+> push south wall
+> n
+> ne
+> push south wall
+> take gold card
+> push south wall
+> n
+> n
+> n
+# (Note: there is a ladder attached to this block. We want this.)
+> n
+> push east wall
+> sw
+> s
+> s
+> se
+> ne
+> push west wall
+> sw
+> nw
+> ne
+> push south wall
+> e
+> ne
+> n
+> push west wall
+> nw
+> push south wall
+> push south wall
+> ne
+> se
+> sw
+> push west wall
+> nw
+> sw
+> se
+> push north wall
+> ne
+> push west wall
+> sw
+> push north wall
+> push north wall
+> nw
+> u
+
+# Little Square Room
+
+# (Note: saved!)
+
+> w
+
+# Treasure Room
+
+> d
+
+# Cyclops Room
+
+> n
+
+# Strange Passage
+
+> e
+
+# Living Room
+
+> put gold card in case
+
+# Points gained: 15
+# Total points : 521
+
+
+# Part XIV, balloon ride (ruby, Zorkmid coin, Flathead stamp, crown)
+# ------------------------------------------------------------------
+
+# We now visit a scene that is also found in Zork II. In this part we need to sacrifice our torch and return to using the lamp with its limited lifetime, so it's probably best to take care of all loose ends first before we proceed here. After this section we will tackle the end game.
+
+> take matchbook
+> take guidebook
+> take brick
+> take lamp
+
+> d
+
+# Cellar
+
+> e
+
+# The Troll Room
+
+> n
+
+# East-West Passage
+
+> d
+
+# Deep Ravine
+
+> d
+
+# Reservoir South
+
+> w
+
+# Stream View
+
+> take wire
+
+> n
+
+# Glacier Room
+
+> throw torch at ice
+
+> turn on lamp
+
+> w
+
+# Ruby Room
+
+> take ruby
+
+> w
+
+# Lava Room
+
+> s
+
+# Volcano Bottom
+
+> open receptacle
+
+> put guidebook in receptacle
+
+> light match
+
+> light guidebook with match
+
+> get in basket
+
+> wait
+
+# Volcano Core
+
+> wait
+
+# (Note: possibly repeat until we reach...)
+
+# Volcano near small ledge
+
+> land
+
+# Narrow ledge
+
+> disembark
+
+> tie braided wire to hook
+
+> take coin
+
+> s
+
+# Library
+
+> take purple book
+
+> open purple book
+
+> take stamp
+
+> drop purple book
+
+> n
+
+# Narrow Ledge
+
+> untie braided wire
+
+> board basket
+
+> wait
+
+> wait
+
+# Volcano near viewing ledge
+
+> wait
+
+# Volcano near wide ledge
+
+> land
+
+# Wide Ledge
+
+> disembark
+
+> tie braided wire to hook
+
+> s
+
+# Dusty Room
+
+> put brick in hole
+
+> put shiny wire in brick
+
+> light match
+
+> light shiny wire with match
+
+> n
+
+# Wide Ledge
+
+# (Note: now things get exciting. No time to lose!)
+
+> s
+
+# Dusty Room
+
+> take crown
+
+> n
+
+# Wide Ledge
+
+> untie braided wire
+
+> board basket
+
+> close receptacle
+
+> wait
+
+# (Note: the balloon will now descend. Wait until we have landed.)
+
+# Volcano Bottom
+
+> disembark
+
+> n
+
+# Lava Room
+
+> w
+
+# Ruby Room
+
+> s
+
+# Glacier Room
+
+> n
+
+# Stream View
+
+> take torch
+
+# (Note: the torch is actually a treasure.)
+
+> e
+
+# Reservoir South
+
+> s
+
+# Deep Ravine
+
+> s
+
+# East-West Passage
+
+> w
+
+# The Troll Room
+
+> w
+
+# Cellar
+
+> u
+
+# Living Room
+
+> turn off lamp
+
+> put torch in case
+
+> put crown in case
+
+> put flathead stamp in case
+
+> put put zorkmid in case
+
+> put ruby in case
+
+# Points gained: 90
+# Total points : 611
+
+
+# Part XV, the last few points (bauble, stamp)
+# --------------------------------------------
+
+# A few small errands remain.
+
+> take clockwork canary
+
+> e
+
+# Kitchen
+
+> e
+
+# Behind House
+
+> s
+
+# South of House
+
+> w
+
+# West of House
+
+> read brochure
+
+> take stamp
+
+> n
+
+# North of House
+
+> n
+
+# Forest
+
+> wind canary
+
+> take bauble
+
+> w
+
+# North of House
+
+> e
+
+# Behind House
+
+> w
+
+# Kitchen
+
+> w
+
+# Living Room
+
+> drop brochure
+
+> put woods stamp in case
+
+> put canary in case
+
+> put bauble in case
+
+# Points gained: 5
+# Total points : 616
+
+# Done!
+
+> drop brochure
+> drop matchbook
+> drop rope
+
+
+# Part XVI, the endgame
+# ---------------------
+
+> wait
+
+# (Note: and continue waiting until a wraith appears. He then tells us something unclear, but rumor has it that we should relocate to Hades.)
+
+> d
+
+# Cellar
+
+> turn on lamp
+
+> e
+
+# The Troll Room
+
+> n
+
+# East-West Passage
+
+> e
+
+# Round Room
+
+> e
+
+# Grail Room
+
+> e
+
+# Narrow Crawlway
+
+> s
+
+# Cave
+
+> d
+
+# Entrance to Hades
+
+> e
+
+# Land of the Living Dead
+
+> e
+
+# Tomb of the Unknown Implementer
+
+> open crypt
+
+> n
+
+# Crypt
+
+> close door
+
+> turn off lamp
+
+> wait
+
+# (Note: another appearance of the cloaked figure.)
+# (Note: the endgame proper begins here. Your score has been reset and is now 15 of a possible 100.)
+# (Note: saving is no longer possible, but note the INCANT procedure.)
+
+# Top of Stairs
+
+# (Note: you find yourself translocated to this location; ambient light is present, and your lamp is off. You also have a sword somehow.)
+
+> d
+
+# Stone Room
+
+> n
+
+# Small Room
+
+> drop sword
+
+# (Note: this breaks the laserbeam that runs across the room.)
+
+> s
+
+# Stone Room
+
+> push button
+
+> n
+
+# Small Room
+
+> take sword
+
+> n
+
+# Hallway
+
+# (Note: here we encounter a so-called "guess-the-verb puzzle"; "go north", "go through mirror", "enter mirror", all will not work. It may depend on what version of Zork we're staring at, but the original MDL responds positively to...)
+
+> go in
+
+# Inside Mirror
+
+# (Note: we are now inside a "box". It is in fact a room that can rotate and move by pushing the walls.)
+
+# (Note: first, we re-orient the room so that it can move along the north-south running groove in the floor.)
+
+> lift short pole
+
+# (Note: to enable rotation of the room.)
+
+> push red panel
+
+> push red panel
+
+# (Note: the longer axis of the room is now aligned north-south.)
+
+> lower short pole
+
+> push mahogany panel
+
+> push mahogany panel
+
+# (Note: the glowing of the sword indicates enemies outside; we just move on.)
+
+> push mahogany panel
+
+# (Note: the room moves along the hallway.)
+
+> lift short pole
+
+> push red panel
+
+> push red panel
+
+> push red panel
+
+> push red panel
+
+> lower short pole
+
+> push pine panel
+
+> n
+
+# Dungeon Entrance
+
+> knock on door
+
+# (Note: we are now confronted by three questions to establish if we are genuine adventurers.
+
+# These questions and answers can be:
+  how to read the cakes?      flask
+  what item is haunted?       rusty knife
+  get to thief's lair?        temple
+  where from altar?           forest
+  offends the ghosts?         skeleton
+  hello sailor useful?        none
+  value of zorkmid treasures? 30003
+  Useful to do with mirror?   rub
+
+> answer "<answer>" (until done)
+
+> n
+
+# Narrow Corridor
+
+> n
+
+# South Corridor
+
+> e
+
+# East Corridor
+
+> n
+
+# North Corridor
+
+# (Note: to the south, behind the closed door, is a cell.)
+
+> n
+
+# Parapet
+
+# (Note: it seems that the numbers on the dial each correspond with one of eight cells situated in a ring around the fiery pit to the north. One of the cells is connected to the Treasury of Zork. By selecting a number on the dial found at the Parapet, the corresponding cell is magically (or mechanically or otherwise) moved from its original location and rotated into the slot behind the cell door to the south of the parapet. When another cell number is subsequently chosen, the previously selected cell is returned to its original location and the new placed in its stead. The cell that we want is number 4; it has a bronze door opposite side of its entrance, through which the Treasury of Zork will ultimately be accessed.)
+
+> set dial to 4
+
+> push button
+
+> tell master "stay"
+
+> s
+
+# North Corridor
+
+> open door
+
+> s
+
+# Prison Cell
+
+# (Note: setting dial to 4 and activating has caused a bronze door to appear here.)
+
+> tell master "set dial to 6"
+
+> tell master "push button"
+
+# (Note: this connects the bronze door to the Treasury of Zork)
+
+> open bronze door
+
+> n
+
+# Treasury of Zork
+
+# The End
+
+
+
+
+
+# Treasure list for parts I - XV
+# ------------------------------
+# a painting
+# a bag of coins
+# pearl necklace
+# tin of spices
+# white crystal sphere
+# fancy violin
+# grail
+# platium bar
+# trident
+# statue
+# emerald
+# pot of gold
+# egg
+# chalice
+# trunk of jewels
+# blue crystal sphere
+# jade figurine
+# huge diamond
+# sapphire bracelet
+# red crystal sphere
+# gold coffin
+# portrait of J. Pierpont Flathead
+# zorkmid bills
+# gold card
+# burned out ivory torch
+# crown
+# Flathead stamp
+# priceless zorkmid
+# ruby
+# Don Woods stamp
+# clockwork canary
+# beautiful brass bauble

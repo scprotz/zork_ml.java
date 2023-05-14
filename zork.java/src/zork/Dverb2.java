@@ -1,5 +1,7 @@
 package zork;
 
+import java.io.IOException;
+
 public class Dverb2
 {
 	/* SAVE- SAVE GAME STATE */
@@ -31,32 +33,32 @@ public class Dverb2
 //	   int i;
 //	   FILE *e;
 //
-//	   prsvec_1.prswon = FALSE_;
+//	   vars.prsvec_1.prswon = false;
 //	   /* 						!DISABLE GAME. */
 //	   /* Note: save file format is different for PDP vs. non-PDP versions */
 //
 //	   if ((e = fopen("dsave.dat", BINWRITE)) == NULL)
-//	      goto L100;
+//	      { GOTO = 100; continue loop; }
 //
 //	   gttime_(&i);
 //	   /* 						!GET TIME. */
 //
 //	#define do_uio(i, zbuf, cbytes) \
-//	   (void) fwrite((const char *)(zbuf), (cbytes), (i), e)
+//	   (void) fwrite((final char *)(zbuf), (cbytes), (i), e)
 //
 //	   do_uio(1, &vers_1.vmaj, sizeof(int));
 //	   do_uio(1, &vers_1.vmin, sizeof(int));
 //	   do_uio(1, &vers_1.vedit, sizeof(int));
 //
-//	   do_uio(1, &play_1.winner, sizeof(int));
-//	   do_uio(1, &play_1.here, sizeof(int));
+//	   do_uio(1, &vars.play_1.winner, sizeof(int));
+//	   do_uio(1, &vars.play_1.here, sizeof(int));
 //	   do_uio(1, &hack_1.thfpos, sizeof(int));
-//	   do_uio(1, &play_1.telflg, sizeof(boolean));
+//	   do_uio(1, &vars.play_1.telflg, sizeof(boolean));
 //	   do_uio(1, &hack_1.thfflg, sizeof(boolean));
 //	   do_uio(1, &hack_1.thfact, sizeof(boolean));
 //	   do_uio(1, &hack_1.swdact, sizeof(boolean));
 //	   do_uio(1, &hack_1.swdsta, sizeof(int));
-//	   do_uio(64, &puzzle_1.cpvec[0], sizeof(int));
+//	   do_uio(64, &vars.puzzle_1.cpvec[0], sizeof(int));
 //
 //	   do_uio(1, &i, sizeof(int));
 //	   do_uio(1, &state_1.moves, sizeof(int));
@@ -72,20 +74,20 @@ public class Dverb2
 //	   do_uio(1, &screen_1.scolrm, sizeof(int));
 //	   do_uio(1, &screen_1.scolac, sizeof(int));
 //
-//	   do_uio(220, &objcts_1.odesc1[0], sizeof(int));
-//	   do_uio(220, &objcts_1.odesc2[0], sizeof(int));
-//	   do_uio(220, &objcts_1.oflag1[0], sizeof(int));
-//	   do_uio(220, &objcts_1.oflag2[0], sizeof(int));
-//	   do_uio(220, &objcts_1.ofval[0], sizeof(int));
-//	   do_uio(220, &objcts_1.otval[0], sizeof(int));
-//	   do_uio(220, &objcts_1.osize[0], sizeof(int));
-//	   do_uio(220, &objcts_1.ocapac[0], sizeof(int));
-//	   do_uio(220, &objcts_1.oroom[0], sizeof(int));
-//	   do_uio(220, &objcts_1.oadv[0], sizeof(int));
-//	   do_uio(220, &objcts_1.ocan[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.odesc1[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.odesc2[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.oflag1[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.oflag2[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.ofval[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.otval[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.osize[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.ocapac[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.oroom[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.oadv[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.ocan[0], sizeof(int));
 //
-//	   do_uio(200, &rooms_1.rval[0], sizeof(int));
-//	   do_uio(200, &rooms_1.rflag[0], sizeof(int));
+//	   do_uio(200, &vars.rooms_1.rval[0], sizeof(int));
+//	   do_uio(200, &vars.rooms_1.rflag[0], sizeof(int));
 //
 //	   do_uio(4, &advs_1.aroom[0], sizeof(int));
 //	   do_uio(4, &advs_1.ascore[0], sizeof(int));
@@ -102,13 +104,13 @@ public class Dverb2
 //	#undef do_uio
 //
 //	   if (fclose(e) == EOF)
-//	      goto L100;
+//	      { GOTO = 100; continue loop; }
 //
-//	   rspeak_(597);
+//	   game.dsub.rspeak_(597);
 //	   return;
 //
-//	L100:
-//	   rspeak_(598);
+//	case 100:
+//	   game.dsub.rspeak_(598);
 		throw new RuntimeException("Dverb2.savegm_ not impl");
 	   /* 						!CANT DO IT. */
 	} /* savegm_ */
@@ -123,12 +125,12 @@ public class Dverb2
 //	   int i, j, k;
 //	   FILE *e;
 //
-//	   prsvec_1.prswon = FALSE_;
+//	   vars.prsvec_1.prswon = false;
 //	   /* 						!DISABLE GAME. */
 //	   /* Note: save file format is different for PDP vs. non-PDP versions */
 //
 //	   if ((e = fopen("dsave.dat", BINREAD)) == NULL)
-//	      goto L100;
+//	      { GOTO = 100; continue loop; }
 //
 //	#define do_uio(i, zbuf, cbytes) \
 //	   (void)fread((char *)(zbuf), (cbytes), (i), e)
@@ -138,18 +140,18 @@ public class Dverb2
 //	   do_uio(1, &k, sizeof(int));
 //
 //	   if (i != vers_1.vmaj | j != vers_1.vmin) {
-//	      goto L200;
+//	      { GOTO = 200; continue loop; }
 //	   }
 //
-//	   do_uio(1, &play_1.winner, sizeof(int));
-//	   do_uio(1, &play_1.here, sizeof(int));
+//	   do_uio(1, &vars.play_1.winner, sizeof(int));
+//	   do_uio(1, &vars.play_1.here, sizeof(int));
 //	   do_uio(1, &hack_1.thfpos, sizeof(int));
-//	   do_uio(1, &play_1.telflg, sizeof(boolean));
+//	   do_uio(1, &vars.play_1.telflg, sizeof(boolean));
 //	   do_uio(1, &hack_1.thfflg, sizeof(boolean));
 //	   do_uio(1, &hack_1.thfact, sizeof(boolean));
 //	   do_uio(1, &hack_1.swdact, sizeof(boolean));
 //	   do_uio(1, &hack_1.swdsta, sizeof(int));
-//	   do_uio(64, &puzzle_1.cpvec[0], sizeof(int));
+//	   do_uio(64, &vars.puzzle_1.cpvec[0], sizeof(int));
 //
 //	   do_uio(1, &time_1.pltime, sizeof(int));
 //	   do_uio(1, &state_1.moves, sizeof(int));
@@ -165,20 +167,20 @@ public class Dverb2
 //	   do_uio(1, &screen_1.scolrm, sizeof(int));
 //	   do_uio(1, &screen_1.scolac, sizeof(int));
 //
-//	   do_uio(220, &objcts_1.odesc1[0], sizeof(int));
-//	   do_uio(220, &objcts_1.odesc2[0], sizeof(int));
-//	   do_uio(220, &objcts_1.oflag1[0], sizeof(int));
-//	   do_uio(220, &objcts_1.oflag2[0], sizeof(int));
-//	   do_uio(220, &objcts_1.ofval[0], sizeof(int));
-//	   do_uio(220, &objcts_1.otval[0], sizeof(int));
-//	   do_uio(220, &objcts_1.osize[0], sizeof(int));
-//	   do_uio(220, &objcts_1.ocapac[0], sizeof(int));
-//	   do_uio(220, &objcts_1.oroom[0], sizeof(int));
-//	   do_uio(220, &objcts_1.oadv[0], sizeof(int));
-//	   do_uio(220, &objcts_1.ocan[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.odesc1[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.odesc2[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.oflag1[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.oflag2[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.ofval[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.otval[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.osize[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.ocapac[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.oroom[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.oadv[0], sizeof(int));
+//	   do_uio(220, &vars.objcts_1.ocan[0], sizeof(int));
 //
-//	   do_uio(200, &rooms_1.rval[0], sizeof(int));
-//	   do_uio(200, &rooms_1.rflag[0], sizeof(int));
+//	   do_uio(200, &vars.rooms_1.rval[0], sizeof(int));
+//	   do_uio(200, &vars.rooms_1.rflag[0], sizeof(int));
 //
 //	   do_uio(4, &advs_1.aroom[0], sizeof(int));
 //	   do_uio(4, &advs_1.ascore[0], sizeof(int));
@@ -194,16 +196,16 @@ public class Dverb2
 //
 //	   (void)fclose(e);
 //
-//	   rspeak_(599);
+//	   game.dsub.rspeak_(599);
 //	   return;
 //
-//	L100:
-//	   rspeak_(598);
+//	case 100:
+//	   game.dsub.rspeak_(598);
 //	   /* 						!CANT DO IT. */
 //	   return;
 //
-//	L200:
-//	   rspeak_(600);
+//	case 200:
+//	   game.dsub.rspeak_(600);
 //	   /* 						!OBSOLETE VERSION */
 //	   (void)fclose(e);
 		throw new RuntimeException("Dverb2.rstrgm_ not impl");
@@ -213,493 +215,726 @@ public class Dverb2
 
 	/* DECLARATIONS */
 
-	boolean walk_()
+	boolean walk_() throws IOException
 	{
-//	   /* System generated locals */
-//	   boolean ret_val;
-//
-//	   ret_val = true;
-//	   /* 						!ASSUME WINS. */
-//	   if (play_1.winner != aindex_1.player || lit_(play_1.here) || prob_(25,
-//	            25)) {
-//	      goto L500;
-//	   }
-//	   if (! findxt_(prsvec_1.prso, play_1.here)) {
-//	      goto L450;
-//	   }
-//	   /* 						!INVALID EXIT? GRUE */
-//	   /* 						! */
-//	   switch (curxt_1.xtype) {
-//	   case 1:  goto L400;
-//	   case 2:  goto L200;
-//	   case 3:  goto L100;
-//	   case 4:  goto L300;
-//	   }
-//	   /* 						!DECODE EXIT TYPE. */
-//	   bug_(9, curxt_1.xtype);
-//
-//	L100:
-//	   if (cxappl_(curxt_1.xactio) != 0) {
-//	      goto L400;
-//	   }
-//	   /* 						!CEXIT... RETURNED ROOM? */
-//	   if (flags[*xflag - 1]) {
-//	      goto L400;
-//	   }
-//	   /* 						!NO, FLAG ON? */
-//	L200:
-//	   jigsup_(523);
-//	   /* 						!BAD EXIT, GRUE */
-//	   /* 						! */
-//	   return ret_val;
-//
-//	L300:
-//	   if (cxappl_(curxt_1.xactio) != 0) {
-//	      goto L400;
-//	   }
-//	   /* 						!DOOR... RETURNED ROOM? */
-//	   if ((objcts_1.oflag2[curxt_1.xobj - 1] & OPENBT) != 0) {
-//	      goto L400;
-//	   }
-//	   /* 						!NO, DOOR OPEN? */
-//	   jigsup_(523);
-//	   /* 						!BAD EXIT, GRUE */
-//	   /* 						! */
-//	   return ret_val;
-//
-//	L400:
-//	   if (lit_(curxt_1.xroom1)) {
-//	      goto L900;
-//	   }
-//	   /* 						!VALID ROOM, IS IT LIT? */
-//	L450:
-//	   jigsup_(522);
-//	   /* 						!NO, GRUE */
-//	   /* 						! */
-//	   return ret_val;
-//
-//	   /* ROOM IS LIT, OR WINNER IS NOT PLAYER (NO GRUE). */
-//
-//	L500:
-//	   if (findxt_(prsvec_1.prso, play_1.here)) {
-//	      goto L550;
-//	   }
-//	   /* 						!EXIT EXIST? */
-//	L525:
-//	   curxt_1.xstrng = 678;
-//	   /* 						!ASSUME WALL. */
-//	   if (prsvec_1.prso == xsrch_1.xup) {
-//	      curxt_1.xstrng = 679;
-//	   }
-//	   /* 						!IF UP, CANT. */
-//	   if (prsvec_1.prso == xsrch_1.xdown) {
-//	      curxt_1.xstrng = 680;
-//	   }
-//	   /* 						!IF DOWN, CANT. */
-//	   if ((rooms_1.rflag[play_1.here - 1] & RNWALL) != 0) {
-//	      curxt_1.xstrng = 524;
-//	   }
-//	   rspeak_(curxt_1.xstrng);
-//	   prsvec_1.prscon = 1;
-//	   /* 						!STOP CMD STREAM. */
-//	   return ret_val;
-//
-//	L550:
-//	   switch (curxt_1.xtype) {
-//	   case 1:  goto L900;
-//	   case 2:  goto L600;
-//	   case 3:  goto L700;
-//	   case 4:  goto L800;
-//	   }
-//	   /* 						!BRANCH ON EXIT TYPE. */
-//	   bug_(9, curxt_1.xtype);
-//
-//	L700:
-//	   if (cxappl_(curxt_1.xactio) != 0) {
-//	      goto L900;
-//	   }
-//	   /* 						!CEXIT... RETURNED ROOM? */
-//	   if (flags[*xflag - 1]) {
-//	      goto L900;
-//	   }
-//	   /* 						!NO, FLAG ON? */
-//	L600:
-//	   if (curxt_1.xstrng == 0) {
-//	      goto L525;
-//	   }
-//	   /* 						!IF NO REASON, USE STD. */
-//	   rspeak_(curxt_1.xstrng);
-//	   /* 						!DENY EXIT. */
-//	   prsvec_1.prscon = 1;
-//	   /* 						!STOP CMD STREAM. */
-//	   return ret_val;
-//
-//	L800:
-//	   if (cxappl_(curxt_1.xactio) != 0) {
-//	      goto L900;
-//	   }
-//	   /* 						!DOOR... RETURNED ROOM? */
-//	   if ((objcts_1.oflag2[curxt_1.xobj - 1] & OPENBT) != 0) {
-//	      goto L900;
-//	   }
-//	   /* 						!NO, DOOR OPEN? */
-//	   if (curxt_1.xstrng == 0) {
-//	      curxt_1.xstrng = 525;
-//	   }
-//	   /* 						!IF NO REASON, USE STD. */
-//	   rspsub_(curxt_1.xstrng, objcts_1.odesc2[curxt_1.xobj - 1]);
-//	   prsvec_1.prscon = 1;
-//	   /* 						!STOP CMD STREAM. */
-//	   return ret_val;
-//
-//	L900:
-//	   ret_val = moveto_(curxt_1.xroom1, play_1.winner);
-//	   /* 						!MOVE TO ROOM. */
-//	   if (ret_val) {
-//	      ret_val = rmdesc_(0);
-//	   }
-//	   /* 						!DESCRIBE ROOM. */
-//	   return ret_val;
-		throw new RuntimeException("Dverb2.walk_ not impl");
+		/* System generated locals */
+		boolean ret_val;
+		int GOTO = 100;
+
+		ret_val = true;
+		/* !ASSUME WINS. */
+		if (vars.play_1.winner != vars.aindex_1.player || game.dso5.game.dso5.lit_(vars.play_1.here)
+				|| game.dsub.prob_(25, 25))
+		{
+			{
+				GOTO = 500;
+			}
+		}
+		if (GOTO != 500)
+		{
+			if (!game.dso3.findxt_(vars.prsvec_1.prso, vars.play_1.here))
+			{
+				{
+					GOTO = 450;
+				}
+			}
+			/* !INVALID EXIT? GRUE */
+			/* ! */
+			if (GOTO != 450)
+			{
+				switch (vars.curxt_1.xtype)
+				{
+					case 1:
+					{
+						GOTO = 400;
+						break;
+					}
+					case 2:
+					{
+						GOTO = 200;
+						break;
+					}
+					case 3:
+					{
+						GOTO = 100;
+						break;
+					}
+					case 4:
+					{
+						GOTO = 300;
+						break;
+					}
+				}
+				/* !DECODE EXIT TYPE. */
+				if (GOTO != 100 && GOTO != 200 && GOTO != 300 && GOTO != 400)
+					game.dsub.bug_(9, vars.curxt_1.xtype);
+			}
+		}
+		loop: do
+		{
+			switch (GOTO)
+			{
+				case 100:
+					if (cxappl_(vars.curxt_1.xactio) != 0)
+					{
+						{
+							GOTO = 400;
+							continue loop;
+						}
+					}
+					/* !CEXIT... RETURNED ROOM? */
+					if (vars.findex_1.flags(vars.curxt_1.xflag() - 1))
+					{
+						{
+							GOTO = 400;
+							continue loop;
+						}
+					}
+					/* !NO, FLAG ON? */
+				case 200:
+					game.dsub.jigsup_(523);
+					/* !BAD EXIT, GRUE */
+					/* ! */
+					return ret_val;
+
+				case 300:
+					if (cxappl_(vars.curxt_1.xactio) != 0)
+					{
+						{
+							GOTO = 400;
+							continue loop;
+						}
+					}
+					/* !DOOR... RETURNED ROOM? */
+					if ((vars.objcts_1.oflag2[vars.curxt_1.xobj - 1] & Vars.OPENBT) != 0)
+					{
+						{
+							GOTO = 400;
+							continue loop;
+						}
+					}
+					/* !NO, DOOR OPEN? */
+					game.dsub.jigsup_(523);
+					/* !BAD EXIT, GRUE */
+					/* ! */
+					return ret_val;
+
+				case 400:
+					if (game.dso5.lit_(vars.curxt_1.xroom1))
+					{
+						{
+							GOTO = 900;
+							continue loop;
+						}
+					}
+					/* !VALID ROOM, IS IT LIT? */
+				case 450:
+					game.dsub.jigsup_(522);
+					/* !NO, GRUE */
+					/* ! */
+					return ret_val;
+
+				/* ROOM IS LIT, OR WINNER IS NOT PLAYER (NO GRUE). */
+
+				case 500:
+					if (game.dso3.findxt_(vars.prsvec_1.prso, vars.play_1.here))
+					{
+						{
+							GOTO = 550;
+							continue loop;
+						}
+					}
+					/* !EXIT EXIST? */
+				case 525:
+					vars.curxt_1.xstrng = 678;
+					/* !ASSUME WALL. */
+					if (vars.prsvec_1.prso == vars.xsrch_1.xup)
+					{
+						vars.curxt_1.xstrng = 679;
+					}
+					/* !IF UP, CANT. */
+					if (vars.prsvec_1.prso == vars.xsrch_1.xdown)
+					{
+						vars.curxt_1.xstrng = 680;
+					}
+					/* !IF DOWN, CANT. */
+					if ((vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RNWALL) != 0)
+					{
+						vars.curxt_1.xstrng = 524;
+					}
+					game.dsub.rspeak_(vars.curxt_1.xstrng);
+					vars.prsvec_1.prscon = 1;
+					/* !STOP CMD STREAM. */
+					return ret_val;
+
+				case 550:
+					switch (vars.curxt_1.xtype)
+					{
+						case 1:
+						{
+							GOTO = 900;
+							continue loop;
+						}
+						case 2:
+						{
+							GOTO = 600;
+							continue loop;
+						}
+						case 3:
+						{
+							GOTO = 700;
+							continue loop;
+						}
+						case 4:
+						{
+							GOTO = 800;
+							continue loop;
+						}
+					}
+					/* !BRANCH ON EXIT TYPE. */
+					game.dsub.bug_(9, vars.curxt_1.xtype);
+
+				case 700:
+					if (cxappl_(vars.curxt_1.xactio) != 0)
+					{
+						{
+							GOTO = 900;
+							continue loop;
+						}
+					}
+					/* !CEXIT... RETURNED ROOM? */
+					if (vars.findex_1.flags(vars.curxt_1.xflag() - 1))
+					{
+						{
+							GOTO = 900;
+							continue loop;
+						}
+					}
+					/* !NO, FLAG ON? */
+				case 600:
+					if (vars.curxt_1.xstrng == 0)
+					{
+						{
+							GOTO = 525;
+							continue loop;
+						}
+					}
+					/* !IF NO REASON, USE STD. */
+					game.dsub.rspeak_(vars.curxt_1.xstrng);
+					/* !DENY EXIT. */
+					vars.prsvec_1.prscon = 1;
+					/* !STOP CMD STREAM. */
+					return ret_val;
+
+				case 800:
+					if (cxappl_(vars.curxt_1.xactio) != 0)
+					{
+						{
+							GOTO = 900;
+							continue loop;
+						}
+					}
+					/* !DOOR... RETURNED ROOM? */
+					if ((vars.objcts_1.oflag2[vars.curxt_1.xobj - 1] & Vars.OPENBT) != 0)
+					{
+						{
+							GOTO = 900;
+							continue loop;
+						}
+					}
+					/* !NO, DOOR OPEN? */
+					if (vars.curxt_1.xstrng == 0)
+					{
+						vars.curxt_1.xstrng = 525;
+					}
+					/* !IF NO REASON, USE STD. */
+					game.dsub.rspsub_(vars.curxt_1.xstrng,
+							vars.objcts_1.odesc2[vars.curxt_1.xobj - 1]);
+					vars.prsvec_1.prscon = 1;
+					/* !STOP CMD STREAM. */
+					return ret_val;
+
+				case 900:
+					ret_val = game.dso2.moveto_(vars.curxt_1.xroom1, vars.play_1.winner);
+					/* !MOVE TO ROOM. */
+					if (ret_val)
+					{
+						ret_val = game.dsub.rmdesc_(0);
+					}
+					/* !DESCRIBE ROOM. */
+					return ret_val;
+			}
+		} while (true);
 	} /* walk_ */
 
 	/* CXAPPL- CONDITIONAL EXIT PROCESSORS */
-
-	/* DECLARATIONS */
-
-	private int cxappl_(int ri)
+	private int cxappl_(int ri) throws IOException
 	{
-//	   /* System generated locals */
-//	   int ret_val, i__1;
-//
-//	   /* Local variables */
-//	   int i, j, k;
-//	   int nxt;
-//	   int ldir;
-//
-//	   ret_val = 0;
-//	   /* 						!NO RETURN. */
-//	   if (ri == 0) {
-//	      return ret_val;
-//	   }
-//	   /* 						!IF NO ACTION, DONE. */
-//	   switch (ri) {
-//	   case 1:  goto L1000;
-//	   case 2:  goto L2000;
-//	   case 3:  goto L3000;
-//	   case 4:  goto L4000;
-//	   case 5:  goto L5000;
-//	   case 6:  goto L6000;
-//	   case 7:  goto L7000;
-//	   case 8:  goto L8000;
-//	   case 9:  goto L9000;
-//	   case 10:  goto L10000;
-//	   case 11:  goto L11000;
-//	   case 12:  goto L12000;
-//	   case 13:  goto L13000;
-//	   case 14:  goto L14000;
-//	   }
-//	   bug_(5, ri);
-//
-//	   /* C1- COFFIN-CURE */
-//
-//	L1000:
-//	   findex_1.egyptf = objcts_1.oadv[oindex_1.coffi - 1] != play_1.winner;
-//	   /* 						!T IF NO COFFIN. */
-//	   return ret_val;
-//
-//	   /* C2- CAROUSEL EXIT */
-//	   /* C5- CAROUSEL OUT */
-//
-//	L2000:
-//	   if (findex_1.caroff) {
-//	      return ret_val;
-//	   }
-//	   /* 						!IF FLIPPED, NOTHING. */
-//	L2500:
-//	   rspeak_(121);
-//	   /* 						!SPIN THE COMPASS. */
-//	L5000:
-//	   i = xpars_1.xelnt[xpars_1.xcond - 1] * rnd_(8);
-//	   /* 						!CHOOSE RANDOM EXIT. */
-//	   curxt_1.xroom1 = exits_1.travel[rooms_1.rexit[play_1.here - 1] + i - 1] & 
-//	      xpars_1.xrmask;
-//	   ret_val = curxt_1.xroom1;
-//	   /* 						!RETURN EXIT. */
-//	   return ret_val;
-//
-//	   /* C3- CHIMNEY FUNCTION */
-//
-//	L3000:
-//	   findex_1.litldf = FALSE_;
-//	   /* 						!ASSUME HEAVY LOAD. */
-//	   j = 0;
-//	   i__1 = objcts_1.olnt;
-//	   for (i = 1; i <= i__1; ++i) {
-//	      /* 						!COUNT OBJECTS. */
-//	      if (objcts_1.oadv[i - 1] == play_1.winner) {
-//	         ++j;
-//	      }
-//	      /* L3100: */
-//	   }
-//
-//	   if (j > 2) {
-//	      return ret_val;
-//	   }
-//	   /* 						!CARRYING TOO MUCH? */
-//	   curxt_1.xstrng = 446;
-//	   /* 						!ASSUME NO LAMP. */
-//	   if (objcts_1.oadv[oindex_1.lamp - 1] != play_1.winner) {
-//	      return ret_val;
-//	   }
-//	   /* 						!NO LAMP? */
-//	   findex_1.litldf = true;
-//	   /* 						!HE CAN DO IT. */
-//	   if ((objcts_1.oflag2[oindex_1.door - 1] & OPENBT) == 0) {
-//	      objcts_1.oflag2[oindex_1.door - 1] &= ~ TCHBT;
-//	   }
-//	   return ret_val;
-//
-//	   /* C4-	FROBOZZ FLAG (MAGNET ROOM, FAKE EXIT) */
-//	   /* C6-	FROBOZZ FLAG (MAGNET ROOM, REAL EXIT) */
-//
-//	L4000:
-//	   if (findex_1.caroff) {
-//	      goto L2500;
-//	   }
-//	   /* 						!IF FLIPPED, GO SPIN. */
-//	   findex_1.frobzf = FALSE_;
-//	   /* 						!OTHERWISE, NOT AN EXIT. */
-//	   return ret_val;
-//
-//	L6000:
-//	   if (findex_1.caroff) {
-//	      goto L2500;
-//	   }
-//	   /* 						!IF FLIPPED, GO SPIN. */
-//	   findex_1.frobzf = true;
-//	   /* 						!OTHERWISE, AN EXIT. */
-//	   return ret_val;
-//
-//	   /* C7-	FROBOZZ FLAG (BANK ALARM) */
-//
-//	L7000:
-//	   findex_1.frobzf = objcts_1.oroom[oindex_1.bills - 1] != 0 & 
-//	      objcts_1.oroom[oindex_1.portr - 1] != 0;
-//	   return ret_val;
-//	   /* CXAPPL, PAGE 3 */
-//
-//	   /* C8-	FROBOZZ FLAG (MRGO) */
-//
-//	L8000:
-//	   findex_1.frobzf = FALSE_;
-//	   /* 						!ASSUME CANT MOVE. */
-//	   if (findex_1.mloc != curxt_1.xroom1) {
-//	      goto L8100;
-//	   }
-//	   /* 						!MIRROR IN WAY? */
-//	   if (prsvec_1.prso == xsrch_1.xnorth || prsvec_1.prso == xsrch_1.xsouth) {
-//	      goto L8200;
-//	   }
-//	   if (findex_1.mdir % 180 != 0) {
-//	      goto L8300;
-//	   }
-//	   /* 						!MIRROR MUST BE N-S. */
-//	   curxt_1.xroom1 = (curxt_1.xroom1 - rindex_1.mra << 1) + rindex_1.mrae;
-//	   /* 						!CALC EAST ROOM. */
-//	   if (prsvec_1.prso > xsrch_1.xsouth) {
-//	      ++curxt_1.xroom1;
-//	   }
-//	   /* 						!IF SW/NW, CALC WEST. */
-//	L8100:
-//	   ret_val = curxt_1.xroom1;
-//	   return ret_val;
-//
-//	L8200:
-//	   curxt_1.xstrng = 814;
-//	   /* 						!ASSUME STRUC BLOCKS. */
-//	   if (findex_1.mdir % 180 == 0) {
-//	      return ret_val;
-//	   }
-//	   /* 						!IF MIRROR N-S, DONE. */
-//	L8300:
-//	   ldir = findex_1.mdir;
-//	   /* 						!SEE WHICH MIRROR. */
-//	   if (prsvec_1.prso == xsrch_1.xsouth) {
-//	      ldir = 180;
-//	   }
-//	   curxt_1.xstrng = 815;
-//	   /* 						!MIRROR BLOCKS. */
-//	   if (ldir > 180 && ! findex_1.mr1f || ldir < 180 && ! findex_1.mr2f) {
-//	      curxt_1.xstrng = 816;
-//	   }
-//	   return ret_val;
-//
-//	   /* C9-	FROBOZZ FLAG (MIRIN) */
-//
-//	L9000:
-//	   if (mrhere_(play_1.here) != 1) {
-//	      goto L9100;
-//	   }
-//	   /* 						!MIRROR 1 HERE? */
-//	   if (findex_1.mr1f) {
-//	      curxt_1.xstrng = 805;
-//	   }
-//	   /* 						!SEE IF BROKEN. */
-//	   findex_1.frobzf = findex_1.mropnf;
-//	   /* 						!ENTER IF OPEN. */
-//	   return ret_val;
-//
-//	L9100:
-//	   findex_1.frobzf = FALSE_;
-//	   /* 						!NOT HERE, */
-//	   curxt_1.xstrng = 817;
-//	   /* 						!LOSE. */
-//	   return ret_val;
-//	   /* CXAPPL, PAGE 4 */
-//
-//	   /* C10-	FROBOZZ FLAG (MIRROR EXIT) */
-//
-//	L10000:
-//	   findex_1.frobzf = FALSE_;
-//	   /* 						!ASSUME CANT. */
-//	   ldir = (prsvec_1.prso - xsrch_1.xnorth) / xsrch_1.xnorth * 45;
-//	   /* 						!XLATE DIR TO DEGREES. */
-//	   if (! findex_1.mropnf || (findex_1.mdir + 270) % 360 != ldir && 
-//	         prsvec_1.prso != xsrch_1.xexit) {
-//	      goto L10200;
-//	   }
-//	   curxt_1.xroom1 = (findex_1.mloc - rindex_1.mra << 1) + rindex_1.mrae + 1 
-//	      - findex_1.mdir / 180;
-//	   /* 						!ASSUME E-W EXIT. */
-//	   if (findex_1.mdir % 180 == 0) {
-//	      goto L10100;
-//	   }
-//	   /* 						!IF N-S, OK. */
-//	   curxt_1.xroom1 = findex_1.mloc + 1;
-//	   /* 						!ASSUME N EXIT. */
-//	   if (findex_1.mdir > 180) {
-//	      curxt_1.xroom1 = findex_1.mloc - 1;
-//	   }
-//	   /* 						!IF SOUTH. */
-//	L10100:
-//	   ret_val = curxt_1.xroom1;
-//	   return ret_val;
-//
-//	L10200:
-//	   if (! findex_1.wdopnf || (findex_1.mdir + 180) % 360 != ldir && 
-//	         prsvec_1.prso != xsrch_1.xexit) {
-//	      return ret_val;
-//	   }
-//	   curxt_1.xroom1 = findex_1.mloc + 1;
-//	   /* 						!ASSUME N. */
-//	   if (findex_1.mdir == 0) {
-//	      curxt_1.xroom1 = findex_1.mloc - 1;
-//	   }
-//	   /* 						!IF S. */
-//	   rspeak_(818);
-//	   /* 						!CLOSE DOOR. */
-//	   findex_1.wdopnf = FALSE_;
-//	   ret_val = curxt_1.xroom1;
-//	   return ret_val;
-//
-//	   /* C11-	MAYBE DOOR.  NORMAL MESSAGE IS THAT DOOR IS CLOSED. */
-//	   /* 	BUT IF LCELL.NE.4, DOOR ISNT THERE. */
-//
-//	L11000:
-//	   if (findex_1.lcell != 4) {
-//	      curxt_1.xstrng = 678;
-//	   }
-//	   /* 						!SET UP MSG. */
-//	   return ret_val;
-//
-//	   /* C12-	FROBZF (PUZZLE ROOM MAIN ENTRANCE) */
-//
-//	L12000:
-//	   findex_1.frobzf = true;
-//	   /* 						!ALWAYS ENTER. */
-//	   findex_1.cphere = 10;
-//	   /* 						!SET SUBSTATE. */
-//	   return ret_val;
-//
-//	   /* C13-	CPOUTF (PUZZLE ROOM SIZE ENTRANCE) */
-//
-//	L13000:
-//	   findex_1.cphere = 52;
-//	   /* 						!SET SUBSTATE. */
-//	   return ret_val;
-//	   /* CXAPPL, PAGE 5 */
-//
-//	   /* C14-	FROBZF (PUZZLE ROOM TRANSITIONS) */
-//
-//	L14000:
-//	   findex_1.frobzf = FALSE_;
-//	   /* 						!ASSSUME LOSE. */
-//	   if (prsvec_1.prso != xsrch_1.xup) {
-//	      goto L14100;
-//	   }
-//	   /* 						!UP? */
-//	   if (findex_1.cphere != 10) {
-//	      return ret_val;
-//	   }
-//	   /* 						!AT EXIT? */
-//	   curxt_1.xstrng = 881;
-//	   /* 						!ASSUME NO LADDER. */
-//	   if (puzzle_1.cpvec[findex_1.cphere] != -2) {
-//	      return ret_val;
-//	   }
-//	   /* 						!LADDER HERE? */
-//	   rspeak_(882);
-//	   /* 						!YOU WIN. */
-//	   findex_1.frobzf = true;
-//	   /* 						!LET HIM OUT. */
-//	   return ret_val;
-//
-//	L14100:
-//	   if (findex_1.cphere != 52 || prsvec_1.prso != xsrch_1.xwest || ! 
-//	         findex_1.cpoutf) {
-//	      goto L14200;
-//	   }
-//	   findex_1.frobzf = true;
-//	   /* 						!YES, LET HIM OUT. */
-//	   return ret_val;
-//
-//	L14200:
-//	   for (i = 1; i <= 16; i += 2) {
-//	      /* 						!LOCATE EXIT. */
-//	      if (prsvec_1.prso == puzzle_1.cpdr[i - 1]) {
-//	         goto L14400;
-//	      }
-//	      /* L14300: */
-//	   }
-//	   return ret_val;
-//	   /* 						!NO SUCH EXIT. */
-//
-//	L14400:
-//	   j = puzzle_1.cpdr[i];
-//	   /* 						!GET DIRECTIONAL OFFSET. */
-//	   nxt = findex_1.cphere + j;
-//	   /* 						!GET NEXT STATE. */
-//	   k = 8;
-//	   /* 						!GET ORTHOGONAL DIR. */
-//	   if (j < 0) {
-//	      k = -8;
-//	   }
-//	   if ((abs(j) == 1 || abs(j) == 8 || (puzzle_1.cpvec[findex_1.cphere + k - 
-//	               1] == 0 || puzzle_1.cpvec[nxt - k - 1] == 0)) && puzzle_1.cpvec[
-//	         nxt - 1] == 0) {
-//	      goto L14500;
-//	   }
-//	   return ret_val;
-//
-//	L14500:
-//	   cpgoto_(nxt);
-//	   /* 						!MOVE TO STATE. */
-//	   curxt_1.xroom1 = rindex_1.cpuzz;
-//	   /* 						!STAY IN ROOM. */
-//	   ret_val = curxt_1.xroom1;
-//	   return ret_val;
-		throw new RuntimeException("Dverb2.cxappl_ not impl");
+		/* System generated locals */
+		int ret_val, i__1;
+		int GOTO = 1000;
+		/* Local variables */
+		int i = 0, j, k;
+		int nxt = 0;
+		int ldir = 0;
+
+		ret_val = 0;
+		/* !NO RETURN. */
+		if (ri == 0)
+		{
+			return ret_val;
+		}
+		/* !IF NO ACTION, DONE. */
+		switch (ri)
+		{
+			case 1:
+			{
+				GOTO = 1000;
+				break;
+			}
+			case 2:
+			{
+				GOTO = 2000;
+				break;
+			}
+			case 3:
+			{
+				GOTO = 3000;
+				break;
+			}
+			case 4:
+			{
+				GOTO = 4000;
+				break;
+			}
+			case 5:
+			{
+				GOTO = 5000;
+				break;
+			}
+			case 6:
+			{
+				GOTO = 6000;
+				break;
+			}
+			case 7:
+			{
+				GOTO = 7000;
+				break;
+			}
+			case 8:
+			{
+				GOTO = 8000;
+				break;
+			}
+			case 9:
+			{
+				GOTO = 9000;
+				break;
+			}
+			case 10:
+			{
+				GOTO = 10000;
+				break;
+			}
+			case 11:
+			{
+				GOTO = 11000;
+				break;
+			}
+			case 12:
+			{
+				GOTO = 12000;
+				break;
+			}
+			case 13:
+			{
+				GOTO = 13000;
+				break;
+			}
+			case 14:
+			{
+				GOTO = 14000;
+				break;
+			}
+			default:
+				game.dsub.bug_(5, ri);
+		}
+
+		/* C1- COFFIN-CURE */
+		loop2: do
+		{
+			switch (GOTO)
+			{
+				case 1000:
+					vars.findex_1.egyptf = vars.objcts_1.oadv[vars.oindex_1.coffi
+							- 1] != vars.play_1.winner;
+					/* !T IF NO COFFIN. */
+					return ret_val;
+
+				/* C2- CAROUSEL EXIT */
+				/* C5- CAROUSEL OUT */
+
+				case 2000:
+					if (vars.findex_1.caroff)
+					{
+						return ret_val;
+					}
+					/* !IF FLIPPED, NOTHING. */
+				case 2500:
+					game.dsub.rspeak_(121);
+					/* !SPIN THE COMPASS. */
+				case 5000:
+					i = vars.xpars_1.xelnt[vars.xpars_1.xcond - 1] * Supp.rnd_(8);
+					/* !CHOOSE RANDOM EXIT. */
+					vars.curxt_1.xroom1 = vars.exits_1.travel[vars.rooms_1.rexit[vars.play_1.here
+							- 1] + i - 1] & vars.xpars_1.xrmask;
+					ret_val = vars.curxt_1.xroom1;
+					/* !RETURN EXIT. */
+					return ret_val;
+
+				/* C3- CHIMNEY FUNCTION */
+
+				case 3000:
+					vars.findex_1.litldf = false;
+					/* !ASSUME HEAVY LOAD. */
+					j = 0;
+					i__1 = vars.objcts_1.olnt;
+					for (i = 1; i <= i__1; ++i)
+					{
+						/* !COUNT OBJECTS. */
+						if (vars.objcts_1.oadv[i - 1] == vars.play_1.winner)
+						{
+							++j;
+						}
+						/* case 3100: */
+					}
+
+					if (j > 2)
+					{
+						return ret_val;
+					}
+					/* !CARRYING TOO MUCH? */
+					vars.curxt_1.xstrng = 446;
+					/* !ASSUME NO LAMP. */
+					if (vars.objcts_1.oadv[vars.oindex_1.lamp - 1] != vars.play_1.winner)
+					{
+						return ret_val;
+					}
+					/* !NO LAMP? */
+					vars.findex_1.litldf = true;
+					/* !HE CAN DO IT. */
+					if ((vars.objcts_1.oflag2[vars.oindex_1.door - 1] & Vars.OPENBT) == 0)
+					{
+						vars.objcts_1.oflag2[vars.oindex_1.door - 1] &= ~Vars.TCHBT;
+					}
+					return ret_val;
+
+				/* C4- FROBOZZ FLAG (MAGNET ROOM, FAKE EXIT) */
+				/* C6- FROBOZZ FLAG (MAGNET ROOM, REAL EXIT) */
+
+				case 4000:
+					if (vars.findex_1.caroff)
+					{
+						{
+							GOTO = 2500;
+							continue loop2;
+						}
+					}
+					/* !IF FLIPPED, GO SPIN. */
+					vars.findex_1.frobzf = false;
+					/* !OTHERWISE, NOT AN EXIT. */
+					return ret_val;
+
+				case 6000:
+					if (vars.findex_1.caroff)
+					{
+						{
+							GOTO = 2500;
+							continue loop2;
+						}
+					}
+					/* !IF FLIPPED, GO SPIN. */
+					vars.findex_1.frobzf = true;
+					/* !OTHERWISE, AN EXIT. */
+					return ret_val;
+
+				/* C7- FROBOZZ FLAG (BANK ALARM) */
+
+				case 7000:
+					vars.findex_1.frobzf = vars.objcts_1.oroom[vars.oindex_1.bills - 1] != 0
+							& vars.objcts_1.oroom[vars.oindex_1.portr - 1] != 0;
+					return ret_val;
+				/* CXAPPL, PAGE 3 */
+
+				/* C8- FROBOZZ FLAG (MRGO) */
+
+				case 8000:
+					vars.findex_1.frobzf = false;
+					/* !ASSUME CANT MOVE. */
+					if (vars.findex_1.mloc != vars.curxt_1.xroom1)
+					{
+						{
+							GOTO = 8100;
+							continue loop2;
+						}
+					}
+					/* !MIRROR IN WAY? */
+					if (vars.prsvec_1.prso == vars.xsrch_1.xnorth
+							|| vars.prsvec_1.prso == vars.xsrch_1.xsouth)
+					{
+						{
+							GOTO = 8200;
+							continue loop2;
+						}
+					}
+					if (vars.findex_1.mdir % 180 != 0)
+					{
+						{
+							GOTO = 8300;
+							continue loop2;
+						}
+					}
+					/* !MIRROR MUST BE N-S. */
+					vars.curxt_1.xroom1 = (vars.curxt_1.xroom1 - vars.rindex_1.mra << 1)
+							+ vars.rindex_1.mrae;
+					/* !CALC EAST ROOM. */
+					if (vars.prsvec_1.prso > vars.xsrch_1.xsouth)
+					{
+						++vars.curxt_1.xroom1;
+					}
+					/* !IF SW/NW, CALC WEST. */
+				case 8100:
+					ret_val = vars.curxt_1.xroom1;
+					return ret_val;
+
+				case 8200:
+					vars.curxt_1.xstrng = 814;
+					/* !ASSUME STRUC BLOCKS. */
+					if (vars.findex_1.mdir % 180 == 0)
+					{
+						return ret_val;
+					}
+					/* !IF MIRROR N-S, DONE. */
+				case 8300:
+					ldir = vars.findex_1.mdir;
+					/* !SEE WHICH MIRROR. */
+					if (vars.prsvec_1.prso == vars.xsrch_1.xsouth)
+					{
+						ldir = 180;
+					}
+					vars.curxt_1.xstrng = 815;
+					/* !MIRROR BLOCKS. */
+					if (ldir > 180 && !vars.findex_1.mr1f || ldir < 180 && !vars.findex_1.mr2f)
+					{
+						vars.curxt_1.xstrng = 816;
+					}
+					return ret_val;
+
+				/* C9- FROBOZZ FLAG (MIRIN) */
+
+				case 9000:
+					if (game.dso6.mrhere_(vars.play_1.here) != 1)
+					{
+						{
+							GOTO = 9100;
+							continue loop2;
+						}
+					}
+					/* !MIRROR 1 HERE? */
+					if (vars.findex_1.mr1f)
+					{
+						vars.curxt_1.xstrng = 805;
+					}
+					/* !SEE IF BROKEN. */
+					vars.findex_1.frobzf = vars.findex_1.mropnf;
+					/* !ENTER IF OPEN. */
+					return ret_val;
+
+				case 9100:
+					vars.findex_1.frobzf = false;
+					/* !NOT HERE, */
+					vars.curxt_1.xstrng = 817;
+					/* !LOSE. */
+					return ret_val;
+				/* CXAPPL, PAGE 4 */
+
+				/* C10- FROBOZZ FLAG (MIRROR EXIT) */
+
+				case 10000:
+					vars.findex_1.frobzf = false;
+					/* !ASSUME CANT. */
+					ldir = (vars.prsvec_1.prso - vars.xsrch_1.xnorth) / vars.xsrch_1.xnorth * 45;
+					/* !XLATE DIR TO DEGREES. */
+					if (!vars.findex_1.mropnf || (vars.findex_1.mdir + 270) % 360 != ldir
+							&& vars.prsvec_1.prso != vars.xsrch_1.xexit)
+					{
+						{
+							GOTO = 10200;
+							continue loop2;
+						}
+					}
+					vars.curxt_1.xroom1 = (vars.findex_1.mloc - vars.rindex_1.mra << 1)
+							+ vars.rindex_1.mrae + 1 - vars.findex_1.mdir / 180;
+					/* !ASSUME E-W EXIT. */
+					if (vars.findex_1.mdir % 180 == 0)
+					{
+						{
+							GOTO = 10100;
+							continue loop2;
+						}
+					}
+					/* !IF N-S, OK. */
+					vars.curxt_1.xroom1 = vars.findex_1.mloc + 1;
+					/* !ASSUME N EXIT. */
+					if (vars.findex_1.mdir > 180)
+					{
+						vars.curxt_1.xroom1 = vars.findex_1.mloc - 1;
+					}
+					/* !IF SOUTH. */
+				case 10100:
+					ret_val = vars.curxt_1.xroom1;
+					return ret_val;
+
+				case 10200:
+					if (!vars.findex_1.wdopnf || (vars.findex_1.mdir + 180) % 360 != ldir
+							&& vars.prsvec_1.prso != vars.xsrch_1.xexit)
+					{
+						return ret_val;
+					}
+					vars.curxt_1.xroom1 = vars.findex_1.mloc + 1;
+					/* !ASSUME N. */
+					if (vars.findex_1.mdir == 0)
+					{
+						vars.curxt_1.xroom1 = vars.findex_1.mloc - 1;
+					}
+					/* !IF S. */
+					game.dsub.rspeak_(818);
+					/* !CLOSE DOOR. */
+					vars.findex_1.wdopnf = false;
+					ret_val = vars.curxt_1.xroom1;
+					return ret_val;
+
+				/* C11- MAYBE DOOR. NORMAL MESSAGE IS THAT DOOR IS CLOSED. */
+				/* BUT IF LCELL.NE.4, DOOR ISNT THERE. */
+
+				case 11000:
+					if (vars.findex_1.lcell != 4)
+					{
+						vars.curxt_1.xstrng = 678;
+					}
+					/* !SET UP MSG. */
+					return ret_val;
+
+				/* C12- FROBZF (PUZZLE ROOM MAIN ENTRANCE) */
+
+				case 12000:
+					vars.findex_1.frobzf = true;
+					/* !ALWAYS ENTER. */
+					vars.findex_1.cphere = 10;
+					/* !SET SUBSTATE. */
+					return ret_val;
+
+				/* C13- CPOUTF (PUZZLE ROOM SIZE ENTRANCE) */
+
+				case 13000:
+					vars.findex_1.cphere = 52;
+					/* !SET SUBSTATE. */
+					return ret_val;
+				/* CXAPPL, PAGE 5 */
+
+				/* C14- FROBZF (PUZZLE ROOM TRANSITIONS) */
+
+				case 14000:
+					vars.findex_1.frobzf = false;
+					/* !ASSSUME LOSE. */
+					if (vars.prsvec_1.prso != vars.xsrch_1.xup)
+					{
+						{
+							GOTO = 14100;
+							continue loop2;
+						}
+					}
+					/* !UP? */
+					if (vars.findex_1.cphere != 10)
+					{
+						return ret_val;
+					}
+					/* !AT EXIT? */
+					vars.curxt_1.xstrng = 881;
+					/* !ASSUME NO LADDER. */
+					if (vars.puzzle_1.cpvec[vars.findex_1.cphere] != -2)
+					{
+						return ret_val;
+					}
+					/* !LADDER HERE? */
+					game.dsub.rspeak_(882);
+					/* !YOU WIN. */
+					vars.findex_1.frobzf = true;
+					/* !LET HIM OUT. */
+					return ret_val;
+
+				case 14100:
+					if (vars.findex_1.cphere != 52 || vars.prsvec_1.prso != vars.xsrch_1.xwest
+							|| !vars.findex_1.cpoutf)
+					{
+						{
+							GOTO = 14200;
+							continue loop2;
+						}
+					}
+					vars.findex_1.frobzf = true;
+					/* !YES, LET HIM OUT. */
+					return ret_val;
+
+				case 14200:
+					for (i = 1; i <= 16; i += 2)
+					{
+						/* !LOCATE EXIT. */
+						if (vars.prsvec_1.prso == vars.puzzle_1.cpdr[i - 1])
+						{
+							{
+								GOTO = 14400;
+								continue loop2;
+							}
+						}
+						/* case 14300: */
+					}
+					return ret_val;
+				/* !NO SUCH EXIT. */
+
+				case 14400:
+					j = vars.puzzle_1.cpdr[i];
+					/* !GET DIRECTIONAL OFFSET. */
+					nxt = vars.findex_1.cphere + j;
+					/* !GET NEXT STATE. */
+					k = 8;
+					/* !GET ORTHOGONAL DIR. */
+					if (j < 0)
+					{
+						k = -8;
+					}
+					if ((Math.abs(j) == 1 || Math.abs(j) == 8
+							|| (vars.puzzle_1.cpvec[vars.findex_1.cphere + k - 1] == 0
+									|| vars.puzzle_1.cpvec[nxt - k - 1] == 0))
+							&& vars.puzzle_1.cpvec[nxt - 1] == 0)
+					{
+						{
+							GOTO = 14500;
+							continue loop2;
+						}
+					}
+					return ret_val;
+
+				case 14500:
+					game.dso7.cpgoto_(nxt);
+					/* !MOVE TO STATE. */
+					vars.curxt_1.xroom1 = vars.rindex_1.cpuzz;
+					/* !STAY IN ROOM. */
+					ret_val = vars.curxt_1.xroom1;
+					return ret_val;
+			}
+		} while (true);
 	} /* cxappl_ */
 
 }

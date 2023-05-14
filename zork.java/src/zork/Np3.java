@@ -9,7 +9,6 @@ public class Np3
 	/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
 	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
 	/* WRITTEN BY R. M. SUPNIK */
-
 	private Vars vars = null;
 	private Dgame game = null;
 	private Np np = null;	
@@ -19,20 +18,9 @@ public class Np3
 		this.vars = vars;				
 		this.np = np;
 		this.game = game;
-				
 	}
-	
-//	#include "funcs.h"
-//	#include "vars.h"
-//	#include "np.parse.h"
-
-//	private void unpack_ P((int, int *));
-//	private int gwim_ P((int, int, int));
-//	private boolean syneql_ P((int, int, int, int, int));
-//	private boolean takeit_ P((int, int));
 
 	/* THIS ROUTINE DETAILS ON BIT 4 OF PRSFLG */
-
 	boolean synmch_() throws IOException
 	{
 		/* Initialized data */
@@ -84,6 +72,7 @@ public class Np3
 				case 200:
 					unpack_(j, newj);
 					/* !UNPACK SYNTAX. */
+					
 					sprep = np.parse.syntax_1.dobj & Parse.VPMASK;
 					if (!syneql_(np.parse.pv_1.p1(), np.parse.pv_1.o1(), np.parse.syntax_1.dobj,
 							np.parse.syntax_1.dfl1, np.parse.syntax_1.dfl2))
@@ -272,9 +261,6 @@ public class Np3
 	} /* synmch_ */
 
 	/* UNPACK- UNPACK SYNTAX SPECIFICATION, ADV POINTER */
-
-	/* DECLARATIONS */
-
 	private void unpack_(int oldj, int[] j)
 	{
 		/* Local variables */
@@ -360,9 +346,6 @@ public class Np3
 	} /* unpack_ */
 
 	/* SYNEQL- TEST FOR SYNTAX EQUALITY */
-
-	/* DECLARATIONS */
-
 	private boolean syneql_(int prep, int obj, int sprep, int sfl1, int sfl2)
 	{
 		/* System generated locals */
@@ -382,237 +365,247 @@ public class Np3
 	} /* syneql_ */
 
 	/* TAKEIT-	PARSER BASED TAKE OF OBJECT */
-
-	/* DECLARATIONS */
-
 	private boolean takeit_(int obj, int sflag) throws IOException
 	{
-	    /* System generated locals */
-	    boolean ret_val;
+		/* System generated locals */
+		boolean ret_val;
 
-	    /* Local variables */
-	    int x = 0;
-	    int odo2  = 0;
+		/* Local variables */
+		int x = 0;
+		int odo2 = 0;
 
-	    ret_val = false;
-	    
-	    int GOTO = 500;
-	/* 						!ASSUME LOSES. */
-	    if (obj == 0 || obj > vars.star_1.strbit) 
-	    {
+		ret_val = false;
+
+		int GOTO = 500;
+		/* !ASSUME LOSES. */
+		if (obj == 0 || obj > vars.star_1.strbit)
+		{
 			GOTO = 4000;
-	    }
-	    if(GOTO != 4000)
-	    {
-		/* 						!NULL/STARS WIN. */
-		    odo2 = vars.objcts_1.odesc2[obj - 1];
-		/* 						!GET DESC. */
-		    x = vars.objcts_1.ocan[obj - 1];
-		/* 						!GET CONTAINER. */
-		    if (x == 0 || (sflag & Parse.VFBIT) == 0) 
-		    {
+		}
+		if (GOTO != 4000)
+		{
+			/* !NULL/STARS WIN. */
+			odo2 = vars.objcts_1.odesc2[obj - 1];
+			/* !GET DESC. */
+			x = vars.objcts_1.ocan[obj - 1];
+			/* !GET CONTAINER. */
+			if (x == 0 || (sflag & Parse.VFBIT) == 0)
+			{
 				GOTO = 500;				
-		    }
-		    if ((vars.objcts_1.oflag2[x - 1] & Vars.OPENBT) != 0) 
-		    {
-				GOTO = 500;				
-		    }
-		    if(GOTO != 500)
-		    {
-		    	game.dsub.rspsub_(566, odo2);
-		    /* 						!CANT REACH. */
-		    	return ret_val;
-		    }
-	    }
-	    loop: do
-	    {
-	    	switch(GOTO)
-	    	{
+			}
+			if(GOTO != 500)
+			{
+				if ((vars.objcts_1.oflag2[x - 1] & Vars.OPENBT) != 0)
+				{
+					GOTO = 500;
+				}
+			}
+			if (GOTO != 500)
+			{
+				game.dsub.rspsub_(566, odo2);
+				/* !CANT REACH. */
+				return ret_val;
+			}
+		}
+		loop: do
+		{
+			switch (GOTO)
+			{
 
-	    		case 500:
-	    			if ((sflag & Parse.VRBIT) == 0) 
-	    			{
-	    				GOTO = 1000;
-	    				continue loop;
-	    			}	
-	    			if ((sflag & Parse.VTBIT) == 0) 
-	    			{
-	    				GOTO = 2000;
-	    				continue loop;
-	    			}
+				case 500:
+					if ((sflag & Parse.VRBIT) == 0)
+					{
+						GOTO = 1000;
+						continue loop;
+					}
+					if ((sflag & Parse.VTBIT) == 0)
+					{
+						GOTO = 2000;
+						continue loop;
+					}
 
-	    			/* SHOULD BE IN ROOM (VRBIT NE 0) AND CAN BE TAKEN (VTBIT NE 0) */
+					/* SHOULD BE IN ROOM (VRBIT NE 0) AND CAN BE TAKEN (VTBIT NE 0) */
 
-	    if (np.np2.schlst_(0, 0, vars.play_1.here, 0, 0, obj) <= 0) {
-			GOTO = 4000;
-			continue loop;
-	    }
-	/* 						!IF NOT, OK. */
+					if (np.np2.schlst_(0, 0, vars.play_1.here, 0, 0, obj) <= 0)
+					{
+						GOTO = 4000;
+						continue loop;
+					}
+					/* !IF NOT, OK. */
 
-	/* ITS IN THE ROOM AND CAN BE TAKEN. */
+					/* ITS IN THE ROOM AND CAN BE TAKEN. */
 
-	    if ((vars.objcts_1.oflag1[obj - 1] & Vars.TAKEBT) != 0 && (
-	    		vars.objcts_1.oflag2[obj - 1] & Vars.TRYBT) == 0) {
-			GOTO = 3000;
-			continue loop;
-	    }
+					if ((vars.objcts_1.oflag1[obj - 1] & Vars.TAKEBT) != 0
+							&& (vars.objcts_1.oflag2[obj - 1] & Vars.TRYBT) == 0)
+					{
+						GOTO = 3000;
+						continue loop;
+					}
 
-	/* NOT TAKEABLE.  IF WE CARE, FAIL. */
+					/* NOT TAKEABLE. IF WE CARE, FAIL. */
 
-	    if ((sflag & Parse.VCBIT) == 0) {
-			GOTO = 4000;
-			continue loop;
-	    }
-	    game.dsub.rspsub_(445, odo2);
-	    return ret_val;
+					if ((sflag & Parse.VCBIT) == 0)
+					{
+						GOTO = 4000;
+						continue loop;
+					}
+					game.dsub.rspsub_(445, odo2);
+					return ret_val;
 
-	/* 1000--	IT SHOULD NOT BE IN THE ROOM. */
-	/* 2000--	IT CANT BE TAKEN. */
+				/* 1000-- IT SHOULD NOT BE IN THE ROOM. */
+				/* 2000-- IT CANT BE TAKEN. */
 
-	case 2000:
-	    if ((sflag & Parse.VCBIT) == 0) {
-			GOTO = 4000;
-			continue loop;
-	    }
-	case 1000:
-	    if (np.np2.schlst_(0, 0, vars.play_1.here, 0, 0, obj) <= 0) {
-			GOTO = 4000;
-			continue loop;
-	    }
-	    game.dsub.rspsub_(665, odo2);
-	    return ret_val;
+				case 2000:
+					if ((sflag & Parse.VCBIT) == 0)
+					{
+						GOTO = 4000;
+						continue loop;
+					}
+				case 1000:
+					if (np.np2.schlst_(0, 0, vars.play_1.here, 0, 0, obj) <= 0)
+					{
+						GOTO = 4000;
+						continue loop;
+					}
+					game.dsub.rspsub_(665, odo2);
+					return ret_val;
 
-	/* OBJECT IS IN THE ROOM, CAN BE TAKEN BY THE PARSER, */
-	/* AND IS TAKEABLE IN GENERAL.  IT IS NOT A STAR. */
-	/* TAKING IT SHOULD NOT HAVE SIDE AFFECTS. */
-	/* IF IT IS INSIDE SOMETHING, THE CONTAINER IS OPEN. */
-	/* THE FOLLOWING CODE IS LIFTED FROM SUBROUTINE TAKE. */
+				/* OBJECT IS IN THE ROOM, CAN BE TAKEN BY THE PARSER, */
+				/* AND IS TAKEABLE IN GENERAL. IT IS NOT A STAR. */
+				/* TAKING IT SHOULD NOT HAVE SIDE AFFECTS. */
+				/* IF IT IS INSIDE SOMETHING, THE CONTAINER IS OPEN. */
+				/* THE FOLLOWING CODE IS LIFTED FROM SUBROUTINE TAKE. */
 
-	case 3000:
-	    if (obj != vars.advs_1.avehic[vars.play_1.winner - 1]) {
-			GOTO = 3500;
-			continue loop;
-	    }
-	/* 						!TAKE VEHICLE? */
-	    game.dsub.rspeak_(672);
-	    return ret_val;
+				case 3000:
+					if (obj != vars.advs_1.avehic[vars.play_1.winner - 1])
+					{
+						GOTO = 3500;
+						continue loop;
+					}
+					/* !TAKE VEHICLE? */
+					game.dsub.rspeak_(672);
+					return ret_val;
 
-	case 3500:
-	    if (x != 0 && vars.objcts_1.oadv[x - 1] == vars.play_1.winner || game.dso5.weight_(0, obj,
-	    		vars.play_1.winner) + vars.objcts_1.osize[obj - 1] <= vars.state_1.mxload) {
-			GOTO = 3700;
-			continue loop;
-	    }
-	    game.dsub.rspeak_(558);
-	/* 						!TOO BIG. */
-	    return ret_val;
+				case 3500:
+					if (x != 0 && vars.objcts_1.oadv[x - 1] == vars.play_1.winner
+							|| game.dso5.weight_(0, obj, vars.play_1.winner)
+									+ vars.objcts_1.osize[obj - 1] <= vars.state_1.mxload)
+					{
+						GOTO = 3700;
+						continue loop;
+					}
+					game.dsub.rspeak_(558);
+					/* !TOO BIG. */
+					return ret_val;
 
-	case 3700:
-	    game.dsub.newsta_(obj, 559, 0, 0, vars.play_1.winner);
-	/* 						!DO TAKE. */
-	    vars.objcts_1.oflag2[obj - 1] |= Vars.TCHBT;
-	    game.dso2.scrupd_(vars.objcts_1.ofval[obj - 1]);
-	    vars.objcts_1.ofval[obj - 1] = 0;
+				case 3700:
+					game.dsub.newsta_(obj, 559, 0, 0, vars.play_1.winner);
+					/* !DO TAKE. */
+					vars.objcts_1.oflag2[obj - 1] |= Vars.TCHBT;
+					game.dso2.scrupd_(vars.objcts_1.ofval[obj - 1]);
+					vars.objcts_1.ofval[obj - 1] = 0;
 
-	case 4000:
-	    ret_val = true;
-	/* 						!SUCCESS. */
-	    return ret_val;
-//	    throw new RuntimeException("Np3.takeit_ not impl.");
-	    	}
-	    }while(true);
+				case 4000:
+					ret_val = true;
+					/* !SUCCESS. */
+					return ret_val;
+			}
+		} while (true);
 
 	} /* takeit_ */
 
 	/* GWIM- GET WHAT I MEAN IN AMBIGOUS SITUATIONS */
-
-	/* DECLARATIONS */
-
-	private int gwim_(int sflag,	int sfw1,	int sfw2)
+	private int gwim_(int sflag, int sfw1, int sfw2) throws IOException
 	{
-//	    /* System generated locals */
-//	    int ret_val;
-//
-//	    /* Local variables */
-//	    int av;
-//	    int nobj, robj;
-//	    boolean nocare;
-//
-//	/* GWIM, PAGE 2 */
-//
-//	    ret_val = -1;
-//	/* 						!ASSUME LOSE. */
-//	    av = advs_1.avehic[play_1.winner - 1];
-//	    nobj = 0;
-//	    nocare = (sflag & VCBIT) == 0;
-//
-//	/* FIRST SEARCH ADVENTURER */
-//
-//	    if ((sflag & VABIT) != 0) {
-//		nobj = fwim_(sfw1, sfw2, 0, 0, play_1.winner, nocare);
-//	    }
-//	    if ((sflag & VRBIT) != 0) {
-//		{
-//			GOTO = 100;
-//			continue start;
-//		}
-//	    }
-//	case 50:
-//	    ret_val = nobj;
-//	    return ret_val;
-//
-//	/* ALSO SEARCH ROOM */
-//
-//	case 100:
-//	    robj = fwim_(sfw1, sfw2, play_1.here, 0, 0, nocare);
-//	    if (robj < 0) {
-//		{
-//			GOTO = 500;
-//			continue start;
-//		}
-//	    } else if (robj == 0) {
-//		{
-//			GOTO = 50;
-//			continue start;
-//		}
-//	    } else {
-//		{
-//			GOTO = 200;
-//			continue start;
-//		}
-//	    }
-//	/* 						!TEST RESULT. */
-//
-//	/* ROBJ > 0 */
-//
-//	case 200:
-//	    if (av == 0 || robj == av || (objcts_1.oflag2[robj - 1] & FINDBT)
-//		     != 0) {
-//		{
-//			GOTO = 300;
-//			continue start;
-//		}
-//	    }
-//	    if (objcts_1.ocan[robj - 1] != av) {
-//		{
-//			GOTO = 50;
-//			continue start;
-//		}
-//	    }
-//	/* 						!UNREACHABLE? TRY NOBJ */
-//	case 300:
-//	    if (nobj != 0) {
-//		return ret_val;
-//	    }
-//	/* 						!IF AMBIGUOUS, RETURN. */
-//	    if (! takeit_(robj, sflag)) {
-//		return ret_val;
-//	    }
-//	/* 						!IF UNTAKEABLE, RETURN */
-//	    ret_val = robj;
-//	case 500:
-//	    return ret_val;
-		throw new RuntimeException("Np3.gwim_ not impl.");
+		/* System generated locals */
+		int ret_val;
+
+		/* Local variables */
+		int av;
+		int nobj, robj = 0;
+		boolean nocare;
+		int GOTO = 50;
+
+		/* GWIM, PAGE 2 */
+
+		ret_val = -1;
+		/* !ASSUME LOSE. */
+		av = vars.advs_1.avehic[vars.play_1.winner - 1];
+		nobj = 0;
+		nocare = (sflag & Parse.VCBIT) == 0;
+
+		/* FIRST SEARCH ADVENTURER */
+
+		if ((sflag & Parse.VABIT) != 0)
+		{
+			nobj = game.dso3.fwim_(sfw1, sfw2, 0, 0, vars.play_1.winner, nocare);
+		}
+		if ((sflag & Parse.VRBIT) != 0)
+		{
+			GOTO = 100;			
+		}
+
+		loop2: do
+		{
+			switch (GOTO)
+			{
+				case 50:
+					ret_val = nobj;
+					return ret_val;
+
+				/* ALSO SEARCH ROOM */
+
+				case 100:
+					robj = game.dso3.fwim_(sfw1, sfw2, vars.play_1.here, 0, 0, nocare);
+					if (robj < 0)
+					{
+						GOTO = 500;
+						continue loop2;
+					}
+					else if (robj == 0)
+					{
+						GOTO = 50;
+						continue loop2;
+					}
+					else
+					{
+						GOTO = 200;
+						continue loop2;
+					}
+					/* !TEST RESULT. */
+
+					/* ROBJ > 0 */
+
+				case 200:
+					if (av == 0 || robj == av
+							|| (vars.objcts_1.oflag2[robj - 1] & Vars.FINDBT) != 0)
+					{
+						GOTO = 300;
+						continue loop2;
+					}
+					if (vars.objcts_1.ocan[robj - 1] != av)
+					{
+						GOTO = 50;
+						continue loop2;
+					}
+					/* !UNREACHABLE? TRY NOBJ */
+				case 300:
+					if (nobj != 0)
+					{
+						return ret_val;
+					}
+					/* !IF AMBIGUOUS, RETURN. */
+					if (!takeit_(robj, sflag))
+					{
+						return ret_val;
+					}
+					/* !IF UNTAKEABLE, RETURN */
+					ret_val = robj;
+				case 500:
+					return ret_val;
+			}
+		} while (true);
+//		throw new RuntimeException("Np3.gwim_ not impl.");
 	} /* gwim_ */
 
 }

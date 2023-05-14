@@ -7,7 +7,14 @@ public class NRooms
 	/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
 	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
 	/* WRITTEN BY R. M. SUPNIK */
-
+	Vars vars = null;
+	Dgame game = null;
+	
+	public NRooms(Vars vars, Dgame game)
+	{
+		this.vars = vars;
+		this.game = game;
+	}
 //	#include "funcs.h"
 //	#include "vars.h"
 
@@ -18,7 +25,7 @@ public class NRooms
 	{
 //	    /* Initialized data */
 //
-//	    const int newrms = 38;
+//	    final int newrms = 38;
 //
 //	    /* System generated locals */
 //	    int i__1;
@@ -28,7 +35,7 @@ public class NRooms
 //	    int i;
 //	    int j;
 //
-//	    ret_val = TRUE_;
+//	    ret_val = true;
 //	    switch (ri - newrms + 1) {
 //		case 1:  goto L38000;
 //		case 2:  goto L39000;
@@ -220,7 +227,7 @@ public class NRooms
 //		goto L50100;
 //	    }
 //	/* 						!WALK IN? */
-//	    cevent_1.cflag[cindex_1.cevfol - 1] = TRUE_;
+//	    cevent_1.cflag[cindex_1.cevfol - 1] = true;
 //	/* 						!MASTER FOLLOWS. */
 //	    cevent_1.ctick[cindex_1.cevfol - 1] = -1;
 //	    return ret_val;

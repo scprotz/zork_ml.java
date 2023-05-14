@@ -1,8 +1,6 @@
 package 	zork;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Np
 {
@@ -13,38 +11,25 @@ public class Np
 	Np3 np3 = null;
 	Parse parse = null;
 	
+	/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
+	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
+	/* WRITTEN BY R. M. SUPNIK */
 	public Np(Vars vars, Dgame game)
 	{
 		this.vars = vars;
 		this.game = game;
 		this.parse = new Parse();
-		this.np2 = new Np2(vars);
+		this.np2 = new Np2(vars, this, game);
 		this.np1 = new Np1(vars, this, game);
 		this.np3 = new Np3(vars, this, game);
 		
-		reader = new BufferedReader(new InputStreamReader(System.in));
+//		reader = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
 	/* RDLINE-	READ INPUT LINE */
-
-	/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
-	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
-	/* WRITTEN BY R. M. SUPNIK */
-
-//	#include <stdio.h>
-//	#include <ctype.h>
-//	#include "funcs.h"
-//	#include "vars.h"
-//
-//	/* This declaration is here since many systems don't have <stdlib.h> */
-//
-//	extern int system P((const char *));
-//
-//	static boolean lex_ P((char *, int *, int *, boolean));
-//
-	BufferedReader reader = null;
+//	BufferedReader reader = null;
 	
-	void rdline_(char[] buffer, int who)
+	void rdline_(char[] buffer, int who) throws IOException
 	{
 	    /* Local variables */
 //	    char[] z;
@@ -72,20 +57,18 @@ public class Np
 	/* 						!PROMPT FOR GAME. */
 				case 90:
 					System.out.flush();
-//	    (void) fflush(stdout);
 					
 					String buf = null;
 					try
 					{
-						buf = reader.readLine();
+						buf = DMain.getInput();
 					}
 					catch(IOException ioe)
 					{
 						ioe.printStackTrace();
 						Supp.exit_();
 					}
-//					if (System.in.read()(buffer, 78, stdin) == null)
-//						Supp.exit_();
+
 					Supp.more_input();
 
 					if (buf.charAt(0) == '!') 
@@ -141,46 +124,46 @@ public class Np
 
 	boolean parse_(char[] inbuf, boolean vbflag) throws IOException	
 	{
-	    /* System generated locals */
-	    int i__1;
-	    boolean ret_val;
+		/* System generated locals */
+		int i__1;
+		boolean ret_val;
 
-	    /* Local variables */
-	    int outbuf[] = new int[40];
-	    int[] outlnt = new int[1];
+		/* Local variables */
+		int outbuf[] = new int[40];
+		int[] outlnt = new int[1];
 
-	    /* Parameter adjustments */
+		/* Parameter adjustments */
 //	    --inbuf;
 
-	    /* Function Body */
-	    ret_val = false;
-	/* 						!ASSUME FAILS. */
-	    vars.prsvec_1.prsa = 0;
-	/* 						!ZERO OUTPUTS. */
-	    vars.prsvec_1.prsi = 0;
-	    vars.prsvec_1.prso = 0;
-	    int GOTO = 0;
-	    
-	    if (! lex_(inbuf, outbuf, outlnt, vbflag)) 
-	    {
-	    	GOTO = 100;
-	    }
-	    if(GOTO != 100)
-	    {
-	    if ((i__1 = np1.sparse_(outbuf, outlnt, vbflag)) < 0) 
-	    {
-	    	GOTO = 100;	    	
-	    } 
-	    else if (i__1 == 0) 
-	    {
-	    	GOTO = 200;
-	    	
-	    } 
-	    else 
-	    {
-	    	GOTO = 300;
-	    }
-	    }
+		/* Function Body */
+		ret_val = false;
+		/* !ASSUME FAILS. */
+		vars.prsvec_1.prsa = 0;
+		/* !ZERO OUTPUTS. */
+		vars.prsvec_1.prsi = 0;
+		vars.prsvec_1.prso = 0;
+		int GOTO = 0;
+
+		if (!lex_(inbuf, outbuf, outlnt, vbflag))
+		{
+			GOTO = 100;
+		}
+		if (GOTO != 100)
+		{
+			if ((i__1 = np1.sparse_(outbuf, outlnt, vbflag)) < 0)
+			{
+				GOTO = 100;
+			}
+			else if (i__1 == 0)
+			{
+				GOTO = 200;
+
+			}
+			else
+			{
+				GOTO = 300;
+			}
+		}
 	/* 						!DO SYN SCAN. */
 
 	/* PARSE REQUIRES VALIDATION */
@@ -251,14 +234,7 @@ public class Np
 				    '-', '-', '-' - 27 };
 	
 	private boolean lex_(char[] inbuf, int[] outbuf, int[] op, boolean vbflag) throws IOException
-//	char *inbuf;
-//	int *outbuf;
-//	int *op;
-//	boolean vbflag;
 	{
-	    /* Initialized data */
-
-
 	    /* System generated locals */
 	    boolean ret_val;
 
@@ -285,7 +261,7 @@ public class Np
 //	    *op = -1;
 	    op[0] = -1;
 	/* 						!OUTPUT PTR. */
-	    
+	    vars.prsvec_1.prscon --;
 	    int GOTO = 50;
 start:	do    
 		{
@@ -299,7 +275,7 @@ start:	do
 				/* 						!CHAR PTR=0. */
 			
 				case 200:
-					j = inbuf[vars.prsvec_1.prscon-1];
+					j = inbuf[vars.prsvec_1.prscon];
 					/* 						!GET CHARACTER */
 				
 					    if (j == '\0')
@@ -438,6 +414,8 @@ start:	do
 					}
 	/* 						!ANY WORD YET? */
 	    		//goto L50;
+					GOTO = 50;
+					continue;
 	/* 						!YES, ADV OP. */
 			}
 		}while(true);

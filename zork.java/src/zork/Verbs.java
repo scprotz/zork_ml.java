@@ -6,7 +6,7 @@ public class Verbs
 {
 	/* VAPPLI- MAIN VERB PROCESSING ROUTINE */
 
-	/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
+	/* COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142 */
 	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
 	/* WRITTEN BY R. M. SUPNIK */
 	Vars vars = null;
@@ -14,7 +14,7 @@ public class Verbs
 	Dverb1 dverb1 = null;
 	Dverb2 dverb2 = null;
 	Sverbs sverbs = null;
-	
+
 	public Verbs(Vars vars, Dgame game)
 	{
 		this.vars = vars;
@@ -24,9 +24,6 @@ public class Verbs
 		this.sverbs = new Sverbs(vars, game, this);
 	}
 
-//	#include "funcs.h"
-//	#include "vars.h"
-//
 	public boolean vappli_(int ri) throws IOException
 	{
 		/* Initialized data */
@@ -41,7 +38,7 @@ public class Verbs
 		/* Local variables */
 		int melee;
 		boolean f = false;
-		int i = 0, j = 0, av  = 0;
+		int i = 0, j = 0, av = 0;
 		int rmk = 0;
 		int odi2 = 0, odo2 = 0;
 		int GOTO = 0;
@@ -995,708 +992,775 @@ public class Verbs
 					/* !DESCRIBE FINDINGS. */
 					return ret_val;
 
-	/* V128--	WAIT.  RUN CLOCK DEMON. */
-
-	case 49000:
-	    game.dsub.rspeak_(419);
-	/* 						!TIME PASSES. */
-	    for (i = 1; i <= 3; ++i) {
-		if (clockd_()) {
-		    return ret_val;
-		}
-	/* case 49100: */
-	    }
-	    return ret_val;
-
-	/* V129--	SPIN. */
-	/* V159--	TURN TO. */
-
-	case 50000:
-	case 88000:
-	    if (! game.dsub.objact_()) {
-		game.dsub.rspeak_(663);
-	    }
-	/* 						!IF NOT OBJ, JOKE. */
-	    return ret_val;
-
-	/* V130--	BOARD.  WORKS WITH VEHICLES. */
-
-	case 51000:
-	    if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VEHBT) != 0) {
-		GOTO = 51100;
-			 continue loop;
-	    }
-	    game.dsub.rspsub_(421, odo2);
-	/* 						!NOT VEHICLE, JOKE. */
-	    return ret_val;
-
-	case 51100:
-	    if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here)) {
-		GOTO = 51200;
-			 continue loop;
-	    }
-	/* 						!HERE? */
-	    game.dsub.rspsub_(420, odo2);
-	/* 						!NO, JOKE. */
-	    return ret_val;
-
-	case 51200:
-	    if (av == 0) {
-		GOTO = 51300;
-			 continue loop;
-	    }
-	/* 						!ALREADY GOT ONE? */
-	    game.dsub.rspsub_(422, odo2);
-	/* 						!YES, JOKE. */
-	    return ret_val;
-
-	case 51300:
-	    if (game.dsub.objact_()) {
-		return ret_val;
-	    }
-	/* 						!OBJ HANDLE? */
-	    game.dsub.rspsub_(423, odo2);
-	/* 						!DESCRIBE. */
-	    vars.advs_1.avehic[vars.play_1.winner - 1] = vars.prsvec_1.prso;
-	    if (vars.play_1.winner != vars.aindex_1.player) {
-		vars.objcts_1.ocan[vars.advs_1.aobj[vars.play_1.winner - 1] - 1] = vars.prsvec_1.prso;
-	    }
-	    return ret_val;
-
-	/* V131--	DISEMBARK. */
-
-	case 52000:
-	    if (av == vars.prsvec_1.prso) {
-		GOTO = 52100;
-			 continue loop;
-	    }
-	/* 						!FROM VEHICLE? */
-	    game.dsub.rspeak_(424);
-	/* 						!NO, JOKE. */
-	    return ret_val;
-
-	case 52100:
-	    if (game.dsub.objact_()) {
-		return ret_val;
-	    }
-	/* 						!OBJ HANDLE? */
-	    if ((vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RLAND) != 0) {
-		GOTO = 52200;
-			 continue loop;
-	    }
-	    game.dsub.rspeak_(425);
-	/* 						!NOT ON LAND. */
-	    return ret_val;
-
-	case 52200:
-	    vars.advs_1.avehic[vars.play_1.winner - 1] = 0;
-	    game.dsub.rspeak_(426);
-	    if (vars.play_1.winner != vars.aindex_1.player) {
-		game.dsub.newsta_(vars.advs_1.aobj[vars.play_1.winner - 1], 0, vars.play_1.here, 0, 0);
-	    }
-	    return ret_val;
-
-	/* V132--	TAKE.  HANDLED EXTERNALLY. */
-
-	case 53000:
-	    ret_val = game.verbs.dverb1.take_(true);
-	    return ret_val;
-
-	/* V133--	INVENTORY.  PROCESSED EXTERNALLY. */
-
-	case 55000:
-	    game.dso1.invent_(vars.play_1.winner);
-	    return ret_val;
-	/* VAPPLI, PAGE 8 */
-
-	/* V134--	FILL.  STRANGE DOINGS WITH WATER. */
-
-	case 56000:
-	    if (vars.prsvec_1.prsi != 0) {
-		GOTO = 56050;
-			 continue loop;
-	    }
-	/* 						!ANY OBJ SPECIFIED? */
-	    if ((vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RWATER + Vars.RFILL) != 
-		    0) {
-		GOTO = 56025;
-			 continue loop;
-	    }
-	    game.dsub.rspeak_(516);
-	/* 						!NOTHING TO FILL WITH. */
-	    vars.prsvec_1.prswon = false;
-	/* 						!YOU LOSE. */
-	    return ret_val;
-
-	case 56025:
-	    vars.prsvec_1.prsi = vars.oindex_1.gwate;
-	/* 						!USE GLOBAL WATER. */
-	case 56050:
-	    if (game.dsub.objact_()) {
-		return ret_val;
-	    }
-	/* 						!OBJ HANDLE? */
-	    if (vars.prsvec_1.prsi != vars.oindex_1.gwate && vars.prsvec_1.prsi != vars.oindex_1.water) {
-		game.dsub.rspsb2_(444, odi2, odo2);
-	    }
-	    return ret_val;
-
-	/* V135,V136--	EAT/DRINK */
-
-	case 58000:
-	case 59000:
-	    if (game.dsub.objact_()) {
-		return ret_val;
-	    }
-	/* 						!OBJ HANDLE? */
-	    if (vars.prsvec_1.prso == vars.oindex_1.gwate) {
-		GOTO = 59500;
-			 continue loop;
-	    }
-	/* 						!DRINK GLOBAL WATER? */
-	    if (! ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.FOODBT) != 0)) {
-		GOTO = 59400;
-			 continue loop;
-	    }
-	/* 						!EDIBLE? */
-	    if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner) {
-		GOTO = 59200;
-			 continue loop;
-	    }
-	/* 						!YES, ON WINNER? */
-	case 59100:
-	    game.dsub.rspsub_(454, odo2);
-	/* 						!NOT ACCESSIBLE. */
-	    return ret_val;
-
-	case 59200:
-	    if (vars.prsvec_1.prsa == vars.vindex_1.drinkw) {
-		GOTO = 59300;
-			 continue loop;
-	    }
-	/* 						!DRINK FOOD? */
-	    game.dsub.newsta_(vars.prsvec_1.prso, 455, 0, 0, 0);
-	/* 						!NO, IT DISAPPEARS. */
-	    return ret_val;
-
-	case 59300:
-	    game.dsub.rspeak_(456);
-	/* 						!YES, JOKE. */
-	    return ret_val;
-
-	case 59400:
-	    if (! ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.DRNKBT) != 0)) {
-		GOTO = 59600;
-			 continue loop;
-	    }
-	/* 						!DRINKABLE? */
-	    if (vars.objcts_1.ocan[vars.prsvec_1.prso - 1] == 0) {
-		GOTO = 59100;
-			 continue loop;
-	    }
-	/* 						!YES, IN SOMETHING? */
-	    if (vars.objcts_1.oadv[vars.objcts_1.ocan[vars.prsvec_1.prso - 1] - 1] != vars.play_1.winner) 
-		    {
-		GOTO = 59100;
-			 continue loop;
-	    }
-	    if ((vars.objcts_1.oflag2[vars.objcts_1.ocan[vars.prsvec_1.prso - 1] - 1] & 
-		    Vars.OPENBT) != 0) {
-		GOTO = 59500;
-			 continue loop;
-	    }
-	/* 						!CONT OPEN? */
-	    game.dsub.rspeak_(457);
-	/* 						!NO, JOKE. */
-	    return ret_val;
-
-	case 59500:
-	    game.dsub.newsta_(vars.prsvec_1.prso, 458, 0, 0, 0);
-	/* 						!GONE. */
-	    return ret_val;
-
-	case 59600:
-	    game.dsub.rspsub_(453, odo2);
-	/* 						!NOT FOOD OR DRINK. */
-	    return ret_val;
-
-	/* V137--	BURN.  COMPLICATED. */
-
-	case 60000:
-	    if ((vars.objcts_1.oflag1[vars.prsvec_1.prsi - 1] & Vars.FLAMBT + 
-		    Vars.LITEBT + Vars.ONBT) != Vars.FLAMBT + 
-		    Vars.LITEBT + Vars.ONBT) {
-		GOTO = 60400;
-			 continue loop;
-	    }
-	    if (game.dsub.objact_()) {
-		return ret_val;
-	    }
-	/* 						!OBJ HANDLE? */
-	    if (vars.objcts_1.ocan[vars.prsvec_1.prso - 1] != vars.oindex_1.recep) {
-		GOTO = 60050;
-			 continue loop;
-	    }
-	/* 						!BALLOON? */
-	    if (game.objcts.oappli_(vars.objcts_1.oactio[vars.oindex_1.ballo - 1], 0)) {
-		return ret_val;
-	    }
-	/* 						!DID IT HANDLE? */
-	case 60050:
-	    if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.BURNBT) == 0) {
-		GOTO = 60300;
-			 continue loop;
-	    }
-	    if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] != vars.play_1.winner) {
-		GOTO = 60100;
-			 continue loop;
-	    }
-	/* 						!CARRYING IT? */
-	    game.dsub.rspsub_(459, odo2);
-	    game.dsub.jigsup_(460);
-	    return ret_val;
-
-	case 60100:
-	    j = vars.objcts_1.ocan[vars.prsvec_1.prso - 1];
-	/* 						!GET CONTAINER. */
-	    if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here) || av != 0 && j == av) {
-		GOTO = 60200;
-			 continue loop;
-	    }
-	    if (j == 0) {
-		GOTO = 60150;
-			 continue loop;
-	    }
-	/* 						!INSIDE? */
-	    if (! ((vars.objcts_1.oflag2[j - 1] & Vars.OPENBT) != 0)) {
-		GOTO = 60150;
-			 continue loop;
-	    }
-	/* 						!OPEN? */
-	    if (game.dsub.qhere_(j, vars.play_1.here) || av != 0 && vars.objcts_1.ocan[j - 1] == av) {
-		GOTO = 60200;
-			 continue loop;
-	    }
-	case 60150:
-	    game.dsub.rspeak_(461);
-	/* 						!CANT REACH IT. */
-	    return ret_val;
-
-	case 60200:
-	    game.dsub.rspsub_(462, odo2);
-	/* 						!BURN IT. */
-	    game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, 0);
-	    return ret_val;
-
-	case 60300:
-	    game.dsub.rspsub_(463, odo2);
-	/* 						!CANT BURN IT. */
-	    return ret_val;
-
-	case 60400:
-	    game.dsub.rspsub_(301, odi2);
-	/* 						!CANT BURN IT WITH THAT. */
-	    return ret_val;
-	/* VAPPLI, PAGE 9 */
-
-	/* V138--	MUNG.  GO TO COMMON ATTACK CODE. */
-
-	case 63000:
-	    i = 466;
-	/* 						!CHOOSE PHRASE. */
-	    if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) != 0) {
-		GOTO = 66100;
-			 continue loop;
-	    }
-	    if (! game.dsub.objact_()) {
-		game.dsub.rspsb2_(466, odo2, rmk);
-	    }
-	    return ret_val;
-
-	/* V139--	KILL.  GO TO COMMON ATTACK CODE. */
-
-	case 64000:
-	    i = 467;
-	/* 						!CHOOSE PHRASE. */
-	    GOTO = 66100;
-			 continue loop;
-
-	/* V140--	SWING.  INVERT OBJECTS, FALL THRU TO ATTACK. */
-
-	case 65000:
-	    j = vars.prsvec_1.prso;
-	/* 						!INVERT. */
-	    vars.prsvec_1.prso = vars.prsvec_1.prsi;
-	    vars.prsvec_1.prsi = j;
-	    j = odo2;
-	    odo2 = odi2;
-	    odi2 = j;
-	    vars.prsvec_1.prsa = vars.vindex_1.attacw;
-	/* 						!FOR OBJACT. */
-
-	/* V141--	ATTACK.  FALL THRU TO ATTACK CODE. */
-
-	case 66000:
-	    i = 468;
-
-	/* COMMON MUNG/ATTACK/SWING/KILL CODE. */
-
-	case 66100:
-	    if (vars.prsvec_1.prso != 0) {
-		GOTO = 66200;
-			 continue loop;
-	    }
-	/* 						!ANYTHING? */
-	    game.dsub.rspeak_(469);
-	/* 						!NO, JOKE. */
-	    return ret_val;
-
-	case 66200:
-	    if (game.dsub.objact_()) {
-		return ret_val;
-	    }
-	/* 						!OBJ HANDLE? */
-	    if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) != 0) {
-		GOTO = 66300;
-			 continue loop;
-	    }
-	    if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.VICTBT) == 0) {
-		game.dsub.rspsub_(470, odo2);
-	    }
-	    return ret_val;
-
-	case 66300:
-	    j = 471;
-	/* 						!ASSUME NO WEAPON. */
-	    if (vars.prsvec_1.prsi == 0) {
-		GOTO = 66500;
-			 continue loop;
-	    }
-	    if ((vars.objcts_1.oflag2[vars.prsvec_1.prsi - 1] & Vars.WEAPBT) == 0) {
-		GOTO = 66400;
-			 continue loop;
-	    }
-	    melee = 1;
-	/* 						!ASSUME SWORD. */
-	    if (vars.prsvec_1.prsi != vars.oindex_1.sword) {
-		melee = 2;
-	    }
-	/* 						!MUST BE KNIFE. */
-	    i = game.demons.blow_(vars.aindex_1.player, vars.prsvec_1.prso, melee, 1, 0);
-	/* 						!STRIKE BLOW. */
-	    return ret_val;
-
-	case 66400:
-	    j = 472;
-	/* 						!NOT A WEAPON. */
-	case 66500:
-	    game.dsub.rspsb2_(i, odo2, j);
-	/* 						!JOKE. */
-	    return ret_val;
-	/* VAPPLI, PAGE 10 */
-
-	/* V142--	WALK.  PROCESSED EXTERNALLY. */
-
-	case 68000:
-	    ret_val = dverb2.walk_();
-	    return ret_val;
-
-	/* V143--	TELL.  PROCESSED IN GAME. */
-
-	case 69000:
-	    game.dsub.rspeak_(603);
-	    return ret_val;
-
-	/* V144--	PUT.  PROCESSED EXTERNALLY. */
-
-	case 70000:
-	    ret_val = dverb1.put_(true);
-	    return ret_val;
-
-	/* V145,V146,V147,V148--	DROP/GIVE/POUR/THROW */
-
-	case 71000:
-	case 72000:
-	case 73000:
-	case 74000:
-	    ret_val = dverb1.drop_(false);
-	    return ret_val;
-
-	/* V149--	SAVE */
-
-	case 77000:
-	    if ((vars.rooms_1.rflag[vars.rindex_1.tstrs - 1] & Vars.RSEEN) == 0) {
-		GOTO = 77100;
-			 continue loop;
-	    }
-	    game.dsub.rspeak_(828);
-	/* 						!NO SAVES IN ENDGAME. */
-	    return ret_val;
-
-	case 77100:
-	    dverb2.savegm_();
-	    return ret_val;
-
-	/* V150--	RESTORE */
-
-	case 78000:
-	    if ((vars.rooms_1.rflag[vars.rindex_1.tstrs - 1] & Vars.RSEEN) == 0) {
-		GOTO = 78100;
-			 continue loop;
-	    }
-	    game.dsub.rspeak_(829);
-	/* 						!NO RESTORES IN ENDGAME. */
-	    return ret_val;
-
-	case 78100:
-	    dverb2.rstrgm_();
-	    return ret_val;
-	/* VAPPLI, PAGE 11 */
-
-	/* V151--	HELLO */
-
-	case 80000:
-	    if (vars.prsvec_1.prso != 0) {
-		GOTO = 80100;
-			 continue loop;
-	    }
-	/* 						!ANY OBJ? */
-	    i__1 = Supp.rnd_(4) + 346;
-	    game.dsub.rspeak_(i__1);
-	/* 						!NO, VANILLA HELLO. */
-	    return ret_val;
-
-	case 80100:
-	    if (vars.prsvec_1.prso != vars.oindex_1.aviat) {
-		GOTO = 80200;
-			 continue loop;
-	    }
-	/* 						!HELLO AVIATOR? */
-	    game.dsub.rspeak_(350);
-	/* 						!NOTHING HAPPENS. */
-	    return ret_val;
-
-	case 80200:
-	    if (vars.prsvec_1.prso != vars.oindex_1.sailo) {
-		GOTO = 80300;
-			 continue loop;
-	    }
-	/* 						!HELLO SAILOR? */
-	    ++vars.state_1.hs;
-	/* 						!COUNT. */
-	    i = 351;
-	/* 						!GIVE NORMAL OR */
-	    if (vars.state_1.hs % 10 == 0) {
-		i = 352;
-	    }
-	/* 						!RANDOM MESSAGE. */
-	    if (vars.state_1.hs % 20 == 0) {
-		i = 353;
-	    }
-	    game.dsub.rspeak_(i);
-	/* 						!SPEAK UP. */
-	    return ret_val;
-
-	case 80300:
-	    if (game.dsub.objact_()) {
-		return ret_val;
-	    }
-	/* 						!OBJ HANDLE? */
-	    i = 354;
-	/* 						!ASSUME VILLAIN. */
-	    if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT + 
-		    Vars.ACTRBT) == 0) {
-		i = 355;
-	    }
-	    game.dsub.rspsub_(i, odo2);
-	/* 						!HELLO THERE */
-	/* 						! */
-	    return ret_val;
-
-	/* V152--	LOOK INTO */
-
-	case 81000:
-	    if (game.dsub.objact_()) {
-		return ret_val;
-	    }
-	/* 						!OBJ HANDLE? */
-	    if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.DOORBT) == 0) {
-		GOTO = 81300;
-			 continue loop;
-	    }
-	    if (! ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.OPENBT) != 0)) {
-		GOTO = 81200;
-			 continue loop;
-	    }
-	/* 						!OPEN? */
-	    game.dsub.rspsub_(628, odo2);
-	/* 						!OPEN DOOR- UNINTERESTING. */
-	    return ret_val;
-
-	case 81200:
-	    game.dsub.rspsub_(525, odo2);
-	/* 						!CLOSED DOOR- CANT SEE. */
-	    return ret_val;
-
-	case 81300:
-	    if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VEHBT) != 0) {
-		GOTO = 81400;
-			 continue loop;
-	    }
-	    if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.OPENBT) != 0 || (
-		    vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TRANBT) != 0) {
-		GOTO = 81400;
-			 continue loop;
-	    }
-	    if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.CONTBT) != 0) {
-		GOTO = 81200;
-			 continue loop;
-	    }
-	    game.dsub.rspsub_(630, odo2);
-	/* 						!CANT LOOK INSIDE. */
-	    return ret_val;
-
-	case 81400:
-	    if (game.dsub.qempty_(vars.prsvec_1.prso)) {
-		GOTO = 81500;
-			 continue loop;
-	    }
-	/* 						!VEH OR SEE IN.  EMPTY? */
-	    game.dso1.princo_(vars.prsvec_1.prso, 573);
-	/* 						!NO, LIST CONTENTS. */
-	    return ret_val;
-
-	case 81500:
-	    game.dsub.rspsub_(629, odo2);
-	/* 						!EMPTY. */
-	    return ret_val;
-
-	/* V153--	LOOK UNDER */
-
-	case 82000:
-	    if (! game.dsub.objact_()) {
-		game.dsub.rspeak_(631);
-	    }
-	/* 						!OBJECT HANDLE? */
-	    return ret_val;
-	/* VAPPLI, PAGE 12 */
-
-	/* V154--	PUMP */
-
-	case 83000:
-	    if (vars.objcts_1.oroom[vars.oindex_1.pump - 1] == vars.play_1.here || vars.objcts_1.oadv[
-		    vars.oindex_1.pump - 1] == vars.play_1.winner) {
-		GOTO = 83100;
-			 continue loop;
-	    }
-	    game.dsub.rspeak_(632);
-	/* 						!NO. */
-	    return ret_val;
-
-	case 83100:
-	    vars.prsvec_1.prsi = vars.oindex_1.pump;
-	/* 						!BECOMES INFLATE */
-	    vars.prsvec_1.prsa = vars.vindex_1.inflaw;
-	/* 						!X WITH PUMP. */
-	    GOTO = 22000;
-			 continue loop;
-	/* 						!DONE. */
-
-	/* V155--	WIND */
-
-	case 84000:
-	    if (! game.dsub.objact_()) {
-		game.dsub.rspsub_(634, odo2);
-	    }
-	/* 						!OBJ HANDLE? */
-	    return ret_val;
-
-	/* V156--	CLIMB */
-	/* V157--	CLIMB UP */
-	/* V158--	CLIMB DOWN */
-
-	case 85000:
-	case 86000:
-	case 87000:
-	    i = vars.xsrch_1.xup;
-	/* 						!ASSUME UP. */
-	    if (vars.prsvec_1.prsa == vars.vindex_1.clmbdw) {
-		i = vars.xsrch_1.xdown;
-	    }
-	/* 						!UNLESS CLIMB DN. */
-	    f = (vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.CLMBBT) != 0;
-	    if (f && game.dso3.findxt_(i, vars.play_1.here)) {
-		GOTO = 87500;
-			 continue loop;
-	    }
-	/* 						!ANYTHING TO CLIMB? */
-	    if (game.dsub.objact_()) {
-		return ret_val;
-	    }
-	/* 						!OBJ HANDLE? */
-	    i = 657;
-	    if (f) {
-		i = 524;
-	    }
-	/* 						!VARIETY OF JOKES. */
-	    if (! f && (vars.prsvec_1.prso == vars.oindex_1.wall || vars.prsvec_1.prso >= 
-		    vars.oindex_1.wnort && vars.prsvec_1.prso <= vars.oindex_1.wnort + 3)) {
-		i = 656;
-	    }
-	    game.dsub.rspeak_(i);
-	/* 						!JOKE. */
-	    return ret_val;
-
-	case 87500:
-	    vars.prsvec_1.prsa = vars.vindex_1.walkw;
-	/* 						!WALK */
-	    vars.prsvec_1.prso = i;
-	/* 						!IN SPECIFIED DIR. */
-	    ret_val = dverb2.walk_();
-	    return ret_val;
-//		throw new RuntimeException("implement vappli_");
-	    	}
-	    }while(true);
+				/* V128-- WAIT. RUN CLOCK DEMON. */
+
+				case 49000:
+					game.dsub.rspeak_(419);
+					/* !TIME PASSES. */
+					for (i = 1; i <= 3; ++i)
+					{
+						if (clockd_())
+						{
+							return ret_val;
+						}
+						/* case 49100: */
+					}
+					return ret_val;
+
+				/* V129-- SPIN. */
+				/* V159-- TURN TO. */
+
+				case 50000:
+				case 88000:
+					if (!game.dsub.objact_())
+					{
+						game.dsub.rspeak_(663);
+					}
+					/* !IF NOT OBJ, JOKE. */
+					return ret_val;
+
+				/* V130-- BOARD. WORKS WITH VEHICLES. */
+
+				case 51000:
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VEHBT) != 0)
+					{
+						GOTO = 51100;
+						continue loop;
+					}
+					game.dsub.rspsub_(421, odo2);
+					/* !NOT VEHICLE, JOKE. */
+					return ret_val;
+
+				case 51100:
+					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here))
+					{
+						GOTO = 51200;
+						continue loop;
+					}
+					/* !HERE? */
+					game.dsub.rspsub_(420, odo2);
+					/* !NO, JOKE. */
+					return ret_val;
+
+				case 51200:
+					if (av == 0)
+					{
+						GOTO = 51300;
+						continue loop;
+					}
+					/* !ALREADY GOT ONE? */
+					game.dsub.rspsub_(422, odo2);
+					/* !YES, JOKE. */
+					return ret_val;
+
+				case 51300:
+					if (game.dsub.objact_())
+					{
+						return ret_val;
+					}
+					/* !OBJ HANDLE? */
+					game.dsub.rspsub_(423, odo2);
+					/* !DESCRIBE. */
+					vars.advs_1.avehic[vars.play_1.winner - 1] = vars.prsvec_1.prso;
+					if (vars.play_1.winner != vars.aindex_1.player)
+					{
+						vars.objcts_1.ocan[vars.advs_1.aobj[vars.play_1.winner - 1]
+								- 1] = vars.prsvec_1.prso;
+					}
+					return ret_val;
+
+				/* V131-- DISEMBARK. */
+
+				case 52000:
+					if (av == vars.prsvec_1.prso)
+					{
+						GOTO = 52100;
+						continue loop;
+					}
+					/* !FROM VEHICLE? */
+					game.dsub.rspeak_(424);
+					/* !NO, JOKE. */
+					return ret_val;
+
+				case 52100:
+					if (game.dsub.objact_())
+					{
+						return ret_val;
+					}
+					/* !OBJ HANDLE? */
+					if ((vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RLAND) != 0)
+					{
+						GOTO = 52200;
+						continue loop;
+					}
+					game.dsub.rspeak_(425);
+					/* !NOT ON LAND. */
+					return ret_val;
+
+				case 52200:
+					vars.advs_1.avehic[vars.play_1.winner - 1] = 0;
+					game.dsub.rspeak_(426);
+					if (vars.play_1.winner != vars.aindex_1.player)
+					{
+						game.dsub.newsta_(vars.advs_1.aobj[vars.play_1.winner - 1], 0,
+								vars.play_1.here, 0, 0);
+					}
+					return ret_val;
+
+				/* V132-- TAKE. HANDLED EXTERNALLY. */
+
+				case 53000:
+					ret_val = game.verbs.dverb1.take_(true);
+					return ret_val;
+
+				/* V133-- INVENTORY. PROCESSED EXTERNALLY. */
+
+				case 55000:
+					game.dso1.invent_(vars.play_1.winner);
+					return ret_val;
+				/* VAPPLI, PAGE 8 */
+
+				/* V134-- FILL. STRANGE DOINGS WITH WATER. */
+
+				case 56000:
+					if (vars.prsvec_1.prsi != 0)
+					{
+						GOTO = 56050;
+						continue loop;
+					}
+					/* !ANY OBJ SPECIFIED? */
+					if ((vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RWATER + Vars.RFILL) != 0)
+					{
+						GOTO = 56025;
+						continue loop;
+					}
+					game.dsub.rspeak_(516);
+					/* !NOTHING TO FILL WITH. */
+					vars.prsvec_1.prswon = false;
+					/* !YOU LOSE. */
+					return ret_val;
+
+				case 56025:
+					vars.prsvec_1.prsi = vars.oindex_1.gwate;
+					/* !USE GLOBAL WATER. */
+				case 56050:
+					if (game.dsub.objact_())
+					{
+						return ret_val;
+					}
+					/* !OBJ HANDLE? */
+					if (vars.prsvec_1.prsi != vars.oindex_1.gwate
+							&& vars.prsvec_1.prsi != vars.oindex_1.water)
+					{
+						game.dsub.rspsb2_(444, odi2, odo2);
+					}
+					return ret_val;
+
+				/* V135,V136-- EAT/DRINK */
+
+				case 58000:
+				case 59000:
+					if (game.dsub.objact_())
+					{
+						return ret_val;
+					}
+					/* !OBJ HANDLE? */
+					if (vars.prsvec_1.prso == vars.oindex_1.gwate)
+					{
+						GOTO = 59500;
+						continue loop;
+					}
+					/* !DRINK GLOBAL WATER? */
+					if (!((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.FOODBT) != 0))
+					{
+						GOTO = 59400;
+						continue loop;
+					}
+					/* !EDIBLE? */
+					if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner)
+					{
+						GOTO = 59200;
+						continue loop;
+					}
+					/* !YES, ON WINNER? */
+				case 59100:
+					game.dsub.rspsub_(454, odo2);
+					/* !NOT ACCESSIBLE. */
+					return ret_val;
+
+				case 59200:
+					if (vars.prsvec_1.prsa == vars.vindex_1.drinkw)
+					{
+						GOTO = 59300;
+						continue loop;
+					}
+					/* !DRINK FOOD? */
+					game.dsub.newsta_(vars.prsvec_1.prso, 455, 0, 0, 0);
+					/* !NO, IT DISAPPEARS. */
+					return ret_val;
+
+				case 59300:
+					game.dsub.rspeak_(456);
+					/* !YES, JOKE. */
+					return ret_val;
+
+				case 59400:
+					if (!((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.DRNKBT) != 0))
+					{
+						GOTO = 59600;
+						continue loop;
+					}
+					/* !DRINKABLE? */
+					if (vars.objcts_1.ocan[vars.prsvec_1.prso - 1] == 0)
+					{
+						GOTO = 59100;
+						continue loop;
+					}
+					/* !YES, IN SOMETHING? */
+					if (vars.objcts_1.oadv[vars.objcts_1.ocan[vars.prsvec_1.prso - 1]
+							- 1] != vars.play_1.winner)
+					{
+						GOTO = 59100;
+						continue loop;
+					}
+					if ((vars.objcts_1.oflag2[vars.objcts_1.ocan[vars.prsvec_1.prso - 1] - 1]
+							& Vars.OPENBT) != 0)
+					{
+						GOTO = 59500;
+						continue loop;
+					}
+					/* !CONT OPEN? */
+					game.dsub.rspeak_(457);
+					/* !NO, JOKE. */
+					return ret_val;
+
+				case 59500:
+					game.dsub.newsta_(vars.prsvec_1.prso, 458, 0, 0, 0);
+					/* !GONE. */
+					return ret_val;
+
+				case 59600:
+					game.dsub.rspsub_(453, odo2);
+					/* !NOT FOOD OR DRINK. */
+					return ret_val;
+
+				/* V137-- BURN. COMPLICATED. */
+
+				case 60000:
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.prsi - 1]
+							& Vars.FLAMBT + Vars.LITEBT + Vars.ONBT) != Vars.FLAMBT + Vars.LITEBT
+									+ Vars.ONBT)
+					{
+						GOTO = 60400;
+						continue loop;
+					}
+					if (game.dsub.objact_())
+					{
+						return ret_val;
+					}
+					/* !OBJ HANDLE? */
+					if (vars.objcts_1.ocan[vars.prsvec_1.prso - 1] != vars.oindex_1.recep)
+					{
+						GOTO = 60050;
+						continue loop;
+					}
+					/* !BALLOON? */
+					if (game.objcts.oappli_(vars.objcts_1.oactio[vars.oindex_1.ballo - 1], 0))
+					{
+						return ret_val;
+					}
+					/* !DID IT HANDLE? */
+				case 60050:
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.BURNBT) == 0)
+					{
+						GOTO = 60300;
+						continue loop;
+					}
+					if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] != vars.play_1.winner)
+					{
+						GOTO = 60100;
+						continue loop;
+					}
+					/* !CARRYING IT? */
+					game.dsub.rspsub_(459, odo2);
+					game.dsub.jigsup_(460);
+					return ret_val;
+
+				case 60100:
+					j = vars.objcts_1.ocan[vars.prsvec_1.prso - 1];
+					/* !GET CONTAINER. */
+					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here)
+							|| av != 0 && j == av)
+					{
+						GOTO = 60200;
+						continue loop;
+					}
+					if (j == 0)
+					{
+						GOTO = 60150;
+						continue loop;
+					}
+					/* !INSIDE? */
+					if (!((vars.objcts_1.oflag2[j - 1] & Vars.OPENBT) != 0))
+					{
+						GOTO = 60150;
+						continue loop;
+					}
+					/* !OPEN? */
+					if (game.dsub.qhere_(j, vars.play_1.here)
+							|| av != 0 && vars.objcts_1.ocan[j - 1] == av)
+					{
+						GOTO = 60200;
+						continue loop;
+					}
+				case 60150:
+					game.dsub.rspeak_(461);
+					/* !CANT REACH IT. */
+					return ret_val;
+
+				case 60200:
+					game.dsub.rspsub_(462, odo2);
+					/* !BURN IT. */
+					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, 0);
+					return ret_val;
+
+				case 60300:
+					game.dsub.rspsub_(463, odo2);
+					/* !CANT BURN IT. */
+					return ret_val;
+
+				case 60400:
+					game.dsub.rspsub_(301, odi2);
+					/* !CANT BURN IT WITH THAT. */
+					return ret_val;
+				/* VAPPLI, PAGE 9 */
+
+				/* V138-- MUNG. GO TO COMMON ATTACK CODE. */
+
+				case 63000:
+					i = 466;
+					/* !CHOOSE PHRASE. */
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) != 0)
+					{
+						GOTO = 66100;
+						continue loop;
+					}
+					if (!game.dsub.objact_())
+					{
+						game.dsub.rspsb2_(466, odo2, rmk);
+					}
+					return ret_val;
+
+				/* V139-- KILL. GO TO COMMON ATTACK CODE. */
+
+				case 64000:
+					i = 467;
+					/* !CHOOSE PHRASE. */
+					GOTO = 66100;
+					continue loop;
+
+				/* V140-- SWING. INVERT OBJECTS, FALL THRU TO ATTACK. */
+
+				case 65000:
+					j = vars.prsvec_1.prso;
+					/* !INVERT. */
+					vars.prsvec_1.prso = vars.prsvec_1.prsi;
+					vars.prsvec_1.prsi = j;
+					j = odo2;
+					odo2 = odi2;
+					odi2 = j;
+					vars.prsvec_1.prsa = vars.vindex_1.attacw;
+					/* !FOR OBJACT. */
+
+					/* V141-- ATTACK. FALL THRU TO ATTACK CODE. */
+
+				case 66000:
+					i = 468;
+
+					/* COMMON MUNG/ATTACK/SWING/KILL CODE. */
+
+				case 66100:
+					if (vars.prsvec_1.prso != 0)
+					{
+						GOTO = 66200;
+						continue loop;
+					}
+					/* !ANYTHING? */
+					game.dsub.rspeak_(469);
+					/* !NO, JOKE. */
+					return ret_val;
+
+				case 66200:
+					if (game.dsub.objact_())
+					{
+						return ret_val;
+					}
+					/* !OBJ HANDLE? */
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) != 0)
+					{
+						GOTO = 66300;
+						continue loop;
+					}
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.VICTBT) == 0)
+					{
+						game.dsub.rspsub_(470, odo2);
+					}
+					return ret_val;
+
+				case 66300:
+					j = 471;
+					/* !ASSUME NO WEAPON. */
+					if (vars.prsvec_1.prsi == 0)
+					{
+						GOTO = 66500;
+						continue loop;
+					}
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.prsi - 1] & Vars.WEAPBT) == 0)
+					{
+						GOTO = 66400;
+						continue loop;
+					}
+					melee = 1;
+					/* !ASSUME SWORD. */
+					if (vars.prsvec_1.prsi != vars.oindex_1.sword)
+					{
+						melee = 2;
+					}
+					/* !MUST BE KNIFE. */
+					i = game.demons.blow_(vars.aindex_1.player, vars.prsvec_1.prso, melee, true, 0);
+					/* !STRIKE BLOW. */
+					return ret_val;
+
+				case 66400:
+					j = 472;
+					/* !NOT A WEAPON. */
+				case 66500:
+					game.dsub.rspsb2_(i, odo2, j);
+					/* !JOKE. */
+					return ret_val;
+				/* VAPPLI, PAGE 10 */
+
+				/* V142-- WALK. PROCESSED EXTERNALLY. */
+
+				case 68000:
+					ret_val = dverb2.walk_();
+					return ret_val;
+
+				/* V143-- TELL. PROCESSED IN GAME. */
+
+				case 69000:
+					game.dsub.rspeak_(603);
+					return ret_val;
+
+				/* V144-- PUT. PROCESSED EXTERNALLY. */
+
+				case 70000:
+					ret_val = dverb1.put_(true);
+					return ret_val;
+
+				/* V145,V146,V147,V148-- DROP/GIVE/POUR/THROW */
+
+				case 71000:
+				case 72000:
+				case 73000:
+				case 74000:
+					ret_val = dverb1.drop_(false);
+					return ret_val;
+
+				/* V149-- SAVE */
+
+				case 77000:
+					if ((vars.rooms_1.rflag[vars.rindex_1.tstrs - 1] & Vars.RSEEN) == 0)
+					{
+						GOTO = 77100;
+						continue loop;
+					}
+					game.dsub.rspeak_(828);
+					/* !NO SAVES IN ENDGAME. */
+					return ret_val;
+
+				case 77100:
+					dverb2.savegm_();
+					return ret_val;
+
+				/* V150-- RESTORE */
+
+				case 78000:
+					if ((vars.rooms_1.rflag[vars.rindex_1.tstrs - 1] & Vars.RSEEN) == 0)
+					{
+						GOTO = 78100;
+						continue loop;
+					}
+					game.dsub.rspeak_(829);
+					/* !NO RESTORES IN ENDGAME. */
+					return ret_val;
+
+				case 78100:
+					dverb2.rstrgm_();
+					return ret_val;
+				/* VAPPLI, PAGE 11 */
+
+				/* V151-- HELLO */
+
+				case 80000:
+					if (vars.prsvec_1.prso != 0)
+					{
+						GOTO = 80100;
+						continue loop;
+					}
+					/* !ANY OBJ? */
+					i__1 = Supp.rnd_(4) + 346;
+					game.dsub.rspeak_(i__1);
+					/* !NO, VANILLA HELLO. */
+					return ret_val;
+
+				case 80100:
+					if (vars.prsvec_1.prso != vars.oindex_1.aviat)
+					{
+						GOTO = 80200;
+						continue loop;
+					}
+					/* !HELLO AVIATOR? */
+					game.dsub.rspeak_(350);
+					/* !NOTHING HAPPENS. */
+					return ret_val;
+
+				case 80200:
+					if (vars.prsvec_1.prso != vars.oindex_1.sailo)
+					{
+						GOTO = 80300;
+						continue loop;
+					}
+					/* !HELLO SAILOR? */
+					++vars.state_1.hs;
+					/* !COUNT. */
+					i = 351;
+					/* !GIVE NORMAL OR */
+					if (vars.state_1.hs % 10 == 0)
+					{
+						i = 352;
+					}
+					/* !RANDOM MESSAGE. */
+					if (vars.state_1.hs % 20 == 0)
+					{
+						i = 353;
+					}
+					game.dsub.rspeak_(i);
+					/* !SPEAK UP. */
+					return ret_val;
+
+				case 80300:
+					if (game.dsub.objact_())
+					{
+						return ret_val;
+					}
+					/* !OBJ HANDLE? */
+					i = 354;
+					/* !ASSUME VILLAIN. */
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1]
+							& Vars.VILLBT + Vars.ACTRBT) == 0)
+					{
+						i = 355;
+					}
+					game.dsub.rspsub_(i, odo2);
+					/* !HELLO THERE */
+					/* ! */
+					return ret_val;
+
+				/* V152-- LOOK INTO */
+
+				case 81000:
+					if (game.dsub.objact_())
+					{
+						return ret_val;
+					}
+					/* !OBJ HANDLE? */
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.DOORBT) == 0)
+					{
+						GOTO = 81300;
+						continue loop;
+					}
+					if (!((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.OPENBT) != 0))
+					{
+						GOTO = 81200;
+						continue loop;
+					}
+					/* !OPEN? */
+					game.dsub.rspsub_(628, odo2);
+					/* !OPEN DOOR- UNINTERESTING. */
+					return ret_val;
+
+				case 81200:
+					game.dsub.rspsub_(525, odo2);
+					/* !CLOSED DOOR- CANT SEE. */
+					return ret_val;
+
+				case 81300:
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VEHBT) != 0)
+					{
+						GOTO = 81400;
+						continue loop;
+					}
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.OPENBT) != 0
+							|| (vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TRANBT) != 0)
+					{
+						GOTO = 81400;
+						continue loop;
+					}
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.CONTBT) != 0)
+					{
+						GOTO = 81200;
+						continue loop;
+					}
+					game.dsub.rspsub_(630, odo2);
+					/* !CANT LOOK INSIDE. */
+					return ret_val;
+
+				case 81400:
+					if (game.dsub.qempty_(vars.prsvec_1.prso))
+					{
+						GOTO = 81500;
+						continue loop;
+					}
+					/* !VEH OR SEE IN. EMPTY? */
+					game.dso1.princo_(vars.prsvec_1.prso, 573);
+					/* !NO, LIST CONTENTS. */
+					return ret_val;
+
+				case 81500:
+					game.dsub.rspsub_(629, odo2);
+					/* !EMPTY. */
+					return ret_val;
+
+				/* V153-- LOOK UNDER */
+
+				case 82000:
+					if (!game.dsub.objact_())
+					{
+						game.dsub.rspeak_(631);
+					}
+					/* !OBJECT HANDLE? */
+					return ret_val;
+				/* VAPPLI, PAGE 12 */
+
+				/* V154-- PUMP */
+
+				case 83000:
+					if (vars.objcts_1.oroom[vars.oindex_1.pump - 1] == vars.play_1.here
+							|| vars.objcts_1.oadv[vars.oindex_1.pump - 1] == vars.play_1.winner)
+					{
+						GOTO = 83100;
+						continue loop;
+					}
+					game.dsub.rspeak_(632);
+					/* !NO. */
+					return ret_val;
+
+				case 83100:
+					vars.prsvec_1.prsi = vars.oindex_1.pump;
+					/* !BECOMES INFLATE */
+					vars.prsvec_1.prsa = vars.vindex_1.inflaw;
+					/* !X WITH PUMP. */
+					GOTO = 22000;
+					continue loop;
+				/* !DONE. */
+
+				/* V155-- WIND */
+
+				case 84000:
+					if (!game.dsub.objact_())
+					{
+						game.dsub.rspsub_(634, odo2);
+					}
+					/* !OBJ HANDLE? */
+					return ret_val;
+
+				/* V156-- CLIMB */
+				/* V157-- CLIMB UP */
+				/* V158-- CLIMB DOWN */
+
+				case 85000:
+				case 86000:
+				case 87000:
+					i = vars.xsrch_1.xup;
+					/* !ASSUME UP. */
+					if (vars.prsvec_1.prsa == vars.vindex_1.clmbdw)
+					{
+						i = vars.xsrch_1.xdown;
+					}
+					/* !UNLESS CLIMB DN. */
+					f = (vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.CLMBBT) != 0;
+					if (f && game.dso3.findxt_(i, vars.play_1.here))
+					{
+						GOTO = 87500;
+						continue loop;
+					}
+					/* !ANYTHING TO CLIMB? */
+					if (game.dsub.objact_())
+					{
+						return ret_val;
+					}
+					/* !OBJ HANDLE? */
+					i = 657;
+					if (f)
+					{
+						i = 524;
+					}
+					/* !VARIETY OF JOKES. */
+					if (!f && (vars.prsvec_1.prso == vars.oindex_1.wall
+							|| vars.prsvec_1.prso >= vars.oindex_1.wnort
+									&& vars.prsvec_1.prso <= vars.oindex_1.wnort + 3))
+					{
+						i = 656;
+					}
+					game.dsub.rspeak_(i);
+					/* !JOKE. */
+					return ret_val;
+
+				case 87500:
+					vars.prsvec_1.prsa = vars.vindex_1.walkw;
+					/* !WALK */
+					vars.prsvec_1.prso = i;
+					/* !IN SPECIFIED DIR. */
+					ret_val = dverb2.walk_();
+					return ret_val;
+			}
+		} while (true);
 	} /* vappli_ */
-//
-//	/* CLOCKD- CLOCK DEMON FOR INTERMOVE CLOCK EVENTS */
-//
-//	/* DECLARATIONS */
 
-	boolean clockd_()
+	/* CLOCKD- CLOCK DEMON FOR INTERMOVE CLOCK EVENTS */
+	boolean clockd_() throws IOException
 	{
-	    /* System generated locals */
-	    int i__1;
-	    boolean ret_val;
+		/* System generated locals */
+		int i__1;
+		boolean ret_val;
 
-	    /* Local variables */
-	    int i;
+		/* Local variables */
+		int i;
 
-	    ret_val = false;
-	    /* 						!ASSUME NO ACTION. */
-	    i__1 = vars.cevent_1.clnt;
-	    for (i = 1; i <= i__1; ++i) 
-	    {	    	
-	    	if (! vars.cevent_1.cflag[i - 1] || vars.cevent_1.ctick[i - 1] == 0) 
-	    	{
-	    		continue;
-	    	}
-	    	if (vars.cevent_1.ctick[i - 1] < 0) 
-	    	{
-	    		ret_val = true;
-	    		game.clockr.cevapp_(vars.cevent_1.cactio[i - 1]);
-	    		continue;
-	    	}
-	    	/* 						!PERMANENT ENTRY? */
-	    	--vars.cevent_1.ctick[i - 1];
-	    	if (vars.cevent_1.ctick[i - 1] != 0) 
-	    	{
-	    		ret_val = true;
-	    		game.clockr.cevapp_(vars.cevent_1.cactio[i - 1]);
-	    		continue;	    		
-	    	}	
-	    }
-	    return ret_val;	    
+		ret_val = false;
+		/* !ASSUME NO ACTION. */
+		i__1 = vars.cevent_1.clnt;
+		for (i = 1; i <= i__1; ++i)
+		{
+			if (!vars.cevent_1.cflag[i - 1] || vars.cevent_1.ctick[i - 1] == 0)
+			{
+				continue;
+			}
+			if (vars.cevent_1.ctick[i - 1] < 0)
+			{
+				ret_val = true;
+				game.clockr.cevapp_(vars.cevent_1.cactio[i - 1]);
+				continue;
+			}
+			/* !PERMANENT ENTRY? */
+			--vars.cevent_1.ctick[i - 1];
+			if (vars.cevent_1.ctick[i - 1] != 0)
+			{
+				continue;
+			}
+		}
+		return ret_val;
 
 	} /* clockd_ */
 

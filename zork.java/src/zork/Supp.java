@@ -1,5 +1,6 @@
 package zork;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -27,48 +28,29 @@ public class Supp
 
 	/* Define these here to avoid using <stdlib.h> */
 
-//	extern void exit P((int));
-//	extern int rand P((void));
-
 	/* We should have a definition for time_t and struct tm by now.  Make
 	 * sure we have definitions for the functions we want to call.
-	 * The argument to localtime should be P((const time_t *)), but Ultrix
-	 * 4.0 leaves out the const in their prototype.  Damn them.
+	 * The argument to localtime should be P((final time_t *)), but Ultrix
+	 * 4.0 leaves out the final in their prototype.  Damn them.
 	 */
-
-//	extern time_t time P((time_t *));
-//	extern struct tm *localtime ();
-
 	/* Terminate the game */
 
-	public static void exit_()
+	public static void exit_() throws IOException
 	{
+		DMain.reader.close();
 		System.err.println("The game is over.");
-//	    fprintf(stderr, "The game is over.\n");
 	    System.exit(0);
 	}
 
 	/* Get time in hours, minutes and seconds */
 
 	public static void itime_(int[] hrptr, int[] minptr, int[] secptr)
-//	integer *hrptr;
-//	integer *minptr;
-//	integer *secptr;
 	{
 		GregorianCalendar cal = new GregorianCalendar();
-//		time_t timebuf;
-//		struct tm *tmptr;
-
-//		time(&timebuf);
-//		tmptr = localtime(&timebuf);
 
 		hrptr[0] = cal.get(Calendar.HOUR_OF_DAY);
 		minptr[0] = cal.get(Calendar.MINUTE);
 		secptr[0] = cal.get(Calendar.SECOND);
-				
-//		*hrptr  = tmptr->tm_hour;
-//		*minptr = tmptr->tm_min;
-//		*secptr = tmptr->tm_sec;
 	}
 
 	/* Random number generator */
@@ -81,10 +63,9 @@ public class Supp
 	}
 
 	public static int rnd_(int maxval)
-//	integer maxval;
 	{
-		return random.nextInt(maxval);		
-//		return rand() % maxval;
+		return (int)(util.Random.randint() % maxval);
+//		return random.nextInt(maxval);		
 	}
 
 	/* Terminal support routines for dungeon */
@@ -134,9 +115,9 @@ public class Supp
 
 //	#ifdef MORE_TERMCAP
 
-//	extern char *getenv P((const char *));
-//	extern void tgetent P((char *, const char *));
-//	extern int tgetnum P((const char *));
+//	extern char *getenv P((final char *));
+//	extern void tgetent P((char *, final char *));
+//	extern int tgetnum P((final char *));
 
 //	#else /* ! MORE_TERMCAP */
 
@@ -144,7 +125,7 @@ public class Supp
 
 //	#include <cursesX.h>
 //	#include <term.h>
-//	extern void setupterm P((const char *, int, int));
+//	extern void setupterm P((final char *, int, int));
 
 //	#else /* ! MORE_TERMINFO */
 
@@ -233,7 +214,7 @@ public class Supp
 	 
 	
 	public static void more_output(String z)
-//	const char *z;
+//	final char *z;
 	{
 //		if (crows > 0  &&  coutput > crows - 2) {
 //			printf("Press return to continue: ");

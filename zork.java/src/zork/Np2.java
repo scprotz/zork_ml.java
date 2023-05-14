@@ -2,162 +2,202 @@ package zork;
 
 public class Np2
 {
-	/* GETOBJ--	FIND OBJ DESCRIBED BY ADJ, NAME PAIR */
+	/* GETOBJ-- FIND OBJ DESCRIBED BY ADJ, NAME PAIR */
 
-	/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
+	/* COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142 */
 	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
 	/* WRITTEN BY R. M. SUPNIK */
 	private Vars vars = null;
-	
-	public Np2(Vars vars)
+	Np np = null;
+	Dgame game = null;
+
+	public Np2(Vars vars, Np np, Dgame game)
 	{
 		this.vars = vars;
+		this.np = np;
+		this.game = game;
 	}
-//	#include "funcs.h"
-//	#include "vars.h"
-//	#include "parse.h"
-
-//	static boolean thisit_ P((int, int, int, int));
 
 	/* THIS ROUTINE DETAILS ON BIT 3 OF PRSFLG */
-
-	int getobj_(
-	int oidx,
-	int aidx,
-	int spcobj)
+	int getobj_(int oidx, int aidx, int spcobj)
 	{
-//	    /* System generated locals */
-//	    int ret_val, i__1;
-//
-//	    /* Local variables */
-//	    int i, av;
-//	    int obj;
-//	    int nobj;
-//	    boolean chomp;
-//
-//	/* GETOBJ, PAGE 2 */
-//
-//	    chomp = FALSE_;
-//	    av = advs_1.avehic[play_1.winner - 1];
-//	    obj = 0;
-//	/* 						!ASSUME DARK. */
-//	    if (! lit_(play_1.here)) {
-//		goto L200;
-//	    }
-//	/* 						!LIT? */
-//
-//	    obj = schlst_(oidx, aidx, play_1.here, 0, 0, spcobj);
-//	/* 						!SEARCH ROOM. */
-//	    if (obj < 0) {
-//		goto L1000;
-//	    } else if (obj == 0) {
-//		goto L200;
-//	    } else {
-//		goto L100;
-//	    }
-//	/* 						!TEST RESULT. */
-//	L100:
-//	    if (av == 0 || av == obj || (objcts_1.oflag2[obj - 1] & FINDBT) 
-//		    != 0) {
-//		goto L200;
-//	    }
-//	    if (objcts_1.ocan[obj - 1] == av) {
-//		goto L200;
-//	    }
-//	/* 						!TEST IF REACHABLE. */
-//	    chomp = TRUE_;
-//	/* 						!PROBABLY NOT. */
-//
-//	L200:
-//	    if (av == 0) {
-//		goto L400;
-//	    }
-//	/* 						!IN VEHICLE? */
-//	    nobj = schlst_(oidx, aidx, 0, av, 0, spcobj);
-//	/* 						!SEARCH VEHICLE. */
-//	    if (nobj < 0) {
-//		goto L1100;
-//	    } else if (nobj == 0) {
-//		goto L400;
-//	    } else {
-//		goto L300;
-//	    }
-//	/* 						!TEST RESULT. */
-//	L300:
-//	    chomp = FALSE_;
-//	/* 						!REACHABLE. */
-//	    if (obj == nobj) {
-//		goto L400;
-//	    }
-//	/* 						!SAME AS BEFORE? */
-//	    if (obj != 0) {
-//		nobj = -nobj;
-//	    }
-//	/* 						!AMB RESULT? */
-//	    obj = nobj;
-//
-//	L400:
-//	    nobj = schlst_(oidx, aidx, 0, 0, play_1.winner, spcobj);
-//	/* 						!SEARCH ADVENTURER. */
-//	    if (nobj < 0) {
-//		goto L1100;
-//	    } else if (nobj == 0) {
-//		goto L600;
-//	    } else {
-//		goto L500;
-//	    }
-//	/* 						!TEST RESULT */
-//	L500:
-//	    if (obj != 0) {
-//		nobj = -nobj;
-//	    }
-//	/* 						!AMB RESULT? */
-//	L1100:
-//	    obj = nobj;
-//	/* 						!RETURN NEW OBJECT. */
-//	L600:
-//	    if (chomp) {
-//		obj = -10000;
-//	    }
-//	/* 						!UNREACHABLE. */
-//	L1000:
-//	    ret_val = obj;
-//
-//	    if (ret_val != 0) {
-//		goto L1500;
-//	    }
-//	/* 						!GOT SOMETHING? */
-//	    i__1 = objcts_1.olnt;
-//	    for (i = star_1.strbit + 1; i <= i__1; ++i) {
-//	/* 						!NO, SEARCH GLOBALS. */
-//		if (! thisit_(oidx, aidx, i, spcobj)) {
-//		    goto L1200;
-//		}
-//		if (! ghere_(i, play_1.here)) {
-//		    goto L1200;
-//		}
-//	/* 						!CAN IT BE HERE? */
-//		if (ret_val != 0) {
-//		    ret_val = -i;
-//		}
-//	/* 						!AMB MATCH? */
-//		if (ret_val == 0) {
-//		    ret_val = i;
-//		}
-//	L1200:
-//		;
-//	    }
-//
-//	L1500:
-//	/* 						!END OF SEARCH. */
-//	    return ret_val;
-		throw new RuntimeException("Np2.getobj() not impl.");
+		/* System generated locals */
+		int ret_val = 0, i__1;
+
+		/* Local variables */
+		int i, av;
+		int obj;
+		int nobj = 0;
+		boolean chomp;
+
+		/* GETOBJ, PAGE 2 */
+		int GOTO = 100;
+
+		chomp = false;
+		av = vars.advs_1.avehic[vars.play_1.winner - 1];
+		obj = 0;
+		/* !ASSUME DARK. */
+		if (!game.dso5.lit_(vars.play_1.here))
+		{
+			GOTO = 200;
+		}
+		/* !LIT? */
+
+		if (GOTO != 200)
+		{
+			obj = schlst_(oidx, aidx, vars.play_1.here, 0, 0, spcobj);
+			/* !SEARCH ROOM. */
+			if (obj < 0)
+			{
+				GOTO = 1000;
+			}
+			else if (obj == 0)
+			{
+				GOTO = 200;
+			}
+			else
+			{
+				GOTO = 100;
+			}
+		}
+
+		loop: do
+		{
+			switch (GOTO)
+			{
+				/* !TEST RESULT. */
+				case 100:
+					if (av == 0 || av == obj || (vars.objcts_1.oflag2[obj - 1] & Vars.FINDBT) != 0)
+					{
+						GOTO = 200;
+						continue loop;
+					}
+					if (vars.objcts_1.ocan[obj - 1] == av)
+					{
+						GOTO = 200;
+						continue loop;
+					}
+					/* !TEST IF REACHABLE. */
+					chomp = true;
+					/* !PROBABLY NOT. */
+
+				case 200:
+					if (av == 0)
+					{
+						GOTO = 400;
+						continue loop;
+					}
+					/* !IN VEHICLE? */
+					nobj = schlst_(oidx, aidx, 0, av, 0, spcobj);
+					/* !SEARCH VEHICLE. */
+					if (nobj < 0)
+					{
+						GOTO = 1100;
+						continue loop;
+					}
+					else if (nobj == 0)
+					{
+						GOTO = 400;
+						continue loop;
+					}
+					else
+					{
+						GOTO = 300;
+						continue loop;
+					}
+					/* !TEST RESULT. */
+				case 300:
+					chomp = false;
+					/* !REACHABLE. */
+					if (obj == nobj)
+					{
+						GOTO = 400;
+						continue loop;
+					}
+					/* !SAME AS BEFORE? */
+					if (obj != 0)
+					{
+						nobj = -nobj;
+					}
+					/* !AMB RESULT? */
+					obj = nobj;
+
+				case 400:
+					nobj = schlst_(oidx, aidx, 0, 0, vars.play_1.winner, spcobj);
+					/* !SEARCH ADVENTURER. */
+					if (nobj < 0)
+					{
+						GOTO = 1100;
+						continue loop;
+					}
+					else if (nobj == 0)
+					{
+						GOTO = 600;
+						continue loop;
+					}
+					else
+					{
+						GOTO = 500;
+						continue loop;
+					}
+					/* !TEST RESULT */
+				case 500:
+					if (obj != 0)
+					{
+						nobj = -nobj;
+					}
+					/* !AMB RESULT? */
+				case 1100:
+					obj = nobj;
+					/* !RETURN NEW OBJECT. */
+				case 600:
+					if (chomp)
+					{
+						obj = -10000;
+					}
+					/* !UNREACHABLE. */
+				case 1000:
+					ret_val = obj;
+
+					if (ret_val != 0)
+					{
+						GOTO = 1500;
+						continue loop;
+					}
+					/* !GOT SOMETHING? */
+					i__1 = vars.objcts_1.olnt;
+					for (i = vars.star_1.strbit + 1; i <= i__1; ++i)
+					{
+						/* !NO, SEARCH GLOBALS. */
+						if (!thisit_(oidx, aidx, i, spcobj))
+						{
+							continue;
+						}
+						if (!game.dso6.ghere_(i, vars.play_1.here))
+						{
+							continue;
+						}
+						/* !CAN IT BE HERE? */
+						if (ret_val != 0)
+						{
+							ret_val = -i;
+						}
+						/* !AMB MATCH? */
+						if (ret_val == 0)
+						{
+							ret_val = i;
+						}
+
+					}
+
+				case 1500:
+					/* !END OF SEARCH. */
+					return ret_val;
+			}
+		} while (true);
 	} /* getobj_ */
 
 	/* SCHLST--	SEARCH FOR OBJECT */
-
-	/* DECLARATIONS */
-
 	int schlst_(
 	int oidx,
 	int aidx,
@@ -166,163 +206,208 @@ public class Np2
 	int ad,
 	int spcobj)
 	{
-//	    /* System generated locals */
-//	    int ret_val, i__1, i__2;
-//
-//	    /* Local variables */
-//	    int i, j, x;
-//
-//	    ret_val = 0;
-//	/* 						!NO RESULT. */
-//	    i__1 = objcts_1.olnt;
-//	    for (i = 1; i <= i__1; ++i) {
-//	/* 						!SEARCH OBJECTS. */
-//		if ((objcts_1.oflag1[i - 1] & VISIBT) == 0 || (rm == 0 || ! 
-//			qhere_(i, rm)) && (cn == 0 || objcts_1.ocan[i - 1] != cn) 
-//			&& (ad == 0 || objcts_1.oadv[i - 1] != ad)) {
-//		    goto L1000;
-//		}
-//		if (! thisit_(oidx, aidx, i, spcobj)) {
-//		    goto L200;
-//		}
-//		if (ret_val != 0) {
-//		    goto L2000;
-//		}
-//	/* 						!GOT ONE ALREADY? */
-//		ret_val = i;
-//	/* 						!NO. */
-//
-//	/* IF OPEN OR TRANSPARENT, SEARCH THE OBJECT ITSELF. */
-//
+	    /* System generated locals */
+	    int ret_val, i__1, i__2;
+
+	    /* Local variables */
+	    int i, j, x;
+
+	    ret_val = 0;
+	    /* 						!NO RESULT. */
+	    i__1 = vars.objcts_1.olnt;
+	    for (i = 1; i <= i__1; ++i) 
+	    {
+	    	/* 						!SEARCH OBJECTS. */
+	    	if ((vars.objcts_1.oflag1[i - 1] & Vars.VISIBT) == 0 || ((rm == 0 || !
+	    			game.dsub.qhere_(i, rm)) && (cn == 0 || vars.objcts_1.ocan[i - 1] != cn) 
+	    			&& (ad == 0 || vars.objcts_1.oadv[i - 1] != ad))) 
+	    	{
+//	    		goto L1000;
+	    		continue;
+	    	}
+	    	boolean skip_to_200 = false;
+	    	if (! thisit_(oidx, aidx, i, spcobj)) 
+	    	{
+//	    		goto L200;
+	    		skip_to_200 = true;
+	    	}
+	    	if(!skip_to_200)
+	    	{
+		    	if (ret_val != 0) 
+		    	{
+	//	    		goto L2000;
+		    	    ret_val = -ret_val;
+		    		/* 						!AMB RETURN. */
+		    		    return ret_val;
+		    	}
+		    	/* 						!GOT ONE ALREADY? */
+		    	ret_val = i;
+		    	/* 						!NO. */
+	    	}
+	    	/* IF OPEN OR TRANSPARENT, SEARCH THE OBJECT ITSELF. */
+
 //	L200:
-//		if ((objcts_1.oflag1[i - 1] & TRANBT) == 0 && (
-//			objcts_1.oflag2[i - 1] & OPENBT) == 0) {
-//		    goto L1000;
-//		}
-//
-//	/* SEARCH IS CONDUCTED IN REVERSE.  ALL OBJECTS ARE CHECKED TO */
-//	/* SEE IF THEY ARE AT SOME LEVEL OF CONTAINMENT INSIDE OBJECT 'I'. */
-//	/* IF THEY ARE AT LEVEL 1, OR IF ALL LINKS IN THE CONTAINMENT */
-//	/* CHAIN ARE OPEN, VISIBLE, AND HAVE SEARCHME SET, THEY CAN QUALIFY */
-//
-//	/* AS A POTENTIAL MATCH. */
-//
-//		i__2 = objcts_1.olnt;
-//		for (j = 1; j <= i__2; ++j) {
-//	/* 						!SEARCH OBJECTS. */
-//		    if ((objcts_1.oflag1[j - 1] & VISIBT) == 0 || ! thisit_(
-//			    oidx, aidx, j, spcobj)) {
-//			goto L500;
-//		    }
-//		    x = objcts_1.ocan[j - 1];
-//	/* 						!GET CONTAINER. */
+			if ((vars.objcts_1.oflag1[i - 1] & Vars.TRANBT) == 0 && (
+			vars.objcts_1.oflag2[i - 1] & Vars.OPENBT) == 0) 
+			{
+//				goto L1000;
+				continue;
+			}
+
+			/* SEARCH IS CONDUCTED IN REVERSE.  ALL OBJECTS ARE CHECKED TO */
+			/* SEE IF THEY ARE AT SOME LEVEL OF CONTAINMENT INSIDE OBJECT 'I'. */
+			/* IF THEY ARE AT LEVEL 1, OR IF ALL LINKS IN THE CONTAINMENT */
+			/* CHAIN ARE OPEN, VISIBLE, AND HAVE SEARCHME SET, THEY CAN QUALIFY */
+		
+			/* AS A POTENTIAL MATCH. */
+
+			i__2 = vars.objcts_1.olnt;
+			inner_for: for (j = 1; j <= i__2; ++j) 
+			{
+				/* 						!SEARCH OBJECTS. */
+				if ((vars.objcts_1.oflag1[j - 1] & Vars.VISIBT) == 0 || ! thisit_(
+						oidx, aidx, j, spcobj)) 
+				{
+//					goto L500;
+					continue inner_for;
+				}				
+				x = vars.objcts_1.ocan[j - 1];
+				/* 						!GET CONTAINER. */
 //	L300:
-//		    if (x == i) {
-//			goto L400;
-//		    }
-//	/* 						!INSIDE TARGET? */
-//		    if (x == 0) {
-//			goto L500;
-//		    }
-//	/* 						!INSIDE ANYTHING? */
-//		    if ((objcts_1.oflag1[x - 1] & VISIBT) == 0 || (
-//			    objcts_1.oflag1[x - 1] & TRANBT) == 0 && (
-//			    objcts_1.oflag2[x - 1] & OPENBT) == 0 || (
-//			    objcts_1.oflag2[x - 1] & SCHBT) == 0) {
-//			goto L500;
-//		    }
-//		    x = objcts_1.ocan[x - 1];
-//	/* 						!GO ANOTHER LEVEL. */
-//		    goto L300;
-//
+				do
+				{
+					boolean skip_to_400 = false;
+			    	if (x == i) 
+			    	{	
+	//		    		goto L400;
+			    		skip_to_400 = true;
+			    	}
+			    	
+			    	if(! skip_to_400)
+			    	{
+					/* 						!INSIDE TARGET? */
+				    	if (x == 0) 
+				    	{
+		//		    		goto L500;
+				    		continue inner_for;
+				    	}
+				    	/* 						!INSIDE ANYTHING? */
+				    	if ((vars.objcts_1.oflag1[x - 1] & Vars.VISIBT) == 0 || ((
+				    			vars.objcts_1.oflag1[x - 1] & Vars.TRANBT) == 0 && (
+				    			vars.objcts_1.oflag2[x - 1] & Vars.OPENBT) == 0) || (
+				    			vars.objcts_1.oflag2[x - 1] & Vars.SCHBT) == 0) 
+				    	{
+		//		    		goto L500;
+				    		continue inner_for;
+				    	}
+				    	x = vars.objcts_1.ocan[x - 1];
+				    	/* 						!GO ANOTHER LEVEL. */
+	//			    	goto L300;
+				    	continue;
+		    		}
+		    		break;
+				}while(true);
+		    	
+
 //	L400:
-//		    if (ret_val != 0) {
-//			goto L2000;
-//		    }
-//	/* 						!ALREADY GOT ONE? */
-//		    ret_val = j;
-//	/* 						!NO. */
+		    	if (ret_val != 0) 
+		    	{
+//		    		goto L2000;
+		    	    ret_val = -ret_val;
+		    		/* 						!AMB RETURN. */
+		    		    return ret_val;
+		    	}
+				/* 						!ALREADY GOT ONE? */
+		    	ret_val = j;
+		    	/* 						!NO. */
 //	L500:
-//		    ;
-//		}
-//
+			}
 //	L1000:
-//		;
-//	    }
-//	    return ret_val;
-//
+	    }
+	    return ret_val;
+
 //	L2000:
 //	    ret_val = -ret_val;
-//	/* 						!AMB RETURN. */
+	/* 						!AMB RETURN. */
 //	    return ret_val;
-	    throw new RuntimeException("Np2.schlst() not impl.");
+
 	} /* schlst_ */
 
-	/* THISIT--	VALIDATE OBJECT VS DESCRIPTION */
-
-	/* DECLARATIONS */
-
-	private boolean thisit_(
-	int oidx,
-	int aidx,
-	int obj,
-	int spcobj)
+	/* THISIT-- VALIDATE OBJECT VS DESCRIPTION */
+	private boolean thisit_(int oidx, int aidx, int obj, int spcobj)
 	{
-//	    /* Initialized data */
-//
-//	/*    THE FOLLOWING DATA STATEMENT USED RADIX-50 NOTATION (R50MIN/1RA/) */
-//
-//	/*       IN RADIX-50 NOTATION, AN "A" IN THE FIRST POSITION IS */
-//	/*       ENCODED AS 1*40*40 = 1600. */
-//
-//	    const int r50min = 1600;
-//
-//	    /* System generated locals */
-//	    boolean ret_val;
-//
-//	    /* Local variables */
-//	    int i;
-//
-//	    ret_val = FALSE_;
-//	/* 						!ASSUME NO MATCH. */
-//	    if (spcobj != 0 && obj == spcobj) {
-//		goto L500;
-//	    }
-//
-//	/* CHECK FOR OBJECT NAMES */
-//
-//	    i = oidx + 1;
-//	L100:
-//	    ++i;
-//	    if (ovoc[i - 1] <= 0 || ovoc[i - 1] >= r50min) {
-//		return ret_val;
-//	    }
-//	/* 						!IF DONE, LOSE. */
-//	    if (ovoc[i - 1] != obj) {
-//		goto L100;
-//	    }
-//	/* 						!IF FAIL, CONT. */
-//
-//	    if (aidx == 0) {
-//		goto L500;
-//	    }
-//	/* 						!ANY ADJ? */
-//	    i = aidx + 1;
-//	L200:
-//	    ++i;
-//	    if (avoc[i - 1] <= 0 || avoc[i - 1] >= r50min) {
-//		return ret_val;
-//	    }
-//	/* 						!IF DONE, LOSE. */
-//	    if (avoc[i - 1] != obj) {
-//		goto L200;
-//	    }
-//	/* 						!IF FAIL, CONT. */
-//
-//	L500:
-//	    ret_val = TRUE_;
-//	    return ret_val;
-	    throw new RuntimeException("Np2.thisit() not impl.");
+		/* Initialized data */
+
+		/* THE FOLLOWING DATA STATEMENT USED RADIX-50 NOTATION (R50MIN/1RA/) */
+
+		/* IN RADIX-50 NOTATION, AN "A" IN THE FIRST POSITION IS */
+		/* ENCODED AS 1*40*40 = 1600. */
+
+		final int r50min = 1600;
+
+		/* System generated locals */
+		boolean ret_val;
+
+		/* Local variables */
+		int i;
+
+		ret_val = false;
+		/* !ASSUME NO MATCH. */
+		if (spcobj != 0 && obj == spcobj)
+		{
+			ret_val = true;
+			return ret_val;
+		}
+
+		/* CHECK FOR OBJECT NAMES */
+
+		i = oidx + 1;
+		int GOTO = 100;
+		loop2: do
+		{
+			switch (GOTO)
+			{
+				case 100:
+					++i;
+					if (np.parse.ovoc[i - 1] <= 0 || np.parse.ovoc[i - 1] >= r50min)
+					{
+						return ret_val;
+					}
+					/* !IF DONE, LOSE. */
+					if (np.parse.ovoc[i - 1] != obj)
+					{
+						GOTO = 100;
+						continue loop2;
+					}
+					/* !IF FAIL, CONT. */
+
+					if (aidx == 0)
+					{
+						ret_val = true;
+						return ret_val;
+					}
+					/* !ANY ADJ? */
+					i = aidx + 1;
+				case 200:
+					++i;
+					if (np.parse.avoc[i - 1] <= 0 || np.parse.avoc[i - 1] >= r50min)
+					{
+						return ret_val;
+					}
+					/* !IF DONE, LOSE. */
+					if (np.parse.avoc[i - 1] != obj)
+					{
+						GOTO = 200;
+						continue loop2;
+					}
+					/* !IF FAIL, CONT. */
+
+				case 500:
+					ret_val = true;
+					return ret_val;
+
+			}
+		} while (true);
 	} /* thisit_ */
 
 }

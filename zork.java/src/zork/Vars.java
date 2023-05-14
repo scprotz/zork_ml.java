@@ -21,7 +21,7 @@ public class Vars
 //	#endif
 	
 	public static final boolean DEBUG = true;
-	public static final boolean ALLOW_GDT = false;
+	public static final boolean ALLOW_GDT = true;
 
 	public class prsvec_
 	{
@@ -61,8 +61,42 @@ public class Vars
 
 	public class rooms_
 	{
-	   int rlnt, rdesc1[] = new int[200], rdesc2[] = new int[200], rexit[] = new int[200], ractio[] = new int[200],
-	           rval[] = new int[200], rflag[] = new int[200];
+		int rlnt, rdesc1[] = new int[200], rdesc2[] = new int[200], rexit[] = new int[200],
+				ractio[] = new int[200], rval[] = new int[200], rflag[] = new int[200];
+
+		public int rrand(int index)
+		{
+			int i = index - 601;
+			int array_number = i % 200;
+			switch (array_number)
+			{
+				case 0:
+					return ractio[i];
+				case 1:
+					return rval[i - 200];
+				case 2:
+					return rflag[i - 400];
+				default:
+					throw new RuntimeException("Could not find rrand index correctly.");
+			}
+		}
+		
+		public void rrand(int index, int value)
+		{
+			int i = index - 601;
+			int array_number = i % 200;
+			switch (array_number)
+			{
+				case 0:
+					ractio[i] = value;
+				case 1:
+					rval[i - 200] = value;
+				case 2:
+					rflag[i - 400] = value;
+				default:
+					throw new RuntimeException("Could not find rrand index correctly.");
+			}
+		}
 	};
 
 
@@ -589,19 +623,116 @@ public class Vars
 
 	public vindex_ vindex_1 = new vindex_();
 
-	   public class findex_
+	public class findex_
 	{
-	      boolean trollf, cagesf, bucktf, caroff, carozf, lwtidf, domef, glacrf, 
-	              echof, riddlf, lldf, cyclof, magicf, litldf, safef, gnomef, 
-	              gnodrf, mirrmf, egyptf, onpolf, blabf, brieff, superf, buoyf, 
-	              grunlf, gatef, rainbf, cagetf, empthf, deflaf, glacmf, frobzf, 
-	              endgmf, badlkf, thfenf, singsf, mrpshf, mropnf, wdopnf, mr1f, 
-	              mr2f, inqstf, follwf, spellf, cpoutf, cpushf;
-	      int btief, binff, rvmnt, rvclr, rvcyc, rvsnd, rvgua, orrug, orcand, 
-	              ormtch, orlamp, mdir, mloc, poleuf, quesno, nqatt, corrct, lcell, 
-	              pnumb, acell, dcell, cphere;
-	   };
+		boolean trollf, cagesf, bucktf, caroff, carozf, lwtidf, domef, glacrf, echof, riddlf, lldf,
+				cyclof, magicf, litldf, safef, gnomef, gnodrf, mirrmf, egyptf, onpolf, blabf,
+				brieff, superf, buoyf, grunlf, gatef, rainbf, cagetf, empthf, deflaf, glacmf,
+				frobzf, endgmf, badlkf, thfenf, singsf, mrpshf, mropnf, wdopnf, mr1f, mr2f, inqstf,
+				follwf, spellf, cpoutf, cpushf;
+		int btief, binff, rvmnt, rvclr, rvcyc, rvsnd, rvgua, orrug, orcand, ormtch, orlamp, mdir,
+				mloc, poleuf, quesno, nqatt, corrct, lcell, pnumb, acell, dcell, cphere;
 
+		public boolean flags(int index)
+		{
+			switch (index)
+			{
+				case 0:
+					return trollf;
+				case 1:
+					return cagesf;
+				case 2:
+					return bucktf;
+				case 3:
+					return caroff;
+				case 4:
+					return carozf;
+				case 5:
+					return lwtidf;
+				case 6:
+					return domef;
+				case 7:
+					return glacrf;
+				case 8:
+					return echof;
+				case 9:
+					return riddlf;
+				case 10:
+					return lldf;
+				case 11:
+					return cyclof;
+				case 12:
+					return magicf;
+				case 13:
+					return litldf;
+				case 14:
+					return safef;
+				case 15:
+					return gnomef;
+				case 16:
+					return gnodrf;
+				case 17:
+					return mirrmf;
+				case 18:
+					return egyptf;
+				case 19:
+					return onpolf;
+				case 20:
+					return blabf;
+				case 21:
+					return brieff;
+				case 22:
+					return superf;
+				case 23:
+					return buoyf;
+				case 24:
+					return grunlf;
+				case 25:
+					return gatef;
+				case 26:
+					return rainbf;
+				case 27:
+					return cagetf;
+				case 28:
+					return empthf;
+				case 29:
+					return deflaf;
+				case 30:
+					return glacmf;
+				case 31:
+					return frobzf;
+				case 32:
+					return endgmf;
+				case 33:
+					return badlkf;
+				case 34:
+					return thfenf;
+				case 35:
+					return singsf;
+				case 36:
+					return mrpshf;
+				case 37:
+					return mropnf;
+				case 38:
+					return wdopnf;
+				case 39:
+					return mr1f;
+				case 40:
+					return mr2f;
+				case 41:
+					return inqstf;
+				case 42:
+					return follwf;
+				case 43:
+					return spellf;
+				case 44:
+					return cpoutf;
+				case 45:
+					return cpushf;
+			}
+			throw new RuntimeException("invalid index for flags: " + index);
+		}
+	};
 
 	public findex_ findex_1 = new findex_();
 //	#define flags ((boolean *)&findex_1)
@@ -646,19 +777,23 @@ public class Vars
 	public class curxt_
 	{
 	   int xtype, xroom1, xstrng, xactio, xobj;
+	   
+	   public int xflag() { return xobj; };
+	   public void xflag(int val) { xobj = val; } 
 	};
 
 
 	public curxt_ curxt_1 = new curxt_();
 //	#define xflag ((int *)&curxt_1 + 4)
+	
 
 	public class xpars_
 	{
 		final int xrmask = 255;
-		final int xdmask = 231744;
+		final int xdmask = 31744;
 		final int xfmask = 3;
 		final int xfshft = 256;
-		final int xashft = 2256;
+		final int xashft = 256;
 		final int xelnt[] = new int[] { 1, 2, 3, 3 };
 		final int xnorm = 1;
 		final int xno = 2;
