@@ -62,7 +62,7 @@ public class DMain
 			"disembark bucket", "e", "take all",
 			"eat eat-me cake", "e", "throw red cake at pool", "take spices", "w", "eat blue cake",
 			"drop orange cake", "nw", "read green paper", 
-//			"tell robot 'east'", "e",
+//			"tell robot,  'east'", "e",
 //			"tell robot 'push triangular button'", "tell robot 'go south'", "s", "take sphere",
 //			"tell robot 'lift cage'", "take sphere", "n", "w", "se", "w", "get in bucket",
 //			"get water", "disembark bucket", "w", "w", "d", "n", "open box", "take violin", "w", "w",
