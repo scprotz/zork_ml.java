@@ -62,10 +62,13 @@ public class Supp
 		random.setSeed(seed);
 	}
 
+	static int rndcnt = 1;
 	public static int rnd_(int maxval)
 	{
-		return (int)(util.Random.randint() % maxval);
-//		return random.nextInt(maxval);		
+//		return (int)(util.Random.randint() % maxval);
+//		return random.nextInt(maxval);
+		rndcnt ++;
+		return rndcnt % maxval;
 	}
 
 	/* Terminal support routines for dungeon */

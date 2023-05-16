@@ -1759,6 +1759,8 @@ public class Verbs
 			{
 				continue;
 			}
+			ret_val = true;
+			game.clockr.cevapp_(vars.cevent_1.cactio[i - 1]);
 		}
 		return ret_val;
 

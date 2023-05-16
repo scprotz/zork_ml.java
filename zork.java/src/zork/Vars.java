@@ -65,7 +65,7 @@ public class Vars
 				ractio[] = new int[200], rval[] = new int[200], rflag[] = new int[200];
 
 		public int rrand(int index)
-		{
+		{			
 			int i = index - 601;
 			int array_number = i % 200;
 			switch (array_number)
@@ -83,6 +83,7 @@ public class Vars
 		
 		public void rrand(int index, int value)
 		{
+			
 			int i = index - 601;
 			int array_number = i % 200;
 			switch (array_number)
@@ -94,7 +95,7 @@ public class Vars
 				case 2:
 					rflag[i - 400] = value;
 				default:
-					throw new RuntimeException("Could not find rrand index correctly.");
+					throw new RuntimeException("Could not find rrand index correctly. " + array_number);
 			}
 		}
 	};

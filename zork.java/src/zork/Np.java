@@ -54,6 +54,17 @@ public class Np
 	/* 						!SEE WHO TO PROMPT FOR. */
 				case 10:
 					System.out.print(">");
+					System.out.flush();
+					try
+					{
+						Thread.sleep(1);
+					}
+					catch (InterruptedException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
 	/* 						!PROMPT FOR GAME. */
 				case 90:
 					System.out.flush();
@@ -286,7 +297,8 @@ start:	do
 					    }
 					/* 						!END OF INPUT? */
 
-					    ++vars.prsvec_1.prscon;	
+					    vars.prsvec_1.prscon++;	
+
 	/* 						!ADVANCE PTR. */
 
 					    if (j == '.') 
@@ -337,6 +349,8 @@ start:	do
 					{
 						vars.prsvec_1.prscon = 1;
 					}
+					else
+						vars.prsvec_1.prscon ++;
 					/* 						!FORCE PARSE RESTART. */
 					if (cp == 0 & op[0] == 1) 
 					{

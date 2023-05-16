@@ -194,7 +194,7 @@ public class Dgame
 					np.rdline_(vars.input_1.inbuf, 0);
 					++vars.state_1.moves;
 					/* !CHARGE FOR MOVES. */
-					if (!new String(vars.input_1.inbuf).equals("ECHO"))
+					if (!new String(vars.input_1.inbuf).startsWith("ECHO"))
 					{
 						GOTO = 1300;
 						continue;
@@ -259,6 +259,7 @@ public class Dgame
 						GOTO = 2700;
 						continue;
 					}
+					
 					/* !ANY INPUT? */
 					if (np.parse_(vars.input_1.inbuf, true))
 					{
