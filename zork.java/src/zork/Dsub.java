@@ -498,7 +498,7 @@ public class Dsub
 		{
 			GOTO = 50;
 		}
-		if (GOTO != 0)
+		if (GOTO != 50)
 		{
 			/* !IF DIRECTION, */
 			vars.screen_1.fromdr = vars.prsvec_1.prso;

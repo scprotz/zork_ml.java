@@ -51,7 +51,7 @@ public class DMain
 		{
 			if (words_file == null)
 			{
-				words_file = new BufferedReader(new FileReader(new File("walk.txt")));
+				words_file = new BufferedReader(new FileReader(new File("test.properties")));
 		
 				if (words_file != null)
 				{

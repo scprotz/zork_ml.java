@@ -990,58 +990,50 @@ public class Sverbs
 					return ret_val;
 
 				case 27100:
-					throw new RuntimeException(
-							"Sverbs.sverbs_ not sure what this is doing EXACTLY.  seems to compare answers");
-//	   for (j = 1; j <= 14; j ++) 
-//	   {
-//	      /* 						!CHECK ANSWERS. */
-//	      if (vars.findex_1.quesno != answer[j - 1])
-//	      {
-//	    	  continue;
-//	      }
-//	      	      	      
-////	      z = ansstr[j - 1];
-//	      int z2index = 0;
-//	      z2 = vars.input_1.inbuf[vars.prsvec_1.prscon - 1];
-//	      
-//	      for(int zindex = j-1; zindex < ansstr[j-1].length(); zindex++)
-//	      /* 						!ONLY CHECK PROPER ANS. */
-//	      
-//	      
-////	      while (z != '\0')	      
-//	      {
-//	    	 z = ansstr[j-1].charAt(zindex);
-//	         while (z2 == ' ')
-//	         {
-//	        	 z2index ++;
-//	        	 z2 = vars.input_1.inbuf[vars.prsvec_1.prscon - 1 + z2index];	            
-//	         }
-//	         /* 						!STRIP INPUT BLANKS. */
-//	         if (z != z2)
-//	         {
-//	        	 
-////	            GOTO = 27300; continue loop;
-//	        	 continue;
-//	         }
-//	      }
-//	      GOTO = 27500; continue loop;
-//	      /* 						!RIGHT ANSWER. */
-////	case 27300:
-////	      ;
-//	   }
-//
-//	   vars.prsvec_1.prscon = 1;
-//	   /* 						!KILL REST OF LINE. */
-//	   ++vars.findex_1.nqatt;
-//	   /* 						!WRONG, CRETIN. */
-//	   if (vars.findex_1.nqatt >= 5) {
-//	      GOTO = 27400; continue loop;
-//	   }
-//	   /* 						!TOO MANY WRONG? */
-//	   i__1 = vars.findex_1.nqatt + 800;
-//	   game.dsub.rspeak_(i__1);
-//	   /* 						!NO, TRY AGAIN. */
-//	   return ret_val;
+					 for (j = 1; j <= 14; j ++) 
+					 {
+					      /* 						!CHECK ANSWERS. */
+					      if (vars.findex_1.quesno != answer[j - 1])
+					         continue;
+//					      /* 						!ONLY CHECK PROPER ANS. */
+					      String zz = ansstr[j - 1];
+					      int ans_index = vars.prsvec_1.prscon -1;
+					      String user_answer = new String(vars.input_1.inbuf);
+//					      char[] z2 = vars.input_1.inbuf + vars.prsvec_1.prscon - 1;
+					      String zz2 = user_answer.substring(ans_index).trim();
+					      System.out.println(zz2);
+					      
+					      int zindex = 0;
+					      int z2index = 0;
+					      while (zindex < zz.length() && zz.charAt(zindex) != '\0' ) 
+					      {
+					         while (zz2.charAt(z2index) == ' ')
+					            z2index++;
+					         /* 						!STRIP INPUT BLANKS. */
+					         if (zz.charAt(zindex) != zz2.charAt(z2index))
+					            continue;
+					         zindex++;
+					         z2index++;
+					      }
+					      GOTO = 27500;
+					      continue loop;
+					      /* 						!RIGHT ANSWER. */
+
+					   }
+
+					   vars.prsvec_1.prscon = 1;
+					   /* 						!KILL REST OF LINE. */
+					   ++vars.findex_1.nqatt;
+					   /* 						!WRONG, CRETIN. */
+					   if (vars.findex_1.nqatt >= 5) {
+						   GOTO = 27400;
+						   continue;
+					   }
+					   /* 						!TOO MANY WRONG? */
+					   i__1 = vars.findex_1.nqatt + 800;
+					   game.dsub.rspeak_(i__1);
+					   /* 						!NO, TRY AGAIN. */
+					   return ret_val;
 
 				case 27400:
 					game.dsub.rspeak_(826);

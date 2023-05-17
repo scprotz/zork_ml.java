@@ -148,41 +148,45 @@ public class Dso6
 
 	int mrhere_(int rm)
 	{
-//	   /* System generated locals */
-//	   int ret_val;
-//
-//	   if (rm < vars.rindex_1.mrae || rm > vars.rindex_1.mrdw) {
-//	      goto L100;
-//	   }
-//
-//	   /* RM IS AN E-W ROOM, MIRROR MUST BE N-S (MDIR= 0 OR 180) */
-//
-//	   ret_val = 1;
-//	   /* 						!ASSUME MIRROR 1 HERE. */
-//	   if ((rm - vars.rindex_1.mrae) % 2 == findex_1.mdir / 180) {
-//	      ret_val = 2;
-//	   }
-//	   return ret_val;
-//
-//	   /* RM IS NORTH OR SOUTH OF MIRROR.  IF MIRROR IS N-S OR NOT */
-//	   /* WITHIN ONE ROOM OF RM, LOSE. */
-//
+	   /* System generated locals */
+	   int ret_val;
+
+	   boolean skip = false;
+	   if (rm < vars.rindex_1.mrae || rm > vars.rindex_1.mrdw) {
+	      skip = true;
+	   }
+
+	   if(!skip)
+	   {
+	   /* RM IS AN E-W ROOM, MIRROR MUST BE N-S (MDIR= 0 OR 180) */
+
+	   ret_val = 1;
+	   /* 						!ASSUME MIRROR 1 HERE. */
+	   if ((rm - vars.rindex_1.mrae) % 2 == vars.findex_1.mdir / 180) {
+	      ret_val = 2;
+	   }
+	   return ret_val;
+	   }
+
+	   /* RM IS NORTH OR SOUTH OF MIRROR.  IF MIRROR IS N-S OR NOT */
+	   /* WITHIN ONE ROOM OF RM, LOSE. */
+
 //	L100:
-//	   ret_val = 0;
-//	   if ((abs(findex_1.mloc - rm)) != 1 || findex_1.mdir % 180 ==
-//	         0) {
-//	      return ret_val;
-//	   }
-//
-//	   /* RM IS WITHIN ONE OF MLOC, AND MDIR IS E-W */
-//
-//	   ret_val = 1;
-//	   if (rm < findex_1.mloc && findex_1.mdir < 180 || rm > findex_1.mloc && 
-//	         findex_1.mdir > 180) {
-//	      ret_val = 2;
-//	   }
-//	   return ret_val;
-	   throw new RuntimeException("Dso6.mrhere_ not impl");
+	   ret_val = 0;
+	   if ((Math.abs(vars.findex_1.mloc - rm)) != 1 || vars.findex_1.mdir % 180 ==
+	         0) {
+	      return ret_val;
+	   }
+
+	   /* RM IS WITHIN ONE OF MLOC, AND MDIR IS E-W */
+
+	   ret_val = 1;
+	   if (rm < vars.findex_1.mloc && vars.findex_1.mdir < 180 || rm > vars.findex_1.mloc && 
+	         vars.findex_1.mdir > 180) {
+	      ret_val = 2;
+	   }
+	   return ret_val;
+//	   throw new RuntimeException("Dso6.mrhere_ not impl");
 	} /* mrhere_ */
 
 }

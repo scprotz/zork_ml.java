@@ -66,16 +66,24 @@ public class Vars
 
 		public int rrand(int index)
 		{			
-			int i = index - 601;
-			int array_number = i % 200;
+			int i = index + 601;
+			
+//			int i = index - 601;
+			int array_number = i / 200;
 			switch (array_number)
 			{
 				case 0:
-					return ractio[i];
+					return rdesc1[i];
 				case 1:
-					return rval[i - 200];
+					return rdesc2[i - 200];
 				case 2:
-					return rflag[i - 400];
+					return rexit[i - 400];
+				case 3:
+					return ractio[i - 600];				 
+				case 4:
+					return rval[i - 800];
+				case 5:
+					return rflag[i - 1000];
 				default:
 					throw new RuntimeException("Could not find rrand index correctly.");
 			}
@@ -84,18 +92,24 @@ public class Vars
 		public void rrand(int index, int value)
 		{
 			
-			int i = index - 601;
-			int array_number = i % 200;
+			int i = index + 600;			 
+			int array_number = i / 200;
 			switch (array_number)
 			{
 				case 0:
-					ractio[i] = value;
+					rdesc1[i] = value; break;
 				case 1:
-					rval[i - 200] = value;
+					rdesc2[i - 200] = value; break;
 				case 2:
-					rflag[i - 400] = value;
+					rexit[i - 400] = value; break;
+				case 3:
+					ractio[i - 600] = value; break;
+				case 4:
+					rval[i - 800] = value; break;
+				case 5:
+					rflag[i - 1000] = value; break;
 				default:
-					throw new RuntimeException("Could not find rrand index correctly. " + array_number);
+					throw new RuntimeException("Could not find rrand index correctly. " + index + "="+ value + " : " + array_number);
 			}
 		}
 	};
@@ -483,7 +497,7 @@ public class Vars
 		final int cevzgi = 18;
 		final int cevzgo = 19;
 		final int cevste = 20;
-		final int cevmrs = 22;
+		final int cevmrs = 21;
 		final int cevpin = 22;
 		final int cevinq = 23;
 		final int cevfol = 24;

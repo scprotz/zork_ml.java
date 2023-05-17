@@ -239,6 +239,8 @@ public class Np3
 				case 5000:
 					vars.prsvec_1.prsa = np.parse.syntax_1.vflag & Parse.SVMASK;
 					vars.prsvec_1.prso = np.parse.pv_1.o1();
+					if(vars.prsvec_1.prso == 151)
+						System.out.print("");
 					/* !GET DIR OBJ. */
 					vars.prsvec_1.prsi = np.parse.pv_1.o2();
 					/* !GET IND OBJ. */
