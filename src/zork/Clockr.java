@@ -941,9 +941,9 @@ public class Clockr
 
 		/* Function Body */
 //	   ++(*ctr);
-//		ctr[0] += 1;
+		ctr[0] += 1;
 		/* !ADVANCE STATE CNTR. */
-		vars.cevent_1.ctick[cev - 1] = ticks[ctr[0]];
+		vars.cevent_1.ctick[cev - 1] = ticks[ctr[0]-1];
 		/* !RESET INTERRUPT. */
 		if (vars.cevent_1.ctick[cev - 1] != 0)
 		{

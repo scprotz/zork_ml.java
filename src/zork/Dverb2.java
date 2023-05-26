@@ -1,214 +1,292 @@
 package zork;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 public class Dverb2
 {
 	/* SAVE- SAVE GAME STATE */
 
-	/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
+	/* COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142 */
 	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
 	/* WRITTEN BY R. M. SUPNIK */
 	Vars vars = null;
 	Dgame game = null;
 	Verbs verbs = null;
-	
+
 	public Dverb2(Vars vars, Dgame game, Verbs verbs)
 	{
 		this.vars = vars;
 		this.game = game;
 		this.verbs = verbs;
 	}
-//	#include <stdio.h>
-//	#include "funcs.h"
-//	#include "vars.h"
 
-	/* DECLARATIONS */
-
-//	static int cxappl_ P((int));
-
-	void savegm_()
+	void savegm_() throws IOException
 	{
-//	   /* Local variables */
-//	   int i;
-//	   FILE *e;
-//
-//	   vars.prsvec_1.prswon = false;
-//	   /* 						!DISABLE GAME. */
-//	   /* Note: save file format is different for PDP vs. non-PDP versions */
-//
-//	   if ((e = fopen("dsave.dat", BINWRITE)) == NULL)
-//	      { GOTO = 100; continue loop; }
-//
-//	   gttime_(&i);
-//	   /* 						!GET TIME. */
-//
-//	#define do_uio(i, zbuf, cbytes) \
-//	   (void) fwrite((final char *)(zbuf), (cbytes), (i), e)
-//
-//	   do_uio(1, &vers_1.vmaj, sizeof(int));
-//	   do_uio(1, &vers_1.vmin, sizeof(int));
-//	   do_uio(1, &vers_1.vedit, sizeof(int));
-//
-//	   do_uio(1, &vars.play_1.winner, sizeof(int));
-//	   do_uio(1, &vars.play_1.here, sizeof(int));
-//	   do_uio(1, &hack_1.thfpos, sizeof(int));
-//	   do_uio(1, &vars.play_1.telflg, sizeof(boolean));
-//	   do_uio(1, &hack_1.thfflg, sizeof(boolean));
-//	   do_uio(1, &hack_1.thfact, sizeof(boolean));
-//	   do_uio(1, &hack_1.swdact, sizeof(boolean));
-//	   do_uio(1, &hack_1.swdsta, sizeof(int));
-//	   do_uio(64, &vars.puzzle_1.cpvec[0], sizeof(int));
-//
-//	   do_uio(1, &i, sizeof(int));
-//	   do_uio(1, &state_1.moves, sizeof(int));
-//	   do_uio(1, &state_1.deaths, sizeof(int));
-//	   do_uio(1, &state_1.rwscor, sizeof(int));
-//	   do_uio(1, &state_1.egscor, sizeof(int));
-//	   do_uio(1, &state_1.mxload, sizeof(int));
-//	   do_uio(1, &state_1.ltshft, sizeof(int));
-//	   do_uio(1, &state_1.bloc, sizeof(int));
-//	   do_uio(1, &state_1.mungrm, sizeof(int));
-//	   do_uio(1, &state_1.hs, sizeof(int));
-//	   do_uio(1, &screen_1.fromdr, sizeof(int));
-//	   do_uio(1, &screen_1.scolrm, sizeof(int));
-//	   do_uio(1, &screen_1.scolac, sizeof(int));
-//
-//	   do_uio(220, &vars.objcts_1.odesc1[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.odesc2[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.oflag1[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.oflag2[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.ofval[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.otval[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.osize[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.ocapac[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.oroom[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.oadv[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.ocan[0], sizeof(int));
-//
-//	   do_uio(200, &vars.rooms_1.rval[0], sizeof(int));
-//	   do_uio(200, &vars.rooms_1.rflag[0], sizeof(int));
-//
-//	   do_uio(4, &advs_1.aroom[0], sizeof(int));
-//	   do_uio(4, &advs_1.ascore[0], sizeof(int));
-//	   do_uio(4, &advs_1.avehic[0], sizeof(int));
-//	   do_uio(4, &advs_1.astren[0], sizeof(int));
-//	   do_uio(4, &advs_1.aflag[0], sizeof(int));
-//
-//	   do_uio(46, &flags[0], sizeof(boolean));
-//	   do_uio(22, &switch_[0], sizeof(int));
-//	   do_uio(4, &vill_1.vprob[0], sizeof(int));
-//	   do_uio(25, &cevent_1.cflag[0], sizeof(boolean));
-//	   do_uio(25, &cevent_1.ctick[0], sizeof(int));
-//
-//	#undef do_uio
-//
-//	   if (fclose(e) == EOF)
-//	      { GOTO = 100; continue loop; }
-//
-//	   game.dsub.rspeak_(597);
-//	   return;
-//
-//	case 100:
-//	   game.dsub.rspeak_(598);
-		throw new RuntimeException("Dverb2.savegm_ not impl");
-	   /* 						!CANT DO IT. */
+		/* Local variables */
+		int[] j = new int[1];
+
+		File file = new File("dsave.java.dat");
+
+		/* DISABLE GAME. */
+		vars.prsvec_1.prswon = false;
+
+		/* Note: save file format is different for PDP vs. non-PDP versions */
+		try
+		{
+
+			DataOutputStream writer = new DataOutputStream(new FileOutputStream(file));
+
+			/* GET TIME. */
+			game.dso5.gttime_(j);
+
+			writeInt(writer, vars.vers_1.vmaj);
+			writeInt(writer, vars.vers_1.vmin);
+			writeInt(writer, vars.vers_1.vedit);
+
+			writeInt(writer, vars.play_1.winner);
+			writeInt(writer, vars.play_1.here);
+			writeInt(writer, vars.hack_1.thfpos);
+			if (vars.play_1.telflg)
+				writeInt(writer, 1);
+			else
+				writeInt(writer, 0);
+			if (vars.hack_1.thfflg)
+				writeInt(writer, 1);
+			else
+				writeInt(writer, 0);
+			if (vars.hack_1.thfact)
+				writeInt(writer, 1);
+			else
+				writeInt(writer, 0);
+			if (vars.hack_1.swdact)
+				writeInt(writer, 1);
+			else
+				writeInt(writer, 0);
+			writeInt(writer, vars.hack_1.swdsta);
+			for (int i = 0; i < 64; i++)
+				writeInt(writer, vars.puzzle_1.cpvec[i]);
+
+			writeInt(writer, j[0]);
+			writeInt(writer, vars.state_1.moves);
+			writeInt(writer, vars.state_1.deaths);
+			writeInt(writer, vars.state_1.rwscor);
+			writeInt(writer, vars.state_1.egscor);
+			writeInt(writer, vars.state_1.mxload);
+			writeInt(writer, vars.state_1.ltshft);
+			writeInt(writer, vars.state_1.bloc);
+			writeInt(writer, vars.state_1.mungrm);
+			writeInt(writer, vars.state_1.hs);
+			writeInt(writer, vars.screen_1.fromdr);
+			writeInt(writer, vars.screen_1.scolrm);
+			writeInt(writer, vars.screen_1.scolac);
+
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.odesc1[i]);
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.odesc2[i]);
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.oflag1[i]);
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.oflag2[i]);
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.ofval[i]);
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.otval[i]);
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.osize[i]);
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.ocapac[i]);
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.oroom[i]);
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.oadv[i]);
+			for (int i = 0; i < 220; i++)
+				writeInt(writer, vars.objcts_1.ocan[i]);
+
+			for (int i = 0; i < 200; i++)
+				writeInt(writer, vars.rooms_1.rval[i]);
+			for (int i = 0; i < 200; i++)
+				writeInt(writer, vars.rooms_1.rflag[i]);
+
+			for (int i = 0; i < 4; i++)
+				writeInt(writer, vars.advs_1.aroom[i]);
+			for (int i = 0; i < 4; i++)
+				writeInt(writer, vars.advs_1.ascore[i]);
+			for (int i = 0; i < 4; i++)
+				writeInt(writer, vars.advs_1.avehic[i]);
+			for (int i = 0; i < 4; i++)
+				writeInt(writer, vars.advs_1.astren[i]);
+			for (int i = 0; i < 4; i++)
+				writeInt(writer, vars.advs_1.aflag[i]);
+
+			for (int i = 0; i < 46; i++)
+			{
+				if (vars.findex_1.flags(i))
+					writeInt(writer, 1);
+				else
+					writeInt(writer, 0);
+			}
+			for (int i = 0; i < 22; i++)
+				writeInt(writer, vars.findex_1.switch_(i));
+			for (int i = 0; i < 4; i++)
+				writeInt(writer, vars.vill_1.vprob[i]);
+			for (int i = 0; i < 25; i++)
+			{
+				if (vars.cevent_1.cflag[i])
+					writeInt(writer, 1);
+				else
+					writeInt(writer, 0);
+			}
+			for (int i = 0; i < 25; i++)
+				writeInt(writer, vars.cevent_1.ctick[i]);
+			writer.flush();
+			writer.close();
+
+			game.dsub.rspeak_(597);
+			return;
+		}
+		catch (IOException ioe)
+		{
+			game.dsub.rspeak_(598);
+		}
 	} /* savegm_ */
 
-	/* RESTORE- RESTORE GAME STATE */
-
-	/* DECLARATIONS */
-
-	void rstrgm_()
+	public void writeInt(OutputStream writer, long value) throws IOException
 	{
-//	   /* Local variables */
-//	   int i, j, k;
-//	   FILE *e;
-//
-//	   vars.prsvec_1.prswon = false;
-//	   /* 						!DISABLE GAME. */
-//	   /* Note: save file format is different for PDP vs. non-PDP versions */
-//
-//	   if ((e = fopen("dsave.dat", BINREAD)) == NULL)
-//	      { GOTO = 100; continue loop; }
-//
-//	#define do_uio(i, zbuf, cbytes) \
-//	   (void)fread((char *)(zbuf), (cbytes), (i), e)
-//
-//	   do_uio(1, &i, sizeof(int));
-//	   do_uio(1, &j, sizeof(int));
-//	   do_uio(1, &k, sizeof(int));
-//
-//	   if (i != vers_1.vmaj | j != vers_1.vmin) {
-//	      { GOTO = 200; continue loop; }
-//	   }
-//
-//	   do_uio(1, &vars.play_1.winner, sizeof(int));
-//	   do_uio(1, &vars.play_1.here, sizeof(int));
-//	   do_uio(1, &hack_1.thfpos, sizeof(int));
-//	   do_uio(1, &vars.play_1.telflg, sizeof(boolean));
-//	   do_uio(1, &hack_1.thfflg, sizeof(boolean));
-//	   do_uio(1, &hack_1.thfact, sizeof(boolean));
-//	   do_uio(1, &hack_1.swdact, sizeof(boolean));
-//	   do_uio(1, &hack_1.swdsta, sizeof(int));
-//	   do_uio(64, &vars.puzzle_1.cpvec[0], sizeof(int));
-//
-//	   do_uio(1, &time_1.pltime, sizeof(int));
-//	   do_uio(1, &state_1.moves, sizeof(int));
-//	   do_uio(1, &state_1.deaths, sizeof(int));
-//	   do_uio(1, &state_1.rwscor, sizeof(int));
-//	   do_uio(1, &state_1.egscor, sizeof(int));
-//	   do_uio(1, &state_1.mxload, sizeof(int));
-//	   do_uio(1, &state_1.ltshft, sizeof(int));
-//	   do_uio(1, &state_1.bloc, sizeof(int));
-//	   do_uio(1, &state_1.mungrm, sizeof(int));
-//	   do_uio(1, &state_1.hs, sizeof(int));
-//	   do_uio(1, &screen_1.fromdr, sizeof(int));
-//	   do_uio(1, &screen_1.scolrm, sizeof(int));
-//	   do_uio(1, &screen_1.scolac, sizeof(int));
-//
-//	   do_uio(220, &vars.objcts_1.odesc1[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.odesc2[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.oflag1[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.oflag2[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.ofval[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.otval[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.osize[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.ocapac[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.oroom[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.oadv[0], sizeof(int));
-//	   do_uio(220, &vars.objcts_1.ocan[0], sizeof(int));
-//
-//	   do_uio(200, &vars.rooms_1.rval[0], sizeof(int));
-//	   do_uio(200, &vars.rooms_1.rflag[0], sizeof(int));
-//
-//	   do_uio(4, &advs_1.aroom[0], sizeof(int));
-//	   do_uio(4, &advs_1.ascore[0], sizeof(int));
-//	   do_uio(4, &advs_1.avehic[0], sizeof(int));
-//	   do_uio(4, &advs_1.astren[0], sizeof(int));
-//	   do_uio(4, &advs_1.aflag[0], sizeof(int));
-//
-//	   do_uio(46, &flags[0], sizeof(boolean));
-//	   do_uio(22, &switch_[0], sizeof(int));
-//	   do_uio(4, &vill_1.vprob[0], sizeof(int));
-//	   do_uio(25, &cevent_1.cflag[0], sizeof(boolean));
-//	   do_uio(25, &cevent_1.ctick[0], sizeof(int));
-//
-//	   (void)fclose(e);
-//
-//	   game.dsub.rspeak_(599);
-//	   return;
-//
-//	case 100:
-//	   game.dsub.rspeak_(598);
-//	   /* 						!CANT DO IT. */
-//	   return;
-//
-//	case 200:
-//	   game.dsub.rspeak_(600);
-//	   /* 						!OBSOLETE VERSION */
-//	   (void)fclose(e);
-		throw new RuntimeException("Dverb2.rstrgm_ not impl");
+		char[] bytes = new char[4];
+		bytes[3] = (char) ((value >> 24) & 0xFF);
+		bytes[2] = (char) ((value >> 16) & 0xFF);
+		bytes[1] = (char) ((value >> 8) & 0xFF);
+		bytes[0] = (char) (value & 0xFF);
+
+//		writer.write(bytes);
+		for (int i = 0; i < 4; i++)
+		{
+			int val = bytes[i];
+			writer.write(bytes[i]);
+		}
+	}
+
+	/* RESTORE- RESTORE GAME STATE */
+	void rstrgm_() throws IOException
+	{
+
+		File file = new File("dsave.dat");
+
+		vars.prsvec_1.prswon = false;
+		/* DISABLE GAME. */
+		/* Note: save file format is different for PDP vs. non-PDP versions */
+		try
+		{
+
+			DataInputStream reader = new DataInputStream(new FileInputStream(file));
+
+			int maj = reader.read();
+			int min = reader.read();
+			int k = reader.read();
+
+			if (maj != vars.vers_1.vmaj | min != vars.vers_1.vmin)
+			{
+				game.dsub.rspeak_(600);
+				/* OBSOLETE VERSION */
+				reader.close();
+				return;
+			}
+
+			vars.play_1.winner = reader.read();
+			vars.play_1.here = reader.read();
+			vars.hack_1.thfpos = reader.read();
+			vars.play_1.telflg = reader.read() != 0;
+			vars.hack_1.thfflg = reader.read() != 0;
+			vars.hack_1.thfact = reader.read() != 0;
+			vars.hack_1.swdact = reader.read() != 0;
+			vars.hack_1.swdsta = reader.read();
+			for (int i = 0; i < 64; i++)
+				vars.puzzle_1.cpvec[i] = reader.read();
+
+			vars.time_1.pltime = reader.read();
+			vars.state_1.moves = reader.read();
+			vars.state_1.deaths = reader.read();
+			vars.state_1.rwscor = reader.read();
+			vars.state_1.egscor = reader.read();
+			vars.state_1.mxload = reader.read();
+			vars.state_1.ltshft = reader.read();
+			vars.state_1.bloc = reader.read();
+			vars.state_1.mungrm = reader.read();
+			vars.state_1.hs = reader.read();
+			vars.screen_1.fromdr = reader.read();
+			vars.screen_1.scolrm = reader.read();
+			vars.screen_1.scolac = reader.read();
+
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.odesc1[i] = reader.read();
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.odesc2[i] = reader.read();
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.oflag1[i] = reader.read();
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.oflag2[i] = reader.read();
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.ofval[i] = reader.read();
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.otval[i] = reader.read();
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.osize[i] = reader.read();
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.ocapac[i] = reader.read();
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.oroom[i] = reader.read();
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.oadv[i] = reader.read();
+			for (int i = 0; i < 220; i++)
+				vars.objcts_1.ocan[i] = reader.read();
+
+			for (int i = 0; i < 200; i++)
+				vars.rooms_1.rval[i] = reader.read();
+			for (int i = 0; i < 200; i++)
+				vars.rooms_1.rflag[i] = reader.read();
+
+			for (int i = 0; i < 4; i++)
+				vars.advs_1.aroom[i] = reader.read();
+			for (int i = 0; i < 4; i++)
+				vars.advs_1.ascore[i] = reader.read();
+			for (int i = 0; i < 4; i++)
+				vars.advs_1.avehic[i] = reader.read();
+			for (int i = 0; i < 4; i++)
+				vars.advs_1.astren[i] = reader.read();
+			for (int i = 0; i < 4; i++)
+				vars.advs_1.aflag[i] = reader.read();
+
+			for (int i = 0; i < 46; i++)
+				vars.findex_1.flags(i, reader.read() != 0);
+//		   do_uio(46, &flags[0], sizeof(boolean));
+			for (int i = 0; i < 22; i++)
+				vars.findex_1.switch_(i, reader.read());
+			for (int i = 0; i < 4; i++)
+				vars.vill_1.vprob[i] = reader.read();
+//		   do_uio(25, &cevent_1.cflag[0], sizeof(boolean));
+			for (int i = 0; i < 25; i++)
+				vars.cevent_1.cflag[i] = reader.read() != 0;
+			for (int i = 0; i < 25; i++)
+				vars.cevent_1.ctick[i] = reader.read();
+
+			reader.close();
+
+			game.dsub.rspeak_(599);
+			return;
+
+		}
+		catch (IOException ioe)
+		{
+			game.dsub.rspeak_(598);
+		}
+
 	} /* rstrgm_ */
 
 	/* WALK- MOVE IN SPECIFIED DIRECTION */

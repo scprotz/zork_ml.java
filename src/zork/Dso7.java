@@ -36,13 +36,13 @@ public class Dso7
 //	   /* Function Body */
 //
 //	   uinws = 0;
-//	   /* 						!UNBIASED INW SUM. */
+//	   /* UNBIASED INW SUM. */
 //	   ukeyws = 0;
-//	   /* 						!UNBIASED KEYW SUM. */
+//	   /* UNBIASED KEYW SUM. */
 //	   j = 1;
-//	   /* 						!POINTER IN KEYWORD. */
+//	   /* POINTER IN KEYWORD. */
 //	   for (i = 1; i <= 6; ++i) {
-//	      /* 						!UNBIAS, COMPUTE SUMS. */
+//	      /* UNBIAS, COMPUTE SUMS. */
 //	      ukeyw[i - 1] = (keyw[i - 1] - 64);
 //	      if (inw[j] <= '@') {
 //	         j = 1;
@@ -55,7 +55,7 @@ public class Dso7
 //	   }
 //
 //	   usum = uinws % 8 + (ukeyws % 8 << 3);
-//	   /* 						!COMPUTE MASK. */
+//	   /* COMPUTE MASK. */
 //	   for (i = 1; i <= 6; ++i) {
 //	      j = (uinw[i - 1] ^ ukeyw[i - 1] ^ usum) & 31;
 //	      usum = (usum + 1) % 32;
@@ -82,7 +82,7 @@ public class Dso7
 
 	   vars.rooms_1.rflag[vars.rindex_1.cpuzz - 1] &= ~ Vars.RSEEN;
 	   for (i = 1; i <= vars.objcts_1.olnt; ++i) {
-	      /* 						!RELOCATE OBJECTS. */
+	      /* RELOCATE OBJECTS. */
 	      if (vars.objcts_1.oroom[i - 1] == vars.rindex_1.cpuzz && (vars.objcts_1.oflag2[i - 1]
 	               & Vars.ACTRBT + Vars.VILLBT) == 0) {
 	         i__2 = vars.findex_1.cphere * vars.hyper_1.hfactr;
@@ -115,7 +115,7 @@ public class Dso7
 	   for (i = 1; i <= 8; ++i) {
 	      j = dgmoft[i - 1];
 	      dgm[i - 1] = pict[vars.puzzle_1.cpvec[st + j - 1] + 3];
-	      /* 						!GET PICTURE ELEMENT. */
+	      /* GET PICTURE ELEMENT. */
 	      if (Math.abs(j) == 1 || Math.abs(j) == 8) {
 	         continue;
 	      }
@@ -123,7 +123,7 @@ public class Dso7
 	      if (j < 0) {
 	         k = -8;
 	      }
-	      /* 						!GET ORTHO DIR. */
+	      /* GET ORTHO DIR. */
 	      l = j - k;
 	      if (vars.puzzle_1.cpvec[st + k - 1] != 0 && vars.puzzle_1.cpvec[st + l - 1] !=
 	            0) {
@@ -143,28 +143,28 @@ public class Dso7
 	   if (st == 10) {
 	      game.dsub.rspeak_(870);
 	   }
-	   /* 						!AT HOLE? */
+	   /* AT HOLE? */
 	   if (st == 37) {
 	      game.dsub.rspeak_(871);
 	   }
-	   /* 						!AT NICHE? */
+	   /* AT NICHE? */
 	   i = 872;
-	   /* 						!DOOR OPEN? */
+	   /* DOOR OPEN? */
 	   if (vars.findex_1.cpoutf) {
 	      i = 873;
 	   }
 	   if (st == 52) {
 	      game.dsub.rspeak_(i);
 	   }
-	   /* 						!AT DOOR? */
+	   /* AT DOOR? */
 	   if (vars.puzzle_1.cpvec[st] == -2) {
 	      game.dsub.rspeak_(874);
 	   }
-	   /* 						!EAST LADDER? */
+	   /* EAST LADDER? */
 	   if (vars.puzzle_1.cpvec[st - 2] == -3) {
 	      game.dsub.rspeak_(875);
 	   }
-	   /* 						!WEST LADDER? */
+	   /* WEST LADDER? */
 		
 	} /* cpinfo_ */
 

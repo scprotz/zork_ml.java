@@ -747,7 +747,284 @@ public class Vars
 			}
 			throw new RuntimeException("invalid index for flags: " + index);
 		}
+
+		public void flags(int index, boolean value)
+		{
+			switch (index)
+			{
+				case 0:
+					trollf = value;
+					return;
+				case 1:
+					cagesf = value;
+					return;
+				case 2:
+					bucktf = value;
+					return;
+				case 3:
+					caroff = value;
+					return;
+				case 4:
+					carozf = value;
+					return;
+				case 5:
+					lwtidf = value;
+					return;
+				case 6:
+					domef = value;
+					return;
+				case 7:
+					glacrf = value;
+					return;
+				case 8:
+					echof = value;
+					return;
+				case 9:
+					riddlf = value;
+					return;
+				case 10:
+					lldf = value;
+					return;
+				case 11:
+					cyclof = value;
+					return;
+				case 12:
+					magicf = value;
+					return;
+				case 13:
+					litldf = value;
+					return;
+				case 14:
+					safef = value;
+					return;
+				case 15:
+					gnomef = value;
+					return;
+				case 16:
+					gnodrf = value;
+					return;
+				case 17:
+					mirrmf = value;
+					return;
+				case 18:
+					egyptf = value;
+					return;
+				case 19:
+					onpolf = value;
+					return;
+				case 20:
+					blabf = value;
+					return;
+				case 21:
+					brieff = value;
+					return;
+				case 22:
+					superf = value;
+					return;
+				case 23:
+					buoyf = value;
+					return;
+				case 24:
+					grunlf = value;
+					return;
+				case 25:
+					gatef = value;
+					return;
+				case 26:
+					rainbf = value;
+					return;
+				case 27:
+					cagetf = value;
+					return;
+				case 28:
+					empthf = value;
+					return;
+				case 29:
+					deflaf = value;
+					return;
+				case 30:
+					glacmf = value;
+					return;
+				case 31:
+					frobzf = value;
+					return;
+				case 32:
+					endgmf = value;
+					return;
+				case 33:
+					badlkf = value;
+					return;
+				case 34:
+					thfenf = value;
+					return;
+				case 35:
+					singsf = value;
+					return;
+				case 36:
+					mrpshf = value;
+					return;
+				case 37:
+					mropnf = value;
+					return;
+				case 38:
+					wdopnf = value;
+					return;
+				case 39:
+					mr1f = value;
+					return;
+				case 40:
+					mr2f = value;
+					return;
+				case 41:
+					inqstf = value;
+					return;
+				case 42:
+					follwf = value;
+					return;
+				case 43:
+					spellf = value;
+					return;
+				case 44:
+					cpoutf = value;
+					return;
+				case 45:
+					cpushf = value;
+					return;
+			}
+			throw new RuntimeException("invalid index for flags: " + index);
+		}
+
+		public int switch_(int index)
+		{
+			switch (index)
+			{
+				case 0:
+					return btief;
+				case 1:
+					return binff;
+				case 2:
+					return rvmnt;
+				case 3:
+					return rvclr;
+				case 4:
+					return rvcyc;
+				case 5:
+					return rvsnd;
+				case 6:
+					return rvgua;
+				case 7:
+					return orrug;
+				case 8:
+					return orcand;
+				case 9:
+					return ormtch;
+				case 10:
+					return orlamp;
+				case 11:
+					return mdir;
+				case 12:
+					return mloc;
+				case 13:
+					return poleuf;
+				case 14:
+					return quesno;
+				case 15:
+					return nqatt;
+				case 16:
+					return corrct;
+				case 17:
+					return lcell;
+				case 18:
+					return pnumb;
+				case 19:
+					return acell;
+				case 20:
+					return dcell;
+				case 21:
+					return cphere;
+
+			};
+			throw new RuntimeException("invalid index for switch_: " + index);
+
+		}
+
+		public void switch_(int index, int value)
+		{
+			switch (index)
+			{
+				case 0:
+					btief = value;
+					return;
+				case 1:
+					binff = value;
+					return;
+				case 2:
+					rvmnt = value;
+					return;
+				case 3:
+					rvclr = value;
+					return;
+				case 4:
+					rvcyc = value;
+					return;
+				case 5:
+					rvsnd = value;
+					return;
+				case 6:
+					rvgua = value;
+					return;
+				case 7:
+					orrug = value;
+					return;
+				case 8:
+					orcand = value;
+					return;
+				case 9:
+					ormtch = value;
+					return;
+				case 10:
+					orlamp = value;
+					return;
+				case 11:
+					mdir = value;
+					return;
+				case 12:
+					mloc = value;
+					return;
+				case 13:
+					poleuf = value;
+					return;
+				case 14:
+					quesno = value;
+					return;
+				case 15:
+					nqatt = value;
+					return;
+				case 16:
+					corrct = value;
+					return;
+				case 17:
+					lcell = value;
+					return;
+				case 18:
+					pnumb = value;
+					return;
+				case 19:
+					acell = value;
+					return;
+				case 20:
+					dcell = value;
+					return;
+				case 21:
+					cphere = value;
+					return;
+
+			}
+			throw new RuntimeException("invalid index for switch_: " + index);
+
+		}
 	};
+	
 
 	public findex_ findex_1 = new findex_();
 //	#define flags ((boolean *)&findex_1)
@@ -832,14 +1109,14 @@ public class Vars
 
 	public star_ star_1 = new star_();
 
-//	public class input_
-//	{
-//	   int inlnt;
-//	   char[] inbuf = new char[78];
-//	};
+	public class input_
+	{
+	   int inlnt;
+	   char[] inbuf = new char[78];
+	};
 
 
-//	public input_ input_1 = new input_();
+	public input_ input_1 = new input_();
 
 	public class screen_
 	{
@@ -868,9 +1145,9 @@ public class Vars
 	public rmsg_ rmsg_1 = new rmsg_();
 
 	public class vers_ {
-	   final int vmaj = 2;
-	   final int vmin = 7;
-	   final int vedit = 'A';
+	   int vmaj = 2;
+	   int vmin = 7;
+	   int vedit = 'A';
 	};
 //	vers_
 //	#ifdef INIT

@@ -992,10 +992,10 @@ public class Sverbs
 				case 27100:
 					 for (j = 1; j <= 14; j ++) 
 					 {
-					      /* 						!CHECK ANSWERS. */
+					      /* CHECK ANSWERS. */
 					      if (vars.findex_1.quesno != answer[j - 1])
 					         continue;
-//					      /* 						!ONLY CHECK PROPER ANS. */
+//					      /* ONLY CHECK PROPER ANS. */
 					      String zz = ansstr[j - 1];
 					      int ans_index = vars.prsvec_1.prscon -1;
 					      String user_answer = new String(vars.input_1.inbuf);
@@ -1009,7 +1009,7 @@ public class Sverbs
 					      {
 					         while (zz2.charAt(z2index) == ' ')
 					            z2index++;
-					         /* 						!STRIP INPUT BLANKS. */
+					         /* STRIP INPUT BLANKS. */
 					         if (zz.charAt(zindex) != zz2.charAt(z2index))
 					            continue;
 					         zindex++;
@@ -1017,22 +1017,22 @@ public class Sverbs
 					      }
 					      GOTO = 27500;
 					      continue loop;
-					      /* 						!RIGHT ANSWER. */
+					      /* RIGHT ANSWER. */
 
 					   }
 
 					   vars.prsvec_1.prscon = 1;
-					   /* 						!KILL REST OF LINE. */
+					   /* KILL REST OF LINE. */
 					   ++vars.findex_1.nqatt;
-					   /* 						!WRONG, CRETIN. */
+					   /* WRONG, CRETIN. */
 					   if (vars.findex_1.nqatt >= 5) {
 						   GOTO = 27400;
 						   continue;
 					   }
-					   /* 						!TOO MANY WRONG? */
+					   /* TOO MANY WRONG? */
 					   i__1 = vars.findex_1.nqatt + 800;
 					   game.dsub.rspeak_(i__1);
-					   /* 						!NO, TRY AGAIN. */
+					   /* NO, TRY AGAIN. */
 					   return ret_val;
 
 				case 27400:

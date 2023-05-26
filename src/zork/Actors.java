@@ -33,9 +33,9 @@ public class Actors
 	   }
 	   
 	   int GOTO = 0;
-	   /* 						!IF ZERO, NO APP. */
+	   /* IF ZERO, NO APP. */
 	   ret_val = true;
-	   /* 						!ASSUME WINS. */
+	   /* ASSUME WINS. */
 	   switch (ri) 
 	   {
 	      case 1:  
@@ -48,7 +48,7 @@ public class Actors
 			break;
 		
 	      default:
-	   /* 						!BRANCH ON ADV. */
+	   /* BRANCH ON ADV. */
 		   game.dsub.bug_(11, ri);
 	   }
 
@@ -67,19 +67,19 @@ public class Actors
 		}
 	   }
 	   vars.cevent_1.cflag[vars.cindex_1.cevsph - 1] = false;
-	   /* 						!ROBOT RAISED CAGE. */
+	   /* ROBOT RAISED CAGE. */
 	   vars.play_1.winner = vars.aindex_1.player;
-	   /* 						!RESET FOR PLAYER. */
+	   /* RESET FOR PLAYER. */
 	   game.dso2.moveto_(vars.rindex_1.cager, vars.play_1.winner);
-	   /* 						!MOVE TO NEW ROOM. */
+	   /* MOVE TO NEW ROOM. */
 	   game.dsub.newsta_(vars.oindex_1.cage, 567, vars.rindex_1.cager, 0, 0);
-	   /* 						!INSTALL CAGE IN ROOM. */
+	   /* INSTALL CAGE IN ROOM. */
 	   game.dsub.newsta_(vars.oindex_1.robot, 0, vars.rindex_1.cager, 0, 0);
-	   /* 						!INSTALL ROBOT IN ROOM. */
+	   /* INSTALL ROBOT IN ROOM. */
 	   vars.advs_1.aroom[vars.aindex_1.arobot - 1] = vars.rindex_1.cager;
-	   /* 						!ALSO MOVE ROBOT/ADV. */
+	   /* ALSO MOVE ROBOT/ADV. */
 	   vars.findex_1.cagesf = true;
-	   /* 						!CAGE SOLVED. */
+	   /* CAGE SOLVED. */
 	   vars.objcts_1.oflag1[vars.oindex_1.robot - 1] &= ~ Vars.NDSCBT;
 	   vars.objcts_1.oflag1[vars.oindex_1.spher - 1] |= Vars.TAKEBT;
 	   return ret_val;
@@ -92,13 +92,13 @@ public class Actors
 			continue;
 		}
 	      }
-	      /* 						!READ, */
+	      /* READ, */
 	      game.dsub.rspeak_(569);
-	      /* 						!JOKE. */
+	      /* JOKE. */
 	      return ret_val;
 	   }
 	   game.dsub.rspeak_(568);
-	   /* 						!EAT OR DRINK, JOKE. */
+	   /* EAT OR DRINK, JOKE. */
 	   return ret_val;
 
 	case 1400:
@@ -110,7 +110,7 @@ public class Actors
 	      return false;
 	   }
 	   game.dsub.rspeak_(570);
-	   /* 						!JOKE. */
+	   /* JOKE. */
 	   return ret_val;
 	   /* AAPPLI, PAGE 3 */
 
@@ -124,7 +124,7 @@ public class Actors
 		}
 	   }
 	   game.dsub.rspeak_(783);
-	   /* 						!NO MASTER YET. */
+	   /* NO MASTER YET. */
 	   return ret_val;
 
 	case 2100:
@@ -134,9 +134,9 @@ public class Actors
 			continue;
 		}
 	   }
-	   /* 						!WALK? */
+	   /* WALK? */
 	   i = 784;
-	   /* 						!ASSUME WONT. */
+	   /* ASSUME WONT. */
 	   if (vars.play_1.here == vars.rindex_1.scorr && (vars.prsvec_1.prso == vars.xsrch_1.xnorth || 
 	            vars.prsvec_1.prso == vars.xsrch_1.xenter) || vars.play_1.here == vars.rindex_1.ncorr 
 	         && (vars.prsvec_1.prso == vars.xsrch_1.xsouth || vars.prsvec_1.prso == 
@@ -159,7 +159,7 @@ public class Actors
 	      return false;
 	   }
 	   game.dsub.rspeak_(786);
-	   /* 						!MASTER CANT DO IT. */
+	   /* MASTER CANT DO IT. */
 	   return ret_val;
 		   }
 	   }while(true);
@@ -182,7 +182,7 @@ public class Actors
 
 	   int GOTO = 1025;
 	   
-	   /* 						!SET UP DETAIL FLAG. */
+	   /* SET UP DETAIL FLAG. */
 	   once = false;
 	   
 start:   do
@@ -190,10 +190,10 @@ start:   do
 		   switch(GOTO)
 		   {
 			   
-			   /* 						!INIT FLAG. */
+			   /* INIT FLAG. */
 			   case 1025:
 				   rhere = vars.objcts_1.oroom[vars.oindex_1.thief - 1];
-				   /* 						!VISIBLE POS. */
+				   /* VISIBLE POS. */
 				   if (rhere != 0) 
 				   {
 					   vars.hack_1.thfpos = rhere;
@@ -206,7 +206,7 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!THIEF IN WIN RM? */
+				   /* THIEF IN WIN RM? */
 				   if (vars.hack_1.thfpos != vars.rindex_1.treas) 
 				   {
 					   {
@@ -214,7 +214,7 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!THIEF NOT IN TREAS? */
+				   /* THIEF NOT IN TREAS? */
 
 				   /* THIEF IS IN TREASURE ROOM, AND WINNER IS NOT. */
 
@@ -225,9 +225,9 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!VISIBLE? */
+				   /* VISIBLE? */
 				   game.dsub.newsta_(vars.oindex_1.thief, 0, 0, 0, 0);
-				   /* 						!YES, VANISH. */
+				   /* YES, VANISH. */
 				   rhere = 0;
 				   if (game.dsub.qhere_(vars.oindex_1.still, vars.rindex_1.treas) || vars.objcts_1.oadv[
 				         vars.oindex_1.still - 1] == -vars.oindex_1.thief) 
@@ -237,7 +237,7 @@ start:   do
 			   case 1050:
 				   i__1 = -vars.oindex_1.thief;
 				   i = game.dso4.robadv_(i__1, vars.hack_1.thfpos, 0, 0);
-				   /* 						!DROP VALUABLES. */
+				   /* DROP VALUABLES. */
 				   if (game.dsub.qhere_(vars.oindex_1.egg, vars.hack_1.thfpos)) 
 				   {
 					   vars.objcts_1.oflag2[vars.oindex_1.egg - 1] |= Vars.OPENBT;
@@ -257,7 +257,7 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!IF TREAS ROOM, NOTHING. */
+				   /* IF TREAS ROOM, NOTHING. */
 				   if ((vars.rooms_1.rflag[vars.hack_1.thfpos - 1] & Vars.RLIGHT) != 0) 
 				   {
 					   {
@@ -272,7 +272,7 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!THIEF ANNOUNCED? */
+				   /* THIEF ANNOUNCED? */
 				   if (rhere != 0 || game.dsub.prob_(70, 70)) 
 				   {
 					   {
@@ -280,7 +280,7 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!IF INVIS AND 30%. */
+				   /* IF INVIS AND 30%. */
 				   if (vars.objcts_1.ocan[vars.oindex_1.still - 1] != vars.oindex_1.thief) 
 				   {
 					   {
@@ -288,11 +288,11 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!ABORT IF NO STILLETTO. */
+				   /* ABORT IF NO STILLETTO. */
 				   game.dsub.newsta_(vars.oindex_1.thief, 583, vars.hack_1.thfpos, 0, 0);
-				   /* 						!INSERT THIEF INTO ROOM. */
+				   /* INSERT THIEF INTO ROOM. */
 				   vars.hack_1.thfflg = true;
-				   /* 						!THIEF IS ANNOUNCED. */
+				   /* THIEF IS ANNOUNCED. */
 				   return;
 
 			   case 1150:
@@ -310,9 +310,9 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!WINNING? */
+				   /* WINNING? */
 				   game.dsub.newsta_(vars.oindex_1.thief, 584, 0, 0, 0);
-				   /* 						!NO, VANISH THIEF. */
+				   /* NO, VANISH THIEF. */
 				   vars.objcts_1.oflag2[vars.oindex_1.thief - 1] &= ~ Vars.FITEBT;
 				   if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos) || vars.objcts_1.oadv[
 				       vars.oindex_1.still - 1] == -vars.oindex_1.thief) 
@@ -328,7 +328,7 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!90% CHANCE TO STAY. */
+				   /* 90% CHANCE TO STAY. */
 
 			   case 1200:
 				   if (rhere == 0 || game.dsub.prob_(70, 70)) 
@@ -338,9 +338,9 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!IF VISIBLE AND 30% */
+				   /* IF VISIBLE AND 30% */
 				   game.dsub.newsta_(vars.oindex_1.thief, 585, 0, 0, 0);
-				   /* 						!VANISH THIEF. */
+				   /* VANISH THIEF. */
 				   if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos) || vars.objcts_1.oadv[
 				       vars.oindex_1.still - 1] == -vars.oindex_1.thief) 
 				   {
@@ -356,31 +356,31 @@ start:   do
 						   continue;
 					   }
 				   }
-				   /* 						!ANNOUNCED.  VISIBLE? */
+				   /* ANNOUNCED.  VISIBLE? */
 			   case 1250:
 				   if (game.dsub.prob_(70, 70)) 
 				   {
 					   return;
 				   }
-				   /* 						!70% CHANCE TO DO NOTHING. */
+				   /* 70% CHANCE TO DO NOTHING. */
 				   vars.hack_1.thfflg = true;
 				   i__1 = -vars.oindex_1.thief;
 				   i__2 = -vars.oindex_1.thief;
 				   nr = game.dso4.robrm_(vars.hack_1.thfpos, 100, 0, 0, i__1) + game.dso4.robadv_(vars.play_1.winner, 0, 0, i__2);
 				   i = 586;
-				   /* 						!ROBBED EM. */
+				   /* ROBBED EM. */
 				   if (rhere != 0) 
 				   {
 					   i = 588;
 				   }
-				   /* 						!WAS HE VISIBLE? */
+				   /* WAS HE VISIBLE? */
 				   if (nr != 0) 
 				   {
 					   ++i;
 				   }
-				   /* 						!DID HE GET ANYTHING? */
+				   /* DID HE GET ANYTHING? */
 				   game.dsub.newsta_(vars.oindex_1.thief, i, 0, 0, 0);
-				   /* 						!VANISH THIEF. */
+				   /* VANISH THIEF. */
 				   if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos) || vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief) 
 				   {
 					   game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
@@ -394,13 +394,13 @@ start:   do
 					   GOTO = 1700;
 					   continue;
 				   }
-				   /* 						!ONWARD. */
+				   /* ONWARD. */
 
 				   /* NOT IN ADVENTURERS ROOM. */
 
 			   case 1400:
 				   game.dsub.newsta_(vars.oindex_1.thief, 0, 0, 0, 0);
-				   /* 						!VANISH. */
+				   /* VANISH. */
 				   rhere = 0;
 				   if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos) || vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief) 
 				   {
@@ -415,7 +415,7 @@ start:   do
 				   }
 				   i__1 = -vars.oindex_1.thief;
 				   i = game.dso4.robrm_(vars.hack_1.thfpos, 75, 0, 0, i__1);
-				   /* 						!ROB ROOM 75%. */
+				   /* ROB ROOM 75%. */
 				   if (vars.hack_1.thfpos < vars.rindex_1.maze1 || vars.hack_1.thfpos > vars.rindex_1.maz15 || 
 	         vars.play_1.here < vars.rindex_1.maze1 || vars.play_1.here > vars.rindex_1.maz15) 
 				   {
@@ -427,7 +427,7 @@ start:   do
 				   i__1 = vars.objcts_1.olnt;
 				   for (i = 1; i <= i__1; ++i) 
 				   {
-					   /* 						!BOTH IN MAZE. */
+					   /* BOTH IN MAZE. */
 					   if (! game.dsub.qhere_(i, vars.hack_1.thfpos) || game.dsub.prob_(60, 60) || (
 							   vars.objcts_1.oflag1[i - 1] & Vars.VISIBT + Vars.TAKEBT) !=
 							   Vars.VISIBT + Vars.TAKEBT) 
@@ -437,7 +437,7 @@ start:   do
 						   }
 					   }
 					   game.dsub.rspsub_(590, vars.objcts_1.odesc2[i - 1]);
-					   /* 						!TAKE OBJECT. */
+					   /* TAKE OBJECT. */
 					   if (game.dsub.prob_(40, 20)) {
 						   {
 							   GOTO = 1700;
@@ -446,7 +446,7 @@ start:   do
 					   }
 					   i__2 = -vars.oindex_1.thief;
 					   game.dsub.newsta_(i, 0, 0, 0, i__2);
-					   /* 						!MOST OF THE TIME. */
+					   /* MOST OF THE TIME. */
 					   vars.objcts_1.oflag2[i - 1] |= Vars.TCHBT;
 					   {
 						   GOTO = 1700;
@@ -462,7 +462,7 @@ start:   do
 				   i__1 = vars.objcts_1.olnt;
 				   for (i = 1; i <= i__1; ++i) 
 				   {
-					   /* 						!NOT IN MAZE. */
+					   /* NOT IN MAZE. */
 					   if (! game.dsub.qhere_(i, vars.hack_1.thfpos) || vars.objcts_1.otval[i - 1] != 0 || 
 							   game.dsub.prob_(80, 60) || (vars.objcts_1.oflag1[i - 1] & 
 									   Vars.VISIBT + Vars.TAKEBT) != Vars.VISIBT + 
@@ -497,7 +497,7 @@ start:   do
 				   once = ! once;
 			   case 1750:
 				   --vars.hack_1.thfpos;
-				   /* 						!NEXT ROOM. */
+				   /* NEXT ROOM. */
 				   if (vars.hack_1.thfpos <= 0) 
 				   {
 					   vars.hack_1.thfpos = vars.rooms_1.rlnt;
@@ -511,12 +511,12 @@ start:   do
 					   }
 				   }
 				   vars.hack_1.thfflg = false;
-				   /* 						!NOT ANNOUNCED. */
+				   /* NOT ANNOUNCED. */
 				   {
 					   GOTO = 1025;
 					   continue;
 				   }
-				   /* 						!ONCE MORE. */
+				   /* ONCE MORE. */
 
 				   /* ALL DONE. */
 
@@ -525,9 +525,9 @@ start:   do
 				   {
 					   return;
 				   }
-				   /* 						!IN TREASURE ROOM? */
+				   /* IN TREASURE ROOM? */
 				   j = 591;
-				   /* 						!NO, DROP STUFF. */
+				   /* NO, DROP STUFF. */
 				   if (vars.hack_1.thfpos != vars.play_1.here) 
 				   {
 					   j = 0;

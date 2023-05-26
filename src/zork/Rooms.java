@@ -238,18 +238,18 @@ public class Rooms
 				    }
 				    vars.advs_1.ascore[vars.play_1.winner - 1] = vars.state_1.rwscor;
 					
-				    /* 						!SCORE TROPHY CASE. */
+				    /* SCORE TROPHY CASE. */
 					i__1 = vars.objcts_1.olnt;
 					inner_for: for (i = 1; i <= i__1; ++i) 
 					{
-						/* 						!RETAIN RAW SCORE AS WELL. */
+						/* RETAIN RAW SCORE AS WELL. */
 						j = i;
-						/* 						!FIND OUT IF IN CASE. */
+						/* FIND OUT IF IN CASE. */
 //					L3550:
 						do
 						{
 						j = vars.objcts_1.ocan[j - 1];
-					/* 						!TRACE OWNERSHIP. */
+					/* TRACE OWNERSHIP. */
 							if (j == 0) {
 							    continue inner_for;
 							}
@@ -257,12 +257,12 @@ public class Rooms
 						while(j != vars.oindex_1.tcase);
 //						    goto L3550;
 //						}
-					/* 						!DO ALL LEVELS. */
+					/* DO ALL LEVELS. */
 						vars.advs_1.ascore[vars.play_1.winner - 1] += vars.objcts_1.otval[i - 1];
 
 					    }
 					game.dso2.scrupd_(0);
-				/* 						!SEE IF ENDGAME TRIG. */
+				/* SEE IF ENDGAME TRIG. */
 				return ret_val;
 				/* RAPPL1, PAGE 3 */
 				/* R4-- CELLAR. SHUT DOOR AND BAR IT IF HE JUST WALKED IN. */

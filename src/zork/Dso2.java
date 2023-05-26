@@ -32,20 +32,20 @@ public class Dso2
 	    int bits;
 
 	    ret_val = false;
-	/* 						!ASSUME FAILS. */
+	/* ASSUME FAILS. */
 	    lhr = (vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RLAND) != 0;
 	    lnr = (vars.rooms_1.rflag[nr - 1] & Vars.RLAND) != 0;
 	    j = vars.advs_1.avehic[who - 1];
-	/* 						!HIS VEHICLE */
+	/* HIS VEHICLE */
 	    
 	    if (j == 0) 
 	    {
 	
-		/* 						!IN VEHICLE? */
+		/* IN VEHICLE? */
 		    if (lnr) 
 		    {
 		    	ret_val = true;
-		    	/* 						!MOVE SHOULD SUCCEED. */
+		    	/* MOVE SHOULD SUCCEED. */
 		    	    if ((vars.rooms_1.rflag[nr - 1] & Vars.RMUNG) == 0) {
 		    	    	if (who != vars.aindex_1.player) {
 		    	    		game.dsub.newsta_(vars.advs_1.aobj[who - 1], 0, nr, 0, 0);
@@ -56,43 +56,43 @@ public class Dso2
 		    	    	    vars.play_1.here = nr;
 		    	    	    vars.advs_1.aroom[who - 1] = vars.play_1.here;
 		    	    	    scrupd_(vars.rooms_1.rval[nr - 1]);
-		    	    	/* 						!SCORE ROOM */
+		    	    	/* SCORE ROOM */
 		    	    	    vars.rooms_1.rval[nr - 1] = 0;
 		    	    	    return ret_val;		    	    }
 		    	    game.dsub.rspeak_(vars.rooms_1.rrand(nr - 1));
-		    	/* 						!YES, TELL HOW. */
+		    	/* YES, TELL HOW. */
 		    	    return ret_val;
 		    }
-		/* 						!NO, GOING TO LAND? */
+		/* NO, GOING TO LAND? */
 		    game.dsub.rspeak_(427);
-		    /* 						!CAN'T GO WITHOUT VEHICLE. */
+		    /* CAN'T GO WITHOUT VEHICLE. */
 		    return ret_val;
 	    }
 //	L100:
 	    bits = 0;
-	/* 						!ASSUME NOWHERE. */
+	/* ASSUME NOWHERE. */
 	    if (j == vars.oindex_1.rboat) {
 		bits = Vars.RWATER;
 	    }
-	/* 						!IN BOAT? */
+	/* IN BOAT? */
 	    if (j == vars.oindex_1.ballo) {
 		bits = Vars.RAIR;
 	    }
-	/* 						!IN BALLOON? */
+	/* IN BALLOON? */
 	    if (j == vars.oindex_1.bucke) {
 		bits = Vars.RBUCK;
 	    }
-	/* 						!IN BUCKET? */
+	/* IN BUCKET? */
 	    nlv = (vars.rooms_1.rflag[nr - 1] & bits) == 0;
 	    if (! lnr && nlv || lnr && lhr && nlv && bits != Vars.RLAND) {
 	    	game.dsub.rspsub_(428, vars.objcts_1.odesc2[j - 1]);
-	    	/* 						!WRONG VEHICLE. */
+	    	/* WRONG VEHICLE. */
 	    	    return ret_val;
 	    }
 
 //	L500:
 	    ret_val = true;
-	/* 						!MOVE SHOULD SUCCEED. */
+	/* MOVE SHOULD SUCCEED. */
 	    if ((vars.rooms_1.rflag[nr - 1] & Vars.RMUNG) == 0) {
 	    	  if (who != vars.aindex_1.player) {
 	    			game.dsub.newsta_(vars.advs_1.aobj[who - 1], 0, nr, 0, 0);
@@ -103,12 +103,12 @@ public class Dso2
 	    		    vars.play_1.here = nr;
 	    		    vars.advs_1.aroom[who - 1] = vars.play_1.here;
 	    		    scrupd_(vars.rooms_1.rval[nr - 1]);
-	    		/* 						!SCORE ROOM */
+	    		/* SCORE ROOM */
 	    		    vars.rooms_1.rval[nr - 1] = 0;
 	    		    return ret_val;
 	    }
 	    game.dsub.rspeak_(vars.rooms_1.rrand(nr - 1));
-	/* 						!YES, TELL HOW. */
+	/* YES, TELL HOW. */
 	    return ret_val;
 
 //	L600:
@@ -121,13 +121,13 @@ public class Dso2
 //	    vars.play_1.here = nr;
 //	    vars.advs_1.aroom[who - 1] = vars.play_1.here;
 //	    scrupd_(vars.rooms_1.rval[nr - 1]);
-//	/* 						!SCORE ROOM */
+//	/* SCORE ROOM */
 //	    vars.rooms_1.rval[nr - 1] = 0;
 //	    return ret_val;
 
 //	L800:
 //	    game.dsub.rspsub_(428, vars.objcts_1.odesc2[j - 1]);
-//	/* 						!WRONG VEHICLE. */
+//	/* WRONG VEHICLE. */
 //	    return ret_val;
 	} /* moveto_ */
 

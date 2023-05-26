@@ -22,18 +22,14 @@ public class Np
 		this.np2 = new Np2(vars, this, game);
 		this.np1 = new Np1(vars, this, game);
 		this.np3 = new Np3(vars, this, game);
-		
-//		reader = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
 	/* RDLINE-	READ INPUT LINE */
-//	BufferedReader reader = null;
+
 	
-	String[] rdline_(char[] buffer, int who) throws IOException
+	void rdline_(char[] buffer, int who) throws IOException
 	{
-	    /* Local variables */
-//	    char[] z;
-//	    char[] zlast;
+
 
 	    int GOTO = 5;
 	    do
@@ -51,21 +47,21 @@ public class Np
 				    		GOTO = 10;
 				    		continue;
 				    }
-	/* 						!SEE WHO TO PROMPT FOR. */
+	/* SEE WHO TO PROMPT FOR. */
 				case 10:
 					System.out.print(">");
 					System.out.flush();
-					try
-					{
-						Thread.sleep(1);
-					}
-					catch (InterruptedException e1)
-					{
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+//					try
+//					{
+//						Thread.sleep(1);
+//					}
+//					catch (InterruptedException e1)
+//					{
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
 
-	/* 						!PROMPT FOR GAME. */
+	/* PROMPT FOR GAME. */
 				case 90:
 					System.out.flush();
 					
@@ -125,7 +121,7 @@ public class Np
 	    }
 	    while(true);
 
-	/* 						!RESTART LEX SCAN. */
+	/* RESTART LEX SCAN. */
 //		throw new RuntimeException("Np.rdline_ not impl.");
 	} /* rdline_ */
 
@@ -175,7 +171,7 @@ public class Np
 				GOTO = 300;
 			}
 		}
-	/* 						!DO SYN SCAN. */
+	/* DO SYN SCAN. */
 
 	/* PARSE REQUIRES VALIDATION */
 	   
@@ -227,7 +223,7 @@ public class Np
 	void orphan_(int o1, int o2, int o3, int o4, int o5)
 	{
 	    vars.orphs_1.oflag = o1;
-	/* 						!SET UP NEW ORPHANS. */
+	/* SET UP NEW ORPHANS. */
 	    vars.orphs_1.oact = o2;
 	    vars.orphs_1.oslot = o3;
 	    vars.orphs_1.oprep = o4;
@@ -262,16 +258,16 @@ public class Np
 
 	    for (i = 0; i < 40; ++i) 
 	    {
-	/* 						!CLEAR OUTPUT BUF. */
+	/* CLEAR OUTPUT BUF. */
 	    	outbuf[i] = 0;
 	/* case 100: */
 	    }
 
 	    ret_val = false;
-	/* 						!ASSUME LEX FAILS. */
+	/* ASSUME LEX FAILS. */
 //	    *op = -1;
 	    op[0] = -1;
-	/* 						!OUTPUT PTR. */
+	/* OUTPUT PTR. */
 	    vars.prsvec_1.prscon --;
 	    int GOTO = 50;
 start:	do    
@@ -281,13 +277,13 @@ start:	do
 				case 50:
 					op[0] += 2;
 //				    *op += 2;
-				/* 						!ADV OUTPUT PTR. */
+				/* ADV OUTPUT PTR. */
 				    cp = 0;
-				/* 						!CHAR PTR=0. */
+				/* CHAR PTR=0. */
 			
 				case 200:
 					j = inbuf[vars.prsvec_1.prscon];
-					/* 						!GET CHARACTER */
+					/* GET CHARACTER */
 				
 					    if (j == '\0')
 					    {
@@ -295,11 +291,11 @@ start:	do
 					    	GOTO = 1000;
 					    	continue;
 					    }
-					/* 						!END OF INPUT? */
+					/* END OF INPUT? */
 
 					    vars.prsvec_1.prscon++;	
 
-	/* 						!ADVANCE PTR. */
+	/* ADVANCE PTR. */
 
 					    if (j == '.') 
 					    {
@@ -307,24 +303,24 @@ start:	do
 					    	GOTO = 1000;
 					    	continue;					    	
 					    }
-	/* 						!END OF COMMAND? */
+	/* END OF COMMAND? */
 					    if (j == ',') 
 					    {
 //					    	goto L1000;
 					    	GOTO = 1000;
 					    	continue;
 					    }
-	/* 						!END OF COMMAND? */
+	/* END OF COMMAND? */
 					    if (j == ' ') 
 					    {
 //					    	goto L6000;
 					    	GOTO = 6000;
 					    	continue;
 					    }
-	/* 						!SPACE? */
+	/* SPACE? */
 					    for (i = 1; i <= 9; i += 3) 
 					    {
-					    	/* 						!SCH FOR CHAR. */
+					    	/* SCH FOR CHAR. */
 					    	if (j >= dlimit[i - 1] & j <= dlimit[i]) 
 					    	{
 //					    		goto L4000;
@@ -339,7 +335,7 @@ start:	do
 					    	game.
 					    	dsub.rspeak_(601);
 					    }
-	/* 						!GREEK TO ME, FAIL. */
+	/* GREEK TO ME, FAIL. */
 					    return ret_val;
 
 					    /* END OF INPUT, SEE IF PARTIAL WORD AVAILABLE. */
@@ -351,7 +347,7 @@ start:	do
 					}
 					else
 						vars.prsvec_1.prscon ++;
-					/* 						!FORCE PARSE RESTART. */
+					/* FORCE PARSE RESTART. */
 					if (cp == 0 & op[0] == 1) 
 					{
 						return ret_val;
@@ -360,7 +356,7 @@ start:	do
 					{
 						op[0] += -2;
 					}
-					/* 						!ANY LAST WORD? */
+					/* ANY LAST WORD? */
 					ret_val = true;
 					
 					// DAVE //
@@ -381,9 +377,9 @@ start:	do
 						GOTO = 200;
 				    	continue;
 					}
-					/* 						!IGNORE IF TOO MANY CHAR. */
+					/* IGNORE IF TOO MANY CHAR. */
 					k = op[0] + cp / 3;
-					/* 						!COMPUTE WORD INDEX. */
+					/* COMPUTE WORD INDEX. */
 					switch (cp % 3 + 1) 
 					{
 						case 1:  
@@ -399,23 +395,23 @@ start:	do
 							GOTO = 4300;
 					    	continue;
 					}
-					/* 						!BRANCH ON CHAR. */
+					/* BRANCH ON CHAR. */
 				case 4100:
 					j2 = j1 * 780;
-					/* 						!CHAR 1... *780 */
+					/* CHAR 1... *780 */
 					outbuf[k] = outbuf[k] + j2 + j2;
-					/* 						!*1560 (40 ADDED BELOW). */
+					/* *1560 (40 ADDED BELOW). */
 				case 4200:
 					outbuf[k] += j1 * 39;
-					/* 						!*39 (1 ADDED BELOW). */
+					/* *39 (1 ADDED BELOW). */
 				case 4300:
 					outbuf[k] += j1;
-					/* 						!*1. */
+					/* *1. */
 					++cp;
 //					goto L200;
 					GOTO = 200;
 			    	continue;
-			    	/* 						!GET NEXT CHAR. */
+			    	/* GET NEXT CHAR. */
 
 			    	/* SPACE */
 
@@ -426,11 +422,11 @@ start:	do
 						continue;
 //					   	goto L200;
 					}
-	/* 						!ANY WORD YET? */
+	/* ANY WORD YET? */
 	    		//goto L50;
 					GOTO = 50;
 					continue;
-	/* 						!YES, ADV OP. */
+	/* YES, ADV OP. */
 			}
 		}while(true);
 	} /* lex_ */

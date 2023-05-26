@@ -215,11 +215,11 @@ public class Np2
 	    int i, j, x;
 
 	    ret_val = 0;
-	    /* 						!NO RESULT. */
+	    /* NO RESULT. */
 	    i__1 = vars.objcts_1.olnt;
 	    for (i = 1; i <= i__1; ++i) 
 	    {
-	    	/* 						!SEARCH OBJECTS. */
+	    	/* SEARCH OBJECTS. */
 	    	if ((vars.objcts_1.oflag1[i - 1] & Vars.VISIBT) == 0 || ((rm == 0 || !
 	    			game.dsub.qhere_(i, rm)) && (cn == 0 || vars.objcts_1.ocan[i - 1] != cn) 
 	    			&& (ad == 0 || vars.objcts_1.oadv[i - 1] != ad))) 
@@ -239,12 +239,12 @@ public class Np2
 		    	{
 	//	    		goto L2000;
 		    	    ret_val = -ret_val;
-		    		/* 						!AMB RETURN. */
+		    		/* AMB RETURN. */
 		    		    return ret_val;
 		    	}
-		    	/* 						!GOT ONE ALREADY? */
+		    	/* GOT ONE ALREADY? */
 		    	ret_val = i;
-		    	/* 						!NO. */
+		    	/* NO. */
 	    	}
 	    	/* IF OPEN OR TRANSPARENT, SEARCH THE OBJECT ITSELF. */
 
@@ -266,7 +266,7 @@ public class Np2
 			i__2 = vars.objcts_1.olnt;
 			inner_for: for (j = 1; j <= i__2; ++j) 
 			{
-				/* 						!SEARCH OBJECTS. */
+				/* SEARCH OBJECTS. */
 				if ((vars.objcts_1.oflag1[j - 1] & Vars.VISIBT) == 0 || ! thisit_(
 						oidx, aidx, j, spcobj)) 
 				{
@@ -274,7 +274,7 @@ public class Np2
 					continue inner_for;
 				}				
 				x = vars.objcts_1.ocan[j - 1];
-				/* 						!GET CONTAINER. */
+				/* GET CONTAINER. */
 //	L300:
 				do
 				{
@@ -287,13 +287,13 @@ public class Np2
 			    	
 			    	if(! skip_to_400)
 			    	{
-					/* 						!INSIDE TARGET? */
+					/* INSIDE TARGET? */
 				    	if (x == 0) 
 				    	{
 		//		    		goto L500;
 				    		continue inner_for;
 				    	}
-				    	/* 						!INSIDE ANYTHING? */
+				    	/* INSIDE ANYTHING? */
 				    	if ((vars.objcts_1.oflag1[x - 1] & Vars.VISIBT) == 0 || ((
 				    			vars.objcts_1.oflag1[x - 1] & Vars.TRANBT) == 0 && (
 				    			vars.objcts_1.oflag2[x - 1] & Vars.OPENBT) == 0) || (
@@ -303,7 +303,7 @@ public class Np2
 				    		continue inner_for;
 				    	}
 				    	x = vars.objcts_1.ocan[x - 1];
-				    	/* 						!GO ANOTHER LEVEL. */
+				    	/* GO ANOTHER LEVEL. */
 	//			    	goto L300;
 				    	continue;
 		    		}
@@ -316,12 +316,12 @@ public class Np2
 		    	{
 //		    		goto L2000;
 		    	    ret_val = -ret_val;
-		    		/* 						!AMB RETURN. */
+		    		/* AMB RETURN. */
 		    		    return ret_val;
 		    	}
-				/* 						!ALREADY GOT ONE? */
+				/* ALREADY GOT ONE? */
 		    	ret_val = j;
-		    	/* 						!NO. */
+		    	/* NO. */
 //	L500:
 			}
 //	L1000:
@@ -330,7 +330,7 @@ public class Np2
 
 //	L2000:
 //	    ret_val = -ret_val;
-	/* 						!AMB RETURN. */
+	/* AMB RETURN. */
 //	    return ret_val;
 
 	} /* schlst_ */

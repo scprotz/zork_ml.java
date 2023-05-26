@@ -1,6 +1,10 @@
 package zork;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public class Dgame
 {
@@ -43,8 +47,6 @@ public class Dgame
 	/** Dsub needs this to initialize **/
 	// TODO: Should refactor the requiring functions **/
 
-	
-	
 	public Dgame(Vars vars, DInit init)
 	{
 		this.vars = vars;
@@ -67,7 +69,7 @@ public class Dgame
 		this.dso7 = new Dso7(vars, this);
 
 		this.verbs = new Verbs(vars, this);
-		
+
 		this.nobjs = new Nobjs(vars, this);
 		this.sobjs = new Sobjs(vars, this);
 		this.villns = new Villns(vars, this);
@@ -76,7 +78,6 @@ public class Dgame
 
 		this.actors = new Actors(vars, this);
 	}
-
 
 	public void game_() throws IOException
 	{
@@ -259,7 +260,7 @@ public class Dgame
 						GOTO = 2700;
 						continue;
 					}
-					
+
 					/* !ANY INPUT? */
 					if (np.parse_(vars.input_1.inbuf, true))
 					{
@@ -384,5 +385,188 @@ public class Dgame
 		}
 		return ret_val;
 	} /* xvehic_ */
+
+	public Integer[] getState()
+	{
+		ArrayList<Integer> state = new ArrayList<Integer>();
+
+		state.add(vars.play_1.winner);
+		state.add(vars.play_1.here);
+		state.add(vars.hack_1.thfpos);
+		if (vars.play_1.telflg)
+			state.add(1);
+		else
+			state.add(0);
+		if (vars.hack_1.thfflg)
+			state.add(1);
+		else
+			state.add(0);
+		if (vars.hack_1.thfact)
+			state.add(1);
+		else
+			state.add(0);
+		if (vars.hack_1.swdact)
+			state.add(1);
+		else
+			state.add(0);
+		state.add(vars.hack_1.swdsta);
+		for (int i = 0; i < 64; i++)
+			state.add(vars.puzzle_1.cpvec[i]);
+		state.add(vars.state_1.moves);
+		state.add(vars.state_1.deaths);
+		state.add(vars.state_1.rwscor);
+		state.add(vars.state_1.egscor);
+		state.add(vars.state_1.mxload);
+		state.add(vars.state_1.ltshft);
+		state.add(vars.state_1.bloc);
+		state.add(vars.state_1.mungrm);
+		state.add(vars.state_1.hs);
+		state.add(vars.screen_1.fromdr);
+		state.add(vars.screen_1.scolrm);
+		state.add(vars.screen_1.scolac);
+
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.odesc1[i]);
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.odesc2[i]);
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.oflag1[i]);
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.oflag2[i]);
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.ofval[i]);
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.otval[i]);
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.osize[i]);
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.ocapac[i]);
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.oroom[i]);
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.oadv[i]);
+		for (int i = 0; i < 220; i++)
+			state.add(vars.objcts_1.ocan[i]);
+		for (int i = 0; i < 200; i++)
+			state.add(vars.rooms_1.rval[i]);
+		for (int i = 0; i < 200; i++)
+			state.add(vars.rooms_1.rflag[i]);
+		for (int i = 0; i < 4; i++)
+			state.add(vars.advs_1.aroom[i]);
+		for (int i = 0; i < 4; i++)
+			state.add(vars.advs_1.ascore[i]);
+		for (int i = 0; i < 4; i++)
+			state.add(vars.advs_1.avehic[i]);
+		for (int i = 0; i < 4; i++)
+			state.add(vars.advs_1.astren[i]);
+		for (int i = 0; i < 4; i++)
+			state.add(vars.advs_1.aflag[i]);
+		for (int i = 0; i < 46; i++)
+		{
+			if (vars.findex_1.flags(i))
+				state.add(1);
+			else
+				state.add(0);
+		}
+		for (int i = 0; i < 22; i++)
+			state.add(vars.findex_1.switch_(i));
+		for (int i = 0; i < 4; i++)
+			state.add(vars.vill_1.vprob[i]);
+		for (int i = 0; i < 25; i++)
+		{
+			if (vars.cevent_1.cflag[i])
+				state.add(1);
+			else
+				state.add(0);
+		}
+		for (int i = 0; i < 25; i++)
+			state.add(vars.cevent_1.ctick[i]);
+
+		return state.toArray(new Integer[state.size()]);
+
+	}
+
+	public void setState(Integer[] s)
+	{
+
+		List<Integer> state = Arrays.asList(s);
+		Iterator<Integer> iter = state.iterator();
+
+		vars.vers_1.vmaj = iter.next();
+		vars.vers_1.vmin = iter.next();
+		vars.vers_1.vedit = iter.next();
+
+		vars.play_1.winner = iter.next();
+		vars.play_1.here = iter.next();
+		vars.hack_1.thfpos = iter.next();
+		vars.play_1.telflg = iter.next() != 0;
+		vars.hack_1.thfflg = iter.next() != 0;
+		vars.hack_1.thfact = iter.next() != 0;
+		vars.hack_1.swdact = iter.next() != 0;
+		vars.hack_1.swdsta = iter.next();
+		for (int i = 0; i < 64; i++)
+			vars.puzzle_1.cpvec[i] = iter.next();
+
+		vars.time_1.pltime = iter.next();
+		vars.state_1.moves = iter.next();
+		vars.state_1.deaths = iter.next();
+		vars.state_1.rwscor = iter.next();
+		vars.state_1.egscor = iter.next();
+		vars.state_1.mxload = iter.next();
+		vars.state_1.ltshft = iter.next();
+		vars.state_1.bloc = iter.next();
+		vars.state_1.mungrm = iter.next();
+		vars.state_1.hs = iter.next();
+		vars.screen_1.fromdr = iter.next();
+		vars.screen_1.scolrm = iter.next();
+		vars.screen_1.scolac = iter.next();
+
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.odesc1[i] = iter.next();
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.odesc2[i] = iter.next();
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.oflag1[i] = iter.next();
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.oflag2[i] = iter.next();
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.ofval[i] = iter.next();
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.otval[i] = iter.next();
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.osize[i] = iter.next();
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.ocapac[i] = iter.next();
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.oroom[i] = iter.next();
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.oadv[i] = iter.next();
+		for (int i = 0; i < 220; i++)
+			vars.objcts_1.ocan[i] = iter.next();
+		for (int i = 0; i < 200; i++)
+			vars.rooms_1.rval[i] = iter.next();
+		for (int i = 0; i < 200; i++)
+			vars.rooms_1.rflag[i] = iter.next();
+		for (int i = 0; i < 4; i++)
+			vars.advs_1.aroom[i] = iter.next();
+		for (int i = 0; i < 4; i++)
+			vars.advs_1.ascore[i] = iter.next();
+		for (int i = 0; i < 4; i++)
+			vars.advs_1.avehic[i] = iter.next();
+		for (int i = 0; i < 4; i++)
+			vars.advs_1.astren[i] = iter.next();
+		for (int i = 0; i < 4; i++)
+			vars.advs_1.aflag[i] = iter.next();
+		for (int i = 0; i < 46; i++)
+			vars.findex_1.flags(i, iter.next() != 0);
+		for (int i = 0; i < 22; i++)
+			vars.findex_1.switch_(i, iter.next());
+		for (int i = 0; i < 4; i++)
+			vars.vill_1.vprob[i] = iter.next();
+		for (int i = 0; i < 25; i++)
+			vars.cevent_1.cflag[i] = iter.next() != 0;
+		for (int i = 0; i < 25; i++)
+			vars.cevent_1.ctick[i] = iter.next();
+	}
 
 }

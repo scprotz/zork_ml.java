@@ -139,9 +139,9 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    game.dsub.rspeak_(688);
-	/* 						!DESCRIBE */
+	/* DESCRIBE */
 
 	/* NOW DESCRIBE POLE STATE. */
 
@@ -150,7 +150,7 @@ public class NRooms
 	/* CASE 5--	POLE IS UP */
 
 	    i = 689;
-	/* 						!ASSUME CASE 5. */
+	/* ASSUME CASE 5. */
 	    if (vars.findex_1.mdir == 270 && vars.findex_1.mloc == vars.rindex_1.mrb) {
 		i = Math.min(vars.findex_1.poleuf,1) + 690;
 	    }
@@ -158,10 +158,10 @@ public class NRooms
 		i = Math.min(vars.findex_1.poleuf,1) + 692;
 	    }
 	    game.dsub.rspeak_(i);
-	/* 						!DESCRIBE POLE. */
+	/* DESCRIBE POLE. */
 	    i__1 = vars.findex_1.mdir / 45 + 695;
 	    game.dsub.rspsub_(694, i__1);
-	/* 						!DESCRIBE ARROW. */
+	/* DESCRIBE ARROW. */
 	    return ret_val;
 	/* RAPPL2, PAGE 4 */
 
@@ -171,9 +171,9 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    i = 704;
-	/* 						!ASSUME BEAM STOP. */
+	/* ASSUME BEAM STOP. */
 	    i__1 = vars.objcts_1.olnt;
 	    for (j = 1; j <= i__1; ++j) 
 	    {
@@ -186,9 +186,9 @@ public class NRooms
 	    i = 703;
 	case 47200:
 	    game.dsub.rspsub_(i, vars.objcts_1.odesc2[j - 1]);
-	/* 						!DESCRIBE BEAM. */
+	/* DESCRIBE BEAM. */
 	    lookto_(vars.rindex_1.mra, 0, 0, 0, 0);
-	/* 						!LOOK NORTH. */
+	/* LOOK NORTH. */
 	    return ret_val;
 
 	/* R48--	INSIDE CRYPT */
@@ -197,9 +197,9 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    i = 46;
-	/* 						!CRYPT IS OPEN/CLOSED. */
+	/* CRYPT IS OPEN/CLOSED. */
 	    if ((vars.objcts_1.oflag2[vars.oindex_1.tomb - 1] & Vars.OPENBT) != 0) {
 		i = 12;
 	    }
@@ -212,18 +212,18 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    game.dsub.rspeak_(706);
-	/* 						!DESCRIBE. */
+	/* DESCRIBE. */
 	    i = 46;
-	/* 						!ODOOR IS OPEN/CLOSED. */
+	/* ODOOR IS OPEN/CLOSED. */
 	    if ((vars.objcts_1.oflag2[vars.oindex_1.odoor - 1] & Vars.OPENBT) != 0) {
 		i = 12;
 	    }
 	    if (vars.findex_1.lcell == 4) {
 		game.dsub.rspsub_(707, i);
 	    }
-	/* 						!DESCRIBE ODOOR IF THERE. */
+	/* DESCRIBE ODOOR IF THERE. */
 	    return ret_val;
 
 	/* R50--	BEHIND DOOR */
@@ -232,9 +232,9 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.walkiw) {
 		GOTO = 50100; continue loop;
 	    }
-	/* 						!WALK IN? */
+	/* WALK IN? */
 	    vars.cevent_1.cflag[vars.cindex_1.cevfol - 1] = true;
-	/* 						!MASTER FOLLOWS. */
+	/* MASTER FOLLOWS. */
 	    vars.cevent_1.ctick[vars.cindex_1.cevfol - 1] = -1;
 	    return ret_val;
 
@@ -242,9 +242,9 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    i = 46;
-	/* 						!QDOOR IS OPEN/CLOSED. */
+	/* QDOOR IS OPEN/CLOSED. */
 	    if ((vars.objcts_1.oflag2[vars.oindex_1.qdoor - 1] & Vars.OPENBT) != 0) {
 		i = 12;
 	    }
@@ -258,21 +258,21 @@ public class NRooms
 	    if (vars.prsvec_1.prsa == vars.vindex_1.walkiw) {
 		vars.cevent_1.ctick[vars.cindex_1.cevfol - 1] = 0;
 	    }
-	/* 						!IF EXITS, KILL FOLLOW. */
+	/* IF EXITS, KILL FOLLOW. */
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    lookto_(0, vars.rindex_1.mrd, 709, 0, 0);
-	/* 						!DESCRIBE SOUTH. */
+	/* DESCRIBE SOUTH. */
 	    i = 46;
-	/* 						!PANEL IS OPEN/CLOSED. */
+	/* PANEL IS OPEN/CLOSED. */
 	    if (vars.findex_1.inqstf) {
 		i = 12;
 	    }
-	/* 						!OPEN IF INQ STARTED. */
+	/* OPEN IF INQ STARTED. */
 	    j = 46;
-	/* 						!QDOOR IS OPEN/CLOSED. */
+	/* QDOOR IS OPEN/CLOSED. */
 	    if ((vars.objcts_1.oflag2[vars.oindex_1.qdoor - 1] & Vars.OPENBT) != 0) {
 		j = 12;
 	    }
@@ -285,12 +285,12 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    i = 46;
 	    if ((vars.objcts_1.oflag2[vars.oindex_1.cdoor - 1] & Vars.OPENBT) != 0) {
 		i = 12;
 	    }
-	/* 						!CDOOR IS OPEN/CLOSED. */
+	/* CDOOR IS OPEN/CLOSED. */
 	    game.dsub.rspsub_(711, i);
 	    return ret_val;
 
@@ -309,15 +309,15 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    i = 721;
-	/* 						!CDOOR IS OPEN/CLOSED. */
+	/* CDOOR IS OPEN/CLOSED. */
 	    if ((vars.objcts_1.oflag2[vars.oindex_1.cdoor - 1] & Vars.OPENBT) != 0) {
 		i = 722;
 	    }
 	    game.dsub.rspeak_(i);
 	    i = 46;
-	/* 						!ODOOR IS OPEN/CLOSED. */
+	/* ODOOR IS OPEN/CLOSED. */
 	    if ((vars.objcts_1.oflag2[vars.oindex_1.odoor - 1] & Vars.OPENBT) != 0) {
 		i = 12;
 	    }
@@ -333,7 +333,7 @@ public class NRooms
 	    if (vars.prsvec_1.prsa == vars.vindex_1.lookw) {
 		game.dsub.rspeak_(724);
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    return ret_val;
 
 	/* R56--	NIRVANA CELL */
@@ -342,9 +342,9 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    i = 46;
-	/* 						!ODOOR IS OPEN/CLOSED. */
+	/* ODOOR IS OPEN/CLOSED. */
 	    if ((vars.objcts_1.oflag2[vars.oindex_1.odoor - 1] & Vars.OPENBT) != 0) {
 		i = 12;
 	    }
@@ -358,7 +358,7 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.walkiw) {
 		return ret_val;
 	    }
-	/* 						!WALKIN? */
+	/* WALKIN? */
 	    game.dsub.rspeak_(726);
 	    game.dso2.score_(false);
 	/* moved to exit routine	CLOSE(DBCH) */
@@ -370,9 +370,9 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    i = 46;
-	/* 						!TOMB IS OPEN/CLOSED. */
+	/* TOMB IS OPEN/CLOSED. */
 	    if ((vars.objcts_1.oflag2[vars.oindex_1.tomb - 1] & Vars.OPENBT) != 0) {
 		i = 12;
 	    }
@@ -385,15 +385,15 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    i = 861;
-	/* 						!ASSUME DOOR CLOSED. */
+	/* ASSUME DOOR CLOSED. */
 	    if (vars.findex_1.cpoutf) {
 		i = 862;
 	    }
-	/* 						!OPEN? */
+	/* OPEN? */
 	    game.dsub.rspeak_(i);
-	/* 						!DESCRIBE. */
+	/* DESCRIBE. */
 	    return ret_val;
 
 	/* R60--	PUZZLE ROOM */
@@ -402,13 +402,13 @@ public class NRooms
 	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
-	/* 						!LOOK? */
+	/* LOOK? */
 	    if (vars.findex_1.cpushf) {
 		GOTO = 60100; continue loop;
 	    }
-	/* 						!STARTED PUZZLE? */
+	/* STARTED PUZZLE? */
 	    game.dsub.rspeak_(868);
-	/* 						!NO, DESCRIBE. */
+	/* NO, DESCRIBE. */
 	    if ((vars.objcts_1.oflag2[vars.oindex_1.warni - 1] & Vars.TCHBT) != 0) {
 		game.dsub.rspeak_(869);
 	    }
@@ -416,7 +416,7 @@ public class NRooms
 
 	case 60100:
 	    game.dso7.cpinfo_(880, vars.findex_1.cphere);
-	/* 						!DESCRIBE ROOM. */
+	/* DESCRIBE ROOM. */
 	    return ret_val;
 	    	}
 	    }while(true);
@@ -435,13 +435,13 @@ public class NRooms
 	    int i, m1, dir, mrbf;
 
 	    game.dsub.rspeak_(ht);
-	/* 						!DESCRIBE HALL. */
+	/* DESCRIBE HALL. */
 	    game.dsub.rspeak_(nt);
-	/* 						!DESCRIBE NORTH VIEW. */
+	/* DESCRIBE NORTH VIEW. */
 	    game.dsub.rspeak_(st);
-	/* 						!DESCRIBE SOUTH VIEW. */
+	/* DESCRIBE SOUTH VIEW. */
 	    dir = 0;
-	/* 						!ASSUME NO DIRECTION. */
+	/* ASSUME NO DIRECTION. */
 	    i__1 = vars.findex_1.mloc - vars.play_1.here;
 	    
 	    int GOTO = 100;
@@ -452,7 +452,7 @@ public class NRooms
 	    }
 	    if(GOTO != 200)
 	    {
-		/* 						!MIRROR TO N OR S? */
+		/* MIRROR TO N OR S? */
 		    if (vars.findex_1.mloc == nrm) 
 		    {
 		    	dir = 695;
@@ -461,7 +461,7 @@ public class NRooms
 		    {
 		    	dir = 699;
 		    }
-		/* 						!DIR=N/S. */
+		/* DIR=N/S. */
 		    boolean skip = false;
 		    if (vars.findex_1.mdir % 180 != 0) 
 		    {
@@ -470,11 +470,11 @@ public class NRooms
 		    }
 		    if(!skip)
 		    {
-		/* 						!MIRROR N-S? */
+		/* MIRROR N-S? */
 			    game.dsub.rspsub_(847, dir);
-			/* 						!YES, HE SEES PANEL */
+			/* YES, HE SEES PANEL */
 			    game.dsub.rspsb2_(848, dir, dir);
-			/* 						!AND NARROW ROOMS. */
+			/* AND NARROW ROOMS. */
 			    GOTO = 200;
 		    }
 	    }
@@ -482,15 +482,15 @@ public class NRooms
 	    	{
 				case 100:
 				    m1 = game.dso6.mrhere_(vars.play_1.here);
-				/* 						!WHICH MIRROR? */
+				/* WHICH MIRROR? */
 				    mrbf = 0;
-				/* 						!ASSUME INTACT. */
+				/* ASSUME INTACT. */
 				    if (m1 == 1 && ! vars.findex_1.mr1f || m1 == 2 && ! vars.findex_1.mr2f) {
 					mrbf = 1;
 				    }
 				    i__1 = mrbf + 849;
 				    game.dsub.rspsub_(i__1, dir);
-				/* 						!DESCRIBE. */
+				/* DESCRIBE. */
 				    if (m1 == 1 && vars.findex_1.mropnf) {
 					i__1 = mrbf + 823;
 					game.dsub.rspeak_(i__1);
@@ -501,7 +501,7 @@ public class NRooms
 			
 				case 200:
 				    i = 0;
-				/* 						!ASSUME NO MORE TO DO. */
+				/* ASSUME NO MORE TO DO. */
 				    if (nt == 0 && (dir == 0 || dir == 699)) {
 					i = 852;
 				    }
@@ -515,7 +515,7 @@ public class NRooms
 					game.dsub.rspeak_(i);
 				    }
 				    
-	/* 						!DESCRIBE HALLS. */
+	/* DESCRIBE HALLS. */
 	    	}
 	    
 //	    throw new RuntimeException("Nrooms.lookto_ not impl.");
@@ -539,7 +539,7 @@ public class NRooms
 //
 //	    m1 = vars.findex_1.mdir + (rm - vars.rindex_1.mrae) % 2 * 180 == 180;
 //	    i = (rm - vars.rindex_1.mrae) % 2 + 819;
-//	/* 						!GET BASIC E/W STRING. */
+//	/* GET BASIC E/W STRING. */
 //	    if (m1 && ! vars.findex_1.mr1f || ! m1 && ! vars.findex_1.mr2f) {
 //		i += 2;
 //	    }

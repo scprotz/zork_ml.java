@@ -39,17 +39,17 @@ public class Gdt
 //	/* FIRST, VALIDATE THAT THE CALLER IS AN IMPLEMENTER. */
 //
 //	    fmax = 46;
-//	/* 						!SET ARRAY LIMITS. */
+//	/* SET ARRAY LIMITS. */
 //	    smax = 22;
 //
 //	    if (debug_1.gdtflg != 0) {
 //		goto L2000;
 //	    }
-//	/* 						!IF OK, SKIP. */
+//	/* IF OK, SKIP. */
 //	    more_output("You are not an authorized user.");
-//	/* 						!NOT AN IMPLEMENTER. */
+//	/* NOT AN IMPLEMENTER. */
 //	    return;
-//	/* 						!BOOT HIM OFF */
+//	/* BOOT HIM OFF */
 //
 //	/* GDT, PAGE 2A */
 //
@@ -57,34 +57,34 @@ public class Gdt
 //
 //	L2000:
 //	    printf("GDT>");
-//	/* 						!OUTPUT PROMPT. */
+//	/* OUTPUT PROMPT. */
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
 //	    more_input();
 //	    cmd[0] = ' ';
 //	    cmd[1] = ' ';
 //	    sscanf(buf, "%2s", cmd);
-//	/* 						!GET COMMAND. */
+//	/* GET COMMAND. */
 //	    if (cmd[0] == '\0')
 //		goto L2000;
-//	/* 						!IGNORE BLANKS. */
+//	/* IGNORE BLANKS. */
 //	    if (islower(cmd[0]))
 //		cmd[0] = toupper(cmd[0]);
 //	    if (islower(cmd[1]))
 //		cmd[1] = toupper(cmd[1]);
 //	    i__1 = cmdmax;
 //	    for (i = 1; i <= i__1; ++i) {
-//	/* 						!LOOK IT UP. */
+//	/* LOOK IT UP. */
 //		if (cmd[0] == dbgcmd[(i - 1) << 1] &&
 //		    cmd[1] == dbgcmd[((i - 1) << 1) + 1]) {
 //		    goto L2300;
 //		}
-//	/* 						!FOUND? */
+//	/* FOUND? */
 //	/* L2100: */
 //	    }
 //	L2200:
 //	    more_output("?");
-//	/* 						!NO, LOSE. */
+//	/* NO, LOSE. */
 //	    goto L2000;
 //
 //	/* L230: */
@@ -100,13 +100,13 @@ public class Gdt
 //		case 3:  goto L2600;
 //		case 4:  goto L2700;
 //	    }
-//	/* 						!BRANCH ON ARG TYPE. */
+//	/* BRANCH ON ARG TYPE. */
 //	    goto L2200;
-//	/* 						!ILLEGAL TYPE. */
+//	/* ILLEGAL TYPE. */
 //
 //	L2700:
 //	    printf("Idx,Ary:  ");
-//	/* 						!TYPE 3, REQUEST ARRAY COORDS. */
+//	/* TYPE 3, REQUEST ARRAY COORDS. */
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
 //	    more_input();
@@ -120,7 +120,7 @@ public class Gdt
 //
 //	L2600:
 //	    printf("Limits:   ");
-//	/* 						!TYPE 2, READ BOUNDS. */
+//	/* TYPE 2, READ BOUNDS. */
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
 //	    more_input();
@@ -137,7 +137,7 @@ public class Gdt
 //
 //	L2500:
 //	    printf("Entry:    ");
-//	/* 						!TYPE 1, READ ENTRY NO. */
+//	/* TYPE 1, READ ENTRY NO. */
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
 //	    more_input();
@@ -186,7 +186,7 @@ public class Gdt
 //		case 38:  goto L47000;
 //	    }
 //	    goto L2200;
-//	/* 						!WHAT??? */
+//	/* WHAT??? */
 //	/* GDT, PAGE 3 */
 //
 //	/* DR-- DISPLAY ROOMS */
@@ -196,9 +196,9 @@ public class Gdt
 //		    k)) {
 //		goto L2200;
 //	    }
-//	/* 						!ARGS VALID? */
+//	/* ARGS VALID? */
 //	    more_output("RM#  DESC1  DESC2  EXITS ACTION  VALUE  FLAGS");
-//	/* 						!COL HDRS. */
+//	/* COL HDRS. */
 //	    i__1 = k;
 //	    for (i = j; i <= i__1; ++i) {
 //		more_output(NULL);
@@ -219,9 +219,9 @@ public class Gdt
 //		    <= k)) {
 //		goto L2200;
 //	    }
-//	/* 						!ARGS VALID? */
+//	/* ARGS VALID? */
 //	    more_output("OB# DESC1 DESC2 DESCO ACT FLAGS1 FLAGS2 FVL TVL	  SIZE CAPAC ROOM ADV CON  READ");
-//	/* 						!COL HDRS */
+//	/* COL HDRS */
 //	    i__1 = k;
 //	    for (i = j; i <= i__1; ++i) {
 //		more_output(NULL);
@@ -246,7 +246,7 @@ public class Gdt
 //		    ) {
 //		goto L2200;
 //	    }
-//	/* 						!ARGS VALID? */
+//	/* ARGS VALID? */
 //	    more_output("AD#   ROOM  SCORE  VEHIC OBJECT ACTION  STREN  FLAGS");
 //	    i__1 = k;
 //	    for (i = j; i <= i__1; ++i) {
@@ -267,7 +267,7 @@ public class Gdt
 //		    <= k)) {
 //		goto L2200;
 //	    }
-//	/* 						!ARGS VALID? */
+//	/* ARGS VALID? */
 //	    more_output("CL#   TICK ACTION  FLAG");
 //	    i__1 = k;
 //	    for (i = j; i <= i__1; ++i) {
@@ -287,16 +287,16 @@ public class Gdt
 //		    k)) {
 //		goto L2200;
 //	    }
-//	/* 						!ARGS VALID? */
+//	/* ARGS VALID? */
 //	    more_output("  RANGE   CONTENTS");
-//	/* 						!COL HDRS. */
+//	/* COL HDRS. */
 //	    i__1 = k;
 //	    for (i = j; i <= i__1; i += 10) {
-//	/* 						!TEN PER LINE. */
+//	/* TEN PER LINE. */
 //	/* Computing MIN */
 //		i__2 = i + 9;
 //		l = min(i__2,k);
-//	/* 						!COMPUTE END OF LINE. */
+//	/* COMPUTE END OF LINE. */
 //		more_output(NULL);
 //		printf("%3d-%3d  ", i, l);
 //		for (l1 = i; l1 <= l; ++l1)
@@ -341,9 +341,9 @@ public class Gdt
 //		    ) {
 //		goto L2200;
 //	    }
-//	/* 						!ARGS VALID? */
+//	/* ARGS VALID? */
 //	    more_output("VL# OBJECT   PROB   OPPS   BEST  MELEE");
-//	/* 						!COL HDRS */
+//	/* COL HDRS */
 //	    i__1 = k;
 //	    for (i = j; i <= i__1; ++i) {
 //		more_output(NULL);
@@ -362,7 +362,7 @@ public class Gdt
 //	    if (! (j > 0 && j <= fmax && (k > 0 && k <= fmax) && j <= k)) {
 //		goto L2200;
 //	    }
-//	/* 						!ARGS VALID? */
+//	/* ARGS VALID? */
 //	    i__1 = k;
 //	    for (i = j; i <= i__1; ++i) {
 //		more_output(NULL);
@@ -402,9 +402,9 @@ public class Gdt
 //	    if (! (j > 0 && j <= fmax)) {
 //		goto L2200;
 //	    }
-//	/* 						!ENTRY NO VALID? */
+//	/* ENTRY NO VALID? */
 //	    printf("Old= %c      New= ", flags[j - 1] ? 'T' : 'F');
-//	/* 						!TYPE OLD, GET NEW. */
+//	/* TYPE OLD, GET NEW. */
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
 //	    more_input();
@@ -449,10 +449,10 @@ public class Gdt
 //
 //	L22000:
 //	    hack_1.thfflg = false;
-//	/* 						!DISABLE ROBBER. */
+//	/* DISABLE ROBBER. */
 //	    hack_1.thfact = false;
 //	    newsta_(oindex_1.thief, 0, 0, 0, 0);
-//	/* 						!VANISH THIEF. */
+//	/* VANISH THIEF. */
 //	    more_output("No robber.");
 //	    goto L2000;
 //
@@ -519,11 +519,11 @@ public class Gdt
 //	    if (! (j > 0 && j <= objcts_1.olnt)) {
 //		goto L2200;
 //	    }
-//	/* 						!VALID OBJECT? */
+//	/* VALID OBJECT? */
 //	    newsta_(j, 0, 0, 0, play_1.winner);
-//	/* 						!YES, TAKE OBJECT. */
+//	/* YES, TAKE OBJECT. */
 //	    more_output("Taken.");
-//	/* 						!TELL. */
+//	/* TELL. */
 //	    goto L2000;
 //
 //
@@ -539,9 +539,9 @@ public class Gdt
 //	    if (! (j > 0 && j <= rooms_1.rlnt && (k > 0 && k <= 5))) {
 //		goto L2200;
 //	    }
-//	/* 						!INDICES VALID? */
+//	/* INDICES VALID? */
 //	    printf("Old = %6d      New = ", eqr[j + k * 200 - 201]);
-//	/* 						!TYPE OLD, GET NEW. */
+//	/* TYPE OLD, GET NEW. */
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
 //	    more_input();
@@ -555,7 +555,7 @@ public class Gdt
 //	    if (! (j > 0 && j <= objcts_1.olnt && (k > 0 && k <= 14))) {
 //		goto L2200;
 //	    }
-//	/* 						!INDICES VALID? */
+//	/* INDICES VALID? */
 //	    printf("Old = %6d      New = ", eqo[j + k * 200 - 201]);
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
@@ -569,7 +569,7 @@ public class Gdt
 //	    if (! (j > 0 && j <= advs_1.alnt && (k > 0 && k <= 7))) {
 //		goto L2200;
 //	    }
-//	/* 						!INDICES VALID? */
+//	/* INDICES VALID? */
 //	    printf("Old = %6d      New = ", eqa[j + (k << 2) - 5]);
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
@@ -583,11 +583,11 @@ public class Gdt
 //	    if (! (j > 0 && j <= cevent_1.clnt && (k > 0 && k <= 3))) {
 //		goto L2200;
 //	    }
-//	/* 						!INDICES VALID? */
+//	/* INDICES VALID? */
 //	    if (k == 3) {
 //		goto L35500;
 //	    }
-//	/* 						!FLAGS ENTRY? */
+//	/* FLAGS ENTRY? */
 //	    printf("Old = %6d      New = ", eqc[j + k * 25 - 26]);
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
@@ -617,7 +617,7 @@ public class Gdt
 //	    if (! (j > 0 && j <= exits_1.xlnt)) {
 //		goto L2200;
 //	    }
-//	/* 						!ENTRY NO VALID? */
+//	/* ENTRY NO VALID? */
 //	    printf("Old= %6d     New= ", exits_1.travel[j - 1]);
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
@@ -632,7 +632,7 @@ public class Gdt
 //	    if (! (j > 0 && j <= vill_1.vlnt && (k > 0 && k <= 5))) {
 //		goto L2200;
 //	    }
-//	/* 						!INDICES VALID? */
+//	/* INDICES VALID? */
 //	    printf("Old = %6d      New= ", eqv[j + (k << 2) - 5]);
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
@@ -663,7 +663,7 @@ public class Gdt
 //	    if (! (j > 0 && j <= smax && (k > 0 && k <= smax) && j <= k)) {
 //		goto L2200;
 //	    }
-//	/* 						!VALID? */
+//	/* VALID? */
 //	    i__1 = k;
 //	    for (i = j; i <= i__1; ++i) {
 //		more_output(NULL);
@@ -679,7 +679,7 @@ public class Gdt
 //	    if (! (j > 0 && j <= smax)) {
 //		goto L2200;
 //	    }
-//	/* 						!VALID ENTRY? */
+//	/* VALID ENTRY? */
 //	    printf("Old= %6d      New= ", switch_[j - 1]);
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
@@ -694,7 +694,7 @@ public class Gdt
 //		    ) {
 //		goto L2200;
 //	    }
-//	/* 						!VALID LIMITS? */
+//	/* VALID LIMITS? */
 //	    more_output("  RANGE   CONTENTS");
 //	    i__1 = k;
 //	    for (i = j; i <= i__1; i += 10) {
@@ -750,7 +750,7 @@ public class Gdt
 //
 //	L45000:
 //	    printf("Old= %6d      New= ", debug_1.prsflg);
-//	/* 						!TYPE OLD, GET NEW. */
+//	/* TYPE OLD, GET NEW. */
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
 //	    more_input();
@@ -761,7 +761,7 @@ public class Gdt
 //
 //	L46000:
 //	    for (i = 1; i <= 64; i += 8) {
-//	/* 						!DISPLAY PUZZLE */
+//	/* DISPLAY PUZZLE */
 //		more_output(NULL);
 //		printf(" ");
 //		for (j = i; j <= i + 7; ++j)
@@ -778,9 +778,9 @@ public class Gdt
 //	    if (! (j > 0 && j <= 64)) {
 //		goto L2200;
 //	    }
-//	/* 						!VALID ENTRY? */
+//	/* VALID ENTRY? */
 //	    printf("Old= %6d      New= ", puzzle_1.cpvec[j - 1]);
-//	/* 						!OUTPUT OLD, */
+//	/* OUTPUT OLD, */
 //	    (void) fflush(stdout);
 //	    (void) fgets(buf, sizeof buf, stdin);
 //	    more_input();

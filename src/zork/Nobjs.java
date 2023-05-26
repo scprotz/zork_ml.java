@@ -1103,18 +1103,18 @@ public class Nobjs
 //
 //	    ret_val = true;
 //	    num = game.dso6.mrhere_(vars.play_1.here);
-//	/* 						!GET MIRROR NUM. */
+//	/* GET MIRROR NUM. */
 //	    if (num != 0) {
 //		GOTO = 100; continue loop;
 //	    }
-//	/* 						!ANY HERE? */
+//	/* ANY HERE? */
 //	    game.dsub.rspeak_(st);
-//	/* 						!NO, LOSE. */
+//	/* NO, LOSE. */
 //	    return ret_val;
 //
 //	case 100:
 //	    mrbf = 0;
-//	/* 						!ASSUME MIRROR OK. */
+//	/* ASSUME MIRROR OK. */
 //	    if (num == 1 && ! vars.findex_1.mr1f || num == 2 && ! vars.findex_1.mr2f) {
 //		mrbf = 1;
 //	    }
@@ -1123,7 +1123,7 @@ public class Nobjs
 //	    }
 //	    i__1 = st + 1;
 //	    game.dsub.rspeak_(i__1);
-//	/* 						!CANT OPEN OR MOVE. */
+//	/* CANT OPEN OR MOVE. */
 //	    return ret_val;
 //
 //	case 200:
@@ -1133,17 +1133,17 @@ public class Nobjs
 //	    }
 //	    i__1 = mrbf + 844;
 //	    game.dsub.rspeak_(i__1);
-//	/* 						!LOOK IN MIRROR. */
+//	/* LOOK IN MIRROR. */
 //	    return ret_val;
 //
 //	case 300:
 //	    if (vars.prsvec_1.prsa != vars.vindex_1.mungw) {
 //		GOTO = 400; continue loop;
 //	    }
-//	/* 						!BREAK? */
+//	/* BREAK? */
 //	    i__1 = st + 2 + mrbf;
 //	    game.dsub.rspeak_(i__1);
-//	/* 						!DO IT. */
+//	/* DO IT. */
 //	    if (num == 1 && ! (pnf)) {
 //		vars.findex_1.mr1f = false;
 //	    }
@@ -1156,7 +1156,7 @@ public class Nobjs
 //	    if (pnf || mrbf == 0) {
 //		GOTO = 500; continue loop;
 //	    }
-//	/* 						!BROKEN MIRROR? */
+//	/* BROKEN MIRROR? */
 //	    game.dsub.rspeak_(846);
 //	    return ret_val;
 //
@@ -1164,14 +1164,14 @@ public class Nobjs
 //	    if (vars.prsvec_1.prsa != vars.vindex_1.pushw) {
 //		GOTO = 600; continue loop;
 //	    }
-//	/* 						!PUSH? */
+//	/* PUSH? */
 //	    i__1 = st + 3 + num;
 //	    game.dsub.rspeak_(i__1);
 //	    return ret_val;
 //
 //	case 600:
 //	    ret_val = false;
-//	/* 						!CANT HANDLE IT. */
+//	/* CANT HANDLE IT. */
 //	    return ret_val;
 //
 		throw new RuntimeException("Nobjs.mirpan_ not impl");

@@ -26,7 +26,7 @@ public class Dso6
 
 	   ret_val = true;
 	   int GOTO = 2000;
-	   /* 						!ASSUME WINS. */
+	   /* ASSUME WINS. */
 	   switch (obj - vars.star_1.strbit) {
 	   case 1: 
 	   case 2:
@@ -119,7 +119,7 @@ public class Dso6
 	   if (rm == vars.rindex_1.fdoor) {
 	      return ret_val;
 	   }
-	   /* 						!PANEL AT FDOOR. */
+	   /* PANEL AT FDOOR. */
 	case 9000:
 	   ret_val = rm >= vars.rindex_1.mra && rm <= vars.rindex_1.mrc || rm >= 
 	      vars.rindex_1.mrae && rm <= vars.rindex_1.mrcw;
@@ -161,7 +161,7 @@ public class Dso6
 	   /* RM IS AN E-W ROOM, MIRROR MUST BE N-S (MDIR= 0 OR 180) */
 
 	   ret_val = 1;
-	   /* 						!ASSUME MIRROR 1 HERE. */
+	   /* ASSUME MIRROR 1 HERE. */
 	   if ((rm - vars.rindex_1.mrae) % 2 == vars.findex_1.mdir / 180) {
 	      ret_val = 2;
 	   }

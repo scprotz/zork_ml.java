@@ -315,14 +315,14 @@ public class Dverb1 {
 
 //	case 750:
 //	   svo = vars.prsvec_1.prso;
-//	   /* 						!SAVE PARSER. */
+//	   /* SAVE PARSER. */
 //	   svi = vars.prsvec_1.prsi;
 //	   vars.prsvec_1.prsa = vars.vindex_1.takew;
 //	   vars.prsvec_1.prsi = 0;
 //	   if (! take_(0)) {
 //	      return ret_val;
 //	   }
-//	   /* 						!TAKE OBJECT. */
+//	   /* TAKE OBJECT. */
 //	   vars.prsvec_1.prsa = vars.vindex_1.putw;
 //	   vars.prsvec_1.prso = svo;
 //	   vars.prsvec_1.prsi = svi;
