@@ -19,7 +19,7 @@ public class Dso6
 	}
 	
 
-	boolean ghere_(int obj, int rm) throws IOException
+	boolean ghere_(int obj, int rm)
 	{
 	   /* System generated locals */
 	   boolean ret_val;

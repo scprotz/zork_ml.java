@@ -24,7 +24,7 @@ public class Verbs
 		this.sverbs = new Sverbs(vars, game, this);
 	}
 
-	public boolean vappli_(int ri) throws IOException
+	public boolean vappli_(int ri)
 	{
 		/* Initialized data */
 
@@ -43,7 +43,7 @@ public class Verbs
 		int odi2 = 0, odo2 = 0;
 		int GOTO = 0;
 		ret_val = true;
-		/* !ASSUME WINS. */
+		/* ASSUME WINS. */
 
 		if (vars.prsvec_1.prso > 220)
 		{
@@ -64,7 +64,7 @@ public class Verbs
 			switch (GOTO)
 			{
 
-				/* !SET UP DESCRIPTORS. */
+				/* SET UP DESCRIPTORS. */
 				case 5:
 					if (vars.prsvec_1.prsi != 0)
 					{
@@ -72,7 +72,7 @@ public class Verbs
 					}
 					av = vars.advs_1.avehic[vars.play_1.winner - 1];
 					rmk = Supp.rnd_(6) + 372;
-					/* !REMARK FOR HACK-HACKS. */
+					/* REMARK FOR HACK-HACKS. */
 
 					if (ri == 0)
 					{
@@ -80,19 +80,19 @@ public class Verbs
 						continue loop;
 
 					}
-					/* !ZERO IS FALSE. */
+					/* ZERO IS FALSE. */
 					if (ri <= mxnop)
 					{
 						return ret_val;
 					}
-					/* !NOP? */
+					/* NOP? */
 					if (ri <= mxsmp)
 					{
 						GOTO = 100;
 						continue loop;
 
 					}
-					/* !SIMPLE VERB? */
+					/* SIMPLE VERB? */
 					switch (ri - mxsmp)
 					{
 						case 1:
@@ -342,7 +342,7 @@ public class Verbs
 
 				case 10:
 					ret_val = false;
-					/* !LOSE. */
+					/* LOSE. */
 					return ret_val;
 
 				/* SIMPLE VERBS ARE HANDLED EXTERNALLY. */
@@ -359,9 +359,9 @@ public class Verbs
 						GOTO = 18100;
 						continue loop;
 					}
-					/* !ROOM LIT? */
+					/* ROOM LIT? */
 					game.dsub.rspeak_(356);
-					/* !NO, CANT READ. */
+					/* NO, CANT READ. */
 					return ret_val;
 
 				case 18100:
@@ -370,14 +370,14 @@ public class Verbs
 						GOTO = 18200;
 						continue loop;
 					}
-					/* !READ THROUGH OBJ? */
+					/* READ THROUGH OBJ? */
 					if ((vars.objcts_1.oflag1[vars.prsvec_1.prsi - 1] & Vars.TRANBT) != 0)
 					{
 						GOTO = 18200;
 						continue loop;
 					}
 					game.dsub.rspsub_(357, odi2);
-					/* !NOT TRANSPARENT. */
+					/* NOT TRANSPARENT. */
 					return ret_val;
 
 				case 18200:
@@ -387,7 +387,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspsub_(358, odo2);
-					/* !NOT READABLE. */
+					/* NOT READABLE. */
 					return ret_val;
 
 				case 18300:
@@ -413,7 +413,7 @@ public class Verbs
 					{
 						game.dsub.rspeak_(368);
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					return ret_val;
 
 				/* V103-- DEFLATE. */
@@ -423,7 +423,7 @@ public class Verbs
 					{
 						game.dsub.rspeak_(369);
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					return ret_val;
 
 				/* V104-- ALARM. IF SLEEPING, WAKE HIM UP. */
@@ -435,19 +435,19 @@ public class Verbs
 						continue loop;
 					}
 					ret_val = game.dsub.objact_();
-					/* !SLEEPING, LET OBJ DO. */
+					/* SLEEPING, LET OBJ DO. */
 					return ret_val;
 
 				case 24100:
 					game.dsub.rspsub_(370, odo2);
-					/* !JOKE. */
+					/* JOKE. */
 					return ret_val;
 
 				/* V105-- EXORCISE. OBJECTS HANDLE. */
 
 				case 25000:
 					f = game.dsub.objact_();
-					/* !OBJECTS HANDLE. */
+					/* OBJECTS HANDLE. */
 					return ret_val;
 
 				/* V106-- PLUG. LET OBJECTS HANDLE. */
@@ -513,9 +513,9 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJECT HANDLE? */
+					/* OBJECT HANDLE? */
 					i = 383;
-					/* !NO, NOT TIED. */
+					/* NO, NOT TIED. */
 					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.TIEBT) == 0)
 					{
 						i = 384;
@@ -532,7 +532,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspeak_(385);
-					/* !NOT TIEABLE. */
+					/* NOT TIEABLE. */
 					return ret_val;
 
 				case 34100:
@@ -540,7 +540,7 @@ public class Verbs
 					{
 						game.dsub.rspsub_(386, odo2);
 					}
-					/* !JOKE. */
+					/* JOKE. */
 					return ret_val;
 
 				/* V115-- TIE UP. NEVER REALLY WORKS. */
@@ -552,18 +552,18 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspsub_(387, odo2);
-					/* !NOT TIEABLE. */
+					/* NOT TIEABLE. */
 					return ret_val;
 
 				case 35100:
 					i = 388;
-					/* !ASSUME VILLAIN. */
+					/* ASSUME VILLAIN. */
 					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) == 0)
 					{
 						i = 389;
 					}
 					game.dsub.rspsub_(i, odo2);
-					/* !JOKE. */
+					/* JOKE. */
 					return ret_val;
 
 				/* V116-- TURN. OBJECT MUST HANDLE. */
@@ -575,7 +575,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspeak_(390);
-					/* !NOT TURNABLE. */
+					/* NOT TURNABLE. */
 					return ret_val;
 
 				case 36100:
@@ -585,12 +585,12 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspsub_(391, odi2);
-					/* !NOT A TOOL. */
+					/* NOT A TOOL. */
 					return ret_val;
 
 				case 36200:
 					ret_val = game.dsub.objact_();
-					/* !LET OBJECT HANDLE. */
+					/* LET OBJECT HANDLE. */
 					return ret_val;
 
 				/* V117-- BREATHE. BECOMES INFLATE WITH LUNGS. */
@@ -600,7 +600,7 @@ public class Verbs
 					vars.prsvec_1.prsi = vars.oindex_1.lungs;
 					GOTO = 22000;
 					continue loop;
-				/* !HANDLE LIKE INFLATE. */
+				/* HANDLE LIKE INFLATE. */
 
 				/* V118-- KNOCK. MOSTLY JOKE. */
 
@@ -609,15 +609,15 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					i = 394;
-					/* !JOKE FOR DOOR. */
+					/* JOKE FOR DOOR. */
 					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.DOORBT) == 0)
 					{
 						i = 395;
 					}
 					game.dsub.rspsub_(i, odo2);
-					/* !JOKE FOR NONDOORS TOO. */
+					/* JOKE FOR NONDOORS TOO. */
 					return ret_val;
 
 				/* V119-- LOOK. */
@@ -628,9 +628,9 @@ public class Verbs
 						GOTO = 41500;
 						continue loop;
 					}
-					/* !SOMETHING TO LOOK AT? */
+					/* SOMETHING TO LOOK AT? */
 					ret_val = game.dsub.rmdesc_(3);
-					/* !HANDLED BY RMDESC. */
+					/* HANDLED BY RMDESC. */
 					return ret_val;
 
 				/* V120-- EXAMINE. */
@@ -641,9 +641,9 @@ public class Verbs
 						GOTO = 41500;
 						continue loop;
 					}
-					/* !SOMETHING TO EXAMINE? */
+					/* SOMETHING TO EXAMINE? */
 					ret_val = game.dsub.rmdesc_(0);
-					/* !HANDLED BY RMDESC. */
+					/* HANDLED BY RMDESC. */
 					return ret_val;
 
 				case 41500:
@@ -651,21 +651,21 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					i = vars.objcts_1.oread[vars.prsvec_1.prso - 1];
-					/* !GET READING MATERIAL. */
+					/* GET READING MATERIAL. */
 					if (i != 0)
 					{
 						game.dsub.rspeak_(i);
 					}
-					/* !OUTPUT IF THERE, */
+					/* OUTPUT IF THERE, */
 					if (i == 0)
 					{
 						game.dsub.rspsub_(429, odo2);
 					}
-					/* !OTHERWISE DEFAULT. */
+					/* OTHERWISE DEFAULT. */
 					vars.prsvec_1.prsa = vars.vindex_1.foow;
-					/* !DEFUSE ROOM PROCESSORS. */
+					/* DEFUSE ROOM PROCESSORS. */
 					return ret_val;
 
 				/* V121-- SHAKE. IF HOLLOW OBJECT, SOME ACTION. */
@@ -675,14 +675,14 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJECT HANDLE? */
+					/* OBJECT HANDLE? */
 					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) == 0)
 					{
 						GOTO = 42100;
 						continue loop;
 					}
 					game.dsub.rspeak_(371);
-					/* !JOKE FOR VILLAINS. */
+					/* JOKE FOR VILLAINS. */
 					return ret_val;
 
 				case 42100:
@@ -697,38 +697,38 @@ public class Verbs
 						GOTO = 42300;
 						continue loop;
 					}
-					/* !OPEN? SPILL. */
+					/* OPEN? SPILL. */
 					game.dsub.rspsub_(396, odo2);
-					/* !NO, DESCRIBE NOISE. */
+					/* NO, DESCRIBE NOISE. */
 					return ret_val;
 
 				case 42300:
 					game.dsub.rspsub_(397, odo2);
-					/* !SPILL THE WORKS. */
+					/* SPILL THE WORKS. */
 					i__1 = vars.objcts_1.olnt;
 					for (i = 1; i <= i__1; ++i)
 					{
-						/* !SPILL CONTENTS. */
+						/* SPILL CONTENTS. */
 						if (vars.objcts_1.ocan[i - 1] != vars.prsvec_1.prso)
 						{
 //	    		GOTO = 42500;
 //	    		continue loop;
 							continue;
 						}
-						/* !INSIDE? */
+						/* INSIDE? */
 						vars.objcts_1.oflag2[i - 1] |= Vars.TCHBT;
 						if (av == 0)
 						{
 							game.dsub.newsta_(i, 0, vars.play_1.here, 0, 0);
-							/* !NO, SPILL ON FLOOR, */
+							/* NO, SPILL ON FLOOR, */
 							if (i == vars.oindex_1.water)
 							{
 								game.dsub.newsta_(i, 133, 0, 0, 0);
 							}
 						}
-						/* !IN VEHICLE? */
+						/* IN VEHICLE? */
 						game.dsub.newsta_(i, 0, 0, av, 0);
-						/* !YES, SPILL IN THERE. */
+						/* YES, SPILL IN THERE. */
 						continue;
 
 					}
@@ -741,28 +741,28 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					i = 398;
-					/* !ASSUME NOT HERE. */
+					/* ASSUME NOT HERE. */
 					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here))
 					{
 						i = 399;
 					}
 					game.dsub.rspsub_(i, odo2);
-					/* !JOKE. */
+					/* JOKE. */
 					return ret_val;
 
 				/* V123-- TURN ON. */
 
 				case 44000:
 					f = game.dso5.lit_(vars.play_1.here);
-					/* !RECORD IF LIT. */
+					/* RECORD IF LIT. */
 					if (game.dsub.objact_())
 					{
 						GOTO = 44300;
 						continue loop;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.LITEBT) != 0
 							&& vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner)
 					{
@@ -770,7 +770,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspeak_(400);
-					/* !CANT DO IT. */
+					/* CANT DO IT. */
 					return ret_val;
 
 				case 44100:
@@ -780,7 +780,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspeak_(401);
-					/* !ALREADY ON. */
+					/* ALREADY ON. */
 					return ret_val;
 
 				case 44200:
@@ -791,7 +791,7 @@ public class Verbs
 					{
 						f = game.dsub.rmdesc_(0);
 					}
-					/* !ROOM NEWLY LIT. */
+					/* ROOM NEWLY LIT. */
 					return ret_val;
 
 				/* V124-- TURN OFF. */
@@ -802,7 +802,7 @@ public class Verbs
 						GOTO = 45300;
 						continue loop;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.LITEBT) != 0
 							&& vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner)
 					{
@@ -810,7 +810,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspeak_(402);
-					/* !CANT DO IT. */
+					/* CANT DO IT. */
 					return ret_val;
 
 				case 45100:
@@ -820,7 +820,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspeak_(403);
-					/* !ALREADY OFF. */
+					/* ALREADY OFF. */
 					return ret_val;
 
 				case 45200:
@@ -831,7 +831,7 @@ public class Verbs
 					{
 						game.dsub.rspeak_(406);
 					}
-					/* !MAY BE DARK. */
+					/* MAY BE DARK. */
 					return ret_val;
 
 				/* V125-- OPEN. A FINE MESS. */
@@ -841,7 +841,7 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.CONTBT) != 0)
 					{
 						GOTO = 46100;
@@ -849,7 +849,7 @@ public class Verbs
 					}
 				case 46050:
 					game.dsub.rspsub_(407, odo2);
-					/* !NOT OPENABLE. */
+					/* NOT OPENABLE. */
 					return ret_val;
 
 				case 46100:
@@ -859,7 +859,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspsub_(408, odo2);
-					/* !NOT OPENABLE. */
+					/* NOT OPENABLE. */
 					return ret_val;
 
 				case 46200:
@@ -869,7 +869,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspeak_(412);
-					/* !ALREADY OPEN. */
+					/* ALREADY OPEN. */
 					return ret_val;
 
 				case 46225:
@@ -881,12 +881,12 @@ public class Verbs
 						continue loop;
 					}
 					game.dso1.princo_(vars.prsvec_1.prso, 410);
-					/* !PRINT CONTENTS. */
+					/* PRINT CONTENTS. */
 					return ret_val;
 
 				case 46300:
 					game.dsub.rspeak_(409);
-					/* !DONE */
+					/* DONE */
 					return ret_val;
 
 				/* V126-- CLOSE. */
@@ -896,7 +896,7 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.CONTBT) == 0)
 					{
 						GOTO = 46050;
@@ -908,7 +908,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspsub_(411, odo2);
-					/* !NOT CLOSABLE. */
+					/* NOT CLOSABLE. */
 					return ret_val;
 
 				case 47100:
@@ -917,15 +917,15 @@ public class Verbs
 						GOTO = 47200;
 						continue loop;
 					}
-					/* !OPEN? */
+					/* OPEN? */
 					game.dsub.rspeak_(413);
-					/* !NO, JOKE. */
+					/* NO, JOKE. */
 					return ret_val;
 
 				case 47200:
 					vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] &= ~Vars.OPENBT;
 					game.dsub.rspeak_(414);
-					/* !DONE. */
+					/* DONE. */
 					return ret_val;
 				/* VAPPLI, PAGE 7 */
 
@@ -936,23 +936,23 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					i = 415;
-					/* !DEFAULT CASE. */
+					/* DEFAULT CASE. */
 					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here))
 					{
 						GOTO = 48300;
 						continue loop;
 					}
-					/* !IN ROOM? */
+					/* IN ROOM? */
 					if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner)
 					{
 						GOTO = 48200;
 						continue loop;
 					}
-					/* !ON WINNER? */
+					/* ON WINNER? */
 					j = vars.objcts_1.ocan[vars.prsvec_1.prso - 1];
-					/* !DOWN ONE LEVEL. */
+					/* DOWN ONE LEVEL. */
 					if (j == 0)
 					{
 						GOTO = 10;
@@ -967,7 +967,7 @@ public class Verbs
 						continue loop;
 					}
 					i = 417;
-					/* !ASSUME IN ROOM. */
+					/* ASSUME IN ROOM. */
 					if (game.dsub.qhere_(j, vars.play_1.here))
 					{
 						GOTO = 48100;
@@ -978,25 +978,25 @@ public class Verbs
 						GOTO = 10;
 						continue loop;
 					}
-					/* !NOT HERE OR ON PERSON. */
+					/* NOT HERE OR ON PERSON. */
 					i = 418;
 				case 48100:
 					game.dsub.rspsub_(i, vars.objcts_1.odesc2[j - 1]);
-					/* !DESCRIBE FINDINGS. */
+					/* DESCRIBE FINDINGS. */
 					return ret_val;
 
 				case 48200:
 					i = 416;
 				case 48300:
 					game.dsub.rspsub_(i, odo2);
-					/* !DESCRIBE FINDINGS. */
+					/* DESCRIBE FINDINGS. */
 					return ret_val;
 
 				/* V128-- WAIT. RUN CLOCK DEMON. */
 
 				case 49000:
 					game.dsub.rspeak_(419);
-					/* !TIME PASSES. */
+					/* TIME PASSES. */
 					for (i = 1; i <= 3; ++i)
 					{
 						if (clockd_())
@@ -1016,7 +1016,7 @@ public class Verbs
 					{
 						game.dsub.rspeak_(663);
 					}
-					/* !IF NOT OBJ, JOKE. */
+					/* IF NOT OBJ, JOKE. */
 					return ret_val;
 
 				/* V130-- BOARD. WORKS WITH VEHICLES. */
@@ -1028,7 +1028,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspsub_(421, odo2);
-					/* !NOT VEHICLE, JOKE. */
+					/* NOT VEHICLE, JOKE. */
 					return ret_val;
 
 				case 51100:
@@ -1037,9 +1037,9 @@ public class Verbs
 						GOTO = 51200;
 						continue loop;
 					}
-					/* !HERE? */
+					/* HERE? */
 					game.dsub.rspsub_(420, odo2);
-					/* !NO, JOKE. */
+					/* NO, JOKE. */
 					return ret_val;
 
 				case 51200:
@@ -1048,9 +1048,9 @@ public class Verbs
 						GOTO = 51300;
 						continue loop;
 					}
-					/* !ALREADY GOT ONE? */
+					/* ALREADY GOT ONE? */
 					game.dsub.rspsub_(422, odo2);
-					/* !YES, JOKE. */
+					/* YES, JOKE. */
 					return ret_val;
 
 				case 51300:
@@ -1058,9 +1058,9 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					game.dsub.rspsub_(423, odo2);
-					/* !DESCRIBE. */
+					/* DESCRIBE. */
 					vars.advs_1.avehic[vars.play_1.winner - 1] = vars.prsvec_1.prso;
 					if (vars.play_1.winner != vars.aindex_1.player)
 					{
@@ -1077,9 +1077,9 @@ public class Verbs
 						GOTO = 52100;
 						continue loop;
 					}
-					/* !FROM VEHICLE? */
+					/* FROM VEHICLE? */
 					game.dsub.rspeak_(424);
-					/* !NO, JOKE. */
+					/* NO, JOKE. */
 					return ret_val;
 
 				case 52100:
@@ -1087,14 +1087,14 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					if ((vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RLAND) != 0)
 					{
 						GOTO = 52200;
 						continue loop;
 					}
 					game.dsub.rspeak_(425);
-					/* !NOT ON LAND. */
+					/* NOT ON LAND. */
 					return ret_val;
 
 				case 52200:
@@ -1128,27 +1128,27 @@ public class Verbs
 						GOTO = 56050;
 						continue loop;
 					}
-					/* !ANY OBJ SPECIFIED? */
+					/* ANY OBJ SPECIFIED? */
 					if ((vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RWATER + Vars.RFILL) != 0)
 					{
 						GOTO = 56025;
 						continue loop;
 					}
 					game.dsub.rspeak_(516);
-					/* !NOTHING TO FILL WITH. */
+					/* NOTHING TO FILL WITH. */
 					vars.prsvec_1.prswon = false;
-					/* !YOU LOSE. */
+					/* YOU LOSE. */
 					return ret_val;
 
 				case 56025:
 					vars.prsvec_1.prsi = vars.oindex_1.gwate;
-					/* !USE GLOBAL WATER. */
+					/* USE GLOBAL WATER. */
 				case 56050:
 					if (game.dsub.objact_())
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					if (vars.prsvec_1.prsi != vars.oindex_1.gwate
 							&& vars.prsvec_1.prsi != vars.oindex_1.water)
 					{
@@ -1164,28 +1164,28 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					if (vars.prsvec_1.prso == vars.oindex_1.gwate)
 					{
 						GOTO = 59500;
 						continue loop;
 					}
-					/* !DRINK GLOBAL WATER? */
+					/* DRINK GLOBAL WATER? */
 					if (!((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.FOODBT) != 0))
 					{
 						GOTO = 59400;
 						continue loop;
 					}
-					/* !EDIBLE? */
+					/* EDIBLE? */
 					if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner)
 					{
 						GOTO = 59200;
 						continue loop;
 					}
-					/* !YES, ON WINNER? */
+					/* YES, ON WINNER? */
 				case 59100:
 					game.dsub.rspsub_(454, odo2);
-					/* !NOT ACCESSIBLE. */
+					/* NOT ACCESSIBLE. */
 					return ret_val;
 
 				case 59200:
@@ -1194,14 +1194,14 @@ public class Verbs
 						GOTO = 59300;
 						continue loop;
 					}
-					/* !DRINK FOOD? */
+					/* DRINK FOOD? */
 					game.dsub.newsta_(vars.prsvec_1.prso, 455, 0, 0, 0);
-					/* !NO, IT DISAPPEARS. */
+					/* NO, IT DISAPPEARS. */
 					return ret_val;
 
 				case 59300:
 					game.dsub.rspeak_(456);
-					/* !YES, JOKE. */
+					/* YES, JOKE. */
 					return ret_val;
 
 				case 59400:
@@ -1210,13 +1210,13 @@ public class Verbs
 						GOTO = 59600;
 						continue loop;
 					}
-					/* !DRINKABLE? */
+					/* DRINKABLE? */
 					if (vars.objcts_1.ocan[vars.prsvec_1.prso - 1] == 0)
 					{
 						GOTO = 59100;
 						continue loop;
 					}
-					/* !YES, IN SOMETHING? */
+					/* YES, IN SOMETHING? */
 					if (vars.objcts_1.oadv[vars.objcts_1.ocan[vars.prsvec_1.prso - 1]
 							- 1] != vars.play_1.winner)
 					{
@@ -1229,19 +1229,19 @@ public class Verbs
 						GOTO = 59500;
 						continue loop;
 					}
-					/* !CONT OPEN? */
+					/* CONT OPEN? */
 					game.dsub.rspeak_(457);
-					/* !NO, JOKE. */
+					/* NO, JOKE. */
 					return ret_val;
 
 				case 59500:
 					game.dsub.newsta_(vars.prsvec_1.prso, 458, 0, 0, 0);
-					/* !GONE. */
+					/* GONE. */
 					return ret_val;
 
 				case 59600:
 					game.dsub.rspsub_(453, odo2);
-					/* !NOT FOOD OR DRINK. */
+					/* NOT FOOD OR DRINK. */
 					return ret_val;
 
 				/* V137-- BURN. COMPLICATED. */
@@ -1258,18 +1258,18 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					if (vars.objcts_1.ocan[vars.prsvec_1.prso - 1] != vars.oindex_1.recep)
 					{
 						GOTO = 60050;
 						continue loop;
 					}
-					/* !BALLOON? */
+					/* BALLOON? */
 					if (game.objcts.oappli_(vars.objcts_1.oactio[vars.oindex_1.ballo - 1], 0))
 					{
 						return ret_val;
 					}
-					/* !DID IT HANDLE? */
+					/* DID IT HANDLE? */
 				case 60050:
 					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.BURNBT) == 0)
 					{
@@ -1281,14 +1281,14 @@ public class Verbs
 						GOTO = 60100;
 						continue loop;
 					}
-					/* !CARRYING IT? */
+					/* CARRYING IT? */
 					game.dsub.rspsub_(459, odo2);
 					game.dsub.jigsup_(460);
 					return ret_val;
 
 				case 60100:
 					j = vars.objcts_1.ocan[vars.prsvec_1.prso - 1];
-					/* !GET CONTAINER. */
+					/* GET CONTAINER. */
 					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here)
 							|| av != 0 && j == av)
 					{
@@ -1300,13 +1300,13 @@ public class Verbs
 						GOTO = 60150;
 						continue loop;
 					}
-					/* !INSIDE? */
+					/* INSIDE? */
 					if (!((vars.objcts_1.oflag2[j - 1] & Vars.OPENBT) != 0))
 					{
 						GOTO = 60150;
 						continue loop;
 					}
-					/* !OPEN? */
+					/* OPEN? */
 					if (game.dsub.qhere_(j, vars.play_1.here)
 							|| av != 0 && vars.objcts_1.ocan[j - 1] == av)
 					{
@@ -1315,23 +1315,23 @@ public class Verbs
 					}
 				case 60150:
 					game.dsub.rspeak_(461);
-					/* !CANT REACH IT. */
+					/* CANT REACH IT. */
 					return ret_val;
 
 				case 60200:
 					game.dsub.rspsub_(462, odo2);
-					/* !BURN IT. */
+					/* BURN IT. */
 					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, 0);
 					return ret_val;
 
 				case 60300:
 					game.dsub.rspsub_(463, odo2);
-					/* !CANT BURN IT. */
+					/* CANT BURN IT. */
 					return ret_val;
 
 				case 60400:
 					game.dsub.rspsub_(301, odi2);
-					/* !CANT BURN IT WITH THAT. */
+					/* CANT BURN IT WITH THAT. */
 					return ret_val;
 				/* VAPPLI, PAGE 9 */
 
@@ -1339,7 +1339,7 @@ public class Verbs
 
 				case 63000:
 					i = 466;
-					/* !CHOOSE PHRASE. */
+					/* CHOOSE PHRASE. */
 					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) != 0)
 					{
 						GOTO = 66100;
@@ -1355,7 +1355,7 @@ public class Verbs
 
 				case 64000:
 					i = 467;
-					/* !CHOOSE PHRASE. */
+					/* CHOOSE PHRASE. */
 					GOTO = 66100;
 					continue loop;
 
@@ -1363,14 +1363,14 @@ public class Verbs
 
 				case 65000:
 					j = vars.prsvec_1.prso;
-					/* !INVERT. */
+					/* INVERT. */
 					vars.prsvec_1.prso = vars.prsvec_1.prsi;
 					vars.prsvec_1.prsi = j;
 					j = odo2;
 					odo2 = odi2;
 					odi2 = j;
 					vars.prsvec_1.prsa = vars.vindex_1.attacw;
-					/* !FOR OBJACT. */
+					/* FOR OBJACT. */
 
 					/* V141-- ATTACK. FALL THRU TO ATTACK CODE. */
 
@@ -1385,9 +1385,9 @@ public class Verbs
 						GOTO = 66200;
 						continue loop;
 					}
-					/* !ANYTHING? */
+					/* ANYTHING? */
 					game.dsub.rspeak_(469);
-					/* !NO, JOKE. */
+					/* NO, JOKE. */
 					return ret_val;
 
 				case 66200:
@@ -1395,7 +1395,7 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) != 0)
 					{
 						GOTO = 66300;
@@ -1409,7 +1409,7 @@ public class Verbs
 
 				case 66300:
 					j = 471;
-					/* !ASSUME NO WEAPON. */
+					/* ASSUME NO WEAPON. */
 					if (vars.prsvec_1.prsi == 0)
 					{
 						GOTO = 66500;
@@ -1421,22 +1421,22 @@ public class Verbs
 						continue loop;
 					}
 					melee = 1;
-					/* !ASSUME SWORD. */
+					/* ASSUME SWORD. */
 					if (vars.prsvec_1.prsi != vars.oindex_1.sword)
 					{
 						melee = 2;
 					}
-					/* !MUST BE KNIFE. */
+					/* MUST BE KNIFE. */
 					i = game.demons.blow_(vars.aindex_1.player, vars.prsvec_1.prso, melee, true, 0);
-					/* !STRIKE BLOW. */
+					/* STRIKE BLOW. */
 					return ret_val;
 
 				case 66400:
 					j = 472;
-					/* !NOT A WEAPON. */
+					/* NOT A WEAPON. */
 				case 66500:
 					game.dsub.rspsb2_(i, odo2, j);
-					/* !JOKE. */
+					/* JOKE. */
 					return ret_val;
 				/* VAPPLI, PAGE 10 */
 
@@ -1476,7 +1476,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspeak_(828);
-					/* !NO SAVES IN ENDGAME. */
+					/* NO SAVES IN ENDGAME. */
 					return ret_val;
 
 				case 77100:
@@ -1492,7 +1492,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspeak_(829);
-					/* !NO RESTORES IN ENDGAME. */
+					/* NO RESTORES IN ENDGAME. */
 					return ret_val;
 
 				case 78100:
@@ -1508,10 +1508,10 @@ public class Verbs
 						GOTO = 80100;
 						continue loop;
 					}
-					/* !ANY OBJ? */
+					/* ANY OBJ? */
 					i__1 = Supp.rnd_(4) + 346;
 					game.dsub.rspeak_(i__1);
-					/* !NO, VANILLA HELLO. */
+					/* NO, VANILLA HELLO. */
 					return ret_val;
 
 				case 80100:
@@ -1520,9 +1520,9 @@ public class Verbs
 						GOTO = 80200;
 						continue loop;
 					}
-					/* !HELLO AVIATOR? */
+					/* HELLO AVIATOR? */
 					game.dsub.rspeak_(350);
-					/* !NOTHING HAPPENS. */
+					/* NOTHING HAPPENS. */
 					return ret_val;
 
 				case 80200:
@@ -1531,22 +1531,22 @@ public class Verbs
 						GOTO = 80300;
 						continue loop;
 					}
-					/* !HELLO SAILOR? */
+					/* HELLO SAILOR? */
 					++vars.state_1.hs;
-					/* !COUNT. */
+					/* COUNT. */
 					i = 351;
-					/* !GIVE NORMAL OR */
+					/* GIVE NORMAL OR */
 					if (vars.state_1.hs % 10 == 0)
 					{
 						i = 352;
 					}
-					/* !RANDOM MESSAGE. */
+					/* RANDOM MESSAGE. */
 					if (vars.state_1.hs % 20 == 0)
 					{
 						i = 353;
 					}
 					game.dsub.rspeak_(i);
-					/* !SPEAK UP. */
+					/* SPEAK UP. */
 					return ret_val;
 
 				case 80300:
@@ -1554,17 +1554,17 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					i = 354;
-					/* !ASSUME VILLAIN. */
+					/* ASSUME VILLAIN. */
 					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1]
 							& Vars.VILLBT + Vars.ACTRBT) == 0)
 					{
 						i = 355;
 					}
 					game.dsub.rspsub_(i, odo2);
-					/* !HELLO THERE */
-					/* ! */
+					/* HELLO THERE */
+					/*  */
 					return ret_val;
 
 				/* V152-- LOOK INTO */
@@ -1574,7 +1574,7 @@ public class Verbs
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.DOORBT) == 0)
 					{
 						GOTO = 81300;
@@ -1585,14 +1585,14 @@ public class Verbs
 						GOTO = 81200;
 						continue loop;
 					}
-					/* !OPEN? */
+					/* OPEN? */
 					game.dsub.rspsub_(628, odo2);
-					/* !OPEN DOOR- UNINTERESTING. */
+					/* OPEN DOOR- UNINTERESTING. */
 					return ret_val;
 
 				case 81200:
 					game.dsub.rspsub_(525, odo2);
-					/* !CLOSED DOOR- CANT SEE. */
+					/* CLOSED DOOR- CANT SEE. */
 					return ret_val;
 
 				case 81300:
@@ -1613,7 +1613,7 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspsub_(630, odo2);
-					/* !CANT LOOK INSIDE. */
+					/* CANT LOOK INSIDE. */
 					return ret_val;
 
 				case 81400:
@@ -1622,14 +1622,14 @@ public class Verbs
 						GOTO = 81500;
 						continue loop;
 					}
-					/* !VEH OR SEE IN. EMPTY? */
+					/* VEH OR SEE IN. EMPTY? */
 					game.dso1.princo_(vars.prsvec_1.prso, 573);
-					/* !NO, LIST CONTENTS. */
+					/* NO, LIST CONTENTS. */
 					return ret_val;
 
 				case 81500:
 					game.dsub.rspsub_(629, odo2);
-					/* !EMPTY. */
+					/* EMPTY. */
 					return ret_val;
 
 				/* V153-- LOOK UNDER */
@@ -1639,7 +1639,7 @@ public class Verbs
 					{
 						game.dsub.rspeak_(631);
 					}
-					/* !OBJECT HANDLE? */
+					/* OBJECT HANDLE? */
 					return ret_val;
 				/* VAPPLI, PAGE 12 */
 
@@ -1653,17 +1653,17 @@ public class Verbs
 						continue loop;
 					}
 					game.dsub.rspeak_(632);
-					/* !NO. */
+					/* NO. */
 					return ret_val;
 
 				case 83100:
 					vars.prsvec_1.prsi = vars.oindex_1.pump;
-					/* !BECOMES INFLATE */
+					/* BECOMES INFLATE */
 					vars.prsvec_1.prsa = vars.vindex_1.inflaw;
-					/* !X WITH PUMP. */
+					/* X WITH PUMP. */
 					GOTO = 22000;
 					continue loop;
-				/* !DONE. */
+				/* DONE. */
 
 				/* V155-- WIND */
 
@@ -1672,7 +1672,7 @@ public class Verbs
 					{
 						game.dsub.rspsub_(634, odo2);
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					return ret_val;
 
 				/* V156-- CLIMB */
@@ -1683,30 +1683,30 @@ public class Verbs
 				case 86000:
 				case 87000:
 					i = vars.xsrch_1.xup;
-					/* !ASSUME UP. */
+					/* ASSUME UP. */
 					if (vars.prsvec_1.prsa == vars.vindex_1.clmbdw)
 					{
 						i = vars.xsrch_1.xdown;
 					}
-					/* !UNLESS CLIMB DN. */
+					/* UNLESS CLIMB DN. */
 					f = (vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.CLMBBT) != 0;
 					if (f && game.dso3.findxt_(i, vars.play_1.here))
 					{
 						GOTO = 87500;
 						continue loop;
 					}
-					/* !ANYTHING TO CLIMB? */
+					/* ANYTHING TO CLIMB? */
 					if (game.dsub.objact_())
 					{
 						return ret_val;
 					}
-					/* !OBJ HANDLE? */
+					/* OBJ HANDLE? */
 					i = 657;
 					if (f)
 					{
 						i = 524;
 					}
-					/* !VARIETY OF JOKES. */
+					/* VARIETY OF JOKES. */
 					if (!f && (vars.prsvec_1.prso == vars.oindex_1.wall
 							|| vars.prsvec_1.prso >= vars.oindex_1.wnort
 									&& vars.prsvec_1.prso <= vars.oindex_1.wnort + 3))
@@ -1714,14 +1714,14 @@ public class Verbs
 						i = 656;
 					}
 					game.dsub.rspeak_(i);
-					/* !JOKE. */
+					/* JOKE. */
 					return ret_val;
 
 				case 87500:
 					vars.prsvec_1.prsa = vars.vindex_1.walkw;
-					/* !WALK */
+					/* WALK */
 					vars.prsvec_1.prso = i;
-					/* !IN SPECIFIED DIR. */
+					/* IN SPECIFIED DIR. */
 					ret_val = dverb2.walk_();
 					return ret_val;
 			}
@@ -1729,7 +1729,7 @@ public class Verbs
 	} /* vappli_ */
 
 	/* CLOCKD- CLOCK DEMON FOR INTERMOVE CLOCK EVENTS */
-	boolean clockd_() throws IOException
+	boolean clockd_()
 	{
 		/* System generated locals */
 		int i__1;
@@ -1739,7 +1739,7 @@ public class Verbs
 		int i;
 
 		ret_val = false;
-		/* !ASSUME NO ACTION. */
+		/* ASSUME NO ACTION. */
 		i__1 = vars.cevent_1.clnt;
 		for (i = 1; i <= i__1; ++i)
 		{
@@ -1753,7 +1753,7 @@ public class Verbs
 				game.clockr.cevapp_(vars.cevent_1.cactio[i - 1]);
 				continue;
 			}
-			/* !PERMANENT ENTRY? */
+			/* PERMANENT ENTRY? */
 			--vars.cevent_1.ctick[i - 1];
 			if (vars.cevent_1.ctick[i - 1] != 0)
 			{

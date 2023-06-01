@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Actors
 {
 	/* AAPPLI- APPLICABLES FOR ADVENTURERS */
@@ -18,7 +16,7 @@ public class Actors
 		this.game = game;
 	}
 
-	boolean aappli_(int ri) throws IOException
+	boolean aappli_(int ri)
 	{
 	   /* System generated locals */
 	   boolean ret_val;
@@ -170,7 +168,7 @@ public class Actors
 //
 //	/* DECLARATIONS */
 
-	void thiefd_() throws IOException
+	void thiefd_()
 	{		
 	   /* System generated locals */
 	   int i__1, i__2;

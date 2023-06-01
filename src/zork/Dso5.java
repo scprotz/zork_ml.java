@@ -31,13 +31,13 @@ public class Dso5
 	} /* gttime_ */
 
 	/* OPNCLS-- PROCESS OPEN/CLOSE FOR DOORS */
-	boolean opncls_(int obj, int so, int sc) throws IOException
+	boolean opncls_(int obj, int so, int sc)
 	{
 		/* System generated locals */
 		boolean ret_val;
 
 		ret_val = true;
-		/* !ASSUME WINS. */
+		/* ASSUME WINS. */
 		if (vars.prsvec_1.prsa == vars.vindex_1.closew)
 		{
 			if (!((vars.objcts_1.oflag2[obj - 1] & Vars.OPENBT) != 0))
@@ -45,17 +45,17 @@ public class Dso5
 				game.dsub.rspeak_(Supp.rnd_(3) + 125);
 				return ret_val;
 			}
-			/* !CLOSE... IS IT? */
+			/* CLOSE... IS IT? */
 			game.dsub.rspeak_(sc);
 			vars.objcts_1.oflag2[obj - 1] &= ~Vars.OPENBT;
 			return ret_val;
 		}
-		/* !CLOSE? */
+		/* CLOSE? */
 		if (vars.prsvec_1.prsa != vars.vindex_1.openw)
 		{
-			/* !OPEN? */
+			/* OPEN? */
 			ret_val = false;
-			/* !LOSE */
+			/* LOSE */
 			return ret_val;
 		}
 
@@ -64,7 +64,7 @@ public class Dso5
 			game.dsub.rspeak_(Supp.rnd_(3) + 125);
 			return ret_val;
 		}
-		/* !OPEN... IS IT? */
+		/* OPEN... IS IT? */
 		game.dsub.rspeak_(so);
 		vars.objcts_1.oflag2[obj - 1] |= Vars.OPENBT;
 		return ret_val;
@@ -81,7 +81,7 @@ public class Dso5
 		int i, j, oa;
 
 		ret_val = true;
-		/* !ASSUME WINS */
+		/* ASSUME WINS */
 		if ((vars.rooms_1.rflag[rm - 1] & Vars.RLIGHT) != 0)
 		{
 			return ret_val;
@@ -89,24 +89,24 @@ public class Dso5
 
 		for (i = 1; i <= vars.objcts_1.olnt; ++i)
 		{
-			/* !LOOK FOR LIT OBJ */
+			/* LOOK FOR LIT OBJ */
 			if (!game.dsub.qhere_(i, rm))
 			{
 
-				/* !IN ROOM? */
+				/* IN ROOM? */
 				oa = vars.objcts_1.oadv[i - 1];
-				/* !NO */
+				/* NO */
 				if (oa <= 0)
 				{
 					continue;
 				}
-				/* !ON ADV? */
+				/* ON ADV? */
 				if (vars.advs_1.aroom[oa - 1] != rm)
 				{
 					continue;
 				}
 			}
-			/* !ADV IN ROOM? */
+			/* ADV IN ROOM? */
 
 			/* OBJ IN ROOM OR ON ADV IN ROOM */
 
@@ -149,28 +149,28 @@ public class Dso5
 		ret_val = 0;
 		loop: for (i = 1; i <= vars.objcts_1.olnt; ++i)
 		{
-			/* !OMIT BIG FIXED ITEMS. */
+			/* OMIT BIG FIXED ITEMS. */
 			if (vars.objcts_1.osize[i - 1] >= 10000)
 			{
 				continue;
 			}
-			/* !IF FIXED, FORGET IT. */
+			/* IF FIXED, FORGET IT. */
 			if (game.dsub.qhere_(i, rm) && rm != 0 || vars.objcts_1.oadv[i - 1] == ad && ad != 0)
 			{
 				ret_val += vars.objcts_1.osize[i - 1];
 				continue loop;
 			}
 			j = i;
-			/* !SEE IF CONTAINED. */
+			/* SEE IF CONTAINED. */
 			do
 			{
 				j = vars.objcts_1.ocan[j - 1];
-				/* !GET NEXT LEVEL UP. */
+				/* GET NEXT LEVEL UP. */
 				if (j == 0)
 				{
 					continue loop;
 				}
-				/* !END OF LIST? */
+				/* END OF LIST? */
 			} while (j != cn);
 		}
 		return ret_val;

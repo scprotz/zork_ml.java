@@ -26,7 +26,7 @@ public class Dverb2
 		this.verbs = verbs;
 	}
 
-	void savegm_() throws IOException
+	void savegm_()
 	{
 		/* Local variables */
 		int[] j = new int[1];
@@ -157,7 +157,7 @@ public class Dverb2
 		}
 	} /* savegm_ */
 
-	public void writeInt(OutputStream writer, long value) throws IOException
+	public void writeInt(OutputStream writer, long value)
 	{
 		char[] bytes = new char[4];
 		bytes[3] = (char) ((value >> 24) & 0xFF);
@@ -165,16 +165,21 @@ public class Dverb2
 		bytes[1] = (char) ((value >> 8) & 0xFF);
 		bytes[0] = (char) (value & 0xFF);
 
-//		writer.write(bytes);
 		for (int i = 0; i < 4; i++)
 		{
-			int val = bytes[i];
-			writer.write(bytes[i]);
+			try
+			{
+				writer.write(bytes[i]);
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	/* RESTORE- RESTORE GAME STATE */
-	void rstrgm_() throws IOException
+	void rstrgm_()
 	{
 
 		File file = new File("dsave.dat");
@@ -189,7 +194,8 @@ public class Dverb2
 
 			int maj = reader.read();
 			int min = reader.read();
-			int k = reader.read();
+			// read vedit //
+			reader.read();
 
 			if (maj != vars.vers_1.vmaj | min != vars.vers_1.vmin)
 			{
@@ -293,14 +299,14 @@ public class Dverb2
 
 	/* DECLARATIONS */
 
-	boolean walk_() throws IOException
+	boolean walk_()
 	{
 		/* System generated locals */
 		boolean ret_val;
 		int GOTO = 100;
 
 		ret_val = true;
-		/* !ASSUME WINS. */
+		/* ASSUME WINS. */
 		if (vars.play_1.winner != vars.aindex_1.player || game.dso5.game.dso5.lit_(vars.play_1.here)
 				|| game.dsub.prob_(25, 25))
 		{
@@ -316,8 +322,8 @@ public class Dverb2
 					GOTO = 450;
 				}
 			}
-			/* !INVALID EXIT? GRUE */
-			/* ! */
+			/* INVALID EXIT? GRUE */
+			/*  */
 			if (GOTO != 450)
 			{
 				switch (vars.curxt_1.xtype)
@@ -343,7 +349,7 @@ public class Dverb2
 						break;
 					}
 				}
-				/* !DECODE EXIT TYPE. */
+				/* DECODE EXIT TYPE. */
 				if (GOTO != 100 && GOTO != 200 && GOTO != 300 && GOTO != 400)
 					game.dsub.bug_(9, vars.curxt_1.xtype);
 			}
@@ -360,7 +366,7 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !CEXIT... RETURNED ROOM? */
+					/* CEXIT... RETURNED ROOM? */
 					if (vars.findex_1.flags(vars.curxt_1.xflag() - 1))
 					{
 						{
@@ -368,11 +374,11 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !NO, FLAG ON? */
+					/* NO, FLAG ON? */
 				case 200:
 					game.dsub.jigsup_(523);
-					/* !BAD EXIT, GRUE */
-					/* ! */
+					/* BAD EXIT, GRUE */
+					/*  */
 					return ret_val;
 
 				case 300:
@@ -383,7 +389,7 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !DOOR... RETURNED ROOM? */
+					/* DOOR... RETURNED ROOM? */
 					if ((vars.objcts_1.oflag2[vars.curxt_1.xobj - 1] & Vars.OPENBT) != 0)
 					{
 						{
@@ -391,10 +397,10 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !NO, DOOR OPEN? */
+					/* NO, DOOR OPEN? */
 					game.dsub.jigsup_(523);
-					/* !BAD EXIT, GRUE */
-					/* ! */
+					/* BAD EXIT, GRUE */
+					/*  */
 					return ret_val;
 
 				case 400:
@@ -405,11 +411,11 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !VALID ROOM, IS IT LIT? */
+					/* VALID ROOM, IS IT LIT? */
 				case 450:
 					game.dsub.jigsup_(522);
-					/* !NO, GRUE */
-					/* ! */
+					/* NO, GRUE */
+					/*  */
 					return ret_val;
 
 				/* ROOM IS LIT, OR WINNER IS NOT PLAYER (NO GRUE). */
@@ -422,27 +428,27 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !EXIT EXIST? */
+					/* EXIT EXIST? */
 				case 525:
 					vars.curxt_1.xstrng = 678;
-					/* !ASSUME WALL. */
+					/* ASSUME WALL. */
 					if (vars.prsvec_1.prso == vars.xsrch_1.xup)
 					{
 						vars.curxt_1.xstrng = 679;
 					}
-					/* !IF UP, CANT. */
+					/* IF UP, CANT. */
 					if (vars.prsvec_1.prso == vars.xsrch_1.xdown)
 					{
 						vars.curxt_1.xstrng = 680;
 					}
-					/* !IF DOWN, CANT. */
+					/* IF DOWN, CANT. */
 					if ((vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RNWALL) != 0)
 					{
 						vars.curxt_1.xstrng = 524;
 					}
 					game.dsub.rspeak_(vars.curxt_1.xstrng);
 					vars.prsvec_1.prscon = 1;
-					/* !STOP CMD STREAM. */
+					/* STOP CMD STREAM. */
 					return ret_val;
 
 				case 550:
@@ -469,7 +475,7 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !BRANCH ON EXIT TYPE. */
+					/* BRANCH ON EXIT TYPE. */
 					game.dsub.bug_(9, vars.curxt_1.xtype);
 
 				case 700:
@@ -480,7 +486,7 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !CEXIT... RETURNED ROOM? */
+					/* CEXIT... RETURNED ROOM? */
 					if (vars.findex_1.flags(vars.curxt_1.xflag() - 1))
 					{
 						{
@@ -488,7 +494,7 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !NO, FLAG ON? */
+					/* NO, FLAG ON? */
 				case 600:
 					if (vars.curxt_1.xstrng == 0)
 					{
@@ -497,11 +503,11 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !IF NO REASON, USE STD. */
+					/* IF NO REASON, USE STD. */
 					game.dsub.rspeak_(vars.curxt_1.xstrng);
-					/* !DENY EXIT. */
+					/* DENY EXIT. */
 					vars.prsvec_1.prscon = 1;
-					/* !STOP CMD STREAM. */
+					/* STOP CMD STREAM. */
 					return ret_val;
 
 				case 800:
@@ -512,7 +518,7 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !DOOR... RETURNED ROOM? */
+					/* DOOR... RETURNED ROOM? */
 					if ((vars.objcts_1.oflag2[vars.curxt_1.xobj - 1] & Vars.OPENBT) != 0)
 					{
 						{
@@ -520,33 +526,33 @@ public class Dverb2
 							continue loop;
 						}
 					}
-					/* !NO, DOOR OPEN? */
+					/* NO, DOOR OPEN? */
 					if (vars.curxt_1.xstrng == 0)
 					{
 						vars.curxt_1.xstrng = 525;
 					}
-					/* !IF NO REASON, USE STD. */
+					/* IF NO REASON, USE STD. */
 					game.dsub.rspsub_(vars.curxt_1.xstrng,
 							vars.objcts_1.odesc2[vars.curxt_1.xobj - 1]);
 					vars.prsvec_1.prscon = 1;
-					/* !STOP CMD STREAM. */
+					/* STOP CMD STREAM. */
 					return ret_val;
 
 				case 900:
 					ret_val = game.dso2.moveto_(vars.curxt_1.xroom1, vars.play_1.winner);
-					/* !MOVE TO ROOM. */
+					/* MOVE TO ROOM. */
 					if (ret_val)
 					{
 						ret_val = game.dsub.rmdesc_(0);
 					}
-					/* !DESCRIBE ROOM. */
+					/* DESCRIBE ROOM. */
 					return ret_val;
 			}
 		} while (true);
 	} /* walk_ */
 
 	/* CXAPPL- CONDITIONAL EXIT PROCESSORS */
-	private int cxappl_(int ri) throws IOException
+	private int cxappl_(int ri)
 	{
 		/* System generated locals */
 		int ret_val, i__1;
@@ -557,12 +563,12 @@ public class Dverb2
 		int ldir = 0;
 
 		ret_val = 0;
-		/* !NO RETURN. */
+		/* NO RETURN. */
 		if (ri == 0)
 		{
 			return ret_val;
 		}
-		/* !IF NO ACTION, DONE. */
+		/* IF NO ACTION, DONE. */
 		switch (ri)
 		{
 			case 1:
@@ -647,7 +653,7 @@ public class Dverb2
 				case 1000:
 					vars.findex_1.egyptf = vars.objcts_1.oadv[vars.oindex_1.coffi
 							- 1] != vars.play_1.winner;
-					/* !T IF NO COFFIN. */
+					/* T IF NO COFFIN. */
 					return ret_val;
 
 				/* C2- CAROUSEL EXIT */
@@ -658,29 +664,29 @@ public class Dverb2
 					{
 						return ret_val;
 					}
-					/* !IF FLIPPED, NOTHING. */
+					/* IF FLIPPED, NOTHING. */
 				case 2500:
 					game.dsub.rspeak_(121);
-					/* !SPIN THE COMPASS. */
+					/* SPIN THE COMPASS. */
 				case 5000:
 					i = vars.xpars_1.xelnt[vars.xpars_1.xcond - 1] * Supp.rnd_(8);
-					/* !CHOOSE RANDOM EXIT. */
+					/* CHOOSE RANDOM EXIT. */
 					vars.curxt_1.xroom1 = vars.exits_1.travel[vars.rooms_1.rexit[vars.play_1.here
 							- 1] + i - 1] & vars.xpars_1.xrmask;
 					ret_val = vars.curxt_1.xroom1;
-					/* !RETURN EXIT. */
+					/* RETURN EXIT. */
 					return ret_val;
 
 				/* C3- CHIMNEY FUNCTION */
 
 				case 3000:
 					vars.findex_1.litldf = false;
-					/* !ASSUME HEAVY LOAD. */
+					/* ASSUME HEAVY LOAD. */
 					j = 0;
 					i__1 = vars.objcts_1.olnt;
 					for (i = 1; i <= i__1; ++i)
 					{
-						/* !COUNT OBJECTS. */
+						/* COUNT OBJECTS. */
 						if (vars.objcts_1.oadv[i - 1] == vars.play_1.winner)
 						{
 							++j;
@@ -692,16 +698,16 @@ public class Dverb2
 					{
 						return ret_val;
 					}
-					/* !CARRYING TOO MUCH? */
+					/* CARRYING TOO MUCH? */
 					vars.curxt_1.xstrng = 446;
-					/* !ASSUME NO LAMP. */
+					/* ASSUME NO LAMP. */
 					if (vars.objcts_1.oadv[vars.oindex_1.lamp - 1] != vars.play_1.winner)
 					{
 						return ret_val;
 					}
-					/* !NO LAMP? */
+					/* NO LAMP? */
 					vars.findex_1.litldf = true;
-					/* !HE CAN DO IT. */
+					/* HE CAN DO IT. */
 					if ((vars.objcts_1.oflag2[vars.oindex_1.door - 1] & Vars.OPENBT) == 0)
 					{
 						vars.objcts_1.oflag2[vars.oindex_1.door - 1] &= ~Vars.TCHBT;
@@ -719,9 +725,9 @@ public class Dverb2
 							continue loop2;
 						}
 					}
-					/* !IF FLIPPED, GO SPIN. */
+					/* IF FLIPPED, GO SPIN. */
 					vars.findex_1.frobzf = false;
-					/* !OTHERWISE, NOT AN EXIT. */
+					/* OTHERWISE, NOT AN EXIT. */
 					return ret_val;
 
 				case 6000:
@@ -732,9 +738,9 @@ public class Dverb2
 							continue loop2;
 						}
 					}
-					/* !IF FLIPPED, GO SPIN. */
+					/* IF FLIPPED, GO SPIN. */
 					vars.findex_1.frobzf = true;
-					/* !OTHERWISE, AN EXIT. */
+					/* OTHERWISE, AN EXIT. */
 					return ret_val;
 
 				/* C7- FROBOZZ FLAG (BANK ALARM) */
@@ -749,7 +755,7 @@ public class Dverb2
 
 				case 8000:
 					vars.findex_1.frobzf = false;
-					/* !ASSUME CANT MOVE. */
+					/* ASSUME CANT MOVE. */
 					if (vars.findex_1.mloc != vars.curxt_1.xroom1)
 					{
 						{
@@ -757,7 +763,7 @@ public class Dverb2
 							continue loop2;
 						}
 					}
-					/* !MIRROR IN WAY? */
+					/* MIRROR IN WAY? */
 					if (vars.prsvec_1.prso == vars.xsrch_1.xnorth
 							|| vars.prsvec_1.prso == vars.xsrch_1.xsouth)
 					{
@@ -773,36 +779,36 @@ public class Dverb2
 							continue loop2;
 						}
 					}
-					/* !MIRROR MUST BE N-S. */
+					/* MIRROR MUST BE N-S. */
 					vars.curxt_1.xroom1 = (vars.curxt_1.xroom1 - vars.rindex_1.mra << 1)
 							+ vars.rindex_1.mrae;
-					/* !CALC EAST ROOM. */
+					/* CALC EAST ROOM. */
 					if (vars.prsvec_1.prso > vars.xsrch_1.xsouth)
 					{
 						++vars.curxt_1.xroom1;
 					}
-					/* !IF SW/NW, CALC WEST. */
+					/* IF SW/NW, CALC WEST. */
 				case 8100:
 					ret_val = vars.curxt_1.xroom1;
 					return ret_val;
 
 				case 8200:
 					vars.curxt_1.xstrng = 814;
-					/* !ASSUME STRUC BLOCKS. */
+					/* ASSUME STRUC BLOCKS. */
 					if (vars.findex_1.mdir % 180 == 0)
 					{
 						return ret_val;
 					}
-					/* !IF MIRROR N-S, DONE. */
+					/* IF MIRROR N-S, DONE. */
 				case 8300:
 					ldir = vars.findex_1.mdir;
-					/* !SEE WHICH MIRROR. */
+					/* SEE WHICH MIRROR. */
 					if (vars.prsvec_1.prso == vars.xsrch_1.xsouth)
 					{
 						ldir = 180;
 					}
 					vars.curxt_1.xstrng = 815;
-					/* !MIRROR BLOCKS. */
+					/* MIRROR BLOCKS. */
 					if (ldir > 180 && !vars.findex_1.mr1f || ldir < 180 && !vars.findex_1.mr2f)
 					{
 						vars.curxt_1.xstrng = 816;
@@ -819,21 +825,21 @@ public class Dverb2
 							continue loop2;
 						}
 					}
-					/* !MIRROR 1 HERE? */
+					/* MIRROR 1 HERE? */
 					if (vars.findex_1.mr1f)
 					{
 						vars.curxt_1.xstrng = 805;
 					}
-					/* !SEE IF BROKEN. */
+					/* SEE IF BROKEN. */
 					vars.findex_1.frobzf = vars.findex_1.mropnf;
-					/* !ENTER IF OPEN. */
+					/* ENTER IF OPEN. */
 					return ret_val;
 
 				case 9100:
 					vars.findex_1.frobzf = false;
-					/* !NOT HERE, */
+					/* NOT HERE, */
 					vars.curxt_1.xstrng = 817;
-					/* !LOSE. */
+					/* LOSE. */
 					return ret_val;
 				/* CXAPPL, PAGE 4 */
 
@@ -841,9 +847,9 @@ public class Dverb2
 
 				case 10000:
 					vars.findex_1.frobzf = false;
-					/* !ASSUME CANT. */
+					/* ASSUME CANT. */
 					ldir = (vars.prsvec_1.prso - vars.xsrch_1.xnorth) / vars.xsrch_1.xnorth * 45;
-					/* !XLATE DIR TO DEGREES. */
+					/* XLATE DIR TO DEGREES. */
 					if (!vars.findex_1.mropnf || (vars.findex_1.mdir + 270) % 360 != ldir
 							&& vars.prsvec_1.prso != vars.xsrch_1.xexit)
 					{
@@ -854,7 +860,7 @@ public class Dverb2
 					}
 					vars.curxt_1.xroom1 = (vars.findex_1.mloc - vars.rindex_1.mra << 1)
 							+ vars.rindex_1.mrae + 1 - vars.findex_1.mdir / 180;
-					/* !ASSUME E-W EXIT. */
+					/* ASSUME E-W EXIT. */
 					if (vars.findex_1.mdir % 180 == 0)
 					{
 						{
@@ -862,14 +868,14 @@ public class Dverb2
 							continue loop2;
 						}
 					}
-					/* !IF N-S, OK. */
+					/* IF N-S, OK. */
 					vars.curxt_1.xroom1 = vars.findex_1.mloc + 1;
-					/* !ASSUME N EXIT. */
+					/* ASSUME N EXIT. */
 					if (vars.findex_1.mdir > 180)
 					{
 						vars.curxt_1.xroom1 = vars.findex_1.mloc - 1;
 					}
-					/* !IF SOUTH. */
+					/* IF SOUTH. */
 				case 10100:
 					ret_val = vars.curxt_1.xroom1;
 					return ret_val;
@@ -881,14 +887,14 @@ public class Dverb2
 						return ret_val;
 					}
 					vars.curxt_1.xroom1 = vars.findex_1.mloc + 1;
-					/* !ASSUME N. */
+					/* ASSUME N. */
 					if (vars.findex_1.mdir == 0)
 					{
 						vars.curxt_1.xroom1 = vars.findex_1.mloc - 1;
 					}
-					/* !IF S. */
+					/* IF S. */
 					game.dsub.rspeak_(818);
-					/* !CLOSE DOOR. */
+					/* CLOSE DOOR. */
 					vars.findex_1.wdopnf = false;
 					ret_val = vars.curxt_1.xroom1;
 					return ret_val;
@@ -901,23 +907,23 @@ public class Dverb2
 					{
 						vars.curxt_1.xstrng = 678;
 					}
-					/* !SET UP MSG. */
+					/* SET UP MSG. */
 					return ret_val;
 
 				/* C12- FROBZF (PUZZLE ROOM MAIN ENTRANCE) */
 
 				case 12000:
 					vars.findex_1.frobzf = true;
-					/* !ALWAYS ENTER. */
+					/* ALWAYS ENTER. */
 					vars.findex_1.cphere = 10;
-					/* !SET SUBSTATE. */
+					/* SET SUBSTATE. */
 					return ret_val;
 
 				/* C13- CPOUTF (PUZZLE ROOM SIZE ENTRANCE) */
 
 				case 13000:
 					vars.findex_1.cphere = 52;
-					/* !SET SUBSTATE. */
+					/* SET SUBSTATE. */
 					return ret_val;
 				/* CXAPPL, PAGE 5 */
 
@@ -925,7 +931,7 @@ public class Dverb2
 
 				case 14000:
 					vars.findex_1.frobzf = false;
-					/* !ASSSUME LOSE. */
+					/* ASSSUME LOSE. */
 					if (vars.prsvec_1.prso != vars.xsrch_1.xup)
 					{
 						{
@@ -933,23 +939,23 @@ public class Dverb2
 							continue loop2;
 						}
 					}
-					/* !UP? */
+					/* UP? */
 					if (vars.findex_1.cphere != 10)
 					{
 						return ret_val;
 					}
-					/* !AT EXIT? */
+					/* AT EXIT? */
 					vars.curxt_1.xstrng = 881;
-					/* !ASSUME NO LADDER. */
+					/* ASSUME NO LADDER. */
 					if (vars.puzzle_1.cpvec[vars.findex_1.cphere] != -2)
 					{
 						return ret_val;
 					}
-					/* !LADDER HERE? */
+					/* LADDER HERE? */
 					game.dsub.rspeak_(882);
-					/* !YOU WIN. */
+					/* YOU WIN. */
 					vars.findex_1.frobzf = true;
-					/* !LET HIM OUT. */
+					/* LET HIM OUT. */
 					return ret_val;
 
 				case 14100:
@@ -962,13 +968,13 @@ public class Dverb2
 						}
 					}
 					vars.findex_1.frobzf = true;
-					/* !YES, LET HIM OUT. */
+					/* YES, LET HIM OUT. */
 					return ret_val;
 
 				case 14200:
 					for (i = 1; i <= 16; i += 2)
 					{
-						/* !LOCATE EXIT. */
+						/* LOCATE EXIT. */
 						if (vars.prsvec_1.prso == vars.puzzle_1.cpdr[i - 1])
 						{
 							{
@@ -979,15 +985,15 @@ public class Dverb2
 						/* case 14300: */
 					}
 					return ret_val;
-				/* !NO SUCH EXIT. */
+				/* NO SUCH EXIT. */
 
 				case 14400:
 					j = vars.puzzle_1.cpdr[i];
-					/* !GET DIRECTIONAL OFFSET. */
+					/* GET DIRECTIONAL OFFSET. */
 					nxt = vars.findex_1.cphere + j;
-					/* !GET NEXT STATE. */
+					/* GET NEXT STATE. */
 					k = 8;
-					/* !GET ORTHOGONAL DIR. */
+					/* GET ORTHOGONAL DIR. */
 					if (j < 0)
 					{
 						k = -8;
@@ -1006,9 +1012,9 @@ public class Dverb2
 
 				case 14500:
 					game.dso7.cpgoto_(nxt);
-					/* !MOVE TO STATE. */
+					/* MOVE TO STATE. */
 					vars.curxt_1.xroom1 = vars.rindex_1.cpuzz;
-					/* !STAY IN ROOM. */
+					/* STAY IN ROOM. */
 					ret_val = vars.curxt_1.xroom1;
 					return ret_val;
 			}

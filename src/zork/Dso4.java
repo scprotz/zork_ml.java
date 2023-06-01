@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Dso4
 {
 	/* ROBADV-- STEAL WINNER'S VALUABLES */
@@ -18,7 +16,7 @@ public class Dso4
 		this.game = game;
 	}
 
-	int robadv_(int adv, int nr, int nc, int na) throws IOException
+	int robadv_(int adv, int nr, int nc, int na)
 	{
 		/* System generated locals */
 		int ret_val;
@@ -27,7 +25,7 @@ public class Dso4
 		int i;
 
 		ret_val = 0;
-		/* !COUNT OBJECTS */
+		/* COUNT OBJECTS */
 		for (i = 1; i <= vars.objcts_1.olnt; ++i)
 		{
 			if (vars.objcts_1.oadv[i - 1] != adv || vars.objcts_1.otval[i - 1] <= 0
@@ -36,14 +34,14 @@ public class Dso4
 				continue;
 			}
 			game.dsub.newsta_(i, 0, nr, nc, na);
-			/* !STEAL OBJECT */
+			/* STEAL OBJECT */
 			++ret_val;
 		}
 		return ret_val;
 	} /* robadv_ */
 
 	/* ROBRM-- STEAL ROOM VALUABLES */
-	int robrm_(int rm, int pr, int nr, int nc, int na) throws IOException
+	int robrm_(int rm, int pr, int nr, int nc, int na)
 	{
 		/* System generated locals */
 		int ret_val;
@@ -52,10 +50,10 @@ public class Dso4
 		int i;
 
 		ret_val = 0;
-		/* !COUNT OBJECTS */
+		/* COUNT OBJECTS */
 		for (i = 1; i <= vars.objcts_1.olnt; ++i)
 		{
-			/* !LOOP ON OBJECTS. */
+			/* LOOP ON OBJECTS. */
 			if (!game.dsub.qhere_(i, rm))
 			{
 				continue;
@@ -89,29 +87,29 @@ public class Dso4
 		int ps, vs;
 
 		vs = vars.objcts_1.ocapac[vl - 1];
-		/* !VILLAIN STRENGTH */
+		/* VILLAIN STRENGTH */
 		ps = vs - game.dso4.fights_(hr, true);
-		/* !HIS MARGIN OVER HERO */
+		/* HIS MARGIN OVER HERO */
 		if (ps > 3)
 		{
 			ret_val = game.dsub.prob_(90, 100);
 		}
-		/* !+3... 90% WINNING */
+		/* +3... 90% WINNING */
 		else if (ps > 0)
 		{
 			ret_val = game.dsub.prob_(75, 85);
 		}
-		/* !>0... 75% WINNING */
+		/* >0... 75% WINNING */
 		else if (ps == 0)
 		{
 			ret_val = game.dsub.prob_(50, 30);
 		}
-		/* !=0... 50% WINNING */
+		/* =0... 50% WINNING */
 		else if (vs > 1)
 		{
 			ret_val = game.dsub.prob_(25, 25);
 		}
-		/* !ANY VILLAIN STRENGTH. */
+		/* ANY VILLAIN STRENGTH. */
 		else
 		{
 			ret_val = game.dsub.prob_(10, 0);
@@ -155,13 +153,13 @@ public class Dso4
 		if (v == vars.oindex_1.thief && vars.findex_1.thfenf)
 		{
 			vars.findex_1.thfenf = false;
-			/* !THIEF UNENGROSSED. */
+			/* THIEF UNENGROSSED. */
 			ret_val = Math.min(ret_val, 2);
-			/* !NO BETTER THAN 2. */
+			/* NO BETTER THAN 2. */
 		}
 		for (i = 1; i <= vars.vill_1.vlnt; ++i)
 		{
-			/* !SEE IF BEST WEAPON. */
+			/* SEE IF BEST WEAPON. */
 			if (vars.vill_1.villns[i - 1] == v && vars.prsvec_1.prsi == vars.vill_1.vbest[i - 1])
 			{
 				/* Computing MAX */

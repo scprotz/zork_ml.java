@@ -1,6 +1,5 @@
 package zork;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -31,7 +30,6 @@ public class Dgame
 	Dso6 dso6 = null;
 	Dso7 dso7 = null;
 
-	Gdt gdt = null;
 	Objcts objcts = null;
 	Clockr clockr = null;
 
@@ -47,8 +45,13 @@ public class Dgame
 	/** Dsub needs this to initialize **/
 	// TODO: Should refactor the requiring functions **/
 
-	public Dgame(Vars vars, DInit init)
+	public Dgame()
 	{
+		/* 1) INITIALIZE DATA STRUCTURES */
+		/* 2) PLAY GAME */
+		Vars vars = new Vars();
+		DInit init = new DInit(vars);
+
 		this.vars = vars;
 		this.init = init;
 
@@ -58,7 +61,6 @@ public class Dgame
 		this.nrooms = new NRooms(vars, this);
 		this.ballop = new Ballop(vars, this);
 		this.lightp = new Lightp(vars, this);
-		this.gdt = new Gdt();
 		this.dsub = new Dsub(vars, this);
 		this.dso1 = new Dso1(vars, this);
 		this.dso2 = new Dso2(vars, this);
@@ -79,18 +81,64 @@ public class Dgame
 		this.actors = new Actors(vars, this);
 	}
 
-	public void game_() throws IOException
+	public void start()
 	{
-		/* Local variables */
-		int i;
+		init.init_();
 
 		/* START UP, DESCRIBE CURRENT LOCATION. */
 
 		dsub.rspeak_(1);
-		/* !WELCOME ABOARD. */
+		/* WELCOME ABOARD. */
 
 		dsub.rmdesc_(3);
-		/* !START GAME. */
+		/* START GAME. */
+	}
+
+	/**
+	 * public void step(String action) {
+	 * 
+	 * // NOW LOOP, READING AND EXECUTING COMMANDS. //
+	 * 
+	 * 
+	 * // case 100:
+	 * 
+	 * vars.play_1.winner = vars.aindex_1.player; // PLAYER MOVING. //
+	 * vars.play_1.telflg = false; // ASSUME NOTHING TOLD. // if
+	 * (vars.prsvec_1.prscon <= 1) { np.rdline_(vars.input_1.inbuf, 1); }
+	 * 
+	 * 
+	 * ++vars.state_1.moves; vars.prsvec_1.prswon = np.parse_(vars.input_1.inbuf,
+	 * true); // PARSE LOSES? // if (!vars.prsvec_1.prswon) {
+	 * 
+	 * xendmv_(vars.play_1.telflg); // DO END OF MOVE. // if
+	 * (!dso5.lit_(vars.play_1.here)) { vars.prsvec_1.prscon = 1; } return; }
+	 * 
+	 * // VEHICLE HANDLE? // if (xvehic_(1)) { xendmv_(vars.play_1.telflg); // DO
+	 * END OF MOVE. // if (!dso5.lit_(vars.play_1.here)) { vars.prsvec_1.prscon = 1;
+	 * } return; }
+	 * 
+	 * // TELL? // if (vars.prsvec_1.prsa == vars.vindex_1.tellw) { GOTO = 2000;
+	 * continue; }
+	 * 
+	 * // case 300: boolean skip_to_350 = false; if (vars.prsvec_1.prso ==
+	 * vars.oindex_1.valua || vars.prsvec_1.prso == vars.oindex_1.every) {
+	 * 
+	 * verbs.dverb1.valuac_(vars.oindex_1.valua); // GOTO = 350; // continue;
+	 * skip_to_350 = true; } if (!skip_to_350 && !verbs.vappli_(vars.prsvec_1.prsa))
+	 * { xendmv_(vars.play_1.telflg); // DO END OF MOVE. // if
+	 * (!dso5.lit_(vars.play_1.here)) { vars.prsvec_1.prscon = 1; } return; } //
+	 * VERB OK? // // case 350: if (!vars.findex_1.echof && vars.play_1.here ==
+	 * vars.rindex_1.echor) { GOTO = 1000; continue; } // f =
+	 * dsub.rappli_(vars.rooms_1.ractio[vars.play_1.here - 1]);
+	 * 
+	 * // case 400:
+	 * 
+	 * xendmv_(vars.play_1.telflg); // DO END OF MOVE. // if
+	 * (!dso5.lit_(vars.play_1.here)) { vars.prsvec_1.prscon = 1; } return; }
+	 */
+
+	public void game_()
+	{
 
 		/* NOW LOOP, READING AND EXECUTING COMMANDS. */
 
@@ -99,275 +147,312 @@ public class Dgame
 		{
 			switch (GOTO)
 			{
-				case 100:
+			case 100:
 
-					vars.play_1.winner = vars.aindex_1.player;
-					/* !PLAYER MOVING. */
-					vars.play_1.telflg = false;
-					/* !ASSUME NOTHING TOLD. */
-					if (vars.prsvec_1.prscon <= 1)
-					{
-						np.rdline_(vars.input_1.inbuf, 1);
-					}
+				vars.play_1.winner = vars.aindex_1.player;
+				/* PLAYER MOVING. */
+				vars.play_1.telflg = false;
+				/* ASSUME NOTHING TOLD. */
+				if (vars.prsvec_1.prscon <= 1)
+				{
+					String buf = DMain.getInput();
+					np.rdline_(buf, vars.input_1.inbuf, 1);
+				}
 
-					if (Vars.ALLOW_GDT)
-					{
-						String str = new String(vars.input_1.inbuf);
-						str = str.substring(vars.prsvec_1.prscon - 1);
-						if (str.startsWith("GDT"))
-						{
-							/* !CALL ON GDT? */
-							gdt.gdt_();
-							/* !YES, INVOKE. */
-							GOTO = 100;
-							continue;
-							/* !ONWARD. */
-						}
+				++vars.state_1.moves;
+				vars.prsvec_1.prswon = np.parse_(vars.input_1.inbuf, true);
+				/* PARSE LOSES? */
+				if (!vars.prsvec_1.prswon)
+				{
 
-					} /* ALLOW_GDT */
-
-					++vars.state_1.moves;
-					vars.prsvec_1.prswon = np.parse_(vars.input_1.inbuf, true);
-					if (!vars.prsvec_1.prswon)
-					{
-
-						GOTO = 400;
-						continue;
-					}
-					/* !PARSE LOSES? */
-					if (xvehic_(1))
-					{
-						GOTO = 400;
-						continue;
-					}
-					/* !VEHICLE HANDLE? */
-
-					if (vars.prsvec_1.prsa == vars.vindex_1.tellw)
-					{
-						GOTO = 2000;
-						continue;
-					}
-					/* !TELL? */
-				case 300:
-					if (vars.prsvec_1.prso == vars.oindex_1.valua
-							|| vars.prsvec_1.prso == vars.oindex_1.every)
-					{
-
-						GOTO = 900;
-						continue;
-					}
-					if (!verbs.vappli_(vars.prsvec_1.prsa))
-					{
-						GOTO = 400;
-						continue;
-					}
-					/* !VERB OK? */
-				case 350:
-					if (!vars.findex_1.echof && vars.play_1.here == vars.rindex_1.echor)
-					{
-						GOTO = 1000;
-						continue;
-					}
-//		    f = 
-					dsub.rappli_(vars.rooms_1.ractio[vars.play_1.here - 1]);
-
-				case 400:
-
-					xendmv_(vars.play_1.telflg);
-					/* !DO END OF MOVE. */
-					if (!dso5.lit_(vars.play_1.here))
-					{
-						vars.prsvec_1.prscon = 1;
-					}
-					GOTO = 100;
-					continue;
-
-				case 900:
-					verbs.dverb1.valuac_(vars.oindex_1.valua);
-					GOTO = 350;
-					continue;
-				/* GAME, PAGE 3 */
-
-				/* SPECIAL CASE-- ECHO ROOM. */
-				/* IF INPUT IS NOT 'ECHO' OR A DIRECTION, JUST ECHO. */
-
-				case 1000:
-					np.rdline_(vars.input_1.inbuf, 0);
-					++vars.state_1.moves;
-					/* !CHARGE FOR MOVES. */
-					if (!new String(vars.input_1.inbuf).startsWith("ECHO"))
-					{
-						GOTO = 1300;
-						continue;
-					}
-
-					dsub.rspeak_(571);
-					/* !KILL THE ECHO. */
-					vars.findex_1.echof = true;
-					vars.objcts_1.oflag2[vars.oindex_1.bar - 1] &= ~Vars.SCRDBT;
-					vars.prsvec_1.prswon = true;
-					/* !FAKE OUT PARSER. */
-					vars.prsvec_1.prscon = 1;
-					/* !FORCE NEW INPUT. */
 					GOTO = 400;
 					continue;
+				}
 
-				case 1300:
-					vars.prsvec_1.prswon = np.parse_(vars.input_1.inbuf, false);
-					if (!vars.prsvec_1.prswon || vars.prsvec_1.prsa != vars.vindex_1.walkw)
-					{
-						GOTO = 1400;
-						continue;
-					}
-					if (dso3.findxt_(vars.prsvec_1.prso, vars.play_1.here))
-					{
-						GOTO = 300;
-						continue;
-					}
-					/* !VALID EXIT? */
-
-				case 1400:
-					Supp.more_output(new String(vars.input_1.inbuf));
-					vars.play_1.telflg = true;
-					/* !INDICATE OUTPUT. */
-					GOTO = 1000;
+				/* VEHICLE HANDLE? */
+				if (xvehic_(1))
+				{
+					GOTO = 400;
 					continue;
-				/* !MORE ECHO ROOM. */
-				/* GAME, PAGE 4 */
+				}
 
-				/* SPECIAL CASE-- TELL <ACTOR>, NEW COMMAND */
-				/* NOTE THAT WE CANNOT BE IN THE ECHO ROOM. */
-
-				case 2000:
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.ACTRBT) != 0)
-					{
-						GOTO = 2100;
-						continue;
-					}
-					dsub.rspeak_(602);
-					/* !CANT DO IT. */
+				/* TELL? */
+				if (vars.prsvec_1.prsa == vars.vindex_1.tellw)
+				{
+					do2000();
 					GOTO = 350;
 					continue;
-				/* !VAPPLI SUCCEEDS. */
+				}
 
-				case 2100:
-					vars.play_1.winner = dsub.oactor_(vars.prsvec_1.prso);
-					/* !NEW PLAYER. */
-					vars.play_1.here = vars.advs_1.aroom[vars.play_1.winner - 1];
-					/* !NEW LOCATION. */
-					if (vars.prsvec_1.prscon <= 1)
-					{
-						GOTO = 2700;
-						continue;
-					}
+			case 300:
+				if (vars.prsvec_1.prso == vars.oindex_1.valua || vars.prsvec_1.prso == vars.oindex_1.every)
+				{
 
-					/* !ANY INPUT? */
-					if (np.parse_(vars.input_1.inbuf, true))
-					{
-						GOTO = 2150;
-						continue;
-					}
-				case 2700:
-					i = 341;
-					/* !FAILS. */
-					if (vars.play_1.telflg)
-					{
-						i = 604;
-					}
-					/* !GIVE RESPONSE. */
-					dsub.rspeak_(i);
-				case 2600:
-					vars.play_1.winner = vars.aindex_1.player;
-					/* !RESTORE STATE. */
-					vars.play_1.here = vars.advs_1.aroom[vars.play_1.winner - 1];
-					GOTO = 350;
-					continue;
-
-				case 2150:
-					if (actors.aappli_(vars.advs_1.aactio[vars.play_1.winner - 1]))
-					{
-						GOTO = 2400;
-						continue;
-					}
-					/* !ACTOR HANDLE? */
-					if (xvehic_(1))
-					{
-						GOTO = 2400;
-						continue;
-					}
-					/* !VEHICLE HANDLE? */
-					if (vars.prsvec_1.prso == vars.oindex_1.valua
-							|| vars.prsvec_1.prso == vars.oindex_1.every)
-					{
-						GOTO = 2900;
-						continue;
-					}
-					if (!verbs.vappli_(vars.prsvec_1.prsa))
-					{
-						GOTO = 2400;
-						continue;
-					}
-					/* !VERB HANDLE? */
-					/* case 2350: */
-//		    f = 
-					dsub.rappli_(vars.rooms_1.ractio[vars.play_1.here - 1]);
-
-				case 2400:
-					xendmv_(vars.play_1.telflg);
-					/* !DO END OF MOVE. */
-					GOTO = 2600;
-					continue;
-				/* !DONE. */
-
-				case 2900:
 					verbs.dverb1.valuac_(vars.oindex_1.valua);
-					/* !ALL OR VALUABLES. */
 					GOTO = 350;
 					continue;
+				}
+				if (!verbs.vappli_(vars.prsvec_1.prsa))
+				{
+					GOTO = 400;
+					continue;
+				}
+				/* VERB OK? */
+			case 350:
+				if (!vars.findex_1.echof && vars.play_1.here == vars.rindex_1.echor)
+				{
+					GOTO = do1000();
+					continue;
+				}
+//		    f = 
+				dsub.rappli_(vars.rooms_1.ractio[vars.play_1.here - 1]);
+
+			case 400:
+
+				xendmv_(vars.play_1.telflg);
+				/* DO END OF MOVE. */
+				if (!dso5.lit_(vars.play_1.here))
+				{
+					vars.prsvec_1.prscon = 1;
+				}
+				GOTO = 100;
+				continue;
+
 			}
 		} while (true);
 
 	} /* game_ */
 
+	/*************************/
+
+//				case 900:
+//					verbs.dverb1.valuac_(vars.oindex_1.valua);
+//					GOTO = 350;
+//					continue;
+	/*************************/
+
+	/* SPECIAL CASE-- ECHO ROOM. */
+	/* IF INPUT IS NOT 'ECHO' OR A DIRECTION, JUST ECHO. */
+
+	public int do1000()
+	{
+
+		do
+		{
+//			case 1000:
+			String buf = DMain.getInput();
+			np.rdline_(buf, vars.input_1.inbuf, 0);
+			++vars.state_1.moves;
+			/* CHARGE FOR MOVES. */
+			if (!new String(vars.input_1.inbuf).startsWith("ECHO"))
+			{
+				if(continue_echo())
+					continue;
+				else
+					return 300;
+			}
+
+			dsub.rspeak_(571);
+			/* KILL THE ECHO. */
+			vars.findex_1.echof = true;
+			vars.objcts_1.oflag2[vars.oindex_1.bar - 1] &= ~Vars.SCRDBT;
+			vars.prsvec_1.prswon = true;
+			/* FAKE OUT PARSER. */
+			vars.prsvec_1.prscon = 1;
+			/* FORCE NEW INPUT. */
+//				GOTO = 400;
+//				continue;
+			return 400;
+		} while (true);
+	}
+
+	/**************************/
+	public boolean continue_echo()
+	{
+		/* VALID EXIT? */
+//			case 1300:
+		vars.prsvec_1.prswon = np.parse_(vars.input_1.inbuf, false);
+		if (!vars.prsvec_1.prswon || vars.prsvec_1.prsa != vars.vindex_1.walkw)
+		{
+			Supp.println(new String(vars.input_1.inbuf));
+			vars.play_1.telflg = true;
+			/* INDICATE OUTPUT. */
+//					GOTO = 1000;
+//					continue;
+			return true;
+		}
+		if (dso3.findxt_(vars.prsvec_1.prso, vars.play_1.here))
+		{
+//					GOTO = 300;
+//					continue;
+			return false;
+		}
+
+		/* MORE ECHO ROOM. */
+//				case 1400:
+		Supp.println(new String(vars.input_1.inbuf));
+		vars.play_1.telflg = true;
+		/* INDICATE OUTPUT. */
+//				GOTO = 1000;
+//				continue;
+		return true;
+	}
+
+	/*************************/
+
+	/* SPECIAL CASE-- TELL <ACTOR>, NEW COMMAND */
+	/* NOTE THAT WE CANNOT BE IN THE ECHO ROOM. */
+
+	/* VAPPLI SUCCEEDS. */
+	public void do2000()
+	{
+//			case 2000:
+		if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.ACTRBT) != 0)
+		{
+//					GOTO = 2100;
+//					continue;
+			do2100();
+			return;
+		}
+		dsub.rspeak_(602);
+		/* CANT DO IT. */
+//				GOTO = 350;
+//				continue;
+//				return;
+	}
+
+	/*************************/
+
+	public void do2100()
+	{
+//			case 2100:
+		vars.play_1.winner = dsub.oactor_(vars.prsvec_1.prso);
+		/* NEW PLAYER. */
+		vars.play_1.here = vars.advs_1.aroom[vars.play_1.winner - 1];
+		/* NEW LOCATION. */
+		if (vars.prsvec_1.prscon <= 1)
+		{
+			do2700();
+			return;
+		}
+
+		/* ANY INPUT? */
+		if (np.parse_(vars.input_1.inbuf, true))
+		{
+//					
+			do2150();
+			return;
+		}
+		do2700();
+		return;
+	}
+
+	public void do2700()
+	{
+//			case 2700:
+		int i = 341;
+		/* FAILS. */
+		if (vars.play_1.telflg)
+		{
+			i = 604;
+		}
+		/* GIVE RESPONSE. */
+		dsub.rspeak_(i);
+//				case 2600:
+		vars.play_1.winner = vars.aindex_1.player;
+		/* RESTORE STATE. */
+		vars.play_1.here = vars.advs_1.aroom[vars.play_1.winner - 1];
+//				GOTO = 350;
+//				continue;
+	}
+
+	/******************************/
+	public void do2150()
+	{
+
+		if (actors.aappli_(vars.advs_1.aactio[vars.play_1.winner - 1]))
+		{
+			end_move();
+			return;
+		}
+
+		/* ACTOR HANDLE? */
+		if (xvehic_(1))
+		{
+			end_move();
+			return;
+		}
+		/* VEHICLE HANDLE? */
+		if (vars.prsvec_1.prso == vars.oindex_1.valua || vars.prsvec_1.prso == vars.oindex_1.every)
+		{
+			verbs.dverb1.valuac_(vars.oindex_1.valua);
+			/* ALL OR VALUABLES. */
+			return;
+		}
+		if (!verbs.vappli_(vars.prsvec_1.prsa))
+		{
+			end_move();
+			return;
+		}
+
+		/* VERB HANDLE? */
+
+		dsub.rappli_(vars.rooms_1.ractio[vars.play_1.here - 1]);
+		end_move();
+		return;
+	}
+
+	/* DONE. */
+	public void end_move()
+	{
+		xendmv_(vars.play_1.telflg);
+		/* DO END OF MOVE. */
+		vars.play_1.winner = vars.aindex_1.player;
+		/* RESTORE STATE. */
+		vars.play_1.here = vars.advs_1.aroom[vars.play_1.winner - 1];
+	}
+
+	/***********************************/
+
 	/* XENDMV- EXECUTE END OF MOVE FUNCTIONS. */
-	private void xendmv_(boolean flag) throws IOException
+	private void xendmv_(boolean flag)
 	{
 
 		if (!(flag))
 		{
 			dsub.rspeak_(341);
 		}
-		/* !DEFAULT REMARK. */
+		/* DEFAULT REMARK. */
 		if (vars.hack_1.thfact)
 		{
 			actors.thiefd_();
 		}
-		/* !THIEF DEMON. */
+		/* THIEF DEMON. */
 		if (vars.prsvec_1.prswon)
 		{
 			demons.fightd_();
 		}
-		/* !FIGHT DEMON. */
+		/* FIGHT DEMON. */
 		if (vars.hack_1.swdact)
 		{
 			demons.swordd_();
 		}
-		/* !SWORD DEMON. */
+		/* SWORD DEMON. */
 		if (vars.prsvec_1.prswon)
 		{
 
 			verbs.clockd_();
 		}
-		/* !CLOCK DEMON. */
+		/* CLOCK DEMON. */
 		if (vars.prsvec_1.prswon)
 		{
 			xvehic_(2);
 		}
-		/* !VEHICLE READOUT. */
+		/* VEHICLE READOUT. */
 	} /* xendmv_ */
 
 	/* XVEHIC- EXECUTE VEHICLE FUNCTION */
-	private boolean xvehic_(int n) throws IOException
+	private boolean xvehic_(int n)
 	{
 		/* System generated locals */
 		boolean ret_val;
@@ -376,9 +461,9 @@ public class Dgame
 		int av;
 
 		ret_val = false;
-		/* !ASSUME LOSES. */
+		/* ASSUME LOSES. */
 		av = vars.advs_1.avehic[vars.play_1.winner - 1];
-		/* !GET VEHICLE. */
+		/* GET VEHICLE. */
 		if (av != 0)
 		{
 			ret_val = objcts.oappli_(vars.objcts_1.oactio[av - 1], n);
@@ -492,9 +577,9 @@ public class Dgame
 		List<Integer> state = Arrays.asList(s);
 		Iterator<Integer> iter = state.iterator();
 
-		vars.vers_1.vmaj = iter.next();
-		vars.vers_1.vmin = iter.next();
-		vars.vers_1.vedit = iter.next();
+//		vars.vers_1.vmaj = iter.next();
+//		vars.vers_1.vmin = iter.next();
+//		vars.vers_1.vedit = iter.next();
 
 		vars.play_1.winner = iter.next();
 		vars.play_1.here = iter.next();

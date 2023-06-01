@@ -18,25 +18,25 @@ public class Ballop
 		this.game = game;
 	}
 
-	boolean ballop_(int arg) throws IOException
+	boolean ballop_(int arg)
 	{
 		/* System generated locals */
 		boolean ret_val;
 		int GOTO = 50;
 		ret_val = true;
-		/* !ASSUME WINS. */
+		/* ASSUME WINS. */
 		if (arg != 2)
 		{
 			GOTO = 200;
 		}
 		if (GOTO != 200)
 		{
-			/* !READOUT? */
+			/* READOUT? */
 			if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
 			{
 				return false;
 			}
-			/* !ONLY PROCESS LOOK. */
+			/* ONLY PROCESS LOOK. */
 			boolean skip = false;
 			if (vars.findex_1.binff != 0)
 			{
@@ -44,9 +44,9 @@ public class Ballop
 			}
 			if (!skip)
 			{
-				/* !INFLATED? */
+				/* INFLATED? */
 				game.dsub.rspeak_(543);
-				/* !NO. */
+				/* NO. */
 				GOTO = 100;
 			}
 		}
@@ -57,13 +57,13 @@ public class Ballop
 
 				case 50:
 					game.dsub.rspsub_(544, vars.objcts_1.odesc2[vars.findex_1.binff - 1]);
-					/* !YES. */
+					/* YES. */
 				case 100:
 					if (vars.findex_1.btief != 0)
 					{
 						game.dsub.rspeak_(545);
 					}
-					/* !HOOKED? */
+					/* HOOKED? */
 					return ret_val;
 
 				case 200:
@@ -72,21 +72,21 @@ public class Ballop
 						GOTO = 500;
 						continue;
 					}
-					/* !READIN? */
+					/* READIN? */
 					if (vars.prsvec_1.prsa != vars.vindex_1.walkw)
 					{
 						GOTO = 300;
 						continue;
 					}
-					/* !WALK? */
+					/* WALK? */
 					if (game.dso3.findxt_(vars.prsvec_1.prso, vars.play_1.here))
 					{
 						GOTO = 250;
 						continue;
 					}
-					/* !VALID EXIT? */
+					/* VALID EXIT? */
 					game.dsub.rspeak_(546);
-					/* !NO, JOKE. */
+					/* NO, JOKE. */
 					return ret_val;
 
 				case 250:
@@ -95,9 +95,9 @@ public class Ballop
 						GOTO = 275;
 						continue;
 					}
-					/* !TIED UP? */
+					/* TIED UP? */
 					game.dsub.rspeak_(547);
-					/* !YES, JOKE. */
+					/* YES, JOKE. */
 					return ret_val;
 
 				case 275:
@@ -106,7 +106,7 @@ public class Ballop
 						GOTO = 10;
 						continue;
 					}
-					/* !NORMAL EXIT? */
+					/* NORMAL EXIT? */
 					if ((vars.rooms_1.rflag[vars.curxt_1.xroom1 - 1] & Vars.RMUNG) == 0)
 					{
 						vars.state_1.bloc = vars.curxt_1.xroom1;
@@ -123,7 +123,7 @@ public class Ballop
 						continue;
 					}
 					game.dsub.rspsub_(548, vars.objcts_1.odesc2[vars.findex_1.binff - 1]);
-					/* !RECEP CONT TOO HOT. */
+					/* RECEP CONT TOO HOT. */
 					return ret_val;
 
 				case 350:
@@ -148,7 +148,7 @@ public class Ballop
 					{
 						vars.cevent_1.ctick[vars.cindex_1.cevbal - 1] = 3;
 					}
-					/* !HE GOT OUT, START BALLOON. */
+					/* HE GOT OUT, START BALLOON. */
 					return false;
 				case 600:
 					if (vars.prsvec_1.prsa != vars.vindex_1.burnw
@@ -158,7 +158,7 @@ public class Ballop
 						continue;
 					}
 					game.dsub.rspsub_(550, vars.objcts_1.odesc2[vars.prsvec_1.prso - 1]);
-					/* !LIGHT FIRE IN RECEP. */
+					/* LIGHT FIRE IN RECEP. */
 					vars.cevent_1.ctick[vars.cindex_1.cevbrn
 							- 1] = vars.objcts_1.osize[vars.prsvec_1.prso - 1] * 20;
 					vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] |= Vars.ONBT + Vars.FLAMBT

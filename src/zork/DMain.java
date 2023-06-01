@@ -15,22 +15,16 @@ public class DMain
 	/* COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142 */
 	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
 	/* WRITTEN BY R. M. SUPNIK */
-	public static void main(String[] args)
-			throws IOException /* void changed to int, Volker Blasius, 11jul93 */
+	public static void main(String[] args)			
 	{
-		/* 1) INITIALIZE DATA STRUCTURES */
-		/* 2) PLAY GAME */
-		Vars vars = new Vars();
-		DInit init = new DInit(vars);
-		Dgame game = new Dgame(vars, init);
+		Dgame game = new Dgame();
 
-		if (init.init_())
-		{
+		do
+		{		
+			game.start();
 			game.game_();
-		}
-		/* !IF INIT, PLAY GAME. */
-		Supp.exit_();
-		/* !DONE */
+		}while(true);
+
 	} /* MAIN__ */
 
 	/**
@@ -45,7 +39,7 @@ public class DMain
 	public static BufferedReader words_file = null;
 	public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-	public static String getInput() throws IOException
+	public static String getInput()
 	{
 		try
 		{
@@ -70,7 +64,13 @@ public class DMain
 		}
 		catch (FileNotFoundException fnfe)
 		{
+			fnfe.printStackTrace();
 		}
+		catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
+		
 		System.out.flush();
 		System.err.flush();
 		String word = "";
@@ -84,7 +84,16 @@ public class DMain
 		else
 		{
 			while (word.length() == 0)
-				word = reader.readLine();
+			{
+				try
+				{
+					word = reader.readLine();
+				} catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		return word;
 	}		 

@@ -84,7 +84,7 @@ public class DInit
 		}
 	}
 
-	public boolean init_() throws IOException
+	public boolean init_()
 	{
 		/* System generated locals */
 		boolean ret_val;
@@ -95,14 +95,12 @@ public class DInit
 		RandomAccessFile indxfile;
 		int mmax, omax, rmax, vmax, amax, cmax;
 
-		Supp.more_init();
-
 		/* NOW START INITIALIZATION PROPER */
 
 		ret_val = false;
-		/* !ASSUME INIT FAILS. */
+		/* ASSUME INIT FAILS. */
 		mmax = 1050;
-		/* !SET UP ARRAY LIMITS. */
+		/* SET UP ARRAY LIMITS. */
 		omax = 220;
 		rmax = 200;
 		vmax = 4;
@@ -112,7 +110,7 @@ public class DInit
 		r2max = 20;
 
 		vars.rmsg_1.mlnt = 0;
-		/* !INIT ARRAY COUNTERS. */
+		/* INIT ARRAY COUNTERS. */
 		vars.objcts_1.olnt = 0;
 		vars.rooms_1.rlnt = 0;
 		vars.vill_1.vlnt = 0;
@@ -122,7 +120,7 @@ public class DInit
 		vars.oroom2_1.r2lnt = 0;
 
 		vars.state_1.ltshft = 10;
-		/* !SET UP STATE VARIABLES. */
+		/* SET UP STATE VARIABLES. */
 		vars.state_1.mxscor = vars.state_1.ltshft;
 		vars.state_1.egscor = 0;
 		vars.state_1.egmxsc = 0;
@@ -134,35 +132,35 @@ public class DInit
 		vars.state_1.mungrm = 0;
 		vars.state_1.hs = 0;
 		vars.prsvec_1.prsa = 0;
-		/* !CLEAR PARSE VECTOR. */
+		/* CLEAR PARSE VECTOR. */
 		vars.prsvec_1.prsi = 0;
 		vars.prsvec_1.prso = 0;
 		vars.prsvec_1.prscon = 1;
 		vars.orphs_1.oflag = 0;
-		/* !CLEAR ORPHANS. */
+		/* CLEAR ORPHANS. */
 		vars.orphs_1.oact = 0;
 		vars.orphs_1.oslot = 0;
 		vars.orphs_1.oprep = 0;
 		vars.orphs_1.oname = 0;
 		vars.hack_1.thfflg = false;
-		/* !THIEF NOT INTRODUCED BUT */
+		/* THIEF NOT INTRODUCED BUT */
 		vars.hack_1.thfact = true;
-		/* !IS ACTIVE. */
+		/* IS ACTIVE. */
 		vars.hack_1.swdact = false;
-		/* !SWORD IS INACTIVE. */
+		/* SWORD IS INACTIVE. */
 		vars.hack_1.swdsta = 0;
-		/* !SWORD IS OFF. */
+		/* SWORD IS OFF. */
 
-		/* !INIT DB FILE POINTER. */
+		/* INIT DB FILE POINTER. */
 		vars.star_1.mbase = 0;
-		/* !INIT MELEE BASE. */
+		/* INIT MELEE BASE. */
 		/* INIT, PAGE 3 */
 
 		/* INIT ALL ARRAYS. */
 
 		for (i = 1; i <= cmax; ++i)
 		{
-			/* !CLEAR CLOCK EVENTS */
+			/* CLEAR CLOCK EVENTS */
 			vars.cevent_1.cflag[i - 1] = false;
 			vars.cevent_1.ctick[i - 1] = 0;
 			vars.cevent_1.cactio[i - 1] = 0;
@@ -170,14 +168,14 @@ public class DInit
 		}
 
 		vars.findex_1.buoyf = true;
-		/* !SOME START AS TRUE. */
+		/* SOME START AS TRUE. */
 		vars.findex_1.egyptf = true;
 		vars.findex_1.cagetf = true;
 		vars.findex_1.mr1f = true;
 		vars.findex_1.mr2f = true;
 		vars.findex_1.follwf = true;
 		vars.findex_1.ormtch = 4;
-		/* !NUMBER OF MATCHES. */
+		/* NUMBER OF MATCHES. */
 		vars.findex_1.lcell = 1;
 		vars.findex_1.pnumb = 1;
 		vars.findex_1.mdir = 270;
@@ -186,7 +184,7 @@ public class DInit
 
 		for (i = 1; i <= r2max; ++i)
 		{
-			/* !CLEAR ROOM 2 ARRAY. */
+			/* CLEAR ROOM 2 ARRAY. */
 			vars.oroom2_1.rroom2[i - 1] = 0;
 			vars.oroom2_1.oroom2[i - 1] = 0;
 			/* L15: */
@@ -194,14 +192,14 @@ public class DInit
 
 		for (i = 1; i <= xmax; ++i)
 		{
-			/* !CLEAR TRAVEL ARRAY. */
+			/* CLEAR TRAVEL ARRAY. */
 			vars.exits_1.travel[i - 1] = 0;
 			/* L20: */
 		}
 
 		for (i = 1; i <= vmax; ++i)
 		{
-			/* !CLEAR VILLAINS ARRAYS. */
+			/* CLEAR VILLAINS ARRAYS. */
 			vars.vill_1.vopps[i - 1] = 0;
 			vars.vill_1.vprob[i - 1] = 0;
 			vars.vill_1.villns[i - 1] = 0;
@@ -212,7 +210,7 @@ public class DInit
 
 		for (i = 1; i <= omax; ++i)
 		{
-			/* !CLEAR OBJECT ARRAYS. */
+			/* CLEAR OBJECT ARRAYS. */
 			vars.objcts_1.odesc1[i - 1] = 0;
 			vars.objcts_1.odesc2[i - 1] = 0;
 			vars.objcts_1.odesco[i - 1] = 0;
@@ -232,7 +230,7 @@ public class DInit
 
 		for (i = 1; i <= rmax; ++i)
 		{
-			/* !CLEAR ROOM ARRAYS. */
+			/* CLEAR ROOM ARRAYS. */
 			vars.rooms_1.rdesc1[i - 1] = 0;
 			vars.rooms_1.rdesc2[i - 1] = 0;
 			vars.rooms_1.ractio[i - 1] = 0;
@@ -244,14 +242,14 @@ public class DInit
 
 		for (i = 1; i <= mmax; ++i)
 		{
-			/* !CLEAR MESSAGE DIRECTORY. */
+			/* CLEAR MESSAGE DIRECTORY. */
 			vars.rmsg_1.rtext[i - 1] = 0;
 			/* L60: */
 		}
 
 		for (i = 1; i <= amax; ++i)
 		{
-			/* !CLEAR ADVENTURER'S ARRAYS. */
+			/* CLEAR ADVENTURER'S ARRAYS. */
 			vars.advs_1.aroom[i - 1] = 0;
 			vars.advs_1.ascore[i - 1] = 0;
 			vars.advs_1.avehic[i - 1] = 0;
@@ -266,24 +264,13 @@ public class DInit
 		vars.debug_1.prsflg = 0;
 		vars.debug_1.gdtflg = 0;
 
-		if (Vars.ALLOW_GDT)
-		{
-
-			/* allow setting gdtflg true if user id matches wizard id */
-			/* this way, the wizard doesn't have to recompile to use gdt */
-
-			if (Local.wizard())
-			{
-				vars.debug_1.gdtflg = 1;
-			}
-
-		} /* ALLOW_GDT */
-
 		vars.screen_1.fromdr = 0;
-		/* !INIT SCOL GOODIES. */
+		/* INIT SCOL GOODIES. */
 		vars.screen_1.scolrm = 0;
 		vars.screen_1.scolac = 0;
 		/* INIT, PAGE 4 */
+		try
+		{
 
 		/* NOW RESTORE FROM EXISTING INDEX FILE. */
 		dbfile = new RandomAccessFile(new File(LOCALTEXTFILE), "r");
@@ -294,7 +281,7 @@ public class DInit
 		j = rdint(indxfile);
 		k = rdint(indxfile);
 
-		/* !GET VERSION. */
+		/* GET VERSION. */
 		if (i != vars.vers_1.vmaj || j != vars.vers_1.vmin)
 		{
 			error1925(i, j, k);
@@ -364,7 +351,7 @@ public class DInit
 		/* Save location of start of message text */
 		vars.rmsg_1.mrloc = indxfile.getFilePointer();
 
-		/* !INIT DONE. */
+		/* INIT DONE. */
 
 		/* THE INTERNAL DATA BASE IS NOW ESTABLISHED. */
 		/* SET UP TO PLAY THE GAME. */
@@ -377,6 +364,11 @@ public class DInit
 		vars.hack_1.thfpos = vars.objcts_1.oroom[vars.oindex_1.thief - 1];
 		vars.state_1.bloc = vars.objcts_1.oroom[vars.oindex_1.ballo - 1];
 		ret_val = true;
+		}
+		catch(IOException ioe)
+		{
+			ioe.printStackTrace();			
+		}
 
 		return ret_val;
 	}
@@ -386,10 +378,8 @@ public class DInit
 	{
 		if (Vars.DEBUG)
 		{
-			Supp.more_output(null);
-			System.out.println(LOCALTEXTFILE + " is version " + i + "." + j + "" + (char) k + ".");
-			Supp.more_output(null);
-			System.out.println("I require version " + vars.vers_1.vmaj + "." + vars.vers_1.vmin
+			Supp.errorln(LOCALTEXTFILE + " is version " + i + "." + j + "" + (char) k + ".");
+			Supp.errorln("I require version " + vars.vers_1.vmaj + "." + vars.vers_1.vmin
 					+ (char) vars.vers_1.vedit + ".");
 			error1975();
 		}
@@ -399,8 +389,7 @@ public class DInit
 	{
 		if (Vars.DEBUG)
 		{
-			Supp.more_output(null);
-			System.out.println("I can't open " + LOCALTEXTFILE + ".");
+			Supp.errorln("I can't open " + LOCALTEXTFILE + ".");
 		}
 		error1975();
 	}
@@ -409,17 +398,17 @@ public class DInit
 	{
 		if (Vars.DEBUG)
 		{
-			Supp.more_output("Suddenly a sinister, wraithlike figure appears before you,");
-			Supp.more_output("seeming to float in the air.  In a low, sorrowful voice he says,");
-			Supp.more_output("\"Alas, the very nature of the world has changed, and the dungeon");
-			Supp.more_output(
+			Supp.println("Suddenly a sinister, wraithlike figure appears before you,");
+			Supp.println("seeming to float in the air.  In a low, sorrowful voice he says,");
+			Supp.println("\"Alas, the very nature of the world has changed, and the dungeon");
+			Supp.println(
 					"cannot be found.  All must now pass away.\"  Raising his oaken staff");
-			Supp.more_output("in farewell, he fades into the spreading darkness.  In his place");
-			Supp.more_output("appears a tastefully lettered sign reading:");
-			Supp.more_output("");
-			Supp.more_output("                       INITIALIZATION FAILURE");
-			Supp.more_output("");
-			Supp.more_output("The darkness becomes all encompassing, and your vision fails.");
+			Supp.println("in farewell, he fades into the spreading darkness.  In his place");
+			Supp.println("appears a tastefully lettered sign reading:");
+			Supp.println("");
+			Supp.println("                       INITIALIZATION FAILURE");
+			Supp.println("");
+			Supp.println("The darkness becomes all encompassing, and your vision fails.");
 		}
 	}
 

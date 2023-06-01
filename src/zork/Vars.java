@@ -21,7 +21,6 @@ public class Vars
 //	#endif
 	
 	public static final boolean DEBUG = true;
-	public static final boolean ALLOW_GDT = true;
 
 	public class prsvec_
 	{
@@ -1145,15 +1144,11 @@ public class Vars
 	public rmsg_ rmsg_1 = new rmsg_();
 
 	public class vers_ {
-	   int vmaj = 2;
-	   int vmin = 7;
-	   int vedit = 'A';
+	   public final int vmaj = 2;
+	   public final int vmin = 7;
+	   public final int vedit = 'A';
 	};
-//	vers_
-//	#ifdef INIT
-//	= { 2, 7, 'A' }
-//	#endif
-//	;
+
 
 	public vers_ vers_1 = new vers_();
 

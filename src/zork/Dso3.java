@@ -18,7 +18,7 @@ public class Dso3
 		this.game = game;
 	}
 
-	boolean findxt_(int dir, int rm) throws IOException
+	boolean findxt_(int dir, int rm)
 	{
 		/* System generated locals */
 		boolean ret_val;
@@ -28,20 +28,20 @@ public class Dso3
 		int xxxflg;
 
 		ret_val = true;
-		/* !ASSUME WINS. */
+		/* ASSUME WINS. */
 		xi = vars.rooms_1.rexit[rm - 1];
-		/* !FIND FIRST ENTRY. */
+		/* FIND FIRST ENTRY. */
 		if (xi == 0)
 		{
-			/* !YES, LOSE. */
+			/* YES, LOSE. */
 			return false;
 		}
-		/* !NO EXITS? */
+		/* NO EXITS? */
 
 		do
 		{
 			i = vars.exits_1.travel[xi - 1];
-			/* !GET ENTRY. */
+			/* GET ENTRY. */
 			vars.curxt_1.xroom1 = i & vars.xpars_1.xrmask;
 			/*
 			 * mask to 16-bits to get rid of sign extension problems with 32-bit ints
@@ -50,26 +50,26 @@ public class Dso3
 			vars.curxt_1.xtype = ((i & xxxflg) / vars.xpars_1.xfshft & vars.xpars_1.xfmask) + 1;
 			switch (vars.curxt_1.xtype)
 			{
-				case 4:
-				case 3:
-					vars.curxt_1.xobj = vars.exits_1.travel[xi + 1] & vars.xpars_1.xrmask;
-					vars.curxt_1.xactio = vars.exits_1.travel[xi + 1] / vars.xpars_1.xashft;
-				case 2:
-					vars.curxt_1.xstrng = vars.exits_1.travel[xi];
-				case 1:
-					xi += vars.xpars_1.xelnt[vars.curxt_1.xtype - 1];
-					/* !ADVANCE TO NEXT ENTRY. */
-					if ((i & vars.xpars_1.xdmask) == dir)
-					{
-						return ret_val;
-					}
-					break;
-				default:
-					/* !BRANCH ON ENTRY. */
-					game.dsub.bug_(10, vars.curxt_1.xtype);
+			case 4:
+			case 3:
+				vars.curxt_1.xobj = vars.exits_1.travel[xi + 1] & vars.xpars_1.xrmask;
+				vars.curxt_1.xactio = vars.exits_1.travel[xi + 1] / vars.xpars_1.xashft;
+			case 2:
+				vars.curxt_1.xstrng = vars.exits_1.travel[xi];
+			case 1:
+				xi += vars.xpars_1.xelnt[vars.curxt_1.xtype - 1];
+				/* ADVANCE TO NEXT ENTRY. */
+				if ((i & vars.xpars_1.xdmask) == dir)
+				{
+					return ret_val;
+				}
+				break;
+			default:
+				/* BRANCH ON ENTRY. */
+				game.dsub.bug_(10, vars.curxt_1.xtype);
 			}
 
-			/* !DOOR/CEXIT/NEXIT - STRING. */
+			/* DOOR/CEXIT/NEXIT - STRING. */
 		} while ((i & vars.xpars_1.xlflag) == 0);
 		return ret_val;
 	} /* findxt_ */
@@ -87,12 +87,11 @@ public class Dso3
 
 		/* OBJECTS */
 		ret_val = 0;
-		/* !ASSUME NOTHING. */
+		/* ASSUME NOTHING. */
 		for (i = 1; i <= vars.objcts_1.olnt; ++i)
 		{
-			/* !LOOP */
-			if ((rm == 0 || vars.objcts_1.oroom[i - 1] != rm)
-					&& (adv == 0 || vars.objcts_1.oadv[i - 1] != adv)
+			/* LOOP */
+			if ((rm == 0 || vars.objcts_1.oroom[i - 1] != rm) && (adv == 0 || vars.objcts_1.oadv[i - 1] != adv)
 					&& (con == 0 || vars.objcts_1.ocan[i - 1] != con))
 			{
 				continue;
@@ -106,17 +105,16 @@ public class Dso3
 			}
 
 			boolean a = (~(nocare_int) & (vars.objcts_1.oflag1[i - 1] & Vars.TAKEBT)) == 0;
-			if (!(a || (vars.objcts_1.oflag1[i - 1] & f1) == 0
-					&& (vars.objcts_1.oflag2[i - 1] & f2) == 0))
+			if (!(a || (vars.objcts_1.oflag1[i - 1] & f1) == 0 && (vars.objcts_1.oflag2[i - 1] & f2) == 0))
 			{
 
 				if (ret_val != 0)
 				{
 					return -ret_val;
 				}
-				/* !ALREADY GOT SOMETHING? */
+				/* ALREADY GOT SOMETHING? */
 				ret_val = i;
-				/* !NOTE MATCH. */
+				/* NOTE MATCH. */
 			}
 			/* DOES OBJECT CONTAIN A MATCH? */
 
@@ -126,11 +124,9 @@ public class Dso3
 			}
 			for (j = 1; j <= vars.objcts_1.olnt; ++j)
 			{
-				/* !NO, SEARCH CONTENTS. */
-				if (vars.objcts_1.ocan[j - 1] != i
-						|| (vars.objcts_1.oflag1[j - 1] & Vars.VISIBT) == 0
-						|| (vars.objcts_1.oflag1[j - 1] & f1) == 0
-								&& (vars.objcts_1.oflag2[j - 1] & f2) == 0)
+				/* NO, SEARCH CONTENTS. */
+				if (vars.objcts_1.ocan[j - 1] != i || (vars.objcts_1.oflag1[j - 1] & Vars.VISIBT) == 0
+						|| (vars.objcts_1.oflag1[j - 1] & f1) == 0 && (vars.objcts_1.oflag2[j - 1] & f2) == 0)
 				{
 					continue;
 				}
@@ -148,33 +144,34 @@ public class Dso3
 
 	/* YESNO- OBTAIN YES/NO ANSWER */
 	/* YES-IS-TRUE=YESNO(QUESTION,YES-STRING,NO-STRING) */
-	boolean yesno_(int q, int y, int n) throws IOException
+	boolean yesno_(int q, int y, int n)
 	{
 		/* Local variables */
 		do
 		{
+			
 			game.dsub.rspeak_(q);
-			/* !ASK */
+			/* ASK */
 			System.out.flush();
 			String ans = DMain.getInput();
-			Supp.more_input();
-			/* !GET ANSWER */
+			/* GET ANSWER */
 			if (ans.length() > 0 && (ans.charAt(0) == 'Y' || ans.charAt(0) == 'y'))
 			{
-				/* !YES, */
+				/* YES, */
 				game.dsub.rspeak_(y);
-				/* !OUT WITH IT. */
+				/* OUT WITH IT. */
 				return true;
 			}
 			if (ans.length() > 0 && (ans.charAt(0) == 'N' || ans.charAt(0) == 'n'))
 			{
-				/* !NO, */
+				/* NO, */
 				game.dsub.rspeak_(n);
-				/* !LIKEWISE. */
+				/* LIKEWISE. */
 				return false;
 			}
 			game.dsub.rspeak_(6);
-			/* !SCOLD. */
+			
+			/* SCOLD. */
 		} while (true);
 
 	} /* yesno_ */

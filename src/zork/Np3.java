@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Np3
 {
 	/* SYNMCH--	SYNTAX MATCHER */
@@ -21,7 +19,7 @@ public class Np3
 	}
 
 	/* THIS ROUTINE DETAILS ON BIT 4 OF PRSFLG */
-	boolean synmch_() throws IOException
+	boolean synmch_()
 	{
 		/* Initialized data */
 
@@ -42,11 +40,11 @@ public class Np3
 
 		ret_val = false;
 		j = np.parse.pv_1.act;
-		/* !SET UP PTR TO SYNTAX. */
+		/* SET UP PTR TO SYNTAX. */
 		drive = 0;
-		/* !NO DEFAULT. */
+		/* NO DEFAULT. */
 		dforce[0] = 0;
-		/* !NO FORCED DEFAULT. */
+		/* NO FORCED DEFAULT. */
 		qprep = vars.orphs_1.oflag & vars.orphs_1.oprep;
 
 		int GOTO = 100;
@@ -58,20 +56,20 @@ public class Np3
 
 				case 100:
 					j += 2;
-					/* !FIND START OF SYNTAX. */
+					/* FIND START OF SYNTAX. */
 					if (np.parse.vvoc[j - 1] <= 0 || np.parse.vvoc[j - 1] >= r50min)
 					{
 						GOTO = 100;
 						continue start;
 					}
 					limit = j + np.parse.vvoc[j - 1] + 1;
-					/* !COMPUTE LIMIT. */
+					/* COMPUTE LIMIT. */
 					++j;
-					/* !ADVANCE TO NEXT. */
+					/* ADVANCE TO NEXT. */
 
 				case 200:
 					unpack_(j, newj);
-					/* !UNPACK SYNTAX. */
+					/* UNPACK SYNTAX. */
 					
 					sprep = np.parse.syntax_1.dobj & Parse.VPMASK;
 					if (!syneql_(np.parse.pv_1.p1(), np.parse.pv_1.o1(), np.parse.syntax_1.dobj,
@@ -100,7 +98,7 @@ public class Np3
 						GOTO = 500;
 						continue start;
 					}
-					/* !IF O2=0, SET DFLT. */
+					/* IF O2=0, SET DFLT. */
 				case 1000:
 					if (np.parse.pv_1.o1() != 0)
 					{
@@ -112,13 +110,13 @@ public class Np3
 						GOTO = 500;
 						continue start;
 					}
-					/* !IF O1=0, SET DFLT. */
+					/* IF O1=0, SET DFLT. */
 				case 500:
 					if (qprep == 0 || qprep == sprep)
 					{
 						dforce[0] = j;
 					}
-					/* !IF PREP MCH. */
+					/* IF PREP MCH. */
 					if ((np.parse.syntax_1.vflag & Parse.SDRIV) != 0)
 					{
 						drive = j;
@@ -130,7 +128,7 @@ public class Np3
 						GOTO = 200;
 						continue start;
 					}
-					/* !MORE TO DO? */
+					/* MORE TO DO? */
 					/* MATCH HAS FAILED. IF DEFAULT SYNTAX EXISTS, TRY TO SNARF */
 					/* ORPHANS OR GWIMS, OR MAKE NEW ORPHANS. */
 
@@ -138,15 +136,15 @@ public class Np3
 					{
 						drive = dforce[0];
 					}
-					/* !NO DRIVER? USE FORCE. */
+					/* NO DRIVER? USE FORCE. */
 					if (drive == 0)
 					{
 						GOTO = 10000;
 						continue start;
 					}
-					/* !ANY DRIVER? */
+					/* ANY DRIVER? */
 					unpack_(drive, dforce);
-					/* !UNPACK DFLT SYNTAX. */
+					/* UNPACK DFLT SYNTAX. */
 
 					/* TRY TO FILL DIRECT OBJECT SLOT IF THAT WAS THE PROBLEM. */
 
@@ -164,7 +162,7 @@ public class Np3
 						GOTO = 3500;
 						continue start;
 					}
-					/* !ANY ORPHAN? */
+					/* ANY ORPHAN? */
 					if (syneql_(np.parse.pv_1.p1(), np.parse.pv_1.o1(), np.parse.syntax_1.dobj,
 							np.parse.syntax_1.dfl1, np.parse.syntax_1.dfl2))
 					{
@@ -177,13 +175,13 @@ public class Np3
 				case 3500:
 					np.parse.pv_1.o1(
 							gwim_(np.parse.syntax_1.dobj, np.parse.syntax_1.dfw1, np.parse.syntax_1.dfw2));
-					/* !GET GWIM. */
+					/* GET GWIM. */
 					if (np.parse.pv_1.o1() > 0)
 					{
 						GOTO = 4000;
 						continue start;
 					}
-					/* !TEST RESULT. */
+					/* TEST RESULT. */
 					i__1 = np.parse.syntax_1.dobj & Parse.VPMASK;
 					np.orphan_(-1, np.parse.pv_1.act, 0, i__1, 0);
 					game.dsub.rspeak_(623);
@@ -198,7 +196,7 @@ public class Np3
 					}
 					np.parse.pv_1.o2(
 							gwim_(np.parse.syntax_1.iobj, np.parse.syntax_1.ifw1, np.parse.syntax_1.ifw2));
-					/* !GWIM. */
+					/* GWIM. */
 					if (np.parse.pv_1.o2() > 0)
 					{
 						GOTO = 6000;
@@ -216,7 +214,7 @@ public class Np3
 				/* TOTAL CHOMP */
 				case 10000:
 					game.dsub.rspeak_(601);
-					/* !CANT DO ANYTHING. */
+					/* CANT DO ANYTHING. */
 					return ret_val;
 				/* SYNMCH, PAGE 3 */
 
@@ -232,7 +230,7 @@ public class Np3
 						}
 					}
 					j = np.parse.pv_1.o1();
-					/* !YES. */
+					/* YES. */
 					np.parse.pv_1.o1(np.parse.pv_1.o2());
 					np.parse.pv_1.o2(j);
 
@@ -241,19 +239,19 @@ public class Np3
 					vars.prsvec_1.prso = np.parse.pv_1.o1();
 					if(vars.prsvec_1.prso == 151)
 						System.out.print("");
-					/* !GET DIR OBJ. */
+					/* GET DIR OBJ. */
 					vars.prsvec_1.prsi = np.parse.pv_1.o2();
-					/* !GET IND OBJ. */
+					/* GET IND OBJ. */
 					if (!takeit_(vars.prsvec_1.prso, np.parse.syntax_1.dobj))
 					{
 						return ret_val;
 					}
-					/* !TRY TAKE. */
+					/* TRY TAKE. */
 					if (!takeit_(vars.prsvec_1.prsi, np.parse.syntax_1.iobj))
 					{
 						return ret_val;
 					}
-					/* !TRY TAKE. */
+					/* TRY TAKE. */
 					ret_val = true;
 					return ret_val;
 
@@ -270,7 +268,7 @@ public class Np3
 
 		for (i = 1; i <= 11; ++i)
 		{
-			/* !CLEAR SYNTAX. */
+			/* CLEAR SYNTAX. */
 			np.parse.syntax_1.syn(i - 1, 0);
 			/* case 10: */
 		}
@@ -284,7 +282,7 @@ public class Np3
 			return;
 		}
 		np.parse.syntax_1.dfl1 = -1;
-		/* !ASSUME STD. */
+		/* ASSUME STD. */
 		np.parse.syntax_1.dfl2 = -1;
 		if ((np.parse.syntax_1.vflag & Parse.SSTD) == 0)
 		{
@@ -294,7 +292,7 @@ public class Np3
 		if (GOTO != 100)
 		{
 			np.parse.syntax_1.dfw1 = -1;
-			/* !YES. */
+			/* YES. */
 			np.parse.syntax_1.dfw2 = -1;
 			np.parse.syntax_1.dobj = Parse.VABIT + Parse.VRBIT + Parse.VFBIT;
 			GOTO = 200;
@@ -306,7 +304,7 @@ public class Np3
 			{
 				case 100:
 					np.parse.syntax_1.dobj = np.parse.vvoc[j[0] - 1];
-					/* !NOT STD. */
+					/* NOT STD. */
 					np.parse.syntax_1.dfw1 = np.parse.vvoc[j[0]];
 					np.parse.syntax_1.dfw2 = np.parse.vvoc[j[0] + 1];
 					j[0] += 3;
@@ -318,7 +316,7 @@ public class Np3
 						}
 					}
 					np.parse.syntax_1.dfl1 = np.parse.syntax_1.dfw1;
-					/* !YES. */
+					/* YES. */
 					np.parse.syntax_1.dfl2 = np.parse.syntax_1.dfw2;
 
 				case 200:
@@ -327,7 +325,7 @@ public class Np3
 						return;
 					}
 					np.parse.syntax_1.ifl1 = -1;
-					/* !ASSUME STD. */
+					/* ASSUME STD. */
 					np.parse.syntax_1.ifl2 = -1;
 					np.parse.syntax_1.iobj = np.parse.vvoc[j[0] - 1];
 					np.parse.syntax_1.ifw1 = np.parse.vvoc[j[0]];
@@ -338,7 +336,7 @@ public class Np3
 						return;
 					}
 					np.parse.syntax_1.ifl1 = np.parse.syntax_1.ifw1;
-					/* !YES. */
+					/* YES. */
 					np.parse.syntax_1.ifl2 = np.parse.syntax_1.ifw2;
 //		throw new RuntimeException("Np3.unpack_ not impl");
 
@@ -355,7 +353,7 @@ public class Np3
 
 		if (obj != 0)
 		{
-			/* !ANY OBJECT? */
+			/* ANY OBJECT? */
 			ret_val = prep == (sprep & Parse.VPMASK) && (sfl1 & vars.objcts_1.oflag1[obj - 1]
 					| sfl2 & vars.objcts_1.oflag2[obj - 1]) != 0;
 			return ret_val;
@@ -367,7 +365,7 @@ public class Np3
 	} /* syneql_ */
 
 	/* TAKEIT-	PARSER BASED TAKE OF OBJECT */
-	private boolean takeit_(int obj, int sflag) throws IOException
+	private boolean takeit_(int obj, int sflag)
 	{
 		/* System generated locals */
 		boolean ret_val;
@@ -379,18 +377,18 @@ public class Np3
 		ret_val = false;
 
 		int GOTO = 500;
-		/* !ASSUME LOSES. */
+		/* ASSUME LOSES. */
 		if (obj == 0 || obj > vars.star_1.strbit)
 		{
 			GOTO = 4000;
 		}
 		if (GOTO != 4000)
 		{
-			/* !NULL/STARS WIN. */
+			/* NULL/STARS WIN. */
 			odo2 = vars.objcts_1.odesc2[obj - 1];
-			/* !GET DESC. */
+			/* GET DESC. */
 			x = vars.objcts_1.ocan[obj - 1];
-			/* !GET CONTAINER. */
+			/* GET CONTAINER. */
 			if (x == 0 || (sflag & Parse.VFBIT) == 0)
 			{
 				GOTO = 500;				
@@ -405,7 +403,7 @@ public class Np3
 			if (GOTO != 500)
 			{
 				game.dsub.rspsub_(566, odo2);
-				/* !CANT REACH. */
+				/* CANT REACH. */
 				return ret_val;
 			}
 		}
@@ -433,7 +431,7 @@ public class Np3
 						GOTO = 4000;
 						continue loop;
 					}
-					/* !IF NOT, OK. */
+					/* IF NOT, OK. */
 
 					/* ITS IN THE ROOM AND CAN BE TAKEN. */
 
@@ -484,7 +482,7 @@ public class Np3
 						GOTO = 3500;
 						continue loop;
 					}
-					/* !TAKE VEHICLE? */
+					/* TAKE VEHICLE? */
 					game.dsub.rspeak_(672);
 					return ret_val;
 
@@ -497,19 +495,19 @@ public class Np3
 						continue loop;
 					}
 					game.dsub.rspeak_(558);
-					/* !TOO BIG. */
+					/* TOO BIG. */
 					return ret_val;
 
 				case 3700:
 					game.dsub.newsta_(obj, 559, 0, 0, vars.play_1.winner);
-					/* !DO TAKE. */
+					/* DO TAKE. */
 					vars.objcts_1.oflag2[obj - 1] |= Vars.TCHBT;
 					game.dso2.scrupd_(vars.objcts_1.ofval[obj - 1]);
 					vars.objcts_1.ofval[obj - 1] = 0;
 
 				case 4000:
 					ret_val = true;
-					/* !SUCCESS. */
+					/* SUCCESS. */
 					return ret_val;
 			}
 		} while (true);
@@ -517,7 +515,7 @@ public class Np3
 	} /* takeit_ */
 
 	/* GWIM- GET WHAT I MEAN IN AMBIGOUS SITUATIONS */
-	private int gwim_(int sflag, int sfw1, int sfw2) throws IOException
+	private int gwim_(int sflag, int sfw1, int sfw2)
 	{
 		/* System generated locals */
 		int ret_val;
@@ -531,7 +529,7 @@ public class Np3
 		/* GWIM, PAGE 2 */
 
 		ret_val = -1;
-		/* !ASSUME LOSE. */
+		/* ASSUME LOSE. */
 		av = vars.advs_1.avehic[vars.play_1.winner - 1];
 		nobj = 0;
 		nocare = (sflag & Parse.VCBIT) == 0;
@@ -574,7 +572,7 @@ public class Np3
 						GOTO = 200;
 						continue loop2;
 					}
-					/* !TEST RESULT. */
+					/* TEST RESULT. */
 
 					/* ROBJ > 0 */
 
@@ -590,18 +588,18 @@ public class Np3
 						GOTO = 50;
 						continue loop2;
 					}
-					/* !UNREACHABLE? TRY NOBJ */
+					/* UNREACHABLE? TRY NOBJ */
 				case 300:
 					if (nobj != 0)
 					{
 						return ret_val;
 					}
-					/* !IF AMBIGUOUS, RETURN. */
+					/* IF AMBIGUOUS, RETURN. */
 					if (!takeit_(robj, sflag))
 					{
 						return ret_val;
 					}
-					/* !IF UNTAKEABLE, RETURN */
+					/* IF UNTAKEABLE, RETURN */
 					ret_val = robj;
 				case 500:
 					return ret_val;
