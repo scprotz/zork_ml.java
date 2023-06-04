@@ -22,7 +22,13 @@ public class DMain
 		do
 		{		
 			game.start();
-			game.game_();
+			
+			while(true)
+			{
+				String action = getInput();
+				game.step(action);
+//				game.game_();
+			}
 		}while(true);
 
 	} /* MAIN__ */

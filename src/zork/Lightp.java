@@ -109,7 +109,7 @@ public class Lightp
 					/* ANY FLAME? */
 					game.dsub.rspeak_(516);
 					/* NO, LOSE. */
-					vars.prsvec_1.prswon = false;
+					vars.prsvec_1.parsed_successfully = false;
 					return ret_val;
 
 				case 19400:

@@ -1136,7 +1136,7 @@ public class Verbs
 					}
 					game.dsub.rspeak_(516);
 					/* NOTHING TO FILL WITH. */
-					vars.prsvec_1.prswon = false;
+					vars.prsvec_1.parsed_successfully = false;
 					/* YOU LOSE. */
 					return ret_val;
 
