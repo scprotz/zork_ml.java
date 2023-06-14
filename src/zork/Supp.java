@@ -65,16 +65,6 @@ public class Supp
 	 * returns (if all computers had vprintf I would just it, but they
 	 * probably don't).
 	 */
-
-	 
-	
-//	public static void more_output(String z)
-//	{
-//		if (z != null && z.length() > 0)
-//			System.out.println(new String(z));
-//
-//	}
-	
 	public static void print(String str)
 	{
 		System.out.print(str);

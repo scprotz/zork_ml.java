@@ -2,7 +2,7 @@ package zork;
 
 import java.io.IOException;
 
-public class Dsub
+public class Dsub implements Actions
 {
 
 	Vars vars = null;
@@ -512,7 +512,7 @@ public class Dsub
 				/* PLAYER JUST MOVE? */
 				rspeak_(2);
 				/* NO, JUST SAY DONE. */
-				vars.prsvec_1.prsa = vars.vindex_1.walkiw;
+				vars.prsvec_1.prsa = WALK_IN;
 				/* SET UP WALK IN ACTION. */
 				return ret_val;
 
@@ -560,7 +560,7 @@ public class Dsub
 					continue;
 				}
 				/* IF GOT DESC, SKIP. */
-				vars.prsvec_1.prsa = vars.vindex_1.lookw;
+				vars.prsvec_1.prsa = LOOK;
 				/* PRETEND LOOK AROUND. */
 				if (!rappli_(ra))
 				{
@@ -568,7 +568,7 @@ public class Dsub
 					continue;
 				}
 				/* ROOM HANDLES, NEW DESC? */
-				vars.prsvec_1.prsa = vars.vindex_1.foow;
+				vars.prsvec_1.prsa = FOO;
 				/* NOP PARSER. */
 				GOTO = 500;
 				continue;
@@ -594,7 +594,7 @@ public class Dsub
 					return ret_val;
 				}
 				/* ANYTHING MORE? */
-				vars.prsvec_1.prsa = vars.vindex_1.walkiw;
+				vars.prsvec_1.prsa = WALK_IN;
 				/* GIVE HIM A SURPISE. */
 				if (!rappli_(ra))
 				{
@@ -602,7 +602,7 @@ public class Dsub
 					continue;
 				}
 				/* ROOM HANDLES, NEW DESC? */
-				vars.prsvec_1.prsa = vars.vindex_1.foow;
+				vars.prsvec_1.prsa = FOO;
 				return ret_val;
 			}
 		} while (true);

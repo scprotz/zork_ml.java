@@ -1,8 +1,6 @@
 package zork;
 
-import java.io.IOException;
-
-public class Ballop
+public class Ballop implements Actions
 {
 	/* BALLOP- BALLOON FUNCTION */
 
@@ -32,7 +30,7 @@ public class Ballop
 		if (GOTO != 200)
 		{
 			/* READOUT? */
-			if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+			if (vars.prsvec_1.prsa != LOOK)
 			{
 				return false;
 			}
@@ -73,7 +71,7 @@ public class Ballop
 						continue;
 					}
 					/* READIN? */
-					if (vars.prsvec_1.prsa != vars.vindex_1.walkw)
+					if (vars.prsvec_1.prsa != WALK)
 					{
 						GOTO = 300;
 						continue;
@@ -116,7 +114,7 @@ public class Ballop
 					return ret_val;
 
 				case 300:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew
+					if (vars.prsvec_1.prsa != TAKE
 							|| vars.prsvec_1.prso != vars.findex_1.binff)
 					{
 						GOTO = 350;
@@ -127,7 +125,7 @@ public class Ballop
 					return ret_val;
 
 				case 350:
-					if (vars.prsvec_1.prsa != vars.vindex_1.putw
+					if (vars.prsvec_1.prsa != PUT
 							|| vars.prsvec_1.prsi != vars.oindex_1.recep
 							|| game.dsub.qempty_(vars.oindex_1.recep))
 					{
@@ -138,7 +136,7 @@ public class Ballop
 					return false;
 
 				case 500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.unboaw
+					if (vars.prsvec_1.prsa != UNBOARD
 							|| (vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RLAND) == 0)
 					{
 						GOTO = 600;
@@ -151,7 +149,7 @@ public class Ballop
 					/* HE GOT OUT, START BALLOON. */
 					return false;
 				case 600:
-					if (vars.prsvec_1.prsa != vars.vindex_1.burnw
+					if (vars.prsvec_1.prsa != BURN
 							|| vars.objcts_1.ocan[vars.prsvec_1.prso - 1] != vars.oindex_1.recep)
 					{
 						GOTO = 700;
@@ -178,7 +176,7 @@ public class Ballop
 					return ret_val;
 
 				case 700:
-					if (vars.prsvec_1.prsa == vars.vindex_1.unboaw && vars.findex_1.binff != 0
+					if (vars.prsvec_1.prsa == UNBOARD && vars.findex_1.binff != 0
 							&& (vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RLAND) != 0)
 					{
 						vars.cevent_1.ctick[vars.cindex_1.cevbal - 1] = 3;

@@ -1,8 +1,6 @@
 package zork;
 
-import java.io.IOException;
-
-public class Demons
+public class Demons implements Actions
 {
 	/* FIGHTD- INTERMOVE FIGHT DEMON */
 
@@ -44,7 +42,7 @@ public class Demons
 			{
 				if (!((vars.objcts_1.oflag2[obj - 1] & Vars.FITEBT) == 0 || ra == 0))
 				{
-					vars.prsvec_1.prsa = vars.vindex_1.fightw;
+					vars.prsvec_1.prsa = FIGHT;
 					/* HAVE A FIGHT. */
 					game.objcts.oappli_(ra, 0);
 				}
@@ -59,7 +57,7 @@ public class Demons
 				{
 					continue;
 				}
-				vars.prsvec_1.prsa = vars.vindex_1.inxw;
+				vars.prsvec_1.prsa = VILLAIN_ENTERED;
 				/* WAKE HIM UP. */
 				game.objcts.oappli_(ra, 0);
 				vars.objcts_1.ocapac[obj - 1] = Math.abs(vars.objcts_1.ocapac[obj - 1]);
@@ -80,7 +78,7 @@ public class Demons
 						continue;
 					}
 					/* NOT FIGHTING, */
-					vars.prsvec_1.prsa = vars.vindex_1.frstqw;
+					vars.prsvec_1.prsa = VILLAIN_QUIT_FIGHTING;
 					/* SET UP PROBABILITY */
 					if (!game.objcts.oappli_(ra, 0))
 					{
@@ -112,7 +110,7 @@ public class Demons
 				continue;
 			}
 			/* ANYTHING TO DO? */
-			vars.prsvec_1.prsa = vars.vindex_1.inxw;
+			vars.prsvec_1.prsa = VILLAIN_ENTERED;
 			/* YES, WAKE HIM UP. */
 			game.objcts.oappli_(ra, 0);
 			continue;
@@ -141,7 +139,7 @@ public class Demons
 				if (ra != 0)
 				{
 					/* VILLAIN ACTION? */
-					vars.prsvec_1.prsa = vars.vindex_1.fightw;
+					vars.prsvec_1.prsa = FIGHT;
 					/* SEE IF */
 					if (game.objcts.oappli_(ra, 0))
 					{
@@ -550,7 +548,7 @@ public class Demons
 						return ret_val;
 					}
 					/* IF NX TO DO, EXIT. */
-					vars.prsvec_1.prsa = vars.vindex_1.deadxw;
+					vars.prsvec_1.prsa = VILLAIN_DIED;
 					/* LET HIM KNOW. */
 					game.objcts.oappli_(ra, 0);
 					return ret_val;
@@ -560,7 +558,7 @@ public class Demons
 					{
 						return ret_val;
 					}
-					vars.prsvec_1.prsa = vars.vindex_1.outxw;
+					vars.prsvec_1.prsa = VILLAIN_LEFT;
 					/* LET HIM BE OUT. */
 					game.objcts.oappli_(ra, 0);
 					return ret_val;

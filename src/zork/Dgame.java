@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class Dgame
+public class Dgame implements Actions
 {
 	/* GAME- MAIN COMMAND LOOP FOR DUNGEON */
 
@@ -85,13 +85,12 @@ public class Dgame
 	{
 		init.init_();
 
-		/* START UP, DESCRIBE CURRENT LOCATION. */
 
+		// WELCOME ABOARD. //
 		dsub.rspeak_(1);
-		/* WELCOME ABOARD. */
-
-		dsub.rmdesc_(3);
-		/* START GAME. */
+		
+		// DESCRIBE CURRENT LOCATION. //
+		dsub.rmdesc_(3);		
 	}
 
 	public void step(String action)
@@ -107,9 +106,9 @@ public class Dgame
 			np.rdline_(action, vars.input_1.inbuf, 1);
 
 			++vars.state_1.moves;
-			vars.prsvec_1.parsed_successfully = np.parse_(vars.input_1.inbuf, true);
+			vars.prsvec_1.isParsed = np.parse_(vars.input_1.inbuf, true);
 			/* PARSE LOSES? */
-			if (!vars.prsvec_1.parsed_successfully)
+			if (!vars.prsvec_1.isParsed)
 			{
 				end_action();
 				return;
@@ -123,7 +122,7 @@ public class Dgame
 			}
 
 			/* TELL? */
-			if (vars.prsvec_1.prsa == vars.vindex_1.tellw)
+			if (vars.prsvec_1.prsa == TELLW)
 			{
 				do2000();
 				if (check_echo())
@@ -250,7 +249,7 @@ public class Dgame
 			/* KILL THE ECHO. */
 			vars.findex_1.echof = true;
 			vars.objcts_1.oflag2[vars.oindex_1.bar - 1] &= ~Vars.SCRDBT;
-			vars.prsvec_1.parsed_successfully = true;
+			vars.prsvec_1.isParsed = true;
 			/* FAKE OUT PARSER. */
 			vars.prsvec_1.prscon = 1;
 			/* FORCE NEW INPUT. */
@@ -265,8 +264,8 @@ public class Dgame
 	{
 		/* VALID EXIT? */
 //			case 1300:
-		vars.prsvec_1.parsed_successfully = np.parse_(vars.input_1.inbuf, false);
-		if (!vars.prsvec_1.parsed_successfully || vars.prsvec_1.prsa != vars.vindex_1.walkw)
+		vars.prsvec_1.isParsed = np.parse_(vars.input_1.inbuf, false);
+		if (!vars.prsvec_1.isParsed || vars.prsvec_1.prsa != WALK)
 		{
 			Supp.println(new String(vars.input_1.inbuf));
 			vars.play_1.telflg = true;
@@ -422,7 +421,7 @@ public class Dgame
 			actors.thiefd_();
 		}
 		/* THIEF DEMON. */
-		if (vars.prsvec_1.parsed_successfully)
+		if (vars.prsvec_1.isParsed)
 		{
 			demons.fightd_();
 		}
@@ -432,13 +431,13 @@ public class Dgame
 			demons.swordd_();
 		}
 		/* SWORD DEMON. */
-		if (vars.prsvec_1.parsed_successfully)
+		if (vars.prsvec_1.isParsed)
 		{
 
 			verbs.clockd_();
 		}
 		/* CLOCK DEMON. */
-		if (vars.prsvec_1.parsed_successfully)
+		if (vars.prsvec_1.isParsed)
 		{
 			xvehic_(2);
 		}

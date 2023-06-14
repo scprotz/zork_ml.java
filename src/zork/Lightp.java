@@ -1,8 +1,6 @@
 package zork;
 
-import java.io.IOException;
-
-public class Lightp
+public class Lightp implements Actions
 {
 	/* LIGHTP- LIGHT PROCESSOR */
 
@@ -65,7 +63,7 @@ public class Lightp
 						return false;
 					}
 					/* IGNORE IND REFS. */
-					if (vars.prsvec_1.prsa != vars.vindex_1.trnofw)
+					if (vars.prsvec_1.prsa != TURN_OFF)
 					{
 						GOTO = 19200;
 						continue;
@@ -85,8 +83,8 @@ public class Lightp
 					return ret_val;
 
 				case 19200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.burnw
-							&& vars.prsvec_1.prsa != vars.vindex_1.trnonw)
+					if (vars.prsvec_1.prsa != BURN
+							&& vars.prsvec_1.prsa != TURN_ON)
 					{
 
 						return false;
@@ -109,7 +107,7 @@ public class Lightp
 					/* ANY FLAME? */
 					game.dsub.rspeak_(516);
 					/* NO, LOSE. */
-					vars.prsvec_1.parsed_successfully = false;
+					vars.prsvec_1.isParsed = false;
 					return ret_val;
 
 				case 19400:
@@ -164,7 +162,7 @@ public class Lightp
 					{
 						game.dsub.bug_(6, obj);
 					}
-					if (vars.prsvec_1.prsa != vars.vindex_1.trnonw
+					if (vars.prsvec_1.prsa != TURN_ON
 							|| vars.prsvec_1.prso != vars.oindex_1.match)
 					{
 
@@ -191,7 +189,7 @@ public class Lightp
 					return ret_val;
 
 				case 20500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.trnofw
+					if (vars.prsvec_1.prsa != TURN_OFF
 							|| (vars.objcts_1.oflag1[vars.oindex_1.match - 1] & Vars.ONBT) == 0)
 					{
 						return false;

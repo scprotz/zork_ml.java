@@ -1,6 +1,6 @@
 package zork;
 
-public class Sobjs
+public class Sobjs implements Actions
 {
 	/* SOBJS- SIMPLE OBJECTS PROCESSOR */
 	/* OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP, */
@@ -176,7 +176,7 @@ public class Sobjs
 				/* O2-- TROPHY CASE */
 
 				case 3000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa != TAKE)
 					{
 						return false;
 					}
@@ -188,7 +188,7 @@ public class Sobjs
 				/* O3-- BOTTLE FUNCTION */
 
 				case 4000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.throww)
+					if (vars.prsvec_1.prsa != THROW)
 					{
 						GOTO = 4100;
 						continue loop;
@@ -199,7 +199,7 @@ public class Sobjs
 					return ret_val;
 
 				case 4100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa != MUNG)
 					{
 						return false;
 					}
@@ -220,7 +220,7 @@ public class Sobjs
 					/* IN DOME? */
 					vars.findex_1.domef = false;
 					/* NO, */
-					if (vars.prsvec_1.prsa != vars.vindex_1.untiew)
+					if (vars.prsvec_1.prsa != UNTIE)
 					{
 						GOTO = 6050;
 						continue loop;
@@ -231,7 +231,7 @@ public class Sobjs
 					return ret_val;
 
 				case 6050:
-					if (vars.prsvec_1.prsa != vars.vindex_1.tiew)
+					if (vars.prsvec_1.prsa != TIE)
 					{
 						return false;
 					}
@@ -241,7 +241,7 @@ public class Sobjs
 					return ret_val;
 
 				case 6100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.tiew
+					if (vars.prsvec_1.prsa != TIE
 							|| vars.prsvec_1.prsi != vars.oindex_1.raili)
 					{
 						GOTO = 6200;
@@ -266,7 +266,7 @@ public class Sobjs
 					return ret_val;
 
 				case 6200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.untiew)
+					if (vars.prsvec_1.prsa != UNTIE)
 					{
 						GOTO = 6300;
 						continue loop;
@@ -291,7 +291,7 @@ public class Sobjs
 					return ret_val;
 
 				case 6300:
-					if (vars.findex_1.domef || vars.prsvec_1.prsa != vars.vindex_1.dropw)
+					if (vars.findex_1.domef || vars.prsvec_1.prsa != DROP)
 					{
 						GOTO = 6400;
 						continue loop;
@@ -302,7 +302,7 @@ public class Sobjs
 					return ret_val;
 
 				case 6400:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew || !vars.findex_1.domef)
+					if (vars.prsvec_1.prsa != TAKE || !vars.findex_1.domef)
 					{
 						return false;
 					}
@@ -313,7 +313,7 @@ public class Sobjs
 				/* O5-- SWORD FUNCTION */
 
 				case 7000:
-					if (vars.prsvec_1.prsa == vars.vindex_1.takew
+					if (vars.prsvec_1.prsa == TAKE
 							&& vars.play_1.winner == vars.aindex_1.player)
 					{
 
@@ -324,7 +324,7 @@ public class Sobjs
 				/* O6-- LANTERN */
 
 				case 8000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.throww)
+					if (vars.prsvec_1.prsa != THROW)
 					{
 						GOTO = 8100;
 						continue loop;
@@ -337,11 +337,11 @@ public class Sobjs
 					return ret_val;
 
 				case 8100:
-					if (vars.prsvec_1.prsa == vars.vindex_1.trnonw)
+					if (vars.prsvec_1.prsa == TURN_ON)
 					{
 						vars.cevent_1.cflag[vars.cindex_1.cevlnt - 1] = true;
 					}
-					if (vars.prsvec_1.prsa == vars.vindex_1.trnofw)
+					if (vars.prsvec_1.prsa == TURN_OFF)
 					{
 						vars.cevent_1.cflag[vars.cindex_1.cevlnt - 1] = false;
 					}
@@ -350,7 +350,7 @@ public class Sobjs
 				/* O7-- RUG FUNCTION */
 
 				case 9000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.raisew)
+					if (vars.prsvec_1.prsa != RAISE)
 					{
 						GOTO = 9100;
 						continue loop;
@@ -361,7 +361,7 @@ public class Sobjs
 					return ret_val;
 
 				case 9100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa != TAKE)
 					{
 						GOTO = 9200;
 						continue loop;
@@ -372,7 +372,7 @@ public class Sobjs
 					return ret_val;
 
 				case 9200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.movew)
+					if (vars.prsvec_1.prsa != MOVE)
 					{
 						GOTO = 9300;
 						continue loop;
@@ -385,7 +385,7 @@ public class Sobjs
 					return ret_val;
 
 				case 9300:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookuw || vars.findex_1.orrug != 0
+					if (vars.prsvec_1.prsa != LOOK_UNDER || vars.findex_1.orrug != 0
 							|| (vars.objcts_1.oflag2[vars.oindex_1.door - 1] & Vars.OPENBT) != 0)
 					{
 						return false;
@@ -409,7 +409,7 @@ public class Sobjs
 				/* O9-- MIRROR */
 
 				case 14000:
-					if (vars.findex_1.mirrmf || vars.prsvec_1.prsa != vars.vindex_1.rubw)
+					if (vars.findex_1.mirrmf || vars.prsvec_1.prsa != RUB)
 					{
 						GOTO = 14500;
 						continue loop;
@@ -439,9 +439,9 @@ public class Sobjs
 					return ret_val;
 
 				case 14500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw
-							&& vars.prsvec_1.prsa != vars.vindex_1.lookiw
-							&& vars.prsvec_1.prsa != vars.vindex_1.examiw)
+					if (vars.prsvec_1.prsa != LOOK
+							&& vars.prsvec_1.prsa != LOOK_IN
+							&& vars.prsvec_1.prsa != EXAMINE)
 					{
 						GOTO = 14600;
 						continue loop;
@@ -457,7 +457,7 @@ public class Sobjs
 					return ret_val;
 
 				case 14600:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa != TAKE)
 					{
 						GOTO = 14700;
 						continue loop;
@@ -468,8 +468,8 @@ public class Sobjs
 					return ret_val;
 
 				case 14700:
-					if (vars.prsvec_1.prsa != vars.vindex_1.mungw
-							&& vars.prsvec_1.prsa != vars.vindex_1.throww)
+					if (vars.prsvec_1.prsa != MUNG
+							&& vars.prsvec_1.prsa != THROW)
 					{
 
 						return false;
@@ -490,7 +490,7 @@ public class Sobjs
 				/* O10-- DUMBWAITER */
 
 				case 16000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.raisew)
+					if (vars.prsvec_1.prsa != RAISE)
 					{
 						GOTO = 16100;
 						continue loop;
@@ -510,7 +510,7 @@ public class Sobjs
 					return ret_val;
 
 				case 16100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lowerw)
+					if (vars.prsvec_1.prsa != LOWER)
 					{
 						GOTO = 16200;
 						continue loop;
@@ -545,7 +545,7 @@ public class Sobjs
 					return ret_val;
 
 				case 16300:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa != TAKE)
 					{
 						return false;
 					}
@@ -578,7 +578,7 @@ public class Sobjs
 				/* O12-- TUBE */
 
 				case 21000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.putw
+					if (vars.prsvec_1.prsa != PUT
 							|| vars.prsvec_1.prsi != vars.oindex_1.tube)
 					{
 						return false;
@@ -590,7 +590,7 @@ public class Sobjs
 				/* O13-- CHALICE */
 
 				case 23000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew
+					if (vars.prsvec_1.prsa != TAKE
 							|| vars.objcts_1.ocan[vars.prsvec_1.prso - 1] != 0
 							|| vars.objcts_1.oroom[vars.prsvec_1.prso - 1] != vars.rindex_1.treas
 							|| vars.objcts_1.oroom[vars.oindex_1.thief - 1] != vars.rindex_1.treas
@@ -606,7 +606,7 @@ public class Sobjs
 				/* O14-- PAINTING */
 
 				case 24000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa != MUNG)
 					{
 						return false;
 					}
@@ -623,7 +623,7 @@ public class Sobjs
 				/* O15-- BOLT */
 
 				case 27000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.turnw)
+					if (vars.prsvec_1.prsa != TURN)
 					{
 						return false;
 					}
@@ -682,8 +682,8 @@ public class Sobjs
 				/* O16-- GRATING */
 
 				case 28000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.openw
-							&& vars.prsvec_1.prsa != vars.vindex_1.closew)
+					if (vars.prsvec_1.prsa != OPEN
+							&& vars.prsvec_1.prsa != CLOSE)
 					{
 
 						return false;
@@ -739,7 +739,7 @@ public class Sobjs
 						return false;
 					}
 					/* FROM CELLAR? */
-					if (vars.prsvec_1.prsa != vars.vindex_1.openw
+					if (vars.prsvec_1.prsa != OPEN
 							|| (vars.objcts_1.oflag2[vars.oindex_1.door - 1] & Vars.OPENBT) != 0)
 					{
 						GOTO = 29200;
@@ -759,17 +759,17 @@ public class Sobjs
 				case 30000:
 					i = 0;
 					/* ASSUME NO APPL. */
-					if (vars.prsvec_1.prsa == vars.vindex_1.openw)
+					if (vars.prsvec_1.prsa == OPEN)
 					{
 						i = 221;
 					}
 					/* OPEN? */
-					if (vars.prsvec_1.prsa == vars.vindex_1.burnw)
+					if (vars.prsvec_1.prsa == BURN)
 					{
 						i = 222;
 					}
 					/* BURN? */
-					if (vars.prsvec_1.prsa == vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa == MUNG)
 					{
 						i = Supp.rnd_(3) + 223;
 					}
@@ -784,7 +784,7 @@ public class Sobjs
 				/* O19-- MASTER SWITCH */
 
 				case 31000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.turnw)
+					if (vars.prsvec_1.prsa != TURN)
 					{
 						return false;
 					}
@@ -847,7 +847,7 @@ public class Sobjs
 
 				case 33000:
 					if (vars.prsvec_1.prso != vars.oindex_1.leak
-							|| vars.prsvec_1.prsa != vars.vindex_1.plugw
+							|| vars.prsvec_1.prsa != PLUG
 							|| vars.findex_1.rvmnt <= 0)
 					{
 						return false;
@@ -872,7 +872,7 @@ public class Sobjs
 				/* O21-- DROWNING BUTTONS */
 
 				case 34000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.pushw)
+					if (vars.prsvec_1.prsa != PUSH)
 					{
 						return false;
 					}
@@ -938,7 +938,7 @@ public class Sobjs
 				/* O22-- INFLATABLE BOAT */
 
 				case 36000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.inflaw)
+					if (vars.prsvec_1.prsa != INFLATE)
 					{
 						return false;
 					}
@@ -980,7 +980,7 @@ public class Sobjs
 				/* O23-- DEFLATED BOAT */
 
 				case 37000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.inflaw)
+					if (vars.prsvec_1.prsa != INFLATE)
 					{
 						GOTO = 37100;
 						continue loop;
@@ -991,7 +991,7 @@ public class Sobjs
 					return ret_val;
 
 				case 37100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.plugw)
+					if (vars.prsvec_1.prsa != PLUG)
 					{
 						return false;
 					}
@@ -1019,7 +1019,7 @@ public class Sobjs
 						return false;
 					}
 					/* DISMISS READIN, OUT. */
-					if (vars.prsvec_1.prsa != vars.vindex_1.boardw
+					if (vars.prsvec_1.prsa != BOARD
 							|| vars.objcts_1.oadv[vars.oindex_1.stick - 1] != vars.play_1.winner)
 					{
 						GOTO = 38100;
@@ -1033,7 +1033,7 @@ public class Sobjs
 					return ret_val;
 
 				case 38100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.inflaw)
+					if (vars.prsvec_1.prsa != INFLATE)
 					{
 						GOTO = 38200;
 						continue loop;
@@ -1044,7 +1044,7 @@ public class Sobjs
 					return ret_val;
 
 				case 38200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.deflaw)
+					if (vars.prsvec_1.prsa != DEFLATE)
 					{
 						return false;
 					}
@@ -1081,7 +1081,7 @@ public class Sobjs
 				/* O25-- BRAIDED ROPE */
 
 				case 41000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.tiew
+					if (vars.prsvec_1.prsa != TIE
 							|| vars.prsvec_1.prso != vars.oindex_1.brope
 							|| vars.prsvec_1.prsi != vars.oindex_1.hook1
 									&& vars.prsvec_1.prsi != vars.oindex_1.hook2)
@@ -1097,7 +1097,7 @@ public class Sobjs
 					return ret_val;
 
 				case 41500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.untiew
+					if (vars.prsvec_1.prsa != UNTIE
 							|| vars.prsvec_1.prso != vars.oindex_1.brope)
 					{
 
@@ -1127,27 +1127,27 @@ public class Sobjs
 				case 42000:
 					i = 0;
 					/* ASSUME UNPROCESSED. */
-					if (vars.prsvec_1.prsa == vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa == TAKE)
 					{
 						i = 251;
 					}
 					/* TAKE? */
-					if (vars.prsvec_1.prsa == vars.vindex_1.openw && vars.findex_1.safef)
+					if (vars.prsvec_1.prsa == OPEN && vars.findex_1.safef)
 					{
 						i = 253;
 					}
 					/* OPEN AFTER BLAST? */
-					if (vars.prsvec_1.prsa == vars.vindex_1.openw && !vars.findex_1.safef)
+					if (vars.prsvec_1.prsa == OPEN && !vars.findex_1.safef)
 					{
 						i = 254;
 					}
 					/* OPEN BEFORE BLAST? */
-					if (vars.prsvec_1.prsa == vars.vindex_1.closew && vars.findex_1.safef)
+					if (vars.prsvec_1.prsa == CLOSE && vars.findex_1.safef)
 					{
 						i = 253;
 					}
 					/* CLOSE AFTER? */
-					if (vars.prsvec_1.prsa == vars.vindex_1.closew && !vars.findex_1.safef)
+					if (vars.prsvec_1.prsa == CLOSE && !vars.findex_1.safef)
 					{
 						i = 255;
 					}
@@ -1161,7 +1161,7 @@ public class Sobjs
 				/* O27-- FUSE */
 
 				case 43000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.burnw)
+					if (vars.prsvec_1.prsa != BURN)
 					{
 						return false;
 					}
@@ -1174,8 +1174,8 @@ public class Sobjs
 				/* O28-- GNOME */
 
 				case 44000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.givew
-							&& vars.prsvec_1.prsa != vars.vindex_1.throww)
+					if (vars.prsvec_1.prsa != GIVE
+							&& vars.prsvec_1.prsa != THROW)
 					{
 
 						GOTO = 44500;
@@ -1215,8 +1215,8 @@ public class Sobjs
 				/* O29-- COKE BOTTLES */
 
 				case 46000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.throww
-							&& vars.prsvec_1.prsa != vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa != THROW
+							&& vars.prsvec_1.prsa != MUNG)
 					{
 
 						return false;
@@ -1229,7 +1229,7 @@ public class Sobjs
 				/* O30-- ROBOT */
 
 				case 53000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.givew)
+					if (vars.prsvec_1.prsa != GIVE)
 					{
 						GOTO = 53200;
 						continue loop;
@@ -1241,8 +1241,8 @@ public class Sobjs
 					return ret_val;
 
 				case 53200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.mungw
-							&& vars.prsvec_1.prsa != vars.vindex_1.throww)
+					if (vars.prsvec_1.prsa != MUNG
+							&& vars.prsvec_1.prsa != THROW)
 					{
 
 						return false;
@@ -1254,7 +1254,7 @@ public class Sobjs
 				/* O31-- GRUE */
 
 				case 56000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.examiw)
+					if (vars.prsvec_1.prsa != EXAMINE)
 					{
 						GOTO = 56100;
 						continue loop;
@@ -1264,7 +1264,7 @@ public class Sobjs
 					return ret_val;
 
 				case 56100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.findw)
+					if (vars.prsvec_1.prsa != FIND)
 					{
 						return false;
 					}

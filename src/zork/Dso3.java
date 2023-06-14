@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Dso3
 {
 	/* FINDXT- FIND EXIT FROM ROOM */

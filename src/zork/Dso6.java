@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Dso6
 {
 	/* GHERE--	IS GLOBAL ACTUALLY IN THIS ROOM? */

@@ -1,8 +1,6 @@
 package zork;
 
-import java.io.IOException;
-
-public class Dso5
+public class Dso5 implements Actions
 {
 	/* COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142 */
 	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
@@ -38,7 +36,7 @@ public class Dso5
 
 		ret_val = true;
 		/* ASSUME WINS. */
-		if (vars.prsvec_1.prsa == vars.vindex_1.closew)
+		if (vars.prsvec_1.prsa == CLOSE)
 		{
 			if (!((vars.objcts_1.oflag2[obj - 1] & Vars.OPENBT) != 0))
 			{
@@ -51,7 +49,7 @@ public class Dso5
 			return ret_val;
 		}
 		/* CLOSE? */
-		if (vars.prsvec_1.prsa != vars.vindex_1.openw)
+		if (vars.prsvec_1.prsa != OPEN)
 		{
 			/* OPEN? */
 			ret_val = false;

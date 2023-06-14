@@ -1,6 +1,6 @@
 package zork;
 
-public class Objcts
+public class Objcts implements Actions
 {
 	/* OAPPLI- OBJECT SPECIAL ACTION ROUTINES */
 
@@ -204,13 +204,13 @@ public class Objcts
 				/* O101-- WATER FUNCTION */
 
 				case 5000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.fillw)
+					if (vars.prsvec_1.prsa != FILL)
 					{
 						GOTO = 5050;
 						continue;
 					}
 					/* FILL X WITH Y IS */
-					vars.prsvec_1.prsa = vars.vindex_1.putw;
+					vars.prsvec_1.prsa = PUT;
 					/* MADE INTO */
 					i = vars.prsvec_1.prsi;
 					vars.prsvec_1.prsi = vars.prsvec_1.prso;
@@ -232,7 +232,7 @@ public class Objcts
 				/* PUNT. */
 
 				case 5100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa != TAKE)
 					{
 						GOTO = 5400;
 						continue;
@@ -269,7 +269,7 @@ public class Objcts
 				/* SLIPS THRU FINGERS. */
 
 				case 5400:
-					if (vars.prsvec_1.prsa != vars.vindex_1.putw)
+					if (vars.prsvec_1.prsa != PUT)
 					{
 						GOTO = 5700;
 						continue;
@@ -321,9 +321,9 @@ public class Objcts
 					return ret_val;
 
 				case 5700:
-					if (vars.prsvec_1.prsa != vars.vindex_1.dropw
-							&& vars.prsvec_1.prsa != vars.vindex_1.pourw
-							&& vars.prsvec_1.prsa != vars.vindex_1.givew)
+					if (vars.prsvec_1.prsa != DROP
+							&& vars.prsvec_1.prsa != POUR
+							&& vars.prsvec_1.prsa != GIVE)
 					{
 						GOTO = 5900;
 						continue;
@@ -346,7 +346,7 @@ public class Objcts
 					return ret_val;
 
 				case 5900:
-					if (vars.prsvec_1.prsa != vars.vindex_1.throww)
+					if (vars.prsvec_1.prsa != THROW)
 					{
 						GOTO = 10;
 						continue;
@@ -360,7 +360,7 @@ public class Objcts
 				/* O102-- LEAF PILE */
 
 				case 10000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.burnw)
+					if (vars.prsvec_1.prsa != BURN)
 					{
 						GOTO = 10500;
 						continue;
@@ -384,7 +384,7 @@ public class Objcts
 					return ret_val;
 
 				case 10500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.movew)
+					if (vars.prsvec_1.prsa != MOVE)
 					{
 						GOTO = 10600;
 						continue;
@@ -395,7 +395,7 @@ public class Objcts
 					return ret_val;
 
 				case 10600:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookuw || vars.findex_1.rvclr != 0)
+					if (vars.prsvec_1.prsa != LOOK_UNDER || vars.findex_1.rvclr != 0)
 					{
 						GOTO = 10;
 						continue;
@@ -414,7 +414,7 @@ public class Objcts
 				/* O104-- RUSTY KNIFE. */
 
 				case 12000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa != TAKE)
 					{
 						GOTO = 12100;
 						continue;
@@ -429,11 +429,11 @@ public class Objcts
 					continue;
 
 				case 12100:
-					if (((vars.prsvec_1.prsa != vars.vindex_1.attacw
-							&& vars.prsvec_1.prsa != vars.vindex_1.killw)
+					if (((vars.prsvec_1.prsa != ATTACK
+							&& vars.prsvec_1.prsa != KILL)
 							|| vars.prsvec_1.prsi != vars.oindex_1.rknif)
-							&& ((vars.prsvec_1.prsa != vars.vindex_1.swingw
-									&& vars.prsvec_1.prsa != vars.vindex_1.throww)
+							&& ((vars.prsvec_1.prsa != SWING
+									&& vars.prsvec_1.prsa != THROW)
 									|| vars.prsvec_1.prso != vars.oindex_1.rknif))
 					{
 						GOTO = 10;
@@ -449,7 +449,7 @@ public class Objcts
 				/* O105-- GLACIER */
 
 				case 15000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.throww)
+					if (vars.prsvec_1.prsa != THROW)
 					{
 						GOTO = 15500;
 						continue;
@@ -484,7 +484,7 @@ public class Objcts
 					return ret_val;
 
 				case 15500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.meltw
+					if (vars.prsvec_1.prsa != MELT
 							|| vars.prsvec_1.prso != vars.oindex_1.ice)
 					{
 						GOTO = 10;
@@ -520,7 +520,7 @@ public class Objcts
 				/* O106-- BLACK BOOK */
 
 				case 18000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.openw)
+					if (vars.prsvec_1.prsa != OPEN)
 					{
 						GOTO = 18100;
 						continue;
@@ -531,7 +531,7 @@ public class Objcts
 					return ret_val;
 
 				case 18100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.closew)
+					if (vars.prsvec_1.prsa != CLOSE)
 					{
 						GOTO = 18200;
 						continue;
@@ -541,7 +541,7 @@ public class Objcts
 					return ret_val;
 
 				case 18200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.burnw)
+					if (vars.prsvec_1.prsa != BURN)
 					{
 						GOTO = 10;
 						continue;
@@ -588,7 +588,7 @@ public class Objcts
 				/* O112-- PILE OF BODIES */
 
 				case 32000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa != TAKE)
 					{
 						GOTO = 32500;
 						continue;
@@ -599,8 +599,8 @@ public class Objcts
 					return ret_val;
 
 				case 32500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.burnw
-							&& vars.prsvec_1.prsa != vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa != BURN
+							&& vars.prsvec_1.prsa != MUNG)
 					{
 						GOTO = 10;
 						continue;
@@ -631,7 +631,7 @@ public class Objcts
 				/* O114-- STICK */
 
 				case 39000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.wavew)
+					if (vars.prsvec_1.prsa != WAVE)
 					{
 						GOTO = 10;
 						continue;
@@ -684,7 +684,7 @@ public class Objcts
 				/* O116-- HEADS */
 
 				case 45000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.hellow)
+					if (vars.prsvec_1.prsa != HELLO)
 					{
 						GOTO = 45100;
 						continue;
@@ -695,7 +695,7 @@ public class Objcts
 					return ret_val;
 
 				case 45100:
-					if (vars.prsvec_1.prsa == vars.vindex_1.readw)
+					if (vars.prsvec_1.prsa == READ)
 					{
 						GOTO = 10;
 						continue;
@@ -713,7 +713,7 @@ public class Objcts
 				/* O117-- SPHERE */
 
 				case 47000:
-					if (vars.findex_1.cagesf || vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.findex_1.cagesf || vars.prsvec_1.prsa != TAKE)
 					{
 						GOTO = 10;
 						continue;
@@ -764,7 +764,7 @@ public class Objcts
 				/* O118-- GEOMETRICAL BUTTONS */
 
 				case 48000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.pushw)
+					if (vars.prsvec_1.prsa != PUSH)
 					{
 						GOTO = 10;
 						continue;
@@ -839,14 +839,14 @@ public class Objcts
 				/* O119-- FLASK FUNCTION */
 
 				case 49000:
-					if (vars.prsvec_1.prsa == vars.vindex_1.openw)
+					if (vars.prsvec_1.prsa == OPEN)
 					{
 						GOTO = 49100;
 						continue;
 					}
 					/* OPEN? */
-					if (vars.prsvec_1.prsa != vars.vindex_1.mungw
-							&& vars.prsvec_1.prsa != vars.vindex_1.throww)
+					if (vars.prsvec_1.prsa != MUNG
+							&& vars.prsvec_1.prsa != THROW)
 					{
 
 						GOTO = 10;
@@ -913,7 +913,7 @@ public class Objcts
 				/* O121-- EATME CAKE */
 
 				case 51000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.eatw
+					if (vars.prsvec_1.prsa != EAT
 							|| vars.prsvec_1.prso != vars.oindex_1.ecake
 							|| vars.play_1.here != vars.rindex_1.alice)
 					{
@@ -934,7 +934,7 @@ public class Objcts
 				/* O122-- ICINGS */
 
 				case 52000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.readw)
+					if (vars.prsvec_1.prsa != READ)
 					{
 						GOTO = 52200;
 						continue;
@@ -962,7 +962,7 @@ public class Objcts
 					return ret_val;
 
 				case 52200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.throww
+					if (vars.prsvec_1.prsa != THROW
 							|| vars.prsvec_1.prso != vars.oindex_1.rdice
 							|| vars.prsvec_1.prsi != vars.oindex_1.pool)
 					{
@@ -982,8 +982,8 @@ public class Objcts
 						GOTO = 10;
 						continue;
 					}
-					if ((vars.prsvec_1.prsa != vars.vindex_1.eatw
-							&& vars.prsvec_1.prsa != vars.vindex_1.throww)
+					if ((vars.prsvec_1.prsa != EAT
+							&& vars.prsvec_1.prsa != THROW)
 							|| vars.prsvec_1.prso != vars.oindex_1.orice)
 					{
 						GOTO = 52400;
@@ -998,7 +998,7 @@ public class Objcts
 					return ret_val;
 
 				case 52400:
-					if (vars.prsvec_1.prsa != vars.vindex_1.eatw
+					if (vars.prsvec_1.prsa != EAT
 							|| vars.prsvec_1.prso != vars.oindex_1.blice)
 					{
 						GOTO = 10;
@@ -1043,7 +1043,7 @@ public class Objcts
 				/* O123-- BRICK */
 
 				case 54000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.burnw)
+					if (vars.prsvec_1.prsa != BURN)
 					{
 						GOTO = 10;
 						continue loop;
@@ -1057,7 +1057,7 @@ public class Objcts
 				/* O124-- MYSELF */
 
 				case 55000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.givew)
+					if (vars.prsvec_1.prsa != GIVE)
 					{
 						GOTO = 55100;
 						continue loop;
@@ -1068,7 +1068,7 @@ public class Objcts
 					return ret_val;
 
 				case 55100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa != TAKE)
 					{
 						GOTO = 55200;
 						continue loop;
@@ -1079,8 +1079,8 @@ public class Objcts
 					return ret_val;
 
 				case 55200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.killw
-							&& vars.prsvec_1.prsa != vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa != KILL
+							&& vars.prsvec_1.prsa != MUNG)
 					{
 						GOTO = 10;
 						continue loop;
@@ -1093,7 +1093,7 @@ public class Objcts
 				/* O125-- PANELS INSIDE MIRROR */
 
 				case 56000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.pushw)
+					if (vars.prsvec_1.prsa != PUSH)
 					{
 						GOTO = 10;
 						continue loop;
@@ -1155,7 +1155,7 @@ public class Objcts
 				/* O126-- ENDS INSIDE MIRROR */
 
 				case 57000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.pushw)
+					if (vars.prsvec_1.prsa != PUSH)
 					{
 						GOTO = 10;
 						continue loop;
@@ -1279,9 +1279,9 @@ public class Objcts
 				/* O127-- GLOBAL GUARDIANS */
 
 				case 58000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.attacw
-							&& vars.prsvec_1.prsa != vars.vindex_1.killw
-							&& vars.prsvec_1.prsa != vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa != ATTACK
+							&& vars.prsvec_1.prsa != KILL
+							&& vars.prsvec_1.prsa != MUNG)
 					{
 						GOTO = 58100;
 						continue loop;
@@ -1291,7 +1291,7 @@ public class Objcts
 					return ret_val;
 
 				case 58100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.hellow)
+					if (vars.prsvec_1.prsa != HELLO)
 					{
 						GOTO = 10;
 						continue loop;
@@ -1304,9 +1304,9 @@ public class Objcts
 				/* O128-- GLOBAL MASTER */
 
 				case 59000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.attacw
-							&& vars.prsvec_1.prsa != vars.vindex_1.killw
-							&& vars.prsvec_1.prsa != vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa != ATTACK
+							&& vars.prsvec_1.prsa != KILL
+							&& vars.prsvec_1.prsa != MUNG)
 					{
 						GOTO = 59100;
 						continue loop;
@@ -1316,7 +1316,7 @@ public class Objcts
 					return ret_val;
 
 				case 59100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa != TAKE)
 					{
 						GOTO = 10;
 						continue loop;
@@ -1329,7 +1329,7 @@ public class Objcts
 				/* O129-- NUMERAL FIVE (FOR JOKE) */
 
 				case 60000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa != TAKE)
 					{
 						GOTO = 10;
 						continue loop;
@@ -1356,7 +1356,7 @@ public class Objcts
 						continue loop;
 					}
 					/* IF NOT EG, DIE. */
-					if (vars.prsvec_1.prsa != vars.vindex_1.openw)
+					if (vars.prsvec_1.prsa != OPEN)
 					{
 						GOTO = 61100;
 						continue loop;
@@ -1372,7 +1372,7 @@ public class Objcts
 					return ret_val;
 
 				case 61100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.closew)
+					if (vars.prsvec_1.prsa != CLOSE)
 					{
 						GOTO = 45000;
 						continue loop;
@@ -1407,8 +1407,8 @@ public class Objcts
 					return ret_val;
 
 				case 62100:
-					if (vars.prsvec_1.prsa == vars.vindex_1.clmbw
-							|| vars.prsvec_1.prsa == vars.vindex_1.clmbuw)
+					if (vars.prsvec_1.prsa == CLIMB
+							|| vars.prsvec_1.prsa == CLIMB_UP)
 					{
 
 						GOTO = 62200;

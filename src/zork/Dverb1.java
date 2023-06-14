@@ -1,6 +1,8 @@
 package zork;
 
-public class Dverb1 {
+public class Dverb1 implements Actions
+
+{
 	/* TAKE-- BASIC TAKE SEQUENCE */
 
 	/* COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142 */
@@ -189,10 +191,10 @@ public class Dverb1 {
 				/* DID IT HANDLE? */
 				i = 0;
 				/* ASSUME NOTHING TO SAY. */
-				if (vars.prsvec_1.prsa == vars.vindex_1.dropw) {
+				if (vars.prsvec_1.prsa == DROP) {
 					i = 528;
 				}
-				if (vars.prsvec_1.prsa == vars.vindex_1.throww) {
+				if (vars.prsvec_1.prsa == THROW) {
 					i = 529;
 				}
 				if (i != 0 && vars.play_1.here == vars.rindex_1.mtree) {
@@ -281,13 +283,13 @@ public class Dverb1 {
 				svo = vars.prsvec_1.prso;
 				/* SAVE PARSER. */
 				svi = vars.prsvec_1.prsi;
-				vars.prsvec_1.prsa = vars.vindex_1.takew;
+				vars.prsvec_1.prsa = TAKE;
 				vars.prsvec_1.prsi = 0;
 				if (!take_(false)) {
 					return ret_val;
 				}
 				/* TAKE OBJECT. */
-				vars.prsvec_1.prsa = vars.vindex_1.putw;
+				vars.prsvec_1.prsa = PUT;
 				vars.prsvec_1.prso = svo;
 				vars.prsvec_1.prsi = svi;
 //			   goto L1000;
@@ -315,13 +317,13 @@ public class Dverb1 {
 //	   svo = vars.prsvec_1.prso;
 //	   /* SAVE PARSER. */
 //	   svi = vars.prsvec_1.prsi;
-//	   vars.prsvec_1.prsa = vars.vindex_1.takew;
+//	   vars.prsvec_1.prsa = TAKE;
 //	   vars.prsvec_1.prsi = 0;
 //	   if (! take_(0)) {
 //	      return ret_val;
 //	   }
 //	   /* TAKE OBJECT. */
-//	   vars.prsvec_1.prsa = vars.vindex_1.putw;
+//	   vars.prsvec_1.prsa = PUT;
 //	   vars.prsvec_1.prso = svo;
 //	   vars.prsvec_1.prsi = svi;
 //	   goto L1000;
@@ -391,7 +393,7 @@ public class Dverb1 {
 			/* SAVE HERE. */
 
 			/* case 100: */
-			if (!(vars.prsvec_1.prsa != vars.vindex_1.takew)) {
+			if (!(vars.prsvec_1.prsa != TAKE)) {
 
 				/* TAKE EVERY/VALUA? */
 				for (vars.prsvec_1.prso = 1; vars.prsvec_1.prso <= vars.objcts_1.olnt; ++vars.prsvec_1.prso) {
@@ -420,7 +422,7 @@ public class Dverb1 {
 			switch (GOTO) {
 
 			case 1000:
-				if (vars.prsvec_1.prsa != vars.vindex_1.dropw) {
+				if (vars.prsvec_1.prsa != DROP) {
 					GOTO = 2000;
 					continue;
 				}
@@ -441,7 +443,7 @@ public class Dverb1 {
 				continue;
 
 			case 2000:
-				if (vars.prsvec_1.prsa != vars.vindex_1.putw) {
+				if (vars.prsvec_1.prsa != PUT) {
 					GOTO = 3000;
 					continue;
 				}

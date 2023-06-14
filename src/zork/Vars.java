@@ -20,7 +20,7 @@ public class Vars
 	public class prsvec_
 	{
 		int prsa, prsi, prso;
-		boolean parsed_successfully;
+		boolean isParsed;
 		int prscon;
 	};
 
@@ -512,88 +512,7 @@ public class Vars
 
 	
 	
-	/***** Verbs *******/
-	public class vindex_
-	{
-		final int cintw = 1;
-		final int deadxw = 2;
-		final int frstqw = 3;
-		final int inxw = 4;
-		final int outxw = 5;
-		final int walkiw = 6;
-		final int fightw = 7;
-		final int foow = 8;
-		final int meltw = 101;
-		final int readw = 100;
-		final int inflaw = 102;
-		final int deflaw = 103;
-		final int alarmw = 104;
-		final int exorcw = 105;
-		final int plugw = 106;
 
-		final int kickw = 107;
-		final int wavew = 108;
-		final int raisew = 109;
-		final int lowerw = 110;
-		final int rubw = 111;
-		final int pushw = 112;
-		final int untiew = 113;
-		final int tiew = 114;
-		final int tieupw = 115;
-		final int turnw = 116;
-		final int breatw = 117;
-		final int knockw = 118;
-		final int lookw = 119;
-
-		final int examiw = 120;
-		final int shakew = 121;
-		final int movew = 122;
-		final int trnonw = 123;
-		final int trnofw = 124;
-		final int openw = 125;
-		final int closew = 126;
-		final int findw = 127;
-		final int waitw = 128;
-		final int spinw = 129;
-		final int boardw = 130;
-		final int unboaw = 131;
-		final int takew = 132;
-
-		final int invenw = 133;
-		final int fillw = 134;
-		final int eatw = 135;
-		final int drinkw = 136;
-		final int burnw = 137;
-		final int mungw = 138;
-		final int killw = 139;
-		final int attacw = 141;
-		final int swingw = 140;
-		final int walkw = 142;
-		final int tellw = 143;
-		final int putw = 144;
-		final int dropw = 145;
-
-		final int givew = 146;
-		final int pourw = 147;
-		final int throww = 148;
-		final int digw = 89;
-		final int leapw = 91;
-		final int stayw = 73;
-		final int follow = 85;
-		final int hellow = 151;
-		final int lookiw = 152;
-		final int lookuw = 153;
-		final int pumpw = 154;
-		final int windw = 155;
-		final int clmbw = 156;
-		final int clmbuw = 157;
-
-		final int clmbdw = 158;
-		final int trntow = 159;
-	};
-
-	public vindex_ vindex_1 = new vindex_();
-	
 	/************** End Verbs **************/
 	
 	/********** State flags *****************/

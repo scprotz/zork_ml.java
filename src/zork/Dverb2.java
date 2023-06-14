@@ -34,7 +34,7 @@ public class Dverb2
 		File file = new File("dsave.java.dat");
 
 		/* DISABLE GAME. */
-		vars.prsvec_1.parsed_successfully = false;
+		vars.prsvec_1.isParsed = false;
 
 		/* Note: save file format is different for PDP vs. non-PDP versions */
 		try
@@ -184,7 +184,7 @@ public class Dverb2
 
 		File file = new File("dsave.dat");
 
-		vars.prsvec_1.parsed_successfully = false;
+		vars.prsvec_1.isParsed = false;
 		/* DISABLE GAME. */
 		/* Note: save file format is different for PDP vs. non-PDP versions */
 		try

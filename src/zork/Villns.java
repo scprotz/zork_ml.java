@@ -1,8 +1,6 @@
 package zork;
 
-import java.io.IOException;
-
-public class Villns
+public class Villns implements Actions
 {
 	/* TROLLP- TROLL FUNCTION */
 
@@ -28,24 +26,24 @@ public class Villns
 
 		ret_val = true;
 		/* ASSUME WINS. */
-		if (vars.prsvec_1.prsa != vars.vindex_1.fightw)
+		if (vars.prsvec_1.prsa != FIGHT)
 		{
-			if (vars.prsvec_1.prsa != vars.vindex_1.deadxw)
+			if (vars.prsvec_1.prsa != VILLAIN_DIED)
 			{
-				if (vars.prsvec_1.prsa != vars.vindex_1.outxw)
+				if (vars.prsvec_1.prsa != VILLAIN_LEFT)
 				{
-					if (vars.prsvec_1.prsa != vars.vindex_1.inxw)
+					if (vars.prsvec_1.prsa != VILLAIN_ENTERED)
 					{
-						if (vars.prsvec_1.prsa != vars.vindex_1.frstqw)
+						if (vars.prsvec_1.prsa != VILLAIN_QUIT_FIGHTING)
 						{
-							if (vars.prsvec_1.prsa != vars.vindex_1.movew
-									&& vars.prsvec_1.prsa != vars.vindex_1.takew
-									&& vars.prsvec_1.prsa != vars.vindex_1.mungw
-									&& vars.prsvec_1.prsa != vars.vindex_1.throww
-									&& vars.prsvec_1.prsa != vars.vindex_1.givew)
+							if (vars.prsvec_1.prsa != MOVE
+									&& vars.prsvec_1.prsa != TAKE
+									&& vars.prsvec_1.prsa != MUNG
+									&& vars.prsvec_1.prsa != THROW
+									&& vars.prsvec_1.prsa != GIVE)
 							{
 								if (!vars.findex_1.trollf
-										|| vars.prsvec_1.prsa != vars.vindex_1.hellow)
+										|| vars.prsvec_1.prsa != HELLO)
 								{
 									ret_val = false;
 									/* COULDNT HANDLE IT. */
@@ -68,10 +66,10 @@ public class Villns
 								game.dsub.rspeak_(437);
 							}
 
-							if (vars.prsvec_1.prsa != vars.vindex_1.takew
-									&& vars.prsvec_1.prsa != vars.vindex_1.movew)
+							if (vars.prsvec_1.prsa != TAKE
+									&& vars.prsvec_1.prsa != MOVE)
 							{
-								if (vars.prsvec_1.prsa != vars.vindex_1.mungw)
+								if (vars.prsvec_1.prsa != MUNG)
 								{
 									if (vars.prsvec_1.prso == 0)
 									{
@@ -82,7 +80,7 @@ public class Villns
 									/* NO OBJECT? */
 									i = 440;
 									/* ASSUME THROW. */
-									if (vars.prsvec_1.prsa == vars.vindex_1.givew)
+									if (vars.prsvec_1.prsa == GIVE)
 									{
 										i = 441;
 									}
@@ -183,8 +181,8 @@ public class Villns
 		/* ASSUME WINS. */
 		if (!vars.findex_1.cyclof)
 		{
-			if (vars.prsvec_1.prsa == vars.vindex_1.fightw
-					|| vars.prsvec_1.prsa == vars.vindex_1.frstqw)
+			if (vars.prsvec_1.prsa == FIGHT
+					|| vars.prsvec_1.prsa == VILLAIN_QUIT_FIGHTING)
 			{
 				ret_val = false;
 				/* FAILS. */
@@ -192,11 +190,11 @@ public class Villns
 			}
 			if (Math.abs(vars.findex_1.rvcyc) <= 5)
 			{
-				if (vars.prsvec_1.prsa != vars.vindex_1.givew)
+				if (vars.prsvec_1.prsa != GIVE)
 				{
 					i = 0;
 					/* ASSUME NOT HANDLED. */
-					if (vars.prsvec_1.prsa == vars.vindex_1.hellow)
+					if (vars.prsvec_1.prsa == HELLO)
 					{
 						game.dsub.rspeak_(i);
 						/* DISDAIN IT. */
@@ -216,17 +214,17 @@ public class Villns
 						return ret_val;
 					}
 					/* HELLO IS NO GO. */
-					if (vars.prsvec_1.prsa == vars.vindex_1.throww
-							|| vars.prsvec_1.prsa == vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa == THROW
+							|| vars.prsvec_1.prsa == MUNG)
 					{
 
 						i = Supp.rnd_(2) + 200;
 					}
-					if (vars.prsvec_1.prsa == vars.vindex_1.takew)
+					if (vars.prsvec_1.prsa == TAKE)
 					{
 						i = 202;
 					}
-					if (vars.prsvec_1.prsa == vars.vindex_1.tiew)
+					if (vars.prsvec_1.prsa == TIE)
 					{
 						i = 203;
 					}
@@ -322,11 +320,11 @@ public class Villns
 			return ret_val;
 		}
 		/* ASLEEP? */
-		if (vars.prsvec_1.prsa != vars.vindex_1.alarmw && vars.prsvec_1.prsa != vars.vindex_1.mungw
-				&& vars.prsvec_1.prsa != vars.vindex_1.hellow
-				&& vars.prsvec_1.prsa != vars.vindex_1.burnw
-				&& vars.prsvec_1.prsa != vars.vindex_1.killw
-				&& vars.prsvec_1.prsa != vars.vindex_1.attacw)
+		if (vars.prsvec_1.prsa != ALARM && vars.prsvec_1.prsa != MUNG
+				&& vars.prsvec_1.prsa != HELLO
+				&& vars.prsvec_1.prsa != BURN
+				&& vars.prsvec_1.prsa != KILL
+				&& vars.prsvec_1.prsa != ATTACK)
 		{
 			ret_val = false;
 			/* FAILS. */
@@ -355,28 +353,28 @@ public class Villns
 
 		ret_val = true;
 		/* ASSUME WINS. */
-		if (vars.prsvec_1.prsa != vars.vindex_1.fightw)
+		if (vars.prsvec_1.prsa != FIGHT)
 		{
-			if (vars.prsvec_1.prsa != vars.vindex_1.deadxw)
+			if (vars.prsvec_1.prsa != VILLAIN_DIED)
 			{
-				if (vars.prsvec_1.prsa != vars.vindex_1.frstqw)
+				if (vars.prsvec_1.prsa != VILLAIN_QUIT_FIGHTING)
 				{
-					if (vars.prsvec_1.prsa != vars.vindex_1.hellow
+					if (vars.prsvec_1.prsa != HELLO
 							|| vars.objcts_1.odesc1[vars.oindex_1.thief - 1] != 504)
 					{
-						if (vars.prsvec_1.prsa != vars.vindex_1.outxw)
+						if (vars.prsvec_1.prsa != VILLAIN_LEFT)
 						{
-							if (vars.prsvec_1.prsa != vars.vindex_1.inxw)
+							if (vars.prsvec_1.prsa != VILLAIN_ENTERED)
 							{
-								if (vars.prsvec_1.prsa != vars.vindex_1.takew)
+								if (vars.prsvec_1.prsa != TAKE)
 								{
-									if (vars.prsvec_1.prsa != vars.vindex_1.throww
+									if (vars.prsvec_1.prsa != THROW
 											|| vars.prsvec_1.prso != vars.oindex_1.knife
 											|| (vars.objcts_1.oflag2[vars.oindex_1.thief - 1]
 													& Vars.FITEBT) != 0)
 									{
-										if (vars.prsvec_1.prsa != vars.vindex_1.throww
-												&& vars.prsvec_1.prsa != vars.vindex_1.givew
+										if (vars.prsvec_1.prsa != THROW
+												&& vars.prsvec_1.prsa != GIVE
 												|| vars.prsvec_1.prso == 0
 												|| vars.prsvec_1.prso == vars.oindex_1.thief)
 										{

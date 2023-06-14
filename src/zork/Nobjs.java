@@ -1,8 +1,6 @@
 package zork;
 
-import java.io.IOException;
-
-public class Nobjs
+public class Nobjs implements Actions
 {
 	/* NOBJS- NEW OBJECTS PROCESSOR */
 	/* OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP, */
@@ -127,7 +125,7 @@ public class Nobjs
 				/* O32-- BILLS */
 
 				case 1000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.eatw)
+					if (vars.prsvec_1.prsa != EAT)
 					{
 						GOTO = 1100;
 						continue loop;
@@ -138,7 +136,7 @@ public class Nobjs
 					return ret_val;
 
 				case 1100:
-					if (vars.prsvec_1.prsa == vars.vindex_1.burnw)
+					if (vars.prsvec_1.prsa == BURN)
 					{
 						game.dsub.rspeak_(640);
 					}
@@ -160,10 +158,10 @@ public class Nobjs
 						continue loop;
 					}
 					/* PRSO EQ TARGET? */
-					if (vars.prsvec_1.prsa != vars.vindex_1.pushw
-							&& vars.prsvec_1.prsa != vars.vindex_1.movew
-							&& vars.prsvec_1.prsa != vars.vindex_1.takew
-							&& vars.prsvec_1.prsa != vars.vindex_1.rubw)
+					if (vars.prsvec_1.prsa != PUSH
+							&& vars.prsvec_1.prsa != MOVE
+							&& vars.prsvec_1.prsa != TAKE
+							&& vars.prsvec_1.prsa != RUB)
 					{
 						GOTO = 2200;
 						continue loop;
@@ -173,9 +171,9 @@ public class Nobjs
 					return ret_val;
 
 				case 2200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.killw
-							&& vars.prsvec_1.prsa != vars.vindex_1.attacw
-							&& vars.prsvec_1.prsa != vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa != KILL
+							&& vars.prsvec_1.prsa != ATTACK
+							&& vars.prsvec_1.prsa != MUNG)
 					{
 						GOTO = 2400;
 						continue loop;
@@ -185,7 +183,7 @@ public class Nobjs
 					return ret_val;
 
 				case 2400:
-					if (vars.prsvec_1.prsa != vars.vindex_1.throww || vars.prsvec_1.prsi != target)
+					if (vars.prsvec_1.prsa != THROW || vars.prsvec_1.prsi != target)
 					{
 						GOTO = 10;
 						continue loop;
@@ -232,7 +230,7 @@ public class Nobjs
 				/* O34-- GNOME OF ZURICH */
 
 				case 3000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.givew  && vars.prsvec_1.prsa != vars.vindex_1.throww)
+					if (vars.prsvec_1.prsa != GIVE  && vars.prsvec_1.prsa != THROW)
 					{
 
 						GOTO = 3200;
@@ -261,9 +259,9 @@ public class Nobjs
 					return ret_val;
 
 				case 3200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.attacw
-							&& vars.prsvec_1.prsa != vars.vindex_1.killw
-							&& vars.prsvec_1.prsa != vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa != ATTACK
+							&& vars.prsvec_1.prsa != KILL
+							&& vars.prsvec_1.prsa != MUNG)
 					{
 						GOTO = 3300;
 						continue loop;
@@ -282,7 +280,7 @@ public class Nobjs
 				/* O35-- EGG */
 
 				case 4000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.openw
+					if (vars.prsvec_1.prsa != OPEN
 							|| vars.prsvec_1.prso != vars.oindex_1.egg)
 					{
 						GOTO = 4500;
@@ -340,8 +338,8 @@ public class Nobjs
 					return ret_val;
 
 				case 4500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.openw
-							&& vars.prsvec_1.prsa != vars.vindex_1.mungw)
+					if (vars.prsvec_1.prsa != OPEN
+							&& vars.prsvec_1.prsa != MUNG)
 					{
 						GOTO = 4800;
 						continue loop;
@@ -373,7 +371,7 @@ public class Nobjs
 					return ret_val;
 
 				case 4800:
-					if (vars.prsvec_1.prsa != vars.vindex_1.dropw
+					if (vars.prsvec_1.prsa != DROP
 							|| vars.play_1.here != vars.rindex_1.mtree)
 					{
 						GOTO = 10;
@@ -396,7 +394,7 @@ public class Nobjs
 				/* O36-- CANARIES, GOOD AND BAD */
 
 				case 5000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.windw)
+					if (vars.prsvec_1.prsa != WIND)
 					{
 						GOTO = 10;
 						continue loop;
@@ -439,9 +437,9 @@ public class Nobjs
 				/* O37-- WHITE CLIFFS */
 
 				case 6000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.clmbw
-							&& vars.prsvec_1.prsa != vars.vindex_1.clmbuw
-							&& vars.prsvec_1.prsa != vars.vindex_1.clmbdw)
+					if (vars.prsvec_1.prsa != CLIMB
+							&& vars.prsvec_1.prsa != CLIMB_UP
+							&& vars.prsvec_1.prsa != CLIMB_DOWN)
 					{
 						GOTO = 10;
 						continue loop;
@@ -455,7 +453,7 @@ public class Nobjs
 				case 7000:
 					i__1 = vars.play_1.here - vars.findex_1.mloc;
 					if ((Math.abs(i__1)) != 1 || game.dso6.mrhere_(vars.play_1.here) != 0
-							|| vars.prsvec_1.prsa != vars.vindex_1.pushw)
+							|| vars.prsvec_1.prsa != PUSH)
 					{
 						GOTO = 7100;
 						continue loop;
@@ -478,7 +476,7 @@ public class Nobjs
 				/* O39-- SONG BIRD GLOBAL */
 
 				case 8000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.findw)
+					if (vars.prsvec_1.prsa != FIND)
 					{
 						GOTO = 8100;
 						continue loop;
@@ -488,7 +486,7 @@ public class Nobjs
 					return ret_val;
 
 				case 8100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.examiw)
+					if (vars.prsvec_1.prsa != EXAMINE)
 					{
 						GOTO = 10;
 						continue loop;
@@ -506,7 +504,7 @@ public class Nobjs
 						continue loop;
 					}
 					/* PUZZLE WALLS? */
-					if (vars.prsvec_1.prsa != vars.vindex_1.pushw)
+					if (vars.prsvec_1.prsa != PUSH)
 					{
 						GOTO = 10;
 						continue loop;
@@ -626,7 +624,7 @@ public class Nobjs
 				/* O41-- SHORT POLE */
 
 				case 10000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.raisew)
+					if (vars.prsvec_1.prsa != RAISE)
 					{
 						GOTO = 10100;
 						continue loop;
@@ -645,8 +643,8 @@ public class Nobjs
 					return ret_val;
 
 				case 10100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lowerw
-							&& vars.prsvec_1.prsa != vars.vindex_1.pushw)
+					if (vars.prsvec_1.prsa != LOWER
+							&& vars.prsvec_1.prsa != PUSH)
 					{
 
 						GOTO = 10;
@@ -697,7 +695,7 @@ public class Nobjs
 				/* O42-- MIRROR SWITCH */
 
 				case 11000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.pushw)
+					if (vars.prsvec_1.prsa != PUSH)
 					{
 						GOTO = 10;
 						continue loop;
@@ -743,7 +741,7 @@ public class Nobjs
 				/* O43-- BEAM FUNCTION */
 
 				case 12000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.takew
+					if (vars.prsvec_1.prsa != TAKE
 							|| vars.prsvec_1.prso != vars.oindex_1.rbeam)
 					{
 						GOTO = 12100;
@@ -756,13 +754,13 @@ public class Nobjs
 				case 12100:
 					i = vars.prsvec_1.prso;
 					/* ASSUME BLK WITH DIROBJ. */
-					if (vars.prsvec_1.prsa == vars.vindex_1.putw
+					if (vars.prsvec_1.prsa == PUT
 							&& vars.prsvec_1.prsi == vars.oindex_1.rbeam)
 					{
 						GOTO = 12200;
 						continue loop;
 					}
-					if (vars.prsvec_1.prsa != vars.vindex_1.mungw
+					if (vars.prsvec_1.prsa != MUNG
 							|| vars.prsvec_1.prso != vars.oindex_1.rbeam || vars.prsvec_1.prsi == 0)
 					{
 						GOTO = 10;
@@ -824,8 +822,8 @@ public class Nobjs
 				/* O45-- QUIZ DOOR */
 
 				case 14000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.openw
-							&& vars.prsvec_1.prsa != vars.vindex_1.closew)
+					if (vars.prsvec_1.prsa != OPEN
+							&& vars.prsvec_1.prsa != CLOSE)
 					{
 
 						GOTO = 14100;
@@ -836,7 +834,7 @@ public class Nobjs
 					return ret_val;
 
 				case 14100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.knockw)
+					if (vars.prsvec_1.prsa != KNOCK)
 					{
 						GOTO = 10;
 						continue loop;
@@ -872,7 +870,7 @@ public class Nobjs
 				/* O46-- LOCKED DOOR */
 
 				case 15000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.openw)
+					if (vars.prsvec_1.prsa != OPEN)
 					{
 						GOTO = 10;
 						continue loop;
@@ -893,7 +891,7 @@ public class Nobjs
 				/* O48-- DIALBUTTON */
 
 				case 17000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.pushw)
+					if (vars.prsvec_1.prsa != PUSH)
 					{
 						GOTO = 10;
 						continue loop;
@@ -961,7 +959,7 @@ public class Nobjs
 				/* O49-- DIAL INDICATOR */
 
 				case 18000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.spinw)
+					if (vars.prsvec_1.prsa != SPIN)
 					{
 						GOTO = 18100;
 						continue loop;
@@ -975,9 +973,9 @@ public class Nobjs
 					return ret_val;
 
 				case 18100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.movew
-							&& vars.prsvec_1.prsa != vars.vindex_1.putw
-							&& vars.prsvec_1.prsa != vars.vindex_1.trntow)
+					if (vars.prsvec_1.prsa != MOVE
+							&& vars.prsvec_1.prsa != PUT
+							&& vars.prsvec_1.prsa != TURN_TO)
 					{
 						GOTO = 10;
 						continue loop;
@@ -1025,8 +1023,8 @@ public class Nobjs
 						continue loop;
 					}
 					/* AT FRONT DOOR? */
-					if (vars.prsvec_1.prsa != vars.vindex_1.openw
-							&& vars.prsvec_1.prsa != vars.vindex_1.closew)
+					if (vars.prsvec_1.prsa != OPEN
+							&& vars.prsvec_1.prsa != CLOSE)
 					{
 
 						GOTO = 10;
@@ -1043,7 +1041,7 @@ public class Nobjs
 				/* O52-- PUZZLE ROOM SLIT */
 
 				case 21000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.putw
+					if (vars.prsvec_1.prsa != PUT
 							|| vars.prsvec_1.prsi != vars.oindex_1.cslit)
 					{
 						GOTO = 10;
@@ -1118,7 +1116,7 @@ public class Nobjs
 //	    if (num == 1 && ! vars.findex_1.mr1f || num == 2 && ! vars.findex_1.mr2f) {
 //		mrbf = 1;
 //	    }
-//	    if (vars.prsvec_1.prsa != vars.vindex_1.movew && vars.prsvec_1.prsa != vars.vindex_1.openw) {
+//	    if (vars.prsvec_1.prsa != MOVE && vars.prsvec_1.prsa != OPEN) {
 //		GOTO = 200; continue loop;
 //	    }
 //	    i__1 = st + 1;
@@ -1127,8 +1125,8 @@ public class Nobjs
 //	    return ret_val;
 //
 //	case 200:
-//	    if (pnf || vars.prsvec_1.prsa != vars.vindex_1.lookiw && vars.prsvec_1.prsa != 
-//		    vars.vindex_1.examiw && vars.prsvec_1.prsa != vars.vindex_1.lookw) {
+//	    if (pnf || vars.prsvec_1.prsa != LOOK_IN && vars.prsvec_1.prsa != 
+//		    examiw && vars.prsvec_1.prsa != LOOK) {
 //		GOTO = 300; continue loop;
 //	    }
 //	    i__1 = mrbf + 844;
@@ -1137,7 +1135,7 @@ public class Nobjs
 //	    return ret_val;
 //
 //	case 300:
-//	    if (vars.prsvec_1.prsa != vars.vindex_1.mungw) {
+//	    if (vars.prsvec_1.prsa != MUNG) {
 //		GOTO = 400; continue loop;
 //	    }
 //	/* BREAK? */
@@ -1161,7 +1159,7 @@ public class Nobjs
 //	    return ret_val;
 //
 //	case 500:
-//	    if (vars.prsvec_1.prsa != vars.vindex_1.pushw) {
+//	    if (vars.prsvec_1.prsa != PUSH) {
 //		GOTO = 600; continue loop;
 //	    }
 //	/* PUSH? */

@@ -1,6 +1,6 @@
 package zork;
 
-public class Np1
+public class Np1 implements Actions
 {
 	/* SPARSE- START OF PARSE */
 
@@ -279,7 +279,7 @@ public class Np1
 
 				/* 2000-- DIRECTION */
 				case 2000:
-					vars.prsvec_1.prsa = vars.vindex_1.walkw;
+					vars.prsvec_1.prsa = WALK;
 					vars.prsvec_1.prso = np.parse.dirvoc_1.dvoc[j + 1];
 					ret_val = 1;
 					return ret_val;

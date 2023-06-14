@@ -1,8 +1,6 @@
 package zork;
 
-import java.io.IOException;
-
-public class Verbs
+public class Verbs  implements Actions
 {
 	/* VAPPLI- MAIN VERB PROCESSING ROUTINE */
 
@@ -596,7 +594,7 @@ public class Verbs
 				/* V117-- BREATHE. BECOMES INFLATE WITH LUNGS. */
 
 				case 38000:
-					vars.prsvec_1.prsa = vars.vindex_1.inflaw;
+					vars.prsvec_1.prsa = INFLATE;
 					vars.prsvec_1.prsi = vars.oindex_1.lungs;
 					GOTO = 22000;
 					continue loop;
@@ -664,7 +662,7 @@ public class Verbs
 						game.dsub.rspsub_(429, odo2);
 					}
 					/* OTHERWISE DEFAULT. */
-					vars.prsvec_1.prsa = vars.vindex_1.foow;
+					vars.prsvec_1.prsa = FOO;
 					/* DEFUSE ROOM PROCESSORS. */
 					return ret_val;
 
@@ -1136,7 +1134,7 @@ public class Verbs
 					}
 					game.dsub.rspeak_(516);
 					/* NOTHING TO FILL WITH. */
-					vars.prsvec_1.parsed_successfully = false;
+					vars.prsvec_1.isParsed = false;
 					/* YOU LOSE. */
 					return ret_val;
 
@@ -1189,7 +1187,7 @@ public class Verbs
 					return ret_val;
 
 				case 59200:
-					if (vars.prsvec_1.prsa == vars.vindex_1.drinkw)
+					if (vars.prsvec_1.prsa == DRINK)
 					{
 						GOTO = 59300;
 						continue loop;
@@ -1369,7 +1367,7 @@ public class Verbs
 					j = odo2;
 					odo2 = odi2;
 					odi2 = j;
-					vars.prsvec_1.prsa = vars.vindex_1.attacw;
+					vars.prsvec_1.prsa = ATTACK;
 					/* FOR OBJACT. */
 
 					/* V141-- ATTACK. FALL THRU TO ATTACK CODE. */
@@ -1659,7 +1657,7 @@ public class Verbs
 				case 83100:
 					vars.prsvec_1.prsi = vars.oindex_1.pump;
 					/* BECOMES INFLATE */
-					vars.prsvec_1.prsa = vars.vindex_1.inflaw;
+					vars.prsvec_1.prsa = INFLATE;
 					/* X WITH PUMP. */
 					GOTO = 22000;
 					continue loop;
@@ -1684,7 +1682,7 @@ public class Verbs
 				case 87000:
 					i = vars.xsrch_1.xup;
 					/* ASSUME UP. */
-					if (vars.prsvec_1.prsa == vars.vindex_1.clmbdw)
+					if (vars.prsvec_1.prsa == CLIMB_DOWN)
 					{
 						i = vars.xsrch_1.xdown;
 					}
@@ -1718,7 +1716,7 @@ public class Verbs
 					return ret_val;
 
 				case 87500:
-					vars.prsvec_1.prsa = vars.vindex_1.walkw;
+					vars.prsvec_1.prsa = WALK;
 					/* WALK */
 					vars.prsvec_1.prso = i;
 					/* IN SPECIFIED DIR. */

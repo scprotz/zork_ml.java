@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Sverbs
 {
 	/* SVERBS- SIMPLE VERBS PROCESSOR */

@@ -1,6 +1,6 @@
 package zork;
 
-public class Rooms
+public class Rooms implements Actions
 {
 	/* RAPPL1- SPECIAL PURPOSE ROOM ROUTINES, PART 1 */
 
@@ -163,7 +163,7 @@ public class Rooms
 				/* R1-- EAST OF HOUSE. DESCRIPTION DEPENDS ON STATE OF WINDOW */
 
 				case 1000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -181,7 +181,7 @@ public class Rooms
 
 				/* R2-- KITCHEN. SAME VIEW FROM INSIDE. */
 				case 2000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -200,7 +200,7 @@ public class Rooms
 				/* R3-- LIVING ROOM. DESCRIPTION DEPENDS ON MAGICF (STATE OF */
 				/* DOOR TO CYCLOPS ROOM), RUG (MOVED OR NOT), DOOR (OPEN OR CLOSED) */
 				case 3000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						GOTO = 3500;
 						continue loop;
@@ -229,7 +229,7 @@ public class Rooms
 				/* NOT A LOOK WORD. REEVALUATE TROPHY CASE. */
 
 				case 3500:
-				    if (vars.prsvec_1.prsa != vars.vindex_1.takew && (vars.prsvec_1.prsa != vars.vindex_1.putw || 
+				    if (vars.prsvec_1.prsa != TAKE && (vars.prsvec_1.prsa != PUT || 
 					    vars.prsvec_1.prsi != vars.oindex_1.tcase)) 
 				    {
 				    	return ret_val;
@@ -266,7 +266,7 @@ public class Rooms
 				/* R4-- CELLAR. SHUT DOOR AND BAR IT IF HE JUST WALKED IN. */
 
 				case 4000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						GOTO = 4500;
 						continue loop;
@@ -277,7 +277,7 @@ public class Rooms
 					return ret_val;
 
 				case 4500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.walkiw)
+					if (vars.prsvec_1.prsa != WALK_IN)
 					{
 						return ret_val;
 					}
@@ -297,7 +297,7 @@ public class Rooms
 				/* R5-- MAZE11. DESCRIBE STATE OF GRATING. */
 
 				case 5000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -323,7 +323,7 @@ public class Rooms
 				/* R6-- CLEARING. DESCRIBE CLEARING, MOVE LEAVES. */
 
 				case 6000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						GOTO = 6500;
 						continue loop;
@@ -350,7 +350,7 @@ public class Rooms
 				case 6500:
 					if (vars.findex_1.rvclr != 0
 							|| game.dsub.qhere_(vars.oindex_1.leave, vars.rindex_1.clear)
-									&& (vars.prsvec_1.prsa != vars.vindex_1.movew
+									&& (vars.prsvec_1.prsa != MOVE
 											|| vars.prsvec_1.prso != vars.oindex_1.leave))
 					{
 						return ret_val;
@@ -365,7 +365,7 @@ public class Rooms
 				/* R7-- RESERVOIR SOUTH. DESCRIPTION DEPENDS ON LOW TIDE FLAG. */
 
 				case 7000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -386,7 +386,7 @@ public class Rooms
 				/* R8-- RESERVOIR. STATE DEPENDS ON LOW TIDE FLAG. */
 
 				case 8000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -405,7 +405,7 @@ public class Rooms
 				/* R9-- RESERVOIR NORTH. ALSO DEPENDS ON LOW TIDE FLAG. */
 
 				case 9000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -423,7 +423,7 @@ public class Rooms
 				/* R10-- GLACIER ROOM. STATE DEPENDS ON MELTED, VANISHED FLAGS. */
 
 				case 10000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -449,7 +449,7 @@ public class Rooms
 				/* R11-- FOREST ROOM */
 
 				case 11000:
-					if (vars.prsvec_1.prsa == vars.vindex_1.walkiw)
+					if (vars.prsvec_1.prsa == WALK_IN)
 					{
 						vars.cevent_1.cflag[vars.cindex_1.cevfor - 1] = true;
 					}
@@ -459,7 +459,7 @@ public class Rooms
 				/* R12-- MIRROR ROOM. STATE DEPENDS ON MIRROR INTACT. */
 
 				case 12000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -477,7 +477,7 @@ public class Rooms
 				/* R13-- CAVE2 ROOM. BLOW OUT CANDLES WITH 50% PROBABILITY. */
 
 				case 13000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.walkiw)
+					if (vars.prsvec_1.prsa != WALK_IN)
 					{
 						return ret_val;
 					}
@@ -525,7 +525,7 @@ public class Rooms
 				/* SAFE */
 
 				case 14100:
-					if (vars.prsvec_1.prsa != vars.vindex_1.trnonw)
+					if (vars.prsvec_1.prsa != TURN_ON)
 					{
 						GOTO = 14200;
 						continue loop;
@@ -538,7 +538,7 @@ public class Rooms
 					return ret_val;
 
 				case 14200:
-					if (vars.prsvec_1.prsa != vars.vindex_1.walkiw)
+					if (vars.prsvec_1.prsa != WALK_IN)
 					{
 						return ret_val;
 					}
@@ -580,7 +580,7 @@ public class Rooms
 				/* R16-- MACHINE ROOM. DESCRIBE MACHINE. */
 
 				case 16000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -599,7 +599,7 @@ public class Rooms
 				/* R17-- BAT ROOM. UNLESS CARRYING GARLIC, FLY AWAY WITH ME... */
 
 				case 17000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						GOTO = 17500;
 						continue loop;
@@ -615,7 +615,7 @@ public class Rooms
 					return ret_val;
 
 				case 17500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.walkiw
+					if (vars.prsvec_1.prsa != WALK_IN
 							|| vars.objcts_1.oadv[vars.oindex_1.garli - 1] == vars.play_1.winner)
 					{
 						return ret_val;
@@ -631,7 +631,7 @@ public class Rooms
 				/* R18-- DOME ROOM. STATE DEPENDS ON WHETHER ROPE TIED TO RAILING. */
 
 				case 18000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						GOTO = 18500;
 						continue loop;
@@ -647,7 +647,7 @@ public class Rooms
 					return ret_val;
 
 				case 18500:
-					if (vars.prsvec_1.prsa == vars.vindex_1.leapw)
+					if (vars.prsvec_1.prsa == LEAP)
 					{
 						game.dsub.jigsup_(53);
 					}
@@ -657,7 +657,7 @@ public class Rooms
 				/* R19-- TORCH ROOM. ALSO DEPENDS ON WHETHER ROPE TIED TO RAILING. */
 
 				case 19000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -674,7 +674,7 @@ public class Rooms
 				/* R20-- CAROUSEL ROOM. SPIN HIM OR KILL HIM. */
 
 				case 20000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						GOTO = 20500;
 						continue loop;
@@ -690,7 +690,7 @@ public class Rooms
 					return ret_val;
 
 				case 20500:
-					if (vars.prsvec_1.prsa == vars.vindex_1.walkiw && vars.findex_1.carozf)
+					if (vars.prsvec_1.prsa == WALK_IN && vars.findex_1.carozf)
 					{
 						game.dsub.jigsup_(58);
 					}
@@ -701,7 +701,7 @@ public class Rooms
 				/* R21-- LLD ROOM. HANDLE EXORCISE, DESCRIPTIONS. */
 
 				case 21000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						GOTO = 21500;
 						continue loop;
@@ -717,7 +717,7 @@ public class Rooms
 					return ret_val;
 
 				case 21500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.exorcw)
+					if (vars.prsvec_1.prsa != EXORCISE)
 					{
 						return ret_val;
 					}
@@ -755,7 +755,7 @@ public class Rooms
 				/* R22-- LLD2-ROOM. IS HIS HEAD ON A POLE? */
 
 				case 22000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -772,7 +772,7 @@ public class Rooms
 				/* R23-- DAM ROOM. DESCRIBE RESERVOIR, PANEL. */
 
 				case 23000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -798,7 +798,7 @@ public class Rooms
 				/* R24-- TREE ROOM */
 
 				case 24000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -832,7 +832,7 @@ public class Rooms
 				 */
 
 				case 25000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -873,7 +873,7 @@ public class Rooms
 				/* R26-- BANK BOX ROOM. */
 
 				case 26000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.walkiw)
+					if (vars.prsvec_1.prsa != WALK_IN)
 					{
 						return ret_val;
 					}
@@ -893,7 +893,7 @@ public class Rooms
 				/* R27-- TREASURE ROOM. */
 
 				case 27000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.walkiw || !vars.hack_1.thfact)
+					if (vars.prsvec_1.prsa != WALK_IN || !vars.hack_1.thfact)
 					{
 						return ret_val;
 					}
@@ -958,7 +958,7 @@ public class Rooms
 				/* R30-- OVERFALLS. DOOM. */
 
 				case 30000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						game.dsub.jigsup_(85);
 					}
@@ -968,7 +968,7 @@ public class Rooms
 				/* R31-- BEACH ROOM. DIG A HOLE. */
 
 				case 31000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.digw
+					if (vars.prsvec_1.prsa != DIG
 							|| vars.prsvec_1.prso != vars.oindex_1.shove)
 					{
 						return ret_val;
@@ -1023,7 +1023,7 @@ public class Rooms
 				/* R32-- TCAVE ROOM. DIG A HOLE IN GUANO. */
 
 				case 32000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.digw
+					if (vars.prsvec_1.prsa != DIG
 							|| vars.prsvec_1.prso != vars.oindex_1.shove)
 					{
 						return ret_val;
@@ -1051,7 +1051,7 @@ public class Rooms
 				/* R33-- FALLS ROOM */
 
 				case 33000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -1073,7 +1073,7 @@ public class Rooms
 				/* R34-- LEDGE FUNCTION. LEDGE CAN COLLAPSE. */
 
 				case 34000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -1093,7 +1093,7 @@ public class Rooms
 				/* R35-- SAFE ROOM. STATE DEPENDS ON WHETHER SAFE BLOWN. */
 
 				case 35000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						return ret_val;
 					}
@@ -1114,7 +1114,7 @@ public class Rooms
 				/* R36-- MAGNET ROOM. DESCRIBE, CHECK FOR SPINDIZZY DOOM. */
 
 				case 36000:
-					if (vars.prsvec_1.prsa != vars.vindex_1.lookw)
+					if (vars.prsvec_1.prsa != LOOK)
 					{
 						GOTO = 36500;
 						continue loop;
@@ -1125,7 +1125,7 @@ public class Rooms
 					return ret_val;
 
 				case 36500:
-					if (vars.prsvec_1.prsa != vars.vindex_1.walkiw || !vars.findex_1.caroff)
+					if (vars.prsvec_1.prsa != WALK_IN || !vars.findex_1.caroff)
 					{
 						return ret_val;
 					}
