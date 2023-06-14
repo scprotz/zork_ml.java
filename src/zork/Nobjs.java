@@ -32,13 +32,13 @@ public class Nobjs implements Actions
 		int nxt = 0, odi2 = 0, odo2 = 0;
 		int GOTO = 10;
 
-		if (vars.prsvec_1.prso != 0)
+		if (vars.prsvec_1.direct_object != 0)
 		{
-			odo2 = vars.objcts_1.odesc2[vars.prsvec_1.prso - 1];
+			odo2 = vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1];
 		}
-		if (vars.prsvec_1.prsi != 0)
+		if (vars.prsvec_1.indirect_object != 0)
 		{
-			odi2 = vars.objcts_1.odesc2[vars.prsvec_1.prsi - 1];
+			odi2 = vars.objcts_1.odesc2[vars.prsvec_1.indirect_object - 1];
 		}
 		ret_val = true;
 
@@ -125,7 +125,7 @@ public class Nobjs implements Actions
 				/* O32-- BILLS */
 
 				case 1000:
-					if (vars.prsvec_1.prsa != EAT)
+					if (vars.prsvec_1.action != EAT)
 					{
 						GOTO = 1100;
 						continue loop;
@@ -136,7 +136,7 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 1100:
-					if (vars.prsvec_1.prsa == BURN)
+					if (vars.prsvec_1.action == BURN)
 					{
 						game.dsub.rspeak_(640);
 					}
@@ -152,16 +152,16 @@ public class Nobjs implements Actions
 					target = vars.oindex_1.scol;
 					/* TARGET IS SCOL. */
 				case 2100:
-					if (vars.prsvec_1.prso != target)
+					if (vars.prsvec_1.direct_object != target)
 					{
 						GOTO = 2400;
 						continue loop;
 					}
 					/* PRSO EQ TARGET? */
-					if (vars.prsvec_1.prsa != PUSH
-							&& vars.prsvec_1.prsa != MOVE
-							&& vars.prsvec_1.prsa != TAKE
-							&& vars.prsvec_1.prsa != RUB)
+					if (vars.prsvec_1.action != PUSH
+							&& vars.prsvec_1.action != MOVE
+							&& vars.prsvec_1.action != TAKE
+							&& vars.prsvec_1.action != RUB)
 					{
 						GOTO = 2200;
 						continue loop;
@@ -171,9 +171,9 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 2200:
-					if (vars.prsvec_1.prsa != KILL
-							&& vars.prsvec_1.prsa != ATTACK
-							&& vars.prsvec_1.prsa != MUNG)
+					if (vars.prsvec_1.action != KILL
+							&& vars.prsvec_1.action != ATTACK
+							&& vars.prsvec_1.action != MUNG)
 					{
 						GOTO = 2400;
 						continue loop;
@@ -183,7 +183,7 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 2400:
-					if (vars.prsvec_1.prsa != THROW || vars.prsvec_1.prsi != target)
+					if (vars.prsvec_1.action != THROW || vars.prsvec_1.indirect_object != target)
 					{
 						GOTO = 10;
 						continue loop;
@@ -194,7 +194,7 @@ public class Nobjs implements Actions
 						continue loop;
 					}
 					/* THRU SCOL? */
-					game.dsub.newsta_(vars.prsvec_1.prso, 0, vars.rindex_1.bkbox, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, vars.rindex_1.bkbox, 0, 0);
 					/* NO, THRU WALL. */
 					game.dsub.rspsub_(675, odo2);
 					/* ENDS UP IN BOX ROOM. */
@@ -211,7 +211,7 @@ public class Nobjs implements Actions
 						continue loop;
 					}
 					/* TRIED TO GO THRU? */
-					game.dsub.newsta_(vars.prsvec_1.prso, 0, vars.screen_1.scolrm, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, vars.screen_1.scolrm, 0, 0);
 					/* SUCCESS. */
 					game.dsub.rspsub_(676, odo2);
 					/* ENDS UP SOMEWHERE. */
@@ -230,24 +230,24 @@ public class Nobjs implements Actions
 				/* O34-- GNOME OF ZURICH */
 
 				case 3000:
-					if (vars.prsvec_1.prsa != GIVE  && vars.prsvec_1.prsa != THROW)
+					if (vars.prsvec_1.action != GIVE  && vars.prsvec_1.action != THROW)
 					{
 
 						GOTO = 3200;
 						continue loop;
 					}
-					if (vars.objcts_1.otval[vars.prsvec_1.prso - 1] != 0)
+					if (vars.objcts_1.otval[vars.prsvec_1.direct_object - 1] != 0)
 					{
 						GOTO = 3100;
 						continue loop;
 					}
 					/* THROW A TREASURE? */
-					game.dsub.newsta_(vars.prsvec_1.prso, 641, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 641, 0, 0, 0);
 					/* NO, GO POP. */
 					return ret_val;
 
 				case 3100:
-					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, 0);
 					/* YES, BYE BYE TREASURE. */
 					game.dsub.rspsub_(642, odo2);
 					game.dsub.newsta_(vars.oindex_1.zgnom, 0, 0, 0, 0);
@@ -259,9 +259,9 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 3200:
-					if (vars.prsvec_1.prsa != ATTACK
-							&& vars.prsvec_1.prsa != KILL
-							&& vars.prsvec_1.prsa != MUNG)
+					if (vars.prsvec_1.action != ATTACK
+							&& vars.prsvec_1.action != KILL
+							&& vars.prsvec_1.action != MUNG)
 					{
 						GOTO = 3300;
 						continue loop;
@@ -280,8 +280,8 @@ public class Nobjs implements Actions
 				/* O35-- EGG */
 
 				case 4000:
-					if (vars.prsvec_1.prsa != OPEN
-							|| vars.prsvec_1.prso != vars.oindex_1.egg)
+					if (vars.prsvec_1.action != OPEN
+							|| vars.prsvec_1.direct_object != vars.oindex_1.egg)
 					{
 						GOTO = 4500;
 						continue loop;
@@ -297,7 +297,7 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 4100:
-					if (vars.prsvec_1.prsi != 0)
+					if (vars.prsvec_1.indirect_object != 0)
 					{
 						GOTO = 4200;
 						continue loop;
@@ -308,7 +308,7 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 4200:
-					if (vars.prsvec_1.prsi != vars.oindex_1.hands)
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.hands)
 					{
 						GOTO = 4300;
 						continue loop;
@@ -321,25 +321,25 @@ public class Nobjs implements Actions
 				case 4300:
 					i = 652;
 					/* MUNG MESSAGE. */
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prsi - 1] & Vars.TOOLBT) != 0
-							|| (vars.objcts_1.oflag2[vars.prsvec_1.prsi - 1] & Vars.WEAPBT) != 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.indirect_object - 1] & Vars.TOOLBT) != 0
+							|| (vars.objcts_1.oflag2[vars.prsvec_1.indirect_object - 1] & Vars.WEAPBT) != 0)
 					{
 						GOTO = 4600;
 						continue loop;
 					}
 					i = 653;
 					/* NOVELTY 1. */
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.FITEBT) != 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.FITEBT) != 0)
 					{
 						i = 654;
 					}
-					vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] |= Vars.FITEBT;
+					vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] |= Vars.FITEBT;
 					game.dsub.rspsub_(i, odi2);
 					return ret_val;
 
 				case 4500:
-					if (vars.prsvec_1.prsa != OPEN
-							&& vars.prsvec_1.prsa != MUNG)
+					if (vars.prsvec_1.action != OPEN
+							&& vars.prsvec_1.action != MUNG)
 					{
 						GOTO = 4800;
 						continue loop;
@@ -371,7 +371,7 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 4800:
-					if (vars.prsvec_1.prsa != DROP
+					if (vars.prsvec_1.action != DROP
 							|| vars.play_1.here != vars.rindex_1.mtree)
 					{
 						GOTO = 10;
@@ -394,13 +394,13 @@ public class Nobjs implements Actions
 				/* O36-- CANARIES, GOOD AND BAD */
 
 				case 5000:
-					if (vars.prsvec_1.prsa != WIND)
+					if (vars.prsvec_1.action != WIND)
 					{
 						GOTO = 10;
 						continue loop;
 					}
 					/* WIND EM UP? */
-					if (vars.prsvec_1.prso == vars.oindex_1.canar)
+					if (vars.prsvec_1.direct_object == vars.oindex_1.canar)
 					{
 						GOTO = 5100;
 						continue loop;
@@ -437,9 +437,9 @@ public class Nobjs implements Actions
 				/* O37-- WHITE CLIFFS */
 
 				case 6000:
-					if (vars.prsvec_1.prsa != CLIMB
-							&& vars.prsvec_1.prsa != CLIMB_UP
-							&& vars.prsvec_1.prsa != CLIMB_DOWN)
+					if (vars.prsvec_1.action != CLIMB
+							&& vars.prsvec_1.action != CLIMB_UP
+							&& vars.prsvec_1.action != CLIMB_DOWN)
 					{
 						GOTO = 10;
 						continue loop;
@@ -453,7 +453,7 @@ public class Nobjs implements Actions
 				case 7000:
 					i__1 = vars.play_1.here - vars.findex_1.mloc;
 					if ((Math.abs(i__1)) != 1 || game.dso6.mrhere_(vars.play_1.here) != 0
-							|| vars.prsvec_1.prsa != PUSH)
+							|| vars.prsvec_1.action != PUSH)
 					{
 						GOTO = 7100;
 						continue loop;
@@ -476,7 +476,7 @@ public class Nobjs implements Actions
 				/* O39-- SONG BIRD GLOBAL */
 
 				case 8000:
-					if (vars.prsvec_1.prsa != FIND)
+					if (vars.prsvec_1.action != FIND)
 					{
 						GOTO = 8100;
 						continue loop;
@@ -486,7 +486,7 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 8100:
-					if (vars.prsvec_1.prsa != EXAMINE)
+					if (vars.prsvec_1.action != EXAMINE)
 					{
 						GOTO = 10;
 						continue loop;
@@ -504,7 +504,7 @@ public class Nobjs implements Actions
 						continue loop;
 					}
 					/* PUZZLE WALLS? */
-					if (vars.prsvec_1.prsa != PUSH)
+					if (vars.prsvec_1.action != PUSH)
 					{
 						GOTO = 10;
 						continue loop;
@@ -513,14 +513,14 @@ public class Nobjs implements Actions
 					for (i = 1; i <= 8; i += 2)
 					{
 						/* LOCATE WALL. */
-						if (vars.prsvec_1.prso == vars.puzzle_1.cpwl[i - 1])
+						if (vars.prsvec_1.direct_object == vars.puzzle_1.cpwl[i - 1])
 						{
 							GOTO = 9200;
 							continue loop;
 						}
 						/* case 9100: */
 					}
-					game.dsub.bug_(80, vars.prsvec_1.prso);
+					game.dsub.bug_(80, vars.prsvec_1.direct_object);
 					/* WHAT? */
 
 				case 9200:
@@ -624,7 +624,7 @@ public class Nobjs implements Actions
 				/* O41-- SHORT POLE */
 
 				case 10000:
-					if (vars.prsvec_1.prsa != RAISE)
+					if (vars.prsvec_1.action != RAISE)
 					{
 						GOTO = 10100;
 						continue loop;
@@ -643,8 +643,8 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 10100:
-					if (vars.prsvec_1.prsa != LOWER
-							&& vars.prsvec_1.prsa != PUSH)
+					if (vars.prsvec_1.action != LOWER
+							&& vars.prsvec_1.action != PUSH)
 					{
 
 						GOTO = 10;
@@ -695,7 +695,7 @@ public class Nobjs implements Actions
 				/* O42-- MIRROR SWITCH */
 
 				case 11000:
-					if (vars.prsvec_1.prsa != PUSH)
+					if (vars.prsvec_1.action != PUSH)
 					{
 						GOTO = 10;
 						continue loop;
@@ -741,8 +741,8 @@ public class Nobjs implements Actions
 				/* O43-- BEAM FUNCTION */
 
 				case 12000:
-					if (vars.prsvec_1.prsa != TAKE
-							|| vars.prsvec_1.prso != vars.oindex_1.rbeam)
+					if (vars.prsvec_1.action != TAKE
+							|| vars.prsvec_1.direct_object != vars.oindex_1.rbeam)
 					{
 						GOTO = 12100;
 						continue loop;
@@ -752,21 +752,21 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 12100:
-					i = vars.prsvec_1.prso;
+					i = vars.prsvec_1.direct_object;
 					/* ASSUME BLK WITH DIROBJ. */
-					if (vars.prsvec_1.prsa == PUT
-							&& vars.prsvec_1.prsi == vars.oindex_1.rbeam)
+					if (vars.prsvec_1.action == PUT
+							&& vars.prsvec_1.indirect_object == vars.oindex_1.rbeam)
 					{
 						GOTO = 12200;
 						continue loop;
 					}
-					if (vars.prsvec_1.prsa != MUNG
-							|| vars.prsvec_1.prso != vars.oindex_1.rbeam || vars.prsvec_1.prsi == 0)
+					if (vars.prsvec_1.action != MUNG
+							|| vars.prsvec_1.direct_object != vars.oindex_1.rbeam || vars.prsvec_1.indirect_object == 0)
 					{
 						GOTO = 10;
 						continue loop;
 					}
-					i = vars.prsvec_1.prsi;
+					i = vars.prsvec_1.indirect_object;
 				case 12200:
 					if (vars.objcts_1.oadv[i - 1] != vars.play_1.winner)
 					{
@@ -822,8 +822,8 @@ public class Nobjs implements Actions
 				/* O45-- QUIZ DOOR */
 
 				case 14000:
-					if (vars.prsvec_1.prsa != OPEN
-							&& vars.prsvec_1.prsa != CLOSE)
+					if (vars.prsvec_1.action != OPEN
+							&& vars.prsvec_1.action != CLOSE)
 					{
 
 						GOTO = 14100;
@@ -834,7 +834,7 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 14100:
-					if (vars.prsvec_1.prsa != KNOCK)
+					if (vars.prsvec_1.action != KNOCK)
 					{
 						GOTO = 10;
 						continue loop;
@@ -870,7 +870,7 @@ public class Nobjs implements Actions
 				/* O46-- LOCKED DOOR */
 
 				case 15000:
-					if (vars.prsvec_1.prsa != OPEN)
+					if (vars.prsvec_1.action != OPEN)
 					{
 						GOTO = 10;
 						continue loop;
@@ -891,7 +891,7 @@ public class Nobjs implements Actions
 				/* O48-- DIALBUTTON */
 
 				case 17000:
-					if (vars.prsvec_1.prsa != PUSH)
+					if (vars.prsvec_1.action != PUSH)
 					{
 						GOTO = 10;
 						continue loop;
@@ -959,7 +959,7 @@ public class Nobjs implements Actions
 				/* O49-- DIAL INDICATOR */
 
 				case 18000:
-					if (vars.prsvec_1.prsa != SPIN)
+					if (vars.prsvec_1.action != SPIN)
 					{
 						GOTO = 18100;
 						continue loop;
@@ -973,14 +973,14 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 18100:
-					if (vars.prsvec_1.prsa != MOVE
-							&& vars.prsvec_1.prsa != PUT
-							&& vars.prsvec_1.prsa != TURN_TO)
+					if (vars.prsvec_1.action != MOVE
+							&& vars.prsvec_1.action != PUT
+							&& vars.prsvec_1.action != TURN_TO)
 					{
 						GOTO = 10;
 						continue loop;
 					}
-					if (vars.prsvec_1.prsi != 0)
+					if (vars.prsvec_1.indirect_object != 0)
 					{
 						GOTO = 18200;
 						continue loop;
@@ -991,8 +991,8 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 18200:
-					if (vars.prsvec_1.prsi >= vars.oindex_1.num1
-							&& vars.prsvec_1.prsi <= vars.oindex_1.num8)
+					if (vars.prsvec_1.indirect_object >= vars.oindex_1.num1
+							&& vars.prsvec_1.indirect_object <= vars.oindex_1.num8)
 					{
 						GOTO = 18300;
 						continue loop;
@@ -1002,7 +1002,7 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 18300:
-					vars.findex_1.pnumb = vars.prsvec_1.prsi - vars.oindex_1.num1 + 1;
+					vars.findex_1.pnumb = vars.prsvec_1.indirect_object - vars.oindex_1.num1 + 1;
 					/* SET UP NEW. */
 					i__1 = vars.findex_1.pnumb + 712;
 					game.dsub.rspsub_(808, i__1);
@@ -1023,8 +1023,8 @@ public class Nobjs implements Actions
 						continue loop;
 					}
 					/* AT FRONT DOOR? */
-					if (vars.prsvec_1.prsa != OPEN
-							&& vars.prsvec_1.prsa != CLOSE)
+					if (vars.prsvec_1.action != OPEN
+							&& vars.prsvec_1.action != CLOSE)
 					{
 
 						GOTO = 10;
@@ -1041,19 +1041,19 @@ public class Nobjs implements Actions
 				/* O52-- PUZZLE ROOM SLIT */
 
 				case 21000:
-					if (vars.prsvec_1.prsa != PUT
-							|| vars.prsvec_1.prsi != vars.oindex_1.cslit)
+					if (vars.prsvec_1.action != PUT
+							|| vars.prsvec_1.indirect_object != vars.oindex_1.cslit)
 					{
 						GOTO = 10;
 						continue loop;
 					}
-					if (vars.prsvec_1.prso != vars.oindex_1.gcard)
+					if (vars.prsvec_1.direct_object != vars.oindex_1.gcard)
 					{
 						GOTO = 21100;
 						continue loop;
 					}
 					/* PUT CARD IN SLIT? */
-					game.dsub.newsta_(vars.prsvec_1.prso, 863, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 863, 0, 0, 0);
 					/* KILL CARD. */
 					vars.findex_1.cpoutf = true;
 					/* OPEN DOOR. */
@@ -1061,8 +1061,8 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 21100:
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.VICTBT) == 0
-							&& (vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) == 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.VICTBT) == 0
+							&& (vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.VILLBT) == 0)
 					{
 						GOTO = 21200;
 						continue loop;
@@ -1073,7 +1073,7 @@ public class Nobjs implements Actions
 					return ret_val;
 
 				case 21200:
-					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, 0);
 					/* KILL OBJECT. */
 					game.dsub.rspsub_(864, odo2);
 					/* DESCRIBE. */

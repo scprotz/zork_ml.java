@@ -106,9 +106,9 @@ public class Dgame implements Actions
 			np.rdline_(action, vars.input_1.inbuf, 1);
 
 			++vars.state_1.moves;
-			vars.prsvec_1.isParsed = np.parse_(vars.input_1.inbuf, true);
+			vars.prsvec_1.is_parsed = np.parse_(vars.input_1.inbuf, true);
 			/* PARSE LOSES? */
-			if (!vars.prsvec_1.isParsed)
+			if (!vars.prsvec_1.is_parsed)
 			{
 				end_action();
 				return;
@@ -122,7 +122,7 @@ public class Dgame implements Actions
 			}
 
 			/* TELL? */
-			if (vars.prsvec_1.prsa == TELLW)
+			if (vars.prsvec_1.action == TELLW)
 			{
 				do2000();
 				if (check_echo())
@@ -162,7 +162,7 @@ public class Dgame implements Actions
 	{
 		do
 		{
-			if (vars.prsvec_1.prso == vars.oindex_1.valua || vars.prsvec_1.prso == vars.oindex_1.every)
+			if (vars.prsvec_1.direct_object == vars.oindex_1.valua || vars.prsvec_1.direct_object == vars.oindex_1.every)
 			{
 
 				verbs.dverb1.valuac_(vars.oindex_1.valua);
@@ -175,7 +175,7 @@ public class Dgame implements Actions
 					return true;
 				}
 			}
-			if (!verbs.vappli_(vars.prsvec_1.prsa))
+			if (!verbs.vappli_(vars.prsvec_1.action))
 			{
 				return true;
 			}
@@ -249,7 +249,7 @@ public class Dgame implements Actions
 			/* KILL THE ECHO. */
 			vars.findex_1.echof = true;
 			vars.objcts_1.oflag2[vars.oindex_1.bar - 1] &= ~Vars.SCRDBT;
-			vars.prsvec_1.isParsed = true;
+			vars.prsvec_1.is_parsed = true;
 			/* FAKE OUT PARSER. */
 			vars.prsvec_1.prscon = 1;
 			/* FORCE NEW INPUT. */
@@ -264,8 +264,8 @@ public class Dgame implements Actions
 	{
 		/* VALID EXIT? */
 //			case 1300:
-		vars.prsvec_1.isParsed = np.parse_(vars.input_1.inbuf, false);
-		if (!vars.prsvec_1.isParsed || vars.prsvec_1.prsa != WALK)
+		vars.prsvec_1.is_parsed = np.parse_(vars.input_1.inbuf, false);
+		if (!vars.prsvec_1.is_parsed || vars.prsvec_1.action != WALK)
 		{
 			Supp.println(new String(vars.input_1.inbuf));
 			vars.play_1.telflg = true;
@@ -274,7 +274,7 @@ public class Dgame implements Actions
 //					continue;
 			return true;
 		}
-		if (dso3.findxt_(vars.prsvec_1.prso, vars.play_1.here))
+		if (dso3.findxt_(vars.prsvec_1.direct_object, vars.play_1.here))
 		{
 //					GOTO = 300;
 //					continue;
@@ -300,7 +300,7 @@ public class Dgame implements Actions
 	public void do2000()
 	{
 //			case 2000:
-		if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.ACTRBT) != 0)
+		if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.ACTRBT) != 0)
 		{
 //					GOTO = 2100;
 //					continue;
@@ -319,7 +319,7 @@ public class Dgame implements Actions
 	public void do2100()
 	{
 //			case 2100:
-		vars.play_1.winner = dsub.oactor_(vars.prsvec_1.prso);
+		vars.play_1.winner = dsub.oactor_(vars.prsvec_1.direct_object);
 		/* NEW PLAYER. */
 		vars.play_1.here = vars.advs_1.aroom[vars.play_1.winner - 1];
 		/* NEW LOCATION. */
@@ -376,13 +376,13 @@ public class Dgame implements Actions
 			return;
 		}
 		/* VEHICLE HANDLE? */
-		if (vars.prsvec_1.prso == vars.oindex_1.valua || vars.prsvec_1.prso == vars.oindex_1.every)
+		if (vars.prsvec_1.direct_object == vars.oindex_1.valua || vars.prsvec_1.direct_object == vars.oindex_1.every)
 		{
 			verbs.dverb1.valuac_(vars.oindex_1.valua);
 			/* ALL OR VALUABLES. */
 			return;
 		}
-		if (!verbs.vappli_(vars.prsvec_1.prsa))
+		if (!verbs.vappli_(vars.prsvec_1.action))
 		{
 			end_move();
 			return;
@@ -421,7 +421,7 @@ public class Dgame implements Actions
 			actors.thiefd_();
 		}
 		/* THIEF DEMON. */
-		if (vars.prsvec_1.isParsed)
+		if (vars.prsvec_1.is_parsed)
 		{
 			demons.fightd_();
 		}
@@ -431,13 +431,13 @@ public class Dgame implements Actions
 			demons.swordd_();
 		}
 		/* SWORD DEMON. */
-		if (vars.prsvec_1.isParsed)
+		if (vars.prsvec_1.is_parsed)
 		{
 
 			verbs.clockd_();
 		}
 		/* CLOCK DEMON. */
-		if (vars.prsvec_1.isParsed)
+		if (vars.prsvec_1.is_parsed)
 		{
 			xvehic_(2);
 		}

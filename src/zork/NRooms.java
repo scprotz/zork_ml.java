@@ -69,7 +69,7 @@ public class NRooms implements Actions
 	    	{
 
 	case 38000:
-	    if (vars.prsvec_1.prsa == LOOK) {
+	    if (vars.prsvec_1.action == LOOK) {
 		lookto_(vars.rindex_1.fdoor, vars.rindex_1.mrg, 0, 682, 681);
 	    }
 	    return ret_val;
@@ -77,7 +77,7 @@ public class NRooms implements Actions
 	/* R39--	MIRROR G ROOM */
 
 	case 39000:
-	    if (vars.prsvec_1.prsa == WALK_IN) {
+	    if (vars.prsvec_1.action == WALK_IN) {
 		game.dsub.jigsup_(685);
 	    }
 	    return ret_val;
@@ -85,7 +85,7 @@ public class NRooms implements Actions
 	/* R40--	MIRROR C ROOM */
 
 	case 40000:
-	    if (vars.prsvec_1.prsa == LOOK) {
+	    if (vars.prsvec_1.action == LOOK) {
 		lookto_(vars.rindex_1.mrg, vars.rindex_1.mrb, 683, 0, 681);
 	    }
 	    return ret_val;
@@ -93,7 +93,7 @@ public class NRooms implements Actions
 	/* R41--	MIRROR B ROOM */
 
 	case 41000:
-	    if (vars.prsvec_1.prsa == LOOK) {
+	    if (vars.prsvec_1.action == LOOK) {
 		lookto_(vars.rindex_1.mrc, vars.rindex_1.mra, 0, 0, 681);
 	    }
 	    return ret_val;
@@ -101,7 +101,7 @@ public class NRooms implements Actions
 	/* R42--	MIRROR A ROOM */
 
 	case 42000:
-	    if (vars.prsvec_1.prsa == LOOK) {
+	    if (vars.prsvec_1.action == LOOK) {
 		lookto_(vars.rindex_1.mrb, 0, 0, 684, 681);
 	    }
 	    return ret_val;
@@ -110,7 +110,7 @@ public class NRooms implements Actions
 	/* R43--	MIRROR C EAST/WEST */
 
 	case 43000:
-	    if (vars.prsvec_1.prsa == LOOK) {
+	    if (vars.prsvec_1.action == LOOK) {
 		ewtell_(vars.play_1.here, 683);
 	    }
 	    return ret_val;
@@ -118,7 +118,7 @@ public class NRooms implements Actions
 	/* R44--	MIRROR B EAST/WEST */
 
 	case 44000:
-	    if (vars.prsvec_1.prsa == LOOK) {
+	    if (vars.prsvec_1.action == LOOK) {
 		ewtell_(vars.play_1.here, 686);
 	    }
 	    return ret_val;
@@ -126,7 +126,7 @@ public class NRooms implements Actions
 	/* R45--	MIRROR A EAST/WEST */
 
 	case 45000:
-	    if (vars.prsvec_1.prsa == LOOK) {
+	    if (vars.prsvec_1.action == LOOK) {
 		ewtell_(vars.play_1.here, 687);
 	    }
 	    return ret_val;
@@ -134,7 +134,7 @@ public class NRooms implements Actions
 	/* R46--	INSIDE MIRROR */
 
 	case 46000:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -166,7 +166,7 @@ public class NRooms implements Actions
 	/* R47--	MIRROR EYE ROOM */
 
 	case 47000:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -192,7 +192,7 @@ public class NRooms implements Actions
 	/* R48--	INSIDE CRYPT */
 
 	case 48000:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -207,7 +207,7 @@ public class NRooms implements Actions
 	/* R49--	SOUTH CORRIDOR */
 
 	case 49000:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -227,7 +227,7 @@ public class NRooms implements Actions
 	/* R50--	BEHIND DOOR */
 
 	case 50000:
-	    if (vars.prsvec_1.prsa != WALK_IN) {
+	    if (vars.prsvec_1.action != WALK_IN) {
 		GOTO = 50100; continue loop;
 	    }
 	/* WALK IN? */
@@ -237,7 +237,7 @@ public class NRooms implements Actions
 	    return ret_val;
 
 	case 50100:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -253,11 +253,11 @@ public class NRooms implements Actions
 	/* R51--	FRONT DOOR */
 
 	case 51000:
-	    if (vars.prsvec_1.prsa == WALK_IN) {
+	    if (vars.prsvec_1.action == WALK_IN) {
 		vars.cevent_1.ctick[vars.cindex_1.cevfol - 1] = 0;
 	    }
 	/* IF EXITS, KILL FOLLOW. */
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -280,7 +280,7 @@ public class NRooms implements Actions
 	/* R52--	NORTH CORRIDOR */
 
 	case 52000:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -295,7 +295,7 @@ public class NRooms implements Actions
 	/* R53--	PARAPET */
 
 	case 53000:
-	    if (vars.prsvec_1.prsa == LOOK) {
+	    if (vars.prsvec_1.action == LOOK) {
 		i__1 = vars.findex_1.pnumb + 712;
 		game.dsub.rspsub_(712, i__1);
 	    }
@@ -304,7 +304,7 @@ public class NRooms implements Actions
 	/* R54--	CELL */
 
 	case 54000:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -328,7 +328,7 @@ public class NRooms implements Actions
 	/* R55--	PRISON CELL */
 
 	case 55000:
-	    if (vars.prsvec_1.prsa == LOOK) {
+	    if (vars.prsvec_1.action == LOOK) {
 		game.dsub.rspeak_(724);
 	    }
 	/* LOOK? */
@@ -337,7 +337,7 @@ public class NRooms implements Actions
 	/* R56--	NIRVANA CELL */
 
 	case 56000:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -353,7 +353,7 @@ public class NRooms implements Actions
 	/* R57--	NIRVANA AND END OF GAME */
 
 	case 57000:
-	    if (vars.prsvec_1.prsa != WALK_IN) {
+	    if (vars.prsvec_1.action != WALK_IN) {
 		return ret_val;
 	    }
 	/* WALKIN? */
@@ -365,7 +365,7 @@ public class NRooms implements Actions
 	/* R58--	TOMB ROOM */
 
 	case 58000:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -380,7 +380,7 @@ public class NRooms implements Actions
 	/* R59--	PUZZLE SIDE ROOM */
 
 	case 59000:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -397,7 +397,7 @@ public class NRooms implements Actions
 	/* R60--	PUZZLE ROOM */
 
 	case 60000:
-	    if (vars.prsvec_1.prsa != LOOK) {
+	    if (vars.prsvec_1.action != LOOK) {
 		return ret_val;
 	    }
 	/* LOOK? */

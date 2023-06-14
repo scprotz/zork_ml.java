@@ -42,7 +42,7 @@ public class Demons implements Actions
 			{
 				if (!((vars.objcts_1.oflag2[obj - 1] & Vars.FITEBT) == 0 || ra == 0))
 				{
-					vars.prsvec_1.prsa = FIGHT;
+					vars.prsvec_1.action = FIGHT;
 					/* HAVE A FIGHT. */
 					game.objcts.oappli_(ra, 0);
 				}
@@ -57,7 +57,7 @@ public class Demons implements Actions
 				{
 					continue;
 				}
-				vars.prsvec_1.prsa = VILLAIN_ENTERED;
+				vars.prsvec_1.action = VILLAIN_ENTERED;
 				/* WAKE HIM UP. */
 				game.objcts.oappli_(ra, 0);
 				vars.objcts_1.ocapac[obj - 1] = Math.abs(vars.objcts_1.ocapac[obj - 1]);
@@ -78,7 +78,7 @@ public class Demons implements Actions
 						continue;
 					}
 					/* NOT FIGHTING, */
-					vars.prsvec_1.prsa = VILLAIN_QUIT_FIGHTING;
+					vars.prsvec_1.action = VILLAIN_QUIT_FIGHTING;
 					/* SET UP PROBABILITY */
 					if (!game.objcts.oappli_(ra, 0))
 					{
@@ -110,7 +110,7 @@ public class Demons implements Actions
 				continue;
 			}
 			/* ANYTHING TO DO? */
-			vars.prsvec_1.prsa = VILLAIN_ENTERED;
+			vars.prsvec_1.action = VILLAIN_ENTERED;
 			/* YES, WAKE HIM UP. */
 			game.objcts.oappli_(ra, 0);
 			continue;
@@ -139,7 +139,7 @@ public class Demons implements Actions
 				if (ra != 0)
 				{
 					/* VILLAIN ACTION? */
-					vars.prsvec_1.prsa = FIGHT;
+					vars.prsvec_1.action = FIGHT;
 					/* SEE IF */
 					if (game.objcts.oappli_(ra, 0))
 					{
@@ -548,7 +548,7 @@ public class Demons implements Actions
 						return ret_val;
 					}
 					/* IF NX TO DO, EXIT. */
-					vars.prsvec_1.prsa = VILLAIN_DIED;
+					vars.prsvec_1.action = VILLAIN_DIED;
 					/* LET HIM KNOW. */
 					game.objcts.oappli_(ra, 0);
 					return ret_val;
@@ -558,7 +558,7 @@ public class Demons implements Actions
 					{
 						return ret_val;
 					}
-					vars.prsvec_1.prsa = VILLAIN_LEFT;
+					vars.prsvec_1.action = VILLAIN_LEFT;
 					/* LET HIM BE OUT. */
 					game.objcts.oappli_(ra, 0);
 					return ret_val;

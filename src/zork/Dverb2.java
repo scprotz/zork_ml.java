@@ -34,7 +34,7 @@ public class Dverb2
 		File file = new File("dsave.java.dat");
 
 		/* DISABLE GAME. */
-		vars.prsvec_1.isParsed = false;
+		vars.prsvec_1.is_parsed = false;
 
 		/* Note: save file format is different for PDP vs. non-PDP versions */
 		try
@@ -184,7 +184,7 @@ public class Dverb2
 
 		File file = new File("dsave.dat");
 
-		vars.prsvec_1.isParsed = false;
+		vars.prsvec_1.is_parsed = false;
 		/* DISABLE GAME. */
 		/* Note: save file format is different for PDP vs. non-PDP versions */
 		try
@@ -316,7 +316,7 @@ public class Dverb2
 		}
 		if (GOTO != 500)
 		{
-			if (!game.dso3.findxt_(vars.prsvec_1.prso, vars.play_1.here))
+			if (!game.dso3.findxt_(vars.prsvec_1.direct_object, vars.play_1.here))
 			{
 				{
 					GOTO = 450;
@@ -421,7 +421,7 @@ public class Dverb2
 				/* ROOM IS LIT, OR WINNER IS NOT PLAYER (NO GRUE). */
 
 				case 500:
-					if (game.dso3.findxt_(vars.prsvec_1.prso, vars.play_1.here))
+					if (game.dso3.findxt_(vars.prsvec_1.direct_object, vars.play_1.here))
 					{
 						{
 							GOTO = 550;
@@ -432,12 +432,12 @@ public class Dverb2
 				case 525:
 					vars.curxt_1.xstrng = 678;
 					/* ASSUME WALL. */
-					if (vars.prsvec_1.prso == vars.xsrch_1.xup)
+					if (vars.prsvec_1.direct_object == vars.xsrch_1.xup)
 					{
 						vars.curxt_1.xstrng = 679;
 					}
 					/* IF UP, CANT. */
-					if (vars.prsvec_1.prso == vars.xsrch_1.xdown)
+					if (vars.prsvec_1.direct_object == vars.xsrch_1.xdown)
 					{
 						vars.curxt_1.xstrng = 680;
 					}
@@ -764,8 +764,8 @@ public class Dverb2
 						}
 					}
 					/* MIRROR IN WAY? */
-					if (vars.prsvec_1.prso == vars.xsrch_1.xnorth
-							|| vars.prsvec_1.prso == vars.xsrch_1.xsouth)
+					if (vars.prsvec_1.direct_object == vars.xsrch_1.xnorth
+							|| vars.prsvec_1.direct_object == vars.xsrch_1.xsouth)
 					{
 						{
 							GOTO = 8200;
@@ -783,7 +783,7 @@ public class Dverb2
 					vars.curxt_1.xroom1 = (vars.curxt_1.xroom1 - vars.rindex_1.mra << 1)
 							+ vars.rindex_1.mrae;
 					/* CALC EAST ROOM. */
-					if (vars.prsvec_1.prso > vars.xsrch_1.xsouth)
+					if (vars.prsvec_1.direct_object > vars.xsrch_1.xsouth)
 					{
 						++vars.curxt_1.xroom1;
 					}
@@ -803,7 +803,7 @@ public class Dverb2
 				case 8300:
 					ldir = vars.findex_1.mdir;
 					/* SEE WHICH MIRROR. */
-					if (vars.prsvec_1.prso == vars.xsrch_1.xsouth)
+					if (vars.prsvec_1.direct_object == vars.xsrch_1.xsouth)
 					{
 						ldir = 180;
 					}
@@ -848,10 +848,10 @@ public class Dverb2
 				case 10000:
 					vars.findex_1.frobzf = false;
 					/* ASSUME CANT. */
-					ldir = (vars.prsvec_1.prso - vars.xsrch_1.xnorth) / vars.xsrch_1.xnorth * 45;
+					ldir = (vars.prsvec_1.direct_object - vars.xsrch_1.xnorth) / vars.xsrch_1.xnorth * 45;
 					/* XLATE DIR TO DEGREES. */
 					if (!vars.findex_1.mropnf || (vars.findex_1.mdir + 270) % 360 != ldir
-							&& vars.prsvec_1.prso != vars.xsrch_1.xexit)
+							&& vars.prsvec_1.direct_object != vars.xsrch_1.xexit)
 					{
 						{
 							GOTO = 10200;
@@ -882,7 +882,7 @@ public class Dverb2
 
 				case 10200:
 					if (!vars.findex_1.wdopnf || (vars.findex_1.mdir + 180) % 360 != ldir
-							&& vars.prsvec_1.prso != vars.xsrch_1.xexit)
+							&& vars.prsvec_1.direct_object != vars.xsrch_1.xexit)
 					{
 						return ret_val;
 					}
@@ -932,7 +932,7 @@ public class Dverb2
 				case 14000:
 					vars.findex_1.frobzf = false;
 					/* ASSSUME LOSE. */
-					if (vars.prsvec_1.prso != vars.xsrch_1.xup)
+					if (vars.prsvec_1.direct_object != vars.xsrch_1.xup)
 					{
 						{
 							GOTO = 14100;
@@ -959,7 +959,7 @@ public class Dverb2
 					return ret_val;
 
 				case 14100:
-					if (vars.findex_1.cphere != 52 || vars.prsvec_1.prso != vars.xsrch_1.xwest
+					if (vars.findex_1.cphere != 52 || vars.prsvec_1.direct_object != vars.xsrch_1.xwest
 							|| !vars.findex_1.cpoutf)
 					{
 						{
@@ -975,7 +975,7 @@ public class Dverb2
 					for (i = 1; i <= 16; i += 2)
 					{
 						/* LOCATE EXIT. */
-						if (vars.prsvec_1.prso == vars.puzzle_1.cpdr[i - 1])
+						if (vars.prsvec_1.direct_object == vars.puzzle_1.cpdr[i - 1])
 						{
 							{
 								GOTO = 14400;

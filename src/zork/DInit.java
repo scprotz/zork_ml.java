@@ -131,10 +131,10 @@ public class DInit
 		vars.time_1.pltime = 0;
 		vars.state_1.mungrm = 0;
 		vars.state_1.hs = 0;
-		vars.prsvec_1.prsa = 0;
+		vars.prsvec_1.action = 0;
 		/* CLEAR PARSE VECTOR. */
-		vars.prsvec_1.prsi = 0;
-		vars.prsvec_1.prso = 0;
+		vars.prsvec_1.indirect_object = 0;
+		vars.prsvec_1.direct_object = 0;
 		vars.prsvec_1.prscon = 1;
 		vars.orphs_1.oflag = 0;
 		/* CLEAR ORPHANS. */

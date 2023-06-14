@@ -30,18 +30,18 @@ public class Sobjs implements Actions
 		int av;
 		int odi2 = 0, odo2 = 0;
 
-		if (vars.prsvec_1.prso <= 220)
+		if (vars.prsvec_1.direct_object <= 220)
 		{
 
-			if (vars.prsvec_1.prso != 0)
+			if (vars.prsvec_1.direct_object != 0)
 			{
-				odo2 = vars.objcts_1.odesc2[vars.prsvec_1.prso - 1];
+				odo2 = vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1];
 			}
 		}
 
-		if (vars.prsvec_1.prsi != 0)
+		if (vars.prsvec_1.indirect_object != 0)
 		{
-			odi2 = vars.objcts_1.odesc2[vars.prsvec_1.prsi - 1];
+			odi2 = vars.objcts_1.odesc2[vars.prsvec_1.indirect_object - 1];
 		}
 		av = vars.advs_1.avehic[vars.play_1.winner - 1];
 		ret_val = true;
@@ -176,7 +176,7 @@ public class Sobjs implements Actions
 				/* O2-- TROPHY CASE */
 
 				case 3000:
-					if (vars.prsvec_1.prsa != TAKE)
+					if (vars.prsvec_1.action != TAKE)
 					{
 						return false;
 					}
@@ -188,23 +188,23 @@ public class Sobjs implements Actions
 				/* O3-- BOTTLE FUNCTION */
 
 				case 4000:
-					if (vars.prsvec_1.prsa != THROW)
+					if (vars.prsvec_1.action != THROW)
 					{
 						GOTO = 4100;
 						continue loop;
 					}
 					/* THROW? */
-					game.dsub.newsta_(vars.prsvec_1.prso, 129, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 129, 0, 0, 0);
 					/* BREAKS. */
 					return ret_val;
 
 				case 4100:
-					if (vars.prsvec_1.prsa != MUNG)
+					if (vars.prsvec_1.action != MUNG)
 					{
 						return false;
 					}
 					/* MUNG? */
-					game.dsub.newsta_(vars.prsvec_1.prso, 131, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 131, 0, 0, 0);
 					/* BREAKS. */
 					return ret_val;
 				/* SOBJS, PAGE 4 */
@@ -220,7 +220,7 @@ public class Sobjs implements Actions
 					/* IN DOME? */
 					vars.findex_1.domef = false;
 					/* NO, */
-					if (vars.prsvec_1.prsa != UNTIE)
+					if (vars.prsvec_1.action != UNTIE)
 					{
 						GOTO = 6050;
 						continue loop;
@@ -231,7 +231,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 6050:
-					if (vars.prsvec_1.prsa != TIE)
+					if (vars.prsvec_1.action != TIE)
 					{
 						return false;
 					}
@@ -241,8 +241,8 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 6100:
-					if (vars.prsvec_1.prsa != TIE
-							|| vars.prsvec_1.prsi != vars.oindex_1.raili)
+					if (vars.prsvec_1.action != TIE
+							|| vars.prsvec_1.indirect_object != vars.oindex_1.raili)
 					{
 						GOTO = 6200;
 						continue loop;
@@ -266,7 +266,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 6200:
-					if (vars.prsvec_1.prsa != UNTIE)
+					if (vars.prsvec_1.action != UNTIE)
 					{
 						GOTO = 6300;
 						continue loop;
@@ -291,7 +291,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 6300:
-					if (vars.findex_1.domef || vars.prsvec_1.prsa != DROP)
+					if (vars.findex_1.domef || vars.prsvec_1.action != DROP)
 					{
 						GOTO = 6400;
 						continue loop;
@@ -302,7 +302,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 6400:
-					if (vars.prsvec_1.prsa != TAKE || !vars.findex_1.domef)
+					if (vars.prsvec_1.action != TAKE || !vars.findex_1.domef)
 					{
 						return false;
 					}
@@ -313,7 +313,7 @@ public class Sobjs implements Actions
 				/* O5-- SWORD FUNCTION */
 
 				case 7000:
-					if (vars.prsvec_1.prsa == TAKE
+					if (vars.prsvec_1.action == TAKE
 							&& vars.play_1.winner == vars.aindex_1.player)
 					{
 
@@ -324,7 +324,7 @@ public class Sobjs implements Actions
 				/* O6-- LANTERN */
 
 				case 8000:
-					if (vars.prsvec_1.prsa != THROW)
+					if (vars.prsvec_1.action != THROW)
 					{
 						GOTO = 8100;
 						continue loop;
@@ -337,11 +337,11 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 8100:
-					if (vars.prsvec_1.prsa == TURN_ON)
+					if (vars.prsvec_1.action == TURN_ON)
 					{
 						vars.cevent_1.cflag[vars.cindex_1.cevlnt - 1] = true;
 					}
-					if (vars.prsvec_1.prsa == TURN_OFF)
+					if (vars.prsvec_1.action == TURN_OFF)
 					{
 						vars.cevent_1.cflag[vars.cindex_1.cevlnt - 1] = false;
 					}
@@ -350,7 +350,7 @@ public class Sobjs implements Actions
 				/* O7-- RUG FUNCTION */
 
 				case 9000:
-					if (vars.prsvec_1.prsa != RAISE)
+					if (vars.prsvec_1.action != RAISE)
 					{
 						GOTO = 9100;
 						continue loop;
@@ -361,7 +361,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 9100:
-					if (vars.prsvec_1.prsa != TAKE)
+					if (vars.prsvec_1.action != TAKE)
 					{
 						GOTO = 9200;
 						continue loop;
@@ -372,7 +372,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 9200:
-					if (vars.prsvec_1.prsa != MOVE)
+					if (vars.prsvec_1.action != MOVE)
 					{
 						GOTO = 9300;
 						continue loop;
@@ -385,7 +385,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 9300:
-					if (vars.prsvec_1.prsa != LOOK_UNDER || vars.findex_1.orrug != 0
+					if (vars.prsvec_1.action != LOOK_UNDER || vars.findex_1.orrug != 0
 							|| (vars.objcts_1.oflag2[vars.oindex_1.door - 1] & Vars.OPENBT) != 0)
 					{
 						return false;
@@ -409,7 +409,7 @@ public class Sobjs implements Actions
 				/* O9-- MIRROR */
 
 				case 14000:
-					if (vars.findex_1.mirrmf || vars.prsvec_1.prsa != RUB)
+					if (vars.findex_1.mirrmf || vars.prsvec_1.action != RUB)
 					{
 						GOTO = 14500;
 						continue loop;
@@ -439,9 +439,9 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 14500:
-					if (vars.prsvec_1.prsa != LOOK
-							&& vars.prsvec_1.prsa != LOOK_IN
-							&& vars.prsvec_1.prsa != EXAMINE)
+					if (vars.prsvec_1.action != LOOK
+							&& vars.prsvec_1.action != LOOK_IN
+							&& vars.prsvec_1.action != EXAMINE)
 					{
 						GOTO = 14600;
 						continue loop;
@@ -457,7 +457,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 14600:
-					if (vars.prsvec_1.prsa != TAKE)
+					if (vars.prsvec_1.action != TAKE)
 					{
 						GOTO = 14700;
 						continue loop;
@@ -468,8 +468,8 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 14700:
-					if (vars.prsvec_1.prsa != MUNG
-							&& vars.prsvec_1.prsa != THROW)
+					if (vars.prsvec_1.action != MUNG
+							&& vars.prsvec_1.action != THROW)
 					{
 
 						return false;
@@ -490,7 +490,7 @@ public class Sobjs implements Actions
 				/* O10-- DUMBWAITER */
 
 				case 16000:
-					if (vars.prsvec_1.prsa != RAISE)
+					if (vars.prsvec_1.action != RAISE)
 					{
 						GOTO = 16100;
 						continue loop;
@@ -510,7 +510,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 16100:
-					if (vars.prsvec_1.prsa != LOWER)
+					if (vars.prsvec_1.action != LOWER)
 					{
 						GOTO = 16200;
 						continue loop;
@@ -534,8 +534,8 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 16200:
-					if (vars.prsvec_1.prso != vars.oindex_1.fbask
-							&& vars.prsvec_1.prsi != vars.oindex_1.fbask)
+					if (vars.prsvec_1.direct_object != vars.oindex_1.fbask
+							&& vars.prsvec_1.indirect_object != vars.oindex_1.fbask)
 					{
 						GOTO = 16300;
 						continue loop;
@@ -545,7 +545,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 16300:
-					if (vars.prsvec_1.prsa != TAKE)
+					if (vars.prsvec_1.action != TAKE)
 					{
 						return false;
 					}
@@ -565,7 +565,7 @@ public class Sobjs implements Actions
 				case 17000:
 					i = 178;
 					/* ASSUME DIRECT. */
-					if (vars.prsvec_1.prso != vars.oindex_1.ghost)
+					if (vars.prsvec_1.direct_object != vars.oindex_1.ghost)
 					{
 						i = 179;
 					}
@@ -578,8 +578,8 @@ public class Sobjs implements Actions
 				/* O12-- TUBE */
 
 				case 21000:
-					if (vars.prsvec_1.prsa != PUT
-							|| vars.prsvec_1.prsi != vars.oindex_1.tube)
+					if (vars.prsvec_1.action != PUT
+							|| vars.prsvec_1.indirect_object != vars.oindex_1.tube)
 					{
 						return false;
 					}
@@ -590,9 +590,9 @@ public class Sobjs implements Actions
 				/* O13-- CHALICE */
 
 				case 23000:
-					if (vars.prsvec_1.prsa != TAKE
-							|| vars.objcts_1.ocan[vars.prsvec_1.prso - 1] != 0
-							|| vars.objcts_1.oroom[vars.prsvec_1.prso - 1] != vars.rindex_1.treas
+					if (vars.prsvec_1.action != TAKE
+							|| vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1] != 0
+							|| vars.objcts_1.oroom[vars.prsvec_1.direct_object - 1] != vars.rindex_1.treas
 							|| vars.objcts_1.oroom[vars.oindex_1.thief - 1] != vars.rindex_1.treas
 							|| (vars.objcts_1.oflag2[vars.oindex_1.thief - 1] & Vars.FITEBT) == 0
 							|| !vars.hack_1.thfact)
@@ -606,29 +606,29 @@ public class Sobjs implements Actions
 				/* O14-- PAINTING */
 
 				case 24000:
-					if (vars.prsvec_1.prsa != MUNG)
+					if (vars.prsvec_1.action != MUNG)
 					{
 						return false;
 					}
 					/* MUNG? */
 					game.dsub.rspeak_(205);
 					/* DESTROY PAINTING. */
-					vars.objcts_1.ofval[vars.prsvec_1.prso - 1] = 0;
-					vars.objcts_1.otval[vars.prsvec_1.prso - 1] = 0;
-					vars.objcts_1.odesc1[vars.prsvec_1.prso - 1] = 207;
-					vars.objcts_1.odesc2[vars.prsvec_1.prso - 1] = 206;
+					vars.objcts_1.ofval[vars.prsvec_1.direct_object - 1] = 0;
+					vars.objcts_1.otval[vars.prsvec_1.direct_object - 1] = 0;
+					vars.objcts_1.odesc1[vars.prsvec_1.direct_object - 1] = 207;
+					vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1] = 206;
 					return ret_val;
 				/* SOBJS, PAGE 8 */
 
 				/* O15-- BOLT */
 
 				case 27000:
-					if (vars.prsvec_1.prsa != TURN)
+					if (vars.prsvec_1.action != TURN)
 					{
 						return false;
 					}
 					/* TURN BOLT? */
-					if (vars.prsvec_1.prsi != vars.oindex_1.wrenc)
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.wrenc)
 					{
 						GOTO = 27500;
 						continue loop;
@@ -682,8 +682,8 @@ public class Sobjs implements Actions
 				/* O16-- GRATING */
 
 				case 28000:
-					if (vars.prsvec_1.prsa != OPEN
-							&& vars.prsvec_1.prsa != CLOSE)
+					if (vars.prsvec_1.action != OPEN
+							&& vars.prsvec_1.action != CLOSE)
 					{
 
 						return false;
@@ -739,7 +739,7 @@ public class Sobjs implements Actions
 						return false;
 					}
 					/* FROM CELLAR? */
-					if (vars.prsvec_1.prsa != OPEN
+					if (vars.prsvec_1.action != OPEN
 							|| (vars.objcts_1.oflag2[vars.oindex_1.door - 1] & Vars.OPENBT) != 0)
 					{
 						GOTO = 29200;
@@ -759,17 +759,17 @@ public class Sobjs implements Actions
 				case 30000:
 					i = 0;
 					/* ASSUME NO APPL. */
-					if (vars.prsvec_1.prsa == OPEN)
+					if (vars.prsvec_1.action == OPEN)
 					{
 						i = 221;
 					}
 					/* OPEN? */
-					if (vars.prsvec_1.prsa == BURN)
+					if (vars.prsvec_1.action == BURN)
 					{
 						i = 222;
 					}
 					/* BURN? */
-					if (vars.prsvec_1.prsa == MUNG)
+					if (vars.prsvec_1.action == MUNG)
 					{
 						i = Supp.rnd_(3) + 223;
 					}
@@ -784,12 +784,12 @@ public class Sobjs implements Actions
 				/* O19-- MASTER SWITCH */
 
 				case 31000:
-					if (vars.prsvec_1.prsa != TURN)
+					if (vars.prsvec_1.action != TURN)
 					{
 						return false;
 					}
 					/* TURN? */
-					if (vars.prsvec_1.prsi != vars.oindex_1.screw)
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.screw)
 					{
 						GOTO = 31500;
 						continue loop;
@@ -846,13 +846,13 @@ public class Sobjs implements Actions
 				/* O20-- LEAK */
 
 				case 33000:
-					if (vars.prsvec_1.prso != vars.oindex_1.leak
-							|| vars.prsvec_1.prsa != PLUG
+					if (vars.prsvec_1.direct_object != vars.oindex_1.leak
+							|| vars.prsvec_1.action != PLUG
 							|| vars.findex_1.rvmnt <= 0)
 					{
 						return false;
 					}
-					if (vars.prsvec_1.prsi != vars.oindex_1.putty)
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.putty)
 					{
 						GOTO = 33100;
 						continue loop;
@@ -872,12 +872,12 @@ public class Sobjs implements Actions
 				/* O21-- DROWNING BUTTONS */
 
 				case 34000:
-					if (vars.prsvec_1.prsa != PUSH)
+					if (vars.prsvec_1.action != PUSH)
 					{
 						return false;
 					}
 					/* PUSH? */
-					switch (vars.prsvec_1.prso - vars.oindex_1.rbutt + 1)
+					switch (vars.prsvec_1.direct_object - vars.oindex_1.rbutt + 1)
 					{
 						case 1:
 							GOTO = 34100;
@@ -938,7 +938,7 @@ public class Sobjs implements Actions
 				/* O22-- INFLATABLE BOAT */
 
 				case 36000:
-					if (vars.prsvec_1.prsa != INFLATE)
+					if (vars.prsvec_1.action != INFLATE)
 					{
 						return false;
 					}
@@ -954,7 +954,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 36100:
-					if (vars.prsvec_1.prsi != vars.oindex_1.pump)
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.pump)
 					{
 						GOTO = 36200;
 						continue loop;
@@ -970,7 +970,7 @@ public class Sobjs implements Actions
 				case 36200:
 					i = 237;
 					/* JOKES. */
-					if (vars.prsvec_1.prsi != vars.oindex_1.lungs)
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.lungs)
 					{
 						i = 303;
 					}
@@ -980,7 +980,7 @@ public class Sobjs implements Actions
 				/* O23-- DEFLATED BOAT */
 
 				case 37000:
-					if (vars.prsvec_1.prsa != INFLATE)
+					if (vars.prsvec_1.action != INFLATE)
 					{
 						GOTO = 37100;
 						continue loop;
@@ -991,12 +991,12 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 37100:
-					if (vars.prsvec_1.prsa != PLUG)
+					if (vars.prsvec_1.action != PLUG)
 					{
 						return false;
 					}
 					/* PLUG? */
-					if (vars.prsvec_1.prsi != vars.oindex_1.putty)
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.putty)
 					{
 						GOTO = 33100;
 						continue loop;
@@ -1019,7 +1019,7 @@ public class Sobjs implements Actions
 						return false;
 					}
 					/* DISMISS READIN, OUT. */
-					if (vars.prsvec_1.prsa != BOARD
+					if (vars.prsvec_1.action != BOARD
 							|| vars.objcts_1.oadv[vars.oindex_1.stick - 1] != vars.play_1.winner)
 					{
 						GOTO = 38100;
@@ -1033,7 +1033,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 38100:
-					if (vars.prsvec_1.prsa != INFLATE)
+					if (vars.prsvec_1.action != INFLATE)
 					{
 						GOTO = 38200;
 						continue loop;
@@ -1044,7 +1044,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 38200:
-					if (vars.prsvec_1.prsa != DEFLATE)
+					if (vars.prsvec_1.action != DEFLATE)
 					{
 						return false;
 					}
@@ -1081,15 +1081,15 @@ public class Sobjs implements Actions
 				/* O25-- BRAIDED ROPE */
 
 				case 41000:
-					if (vars.prsvec_1.prsa != TIE
-							|| vars.prsvec_1.prso != vars.oindex_1.brope
-							|| vars.prsvec_1.prsi != vars.oindex_1.hook1
-									&& vars.prsvec_1.prsi != vars.oindex_1.hook2)
+					if (vars.prsvec_1.action != TIE
+							|| vars.prsvec_1.direct_object != vars.oindex_1.brope
+							|| vars.prsvec_1.indirect_object != vars.oindex_1.hook1
+									&& vars.prsvec_1.indirect_object != vars.oindex_1.hook2)
 					{
 						GOTO = 41500;
 						continue loop;
 					}
-					vars.findex_1.btief = vars.prsvec_1.prsi;
+					vars.findex_1.btief = vars.prsvec_1.indirect_object;
 					/* RECORD LOCATION. */
 					vars.cevent_1.cflag[vars.cindex_1.cevbal - 1] = false;
 					/* STALL ASCENT. */
@@ -1097,8 +1097,8 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 41500:
-					if (vars.prsvec_1.prsa != UNTIE
-							|| vars.prsvec_1.prso != vars.oindex_1.brope)
+					if (vars.prsvec_1.action != UNTIE
+							|| vars.prsvec_1.direct_object != vars.oindex_1.brope)
 					{
 
 						return false;
@@ -1127,27 +1127,27 @@ public class Sobjs implements Actions
 				case 42000:
 					i = 0;
 					/* ASSUME UNPROCESSED. */
-					if (vars.prsvec_1.prsa == TAKE)
+					if (vars.prsvec_1.action == TAKE)
 					{
 						i = 251;
 					}
 					/* TAKE? */
-					if (vars.prsvec_1.prsa == OPEN && vars.findex_1.safef)
+					if (vars.prsvec_1.action == OPEN && vars.findex_1.safef)
 					{
 						i = 253;
 					}
 					/* OPEN AFTER BLAST? */
-					if (vars.prsvec_1.prsa == OPEN && !vars.findex_1.safef)
+					if (vars.prsvec_1.action == OPEN && !vars.findex_1.safef)
 					{
 						i = 254;
 					}
 					/* OPEN BEFORE BLAST? */
-					if (vars.prsvec_1.prsa == CLOSE && vars.findex_1.safef)
+					if (vars.prsvec_1.action == CLOSE && vars.findex_1.safef)
 					{
 						i = 253;
 					}
 					/* CLOSE AFTER? */
-					if (vars.prsvec_1.prsa == CLOSE && !vars.findex_1.safef)
+					if (vars.prsvec_1.action == CLOSE && !vars.findex_1.safef)
 					{
 						i = 255;
 					}
@@ -1161,7 +1161,7 @@ public class Sobjs implements Actions
 				/* O27-- FUSE */
 
 				case 43000:
-					if (vars.prsvec_1.prsa != BURN)
+					if (vars.prsvec_1.action != BURN)
 					{
 						return false;
 					}
@@ -1174,14 +1174,14 @@ public class Sobjs implements Actions
 				/* O28-- GNOME */
 
 				case 44000:
-					if (vars.prsvec_1.prsa != GIVE
-							&& vars.prsvec_1.prsa != THROW)
+					if (vars.prsvec_1.action != GIVE
+							&& vars.prsvec_1.action != THROW)
 					{
 
 						GOTO = 44500;
 						continue loop;
 					}
-					if (vars.objcts_1.otval[vars.prsvec_1.prso - 1] == 0)
+					if (vars.objcts_1.otval[vars.prsvec_1.direct_object - 1] == 0)
 					{
 						GOTO = 44100;
 						continue loop;
@@ -1189,7 +1189,7 @@ public class Sobjs implements Actions
 					/* TREASURE? */
 					game.dsub.rspsub_(257, odo2);
 					/* YES, GET DOOR. */
-					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, 0);
 					game.dsub.newsta_(vars.oindex_1.gnome, 0, 0, 0, 0);
 					/* VANISH GNOME. */
 					vars.findex_1.gnodrf = true;
@@ -1198,7 +1198,7 @@ public class Sobjs implements Actions
 				case 44100:
 					game.dsub.rspsub_(258, odo2);
 					/* NO, LOSE OBJECT. */
-					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, 0);
 					return ret_val;
 
 				case 44500:
@@ -1215,13 +1215,13 @@ public class Sobjs implements Actions
 				/* O29-- COKE BOTTLES */
 
 				case 46000:
-					if (vars.prsvec_1.prsa != THROW
-							&& vars.prsvec_1.prsa != MUNG)
+					if (vars.prsvec_1.action != THROW
+							&& vars.prsvec_1.action != MUNG)
 					{
 
 						return false;
 					}
-					game.dsub.newsta_(vars.prsvec_1.prso, 262, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 262, 0, 0, 0);
 					/* MUNG BOTTLES. */
 					return ret_val;
 				/* SOBJS, PAGE 11 */
@@ -1229,20 +1229,20 @@ public class Sobjs implements Actions
 				/* O30-- ROBOT */
 
 				case 53000:
-					if (vars.prsvec_1.prsa != GIVE)
+					if (vars.prsvec_1.action != GIVE)
 					{
 						GOTO = 53200;
 						continue loop;
 					}
 					/* GIVE? */
-					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, vars.aindex_1.arobot);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, vars.aindex_1.arobot);
 					/* PUT ON ROBOT. */
 					game.dsub.rspsub_(302, odo2);
 					return ret_val;
 
 				case 53200:
-					if (vars.prsvec_1.prsa != MUNG
-							&& vars.prsvec_1.prsa != THROW)
+					if (vars.prsvec_1.action != MUNG
+							&& vars.prsvec_1.action != THROW)
 					{
 
 						return false;
@@ -1254,7 +1254,7 @@ public class Sobjs implements Actions
 				/* O31-- GRUE */
 
 				case 56000:
-					if (vars.prsvec_1.prsa != EXAMINE)
+					if (vars.prsvec_1.action != EXAMINE)
 					{
 						GOTO = 56100;
 						continue loop;
@@ -1264,7 +1264,7 @@ public class Sobjs implements Actions
 					return ret_val;
 
 				case 56100:
-					if (vars.prsvec_1.prsa != FIND)
+					if (vars.prsvec_1.action != FIND)
 					{
 						return false;
 					}

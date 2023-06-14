@@ -26,24 +26,24 @@ public class Villns implements Actions
 
 		ret_val = true;
 		/* ASSUME WINS. */
-		if (vars.prsvec_1.prsa != FIGHT)
+		if (vars.prsvec_1.action != FIGHT)
 		{
-			if (vars.prsvec_1.prsa != VILLAIN_DIED)
+			if (vars.prsvec_1.action != VILLAIN_DIED)
 			{
-				if (vars.prsvec_1.prsa != VILLAIN_LEFT)
+				if (vars.prsvec_1.action != VILLAIN_LEFT)
 				{
-					if (vars.prsvec_1.prsa != VILLAIN_ENTERED)
+					if (vars.prsvec_1.action != VILLAIN_ENTERED)
 					{
-						if (vars.prsvec_1.prsa != VILLAIN_QUIT_FIGHTING)
+						if (vars.prsvec_1.action != VILLAIN_QUIT_FIGHTING)
 						{
-							if (vars.prsvec_1.prsa != MOVE
-									&& vars.prsvec_1.prsa != TAKE
-									&& vars.prsvec_1.prsa != MUNG
-									&& vars.prsvec_1.prsa != THROW
-									&& vars.prsvec_1.prsa != GIVE)
+							if (vars.prsvec_1.action != MOVE
+									&& vars.prsvec_1.action != TAKE
+									&& vars.prsvec_1.action != MUNG
+									&& vars.prsvec_1.action != THROW
+									&& vars.prsvec_1.action != GIVE)
 							{
 								if (!vars.findex_1.trollf
-										|| vars.prsvec_1.prsa != HELLO)
+										|| vars.prsvec_1.action != HELLO)
 								{
 									ret_val = false;
 									/* COULDNT HANDLE IT. */
@@ -66,12 +66,12 @@ public class Villns implements Actions
 								game.dsub.rspeak_(437);
 							}
 
-							if (vars.prsvec_1.prsa != TAKE
-									&& vars.prsvec_1.prsa != MOVE)
+							if (vars.prsvec_1.action != TAKE
+									&& vars.prsvec_1.action != MOVE)
 							{
-								if (vars.prsvec_1.prsa != MUNG)
+								if (vars.prsvec_1.action != MUNG)
 								{
-									if (vars.prsvec_1.prso == 0)
+									if (vars.prsvec_1.direct_object == 0)
 									{
 										ret_val = false;
 										/* COULDNT HANDLE IT. */
@@ -80,15 +80,15 @@ public class Villns implements Actions
 									/* NO OBJECT? */
 									i = 440;
 									/* ASSUME THROW. */
-									if (vars.prsvec_1.prsa == GIVE)
+									if (vars.prsvec_1.action == GIVE)
 									{
 										i = 441;
 									}
 									/* GIVE? */
 									game.dsub.rspsub_(i,
-											vars.objcts_1.odesc2[vars.prsvec_1.prso - 1]);
+											vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1]);
 									/* TROLL TAKES. */
-									if (vars.prsvec_1.prso == vars.oindex_1.knife)
+									if (vars.prsvec_1.direct_object == vars.oindex_1.knife)
 									{
 										game.dsub.rspeak_(443);
 										/* KNIFE, THROWS IT BACK */
@@ -97,7 +97,7 @@ public class Villns implements Actions
 										return ret_val;
 									}
 									/* OBJ KNIFE? */
-									game.dsub.newsta_(vars.prsvec_1.prso, 442, 0, 0, 0);
+									game.dsub.newsta_(vars.prsvec_1.direct_object, 442, 0, 0, 0);
 									/* NO, EATS IT. */
 									return ret_val;
 								}
@@ -181,8 +181,8 @@ public class Villns implements Actions
 		/* ASSUME WINS. */
 		if (!vars.findex_1.cyclof)
 		{
-			if (vars.prsvec_1.prsa == FIGHT
-					|| vars.prsvec_1.prsa == VILLAIN_QUIT_FIGHTING)
+			if (vars.prsvec_1.action == FIGHT
+					|| vars.prsvec_1.action == VILLAIN_QUIT_FIGHTING)
 			{
 				ret_val = false;
 				/* FAILS. */
@@ -190,11 +190,11 @@ public class Villns implements Actions
 			}
 			if (Math.abs(vars.findex_1.rvcyc) <= 5)
 			{
-				if (vars.prsvec_1.prsa != GIVE)
+				if (vars.prsvec_1.action != GIVE)
 				{
 					i = 0;
 					/* ASSUME NOT HANDLED. */
-					if (vars.prsvec_1.prsa == HELLO)
+					if (vars.prsvec_1.action == HELLO)
 					{
 						game.dsub.rspeak_(i);
 						/* DISDAIN IT. */
@@ -214,17 +214,17 @@ public class Villns implements Actions
 						return ret_val;
 					}
 					/* HELLO IS NO GO. */
-					if (vars.prsvec_1.prsa == THROW
-							|| vars.prsvec_1.prsa == MUNG)
+					if (vars.prsvec_1.action == THROW
+							|| vars.prsvec_1.action == MUNG)
 					{
 
 						i = Supp.rnd_(2) + 200;
 					}
-					if (vars.prsvec_1.prsa == TAKE)
+					if (vars.prsvec_1.action == TAKE)
 					{
 						i = 202;
 					}
-					if (vars.prsvec_1.prsa == TIE)
+					if (vars.prsvec_1.action == TIE)
 					{
 						i = 203;
 					}
@@ -256,13 +256,13 @@ public class Villns implements Actions
 					/* SEE IF HANDLED. */
 				}
 				/* GIVE? */
-				if (vars.prsvec_1.prso != vars.oindex_1.food || vars.findex_1.rvcyc < 0)
+				if (vars.prsvec_1.direct_object != vars.oindex_1.food || vars.findex_1.rvcyc < 0)
 				{
-					if (vars.prsvec_1.prso != vars.oindex_1.water)
+					if (vars.prsvec_1.direct_object != vars.oindex_1.water)
 					{
 						i = 192;
 						/* ASSUME INEDIBLE. */
-						if (vars.prsvec_1.prso == vars.oindex_1.garli)
+						if (vars.prsvec_1.direct_object == vars.oindex_1.garli)
 						{
 							i = 193;
 						}
@@ -293,7 +293,7 @@ public class Villns implements Actions
 						/* FAILS. */
 						return ret_val;
 					}
-					game.dsub.newsta_(vars.prsvec_1.prso, 190, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 190, 0, 0, 0);
 					/* DRINKS AND */
 					vars.findex_1.cyclof = true;
 					/* FALLS ASLEEP. */
@@ -320,11 +320,11 @@ public class Villns implements Actions
 			return ret_val;
 		}
 		/* ASLEEP? */
-		if (vars.prsvec_1.prsa != ALARM && vars.prsvec_1.prsa != MUNG
-				&& vars.prsvec_1.prsa != HELLO
-				&& vars.prsvec_1.prsa != BURN
-				&& vars.prsvec_1.prsa != KILL
-				&& vars.prsvec_1.prsa != ATTACK)
+		if (vars.prsvec_1.action != ALARM && vars.prsvec_1.action != MUNG
+				&& vars.prsvec_1.action != HELLO
+				&& vars.prsvec_1.action != BURN
+				&& vars.prsvec_1.action != KILL
+				&& vars.prsvec_1.action != ATTACK)
 		{
 			ret_val = false;
 			/* FAILS. */
@@ -353,30 +353,30 @@ public class Villns implements Actions
 
 		ret_val = true;
 		/* ASSUME WINS. */
-		if (vars.prsvec_1.prsa != FIGHT)
+		if (vars.prsvec_1.action != FIGHT)
 		{
-			if (vars.prsvec_1.prsa != VILLAIN_DIED)
+			if (vars.prsvec_1.action != VILLAIN_DIED)
 			{
-				if (vars.prsvec_1.prsa != VILLAIN_QUIT_FIGHTING)
+				if (vars.prsvec_1.action != VILLAIN_QUIT_FIGHTING)
 				{
-					if (vars.prsvec_1.prsa != HELLO
+					if (vars.prsvec_1.action != HELLO
 							|| vars.objcts_1.odesc1[vars.oindex_1.thief - 1] != 504)
 					{
-						if (vars.prsvec_1.prsa != VILLAIN_LEFT)
+						if (vars.prsvec_1.action != VILLAIN_LEFT)
 						{
-							if (vars.prsvec_1.prsa != VILLAIN_ENTERED)
+							if (vars.prsvec_1.action != VILLAIN_ENTERED)
 							{
-								if (vars.prsvec_1.prsa != TAKE)
+								if (vars.prsvec_1.action != TAKE)
 								{
-									if (vars.prsvec_1.prsa != THROW
-											|| vars.prsvec_1.prso != vars.oindex_1.knife
+									if (vars.prsvec_1.action != THROW
+											|| vars.prsvec_1.direct_object != vars.oindex_1.knife
 											|| (vars.objcts_1.oflag2[vars.oindex_1.thief - 1]
 													& Vars.FITEBT) != 0)
 									{
-										if (vars.prsvec_1.prsa != THROW
-												&& vars.prsvec_1.prsa != GIVE
-												|| vars.prsvec_1.prso == 0
-												|| vars.prsvec_1.prso == vars.oindex_1.thief)
+										if (vars.prsvec_1.action != THROW
+												&& vars.prsvec_1.action != GIVE
+												|| vars.prsvec_1.direct_object == 0
+												|| vars.prsvec_1.direct_object == vars.oindex_1.thief)
 										{
 											ret_val = false;
 											return ret_val;
@@ -395,19 +395,19 @@ public class Villns implements Actions
 											game.dsub.rspeak_(510);
 										}
 
-										if (vars.prsvec_1.prso != vars.oindex_1.brick
+										if (vars.prsvec_1.direct_object != vars.oindex_1.brick
 												|| vars.objcts_1.ocan[vars.oindex_1.fuse
 														- 1] != vars.oindex_1.brick
 												|| vars.cevent_1.ctick[vars.cindex_1.cevfus
 														- 1] == 0)
 										{
 											i__1 = -vars.oindex_1.thief;
-											game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, i__1);
+											game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, i__1);
 											/* THIEF TAKES GIFT. */
-											if (vars.objcts_1.otval[vars.prsvec_1.prso - 1] > 0)
+											if (vars.objcts_1.otval[vars.prsvec_1.direct_object - 1] > 0)
 											{
 												game.dsub.rspsub_(627,
-														vars.objcts_1.odesc2[vars.prsvec_1.prso
+														vars.objcts_1.odesc2[vars.prsvec_1.direct_object
 																- 1]);
 												/* THIEF ENGROSSED. */
 												vars.findex_1.thfenf = true;
@@ -415,7 +415,7 @@ public class Villns implements Actions
 											}
 											/* A TREASURE? */
 											game.dsub.rspsub_(512,
-													vars.objcts_1.odesc2[vars.prsvec_1.prso - 1]);
+													vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1]);
 											return ret_val;
 										}
 										game.dsub.rspeak_(511);

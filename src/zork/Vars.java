@@ -19,8 +19,8 @@ public class Vars
 	// Parsed information //
 	public class prsvec_
 	{
-		int prsa, prsi, prso;
-		boolean isParsed;
+		int action, indirect_object, direct_object;
+		boolean is_parsed;
 		int prscon;
 	};
 

@@ -31,15 +31,15 @@ public class Dverb1 implements Actions
 
 		ret_val = false;
 		/* ASSUME LOSES. */
-		oa = vars.objcts_1.oactio[vars.prsvec_1.prso - 1];
+		oa = vars.objcts_1.oactio[vars.prsvec_1.direct_object - 1];
 		/* GET OBJECT ACTION. */
-		if (vars.prsvec_1.prso > vars.star_1.strbit) {
+		if (vars.prsvec_1.direct_object > vars.star_1.strbit) {
 			return game.dsub.objact_();
 		}
 
-		x = vars.objcts_1.ocan[vars.prsvec_1.prso - 1];
+		x = vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1];
 		/* INSIDE? */
-		if (vars.prsvec_1.prso == vars.advs_1.avehic[vars.play_1.winner - 1]) {
+		if (vars.prsvec_1.direct_object == vars.advs_1.avehic[vars.play_1.winner - 1]) {
 			game.dsub.rspeak_(672);
 			/* DUMMY. */
 			return false;
@@ -48,7 +48,7 @@ public class Dverb1 implements Actions
 
 		boolean skip = false;
 
-		if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TAKEBT) != 0) {
+		if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.TAKEBT) != 0) {
 			skip = true;
 		}
 		if (!skip) {
@@ -65,11 +65,11 @@ public class Dverb1 implements Actions
 			switch (GOTO) {
 
 			case 500:
-				if (x != 0 || game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here)) {
+				if (x != 0 || game.dsub.qhere_(vars.prsvec_1.direct_object, vars.play_1.here)) {
 					GOTO = 600;
 					continue;
 				}
-				if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner) {
+				if (vars.objcts_1.oadv[vars.prsvec_1.direct_object - 1] == vars.play_1.winner) {
 					game.dsub.rspeak_(557);
 				}
 				/* ALREADY GOT IT? */
@@ -77,8 +77,8 @@ public class Dverb1 implements Actions
 
 			case 600:
 				if (x != 0 && vars.objcts_1.oadv[x - 1] == vars.play_1.winner
-						|| game.dso5.weight_(0, vars.prsvec_1.prso, vars.play_1.winner)
-								+ vars.objcts_1.osize[vars.prsvec_1.prso - 1] <= vars.state_1.mxload) {
+						|| game.dso5.weight_(0, vars.prsvec_1.direct_object, vars.play_1.winner)
+								+ vars.objcts_1.osize[vars.prsvec_1.direct_object - 1] <= vars.state_1.mxload) {
 					GOTO = 700;
 					continue;
 				}
@@ -93,12 +93,12 @@ public class Dverb1 implements Actions
 					return ret_val;
 				}
 				/* DID IT HANDLE? */
-				game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, vars.play_1.winner);
+				game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, vars.play_1.winner);
 				/* TAKE OBJECT FOR WINNER. */
-				vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] |= Vars.TCHBT;
-				game.dso2.scrupd_(vars.objcts_1.ofval[vars.prsvec_1.prso - 1]);
+				vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] |= Vars.TCHBT;
+				game.dso2.scrupd_(vars.objcts_1.ofval[vars.prsvec_1.direct_object - 1]);
 				/* UPDATE SCORE. */
-				vars.objcts_1.ofval[vars.prsvec_1.prso - 1] = 0;
+				vars.objcts_1.ofval[vars.prsvec_1.direct_object - 1] = 0;
 				/* CANT BE SCORED AGAIN. */
 				if (flg) {
 					game.dsub.rspeak_(559);
@@ -124,7 +124,7 @@ public class Dverb1 implements Actions
 
 		ret_val = true;
 		/* ASSUME WINS. */
-		x = vars.objcts_1.ocan[vars.prsvec_1.prso - 1];
+		x = vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1];
 		/* GET CONTAINER. */
 		boolean skip = false;
 		if (x == 0) {
@@ -152,7 +152,7 @@ public class Dverb1 implements Actions
 		do {
 			switch (GOTO) {
 			case 200:
-				if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] != vars.play_1.winner) {
+				if (vars.objcts_1.oadv[vars.prsvec_1.direct_object - 1] != vars.play_1.winner) {
 					game.dsub.rspeak_(527);
 					/* DONT HAVE IT. */
 					return ret_val;
@@ -164,26 +164,26 @@ public class Dverb1 implements Actions
 					continue;
 				}
 				/* IS HE IN VEHICLE? */
-				vars.prsvec_1.prsi = vars.advs_1.avehic[vars.play_1.winner - 1];
+				vars.prsvec_1.indirect_object = vars.advs_1.avehic[vars.play_1.winner - 1];
 				/* YES, */
 				put_(true);
 				/* DROP INTO VEHICLE. */
-				vars.prsvec_1.prsi = 0;
+				vars.prsvec_1.indirect_object = 0;
 				/* DISARM PARSER. */
 				return ret_val;
 			/* DONE. */
 
 			case 400:
-				game.dsub.newsta_(vars.prsvec_1.prso, 0, vars.play_1.here, 0, 0);
+				game.dsub.newsta_(vars.prsvec_1.direct_object, 0, vars.play_1.here, 0, 0);
 				/* DROP INTO ROOM. */
 				if (vars.play_1.here == vars.rindex_1.mtree) {
-					game.dsub.newsta_(vars.prsvec_1.prso, 0, vars.rindex_1.fore3, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, vars.rindex_1.fore3, 0, 0);
 				}
-				game.dso2.scrupd_(vars.objcts_1.ofval[vars.prsvec_1.prso - 1]);
+				game.dso2.scrupd_(vars.objcts_1.ofval[vars.prsvec_1.direct_object - 1]);
 				/* SCORE OBJECT. */
-				vars.objcts_1.ofval[vars.prsvec_1.prso - 1] = 0;
+				vars.objcts_1.ofval[vars.prsvec_1.direct_object - 1] = 0;
 				/* CANT BE SCORED AGAIN. */
-				vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] |= Vars.TCHBT;
+				vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] |= Vars.TCHBT;
 
 				if (game.dsub.objact_()) {
 					return ret_val;
@@ -191,16 +191,16 @@ public class Dverb1 implements Actions
 				/* DID IT HANDLE? */
 				i = 0;
 				/* ASSUME NOTHING TO SAY. */
-				if (vars.prsvec_1.prsa == DROP) {
+				if (vars.prsvec_1.action == DROP) {
 					i = 528;
 				}
-				if (vars.prsvec_1.prsa == THROW) {
+				if (vars.prsvec_1.action == THROW) {
 					i = 529;
 				}
 				if (i != 0 && vars.play_1.here == vars.rindex_1.mtree) {
 					i = 659;
 				}
-				game.dsub.rspsub_(i, vars.objcts_1.odesc2[vars.prsvec_1.prso - 1]);
+				game.dsub.rspsub_(i, vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1]);
 				return ret_val;
 
 			case 1000:
@@ -221,7 +221,7 @@ public class Dverb1 implements Actions
 		int svi, svo;
 
 		ret_val = false;
-		if (!(vars.prsvec_1.prso <= vars.star_1.strbit && vars.prsvec_1.prsi <= vars.star_1.strbit)) {
+		if (!(vars.prsvec_1.direct_object <= vars.star_1.strbit && vars.prsvec_1.indirect_object <= vars.star_1.strbit)) {
 
 			if (!game.dsub.objact_()) {
 				game.dsub.rspeak_(560);
@@ -231,16 +231,16 @@ public class Dverb1 implements Actions
 			return ret_val;
 		}
 //	case 200:
-		if (!((vars.objcts_1.oflag2[vars.prsvec_1.prsi - 1] & Vars.OPENBT) != 0
-				|| (vars.objcts_1.oflag1[vars.prsvec_1.prsi - 1] & Vars.DOORBT + Vars.CONTBT) != 0
-				|| (vars.objcts_1.oflag2[vars.prsvec_1.prsi - 1] & Vars.VEHBT) != 0)) {
+		if (!((vars.objcts_1.oflag2[vars.prsvec_1.indirect_object - 1] & Vars.OPENBT) != 0
+				|| (vars.objcts_1.oflag1[vars.prsvec_1.indirect_object - 1] & Vars.DOORBT + Vars.CONTBT) != 0
+				|| (vars.objcts_1.oflag2[vars.prsvec_1.indirect_object - 1] & Vars.VEHBT) != 0)) {
 
 			game.dsub.rspeak_(561);
 			/* CANT PUT IN THAT. */
 			return ret_val;
 		}
 //	case 300:
-		if (!((vars.objcts_1.oflag2[vars.prsvec_1.prsi - 1] & Vars.OPENBT) != 0)) {
+		if (!((vars.objcts_1.oflag2[vars.prsvec_1.indirect_object - 1] & Vars.OPENBT) != 0)) {
 
 			/* IS IT OPEN? */
 			game.dsub.rspeak_(562);
@@ -248,7 +248,7 @@ public class Dverb1 implements Actions
 			return ret_val;
 		}
 //	case 400:
-		if (!(vars.prsvec_1.prso != vars.prsvec_1.prsi)) {
+		if (!(vars.prsvec_1.direct_object != vars.prsvec_1.indirect_object)) {
 
 			/* INTO ITSELF? */
 			game.dsub.rspeak_(563);
@@ -256,17 +256,17 @@ public class Dverb1 implements Actions
 			return ret_val;
 		}
 //	case 500:
-		if (!(vars.objcts_1.ocan[vars.prsvec_1.prso - 1] != vars.prsvec_1.prsi)) {
+		if (!(vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1] != vars.prsvec_1.indirect_object)) {
 
 			/* ALREADY INSIDE. */
-			game.dsub.rspsb2_(564, vars.objcts_1.odesc2[vars.prsvec_1.prso - 1],
-					vars.objcts_1.odesc2[vars.prsvec_1.prsi - 1]);
+			game.dsub.rspsb2_(564, vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1],
+					vars.objcts_1.odesc2[vars.prsvec_1.indirect_object - 1]);
 			ret_val = true;
 			return ret_val;
 		}
 //	case 600:
-		if (!(game.dso5.weight_(0, vars.prsvec_1.prso, 0) + game.dso5.weight_(0, vars.prsvec_1.prsi, 0)
-				+ vars.objcts_1.osize[vars.prsvec_1.prso - 1] <= vars.objcts_1.ocapac[vars.prsvec_1.prsi - 1])) {
+		if (!(game.dso5.weight_(0, vars.prsvec_1.direct_object, 0) + game.dso5.weight_(0, vars.prsvec_1.indirect_object, 0)
+				+ vars.objcts_1.osize[vars.prsvec_1.direct_object - 1] <= vars.objcts_1.ocapac[vars.prsvec_1.indirect_object - 1])) {
 
 			game.dsub.rspeak_(565);
 			/* THEN CANT DO IT. */
@@ -275,29 +275,29 @@ public class Dverb1 implements Actions
 		/* NOW SEE IF OBJECT (OR ITS CONTAINER) IS IN ROOM */
 
 //	case 700:
-		j = vars.prsvec_1.prso;
+		j = vars.prsvec_1.direct_object;
 		/* START SEARCH. */
 //	case 725:
 		do {
 			if (game.dsub.qhere_(j, vars.play_1.here)) {
-				svo = vars.prsvec_1.prso;
+				svo = vars.prsvec_1.direct_object;
 				/* SAVE PARSER. */
-				svi = vars.prsvec_1.prsi;
-				vars.prsvec_1.prsa = TAKE;
-				vars.prsvec_1.prsi = 0;
+				svi = vars.prsvec_1.indirect_object;
+				vars.prsvec_1.action = TAKE;
+				vars.prsvec_1.indirect_object = 0;
 				if (!take_(false)) {
 					return ret_val;
 				}
 				/* TAKE OBJECT. */
-				vars.prsvec_1.prsa = PUT;
-				vars.prsvec_1.prso = svo;
-				vars.prsvec_1.prsi = svi;
+				vars.prsvec_1.action = PUT;
+				vars.prsvec_1.direct_object = svo;
+				vars.prsvec_1.indirect_object = svi;
 //			   goto L1000;
 				if (game.dsub.objact_()) {
 					return ret_val;
 				}
 				/* NO, GIVE OBJECT A SHOT. */
-				game.dsub.newsta_(vars.prsvec_1.prso, 2, 0, vars.prsvec_1.prsi, 0);
+				game.dsub.newsta_(vars.prsvec_1.direct_object, 2, 0, vars.prsvec_1.indirect_object, 0);
 				/* CONTAINED INSIDE. */
 				ret_val = true;
 				return ret_val;
@@ -331,30 +331,30 @@ public class Dverb1 implements Actions
 		/* NOW SEE IF OBJECT IS ON PERSON. */
 
 //	case 800:
-		if (vars.objcts_1.ocan[vars.prsvec_1.prso - 1] == 0) {
+		if (vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1] == 0) {
 			if (game.dsub.objact_()) {
 				return ret_val;
 			}
 			/* NO, GIVE OBJECT A SHOT. */
-			game.dsub.newsta_(vars.prsvec_1.prso, 2, 0, vars.prsvec_1.prsi, 0);
+			game.dsub.newsta_(vars.prsvec_1.direct_object, 2, 0, vars.prsvec_1.indirect_object, 0);
 			/* CONTAINED INSIDE. */
 			ret_val = true;
 			return ret_val;
 		}
 		/* INSIDE? */
-		if (!((vars.objcts_1.oflag2[vars.objcts_1.ocan[vars.prsvec_1.prso - 1] - 1] & Vars.OPENBT) != 0)) {
+		if (!((vars.objcts_1.oflag2[vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1] - 1] & Vars.OPENBT) != 0)) {
 
 			/* OPEN? */
-			game.dsub.rspsub_(566, vars.objcts_1.odesc2[vars.prsvec_1.prso - 1]);
+			game.dsub.rspsub_(566, vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1]);
 			/* LOSE. */
 			return ret_val;
 		}
 //	case 900:
-		game.dso2.scrupd_(vars.objcts_1.ofval[vars.prsvec_1.prso - 1]);
+		game.dso2.scrupd_(vars.objcts_1.ofval[vars.prsvec_1.direct_object - 1]);
 		/* SCORE OBJECT. */
-		vars.objcts_1.ofval[vars.prsvec_1.prso - 1] = 0;
-		vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] |= Vars.TCHBT;
-		game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, vars.play_1.winner);
+		vars.objcts_1.ofval[vars.prsvec_1.direct_object - 1] = 0;
+		vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] |= Vars.TCHBT;
+		game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, vars.play_1.winner);
 		/* TEMPORARILY ON WINNER. */
 
 //	case 1000:
@@ -362,7 +362,7 @@ public class Dverb1 implements Actions
 			return ret_val;
 		}
 		/* NO, GIVE OBJECT A SHOT. */
-		game.dsub.newsta_(vars.prsvec_1.prso, 2, 0, vars.prsvec_1.prsi, 0);
+		game.dsub.newsta_(vars.prsvec_1.direct_object, 2, 0, vars.prsvec_1.indirect_object, 0);
 		/* CONTAINED INSIDE. */
 		ret_val = true;
 		return ret_val;
@@ -387,29 +387,29 @@ public class Dverb1 implements Actions
 			/* IF NOT LIT, PUNT. */
 			i = 677;
 			/* ASSUME WRONG VERB. */
-			savep = vars.prsvec_1.prso;
+			savep = vars.prsvec_1.direct_object;
 			/* SAVE PRSO. */
 			saveh = vars.play_1.here;
 			/* SAVE HERE. */
 
 			/* case 100: */
-			if (!(vars.prsvec_1.prsa != TAKE)) {
+			if (!(vars.prsvec_1.action != TAKE)) {
 
 				/* TAKE EVERY/VALUA? */
-				for (vars.prsvec_1.prso = 1; vars.prsvec_1.prso <= vars.objcts_1.olnt; ++vars.prsvec_1.prso) {
+				for (vars.prsvec_1.direct_object = 1; vars.prsvec_1.direct_object <= vars.objcts_1.olnt; ++vars.prsvec_1.direct_object) {
 					/* LOOP THRU OBJECTS. */
-					if (!game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here)
-							|| (vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.VISIBT) == 0
-							|| (vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.ACTRBT) != 0
-							|| savep == v && vars.objcts_1.otval[vars.prsvec_1.prso - 1] <= 0) {
+					if (!game.dsub.qhere_(vars.prsvec_1.direct_object, vars.play_1.here)
+							|| (vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.VISIBT) == 0
+							|| (vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.ACTRBT) != 0
+							|| savep == v && vars.objcts_1.otval[vars.prsvec_1.direct_object - 1] <= 0) {
 						continue;
 					}
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TAKEBT) == 0
-							&& (vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.TRYBT) == 0) {
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.TAKEBT) == 0
+							&& (vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.TRYBT) == 0) {
 						continue;
 					}
 					f = false;
-					game.dsub.rspsub_(580, vars.objcts_1.odesc2[vars.prsvec_1.prso - 1]);
+					game.dsub.rspsub_(580, vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1]);
 					take_(true);
 					if (saveh != vars.play_1.here) {
 						return;
@@ -422,18 +422,18 @@ public class Dverb1 implements Actions
 			switch (GOTO) {
 
 			case 1000:
-				if (vars.prsvec_1.prsa != DROP) {
+				if (vars.prsvec_1.action != DROP) {
 					GOTO = 2000;
 					continue;
 				}
 				/* DROP EVERY/VALUA? */
-				for (vars.prsvec_1.prso = 1; vars.prsvec_1.prso <= vars.objcts_1.olnt; ++vars.prsvec_1.prso) {
-					if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] != vars.play_1.winner
-							|| savep == v && vars.objcts_1.otval[vars.prsvec_1.prso - 1] <= 0) {
+				for (vars.prsvec_1.direct_object = 1; vars.prsvec_1.direct_object <= vars.objcts_1.olnt; ++vars.prsvec_1.direct_object) {
+					if (vars.objcts_1.oadv[vars.prsvec_1.direct_object - 1] != vars.play_1.winner
+							|| savep == v && vars.objcts_1.otval[vars.prsvec_1.direct_object - 1] <= 0) {
 						continue;
 					}
 					f = false;
-					game.dsub.rspsub_(580, vars.objcts_1.odesc2[vars.prsvec_1.prso - 1]);
+					game.dsub.rspsub_(580, vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1]);
 					drop_(true);
 					if (saveh != vars.play_1.here) {
 						return;
@@ -443,21 +443,21 @@ public class Dverb1 implements Actions
 				continue;
 
 			case 2000:
-				if (vars.prsvec_1.prsa != PUT) {
+				if (vars.prsvec_1.action != PUT) {
 					GOTO = 3000;
 					continue;
 				}
 				/* PUT EVERY/VALUA? */
-				for (vars.prsvec_1.prso = 1; vars.prsvec_1.prso <= vars.objcts_1.olnt; ++vars.prsvec_1.prso) {
+				for (vars.prsvec_1.direct_object = 1; vars.prsvec_1.direct_object <= vars.objcts_1.olnt; ++vars.prsvec_1.direct_object) {
 					/* LOOP THRU OBJECTS. */
-					if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] != vars.play_1.winner
-							|| vars.prsvec_1.prso == vars.prsvec_1.prsi
-							|| savep == v && vars.objcts_1.otval[vars.prsvec_1.prso - 1] <= 0
-							|| (vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.VISIBT) == 0) {
+					if (vars.objcts_1.oadv[vars.prsvec_1.direct_object - 1] != vars.play_1.winner
+							|| vars.prsvec_1.direct_object == vars.prsvec_1.indirect_object
+							|| savep == v && vars.objcts_1.otval[vars.prsvec_1.direct_object - 1] <= 0
+							|| (vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.VISIBT) == 0) {
 						continue;
 					}
 					f = false;
-					game.dsub.rspsub_(580, vars.objcts_1.odesc2[vars.prsvec_1.prso - 1]);
+					game.dsub.rspsub_(580, vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1]);
 					put_(true);
 					if (saveh != vars.play_1.here) {
 						return;

@@ -279,8 +279,8 @@ public class Np1 implements Actions
 
 				/* 2000-- DIRECTION */
 				case 2000:
-					vars.prsvec_1.prsa = WALK;
-					vars.prsvec_1.prso = np.parse.dirvoc_1.dvoc[j + 1];
+					vars.prsvec_1.action = WALK;
+					vars.prsvec_1.direct_object = np.parse.dirvoc_1.dvoc[j + 1];
 					ret_val = 1;
 					return ret_val;
 

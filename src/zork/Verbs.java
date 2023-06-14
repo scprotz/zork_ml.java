@@ -43,16 +43,16 @@ public class Verbs  implements Actions
 		ret_val = true;
 		/* ASSUME WINS. */
 
-		if (vars.prsvec_1.prso > 220)
+		if (vars.prsvec_1.direct_object > 220)
 		{
 			GOTO = 5;
 		}
 
 		if (GOTO != 5)
 		{
-			if (vars.prsvec_1.prso != 0)
+			if (vars.prsvec_1.direct_object != 0)
 			{
-				odo2 = vars.objcts_1.odesc2[vars.prsvec_1.prso - 1];
+				odo2 = vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1];
 			}
 		}
 		GOTO = 5;
@@ -64,9 +64,9 @@ public class Verbs  implements Actions
 
 				/* SET UP DESCRIPTORS. */
 				case 5:
-					if (vars.prsvec_1.prsi != 0)
+					if (vars.prsvec_1.indirect_object != 0)
 					{
-						odi2 = vars.objcts_1.odesc2[vars.prsvec_1.prsi - 1];
+						odi2 = vars.objcts_1.odesc2[vars.prsvec_1.indirect_object - 1];
 					}
 					av = vars.advs_1.avehic[vars.play_1.winner - 1];
 					rmk = Supp.rnd_(6) + 372;
@@ -363,13 +363,13 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 18100:
-					if (vars.prsvec_1.prsi == 0)
+					if (vars.prsvec_1.indirect_object == 0)
 					{
 						GOTO = 18200;
 						continue loop;
 					}
 					/* READ THROUGH OBJ? */
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prsi - 1] & Vars.TRANBT) != 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.indirect_object - 1] & Vars.TRANBT) != 0)
 					{
 						GOTO = 18200;
 						continue loop;
@@ -379,7 +379,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 18200:
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.READBT) != 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.READBT) != 0)
 					{
 						GOTO = 18300;
 						continue loop;
@@ -391,7 +391,7 @@ public class Verbs  implements Actions
 				case 18300:
 					if (!game.dsub.objact_())
 					{
-						game.dsub.rspeak_(vars.objcts_1.oread[vars.prsvec_1.prso - 1]);
+						game.dsub.rspeak_(vars.objcts_1.oread[vars.prsvec_1.direct_object - 1]);
 					}
 					return ret_val;
 
@@ -427,7 +427,7 @@ public class Verbs  implements Actions
 				/* V104-- ALARM. IF SLEEPING, WAKE HIM UP. */
 
 				case 24000:
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.SLEPBT) == 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.SLEPBT) == 0)
 					{
 						GOTO = 24100;
 						continue loop;
@@ -514,7 +514,7 @@ public class Verbs  implements Actions
 					/* OBJECT HANDLE? */
 					i = 383;
 					/* NO, NOT TIED. */
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.TIEBT) == 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.TIEBT) == 0)
 					{
 						i = 384;
 					}
@@ -524,7 +524,7 @@ public class Verbs  implements Actions
 				/* V114-- TIE. NEVER REALLY WORKS. */
 
 				case 34000:
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.TIEBT) != 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.TIEBT) != 0)
 					{
 						GOTO = 34100;
 						continue loop;
@@ -544,7 +544,7 @@ public class Verbs  implements Actions
 				/* V115-- TIE UP. NEVER REALLY WORKS. */
 
 				case 35000:
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prsi - 1] & Vars.TIEBT) != 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.indirect_object - 1] & Vars.TIEBT) != 0)
 					{
 						GOTO = 35100;
 						continue loop;
@@ -556,7 +556,7 @@ public class Verbs  implements Actions
 				case 35100:
 					i = 388;
 					/* ASSUME VILLAIN. */
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) == 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.VILLBT) == 0)
 					{
 						i = 389;
 					}
@@ -567,7 +567,7 @@ public class Verbs  implements Actions
 				/* V116-- TURN. OBJECT MUST HANDLE. */
 
 				case 36000:
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TURNBT) != 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.TURNBT) != 0)
 					{
 						GOTO = 36100;
 						continue loop;
@@ -577,7 +577,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 36100:
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prsi - 1] & Vars.TOOLBT) != 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.indirect_object - 1] & Vars.TOOLBT) != 0)
 					{
 						GOTO = 36200;
 						continue loop;
@@ -594,8 +594,8 @@ public class Verbs  implements Actions
 				/* V117-- BREATHE. BECOMES INFLATE WITH LUNGS. */
 
 				case 38000:
-					vars.prsvec_1.prsa = INFLATE;
-					vars.prsvec_1.prsi = vars.oindex_1.lungs;
+					vars.prsvec_1.action = INFLATE;
+					vars.prsvec_1.indirect_object = vars.oindex_1.lungs;
 					GOTO = 22000;
 					continue loop;
 				/* HANDLE LIKE INFLATE. */
@@ -610,7 +610,7 @@ public class Verbs  implements Actions
 					/* OBJ HANDLE? */
 					i = 394;
 					/* JOKE FOR DOOR. */
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.DOORBT) == 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.DOORBT) == 0)
 					{
 						i = 395;
 					}
@@ -621,7 +621,7 @@ public class Verbs  implements Actions
 				/* V119-- LOOK. */
 
 				case 40000:
-					if (vars.prsvec_1.prso != 0)
+					if (vars.prsvec_1.direct_object != 0)
 					{
 						GOTO = 41500;
 						continue loop;
@@ -634,7 +634,7 @@ public class Verbs  implements Actions
 				/* V120-- EXAMINE. */
 
 				case 41000:
-					if (vars.prsvec_1.prso != 0)
+					if (vars.prsvec_1.direct_object != 0)
 					{
 						GOTO = 41500;
 						continue loop;
@@ -650,7 +650,7 @@ public class Verbs  implements Actions
 						return ret_val;
 					}
 					/* OBJ HANDLE? */
-					i = vars.objcts_1.oread[vars.prsvec_1.prso - 1];
+					i = vars.objcts_1.oread[vars.prsvec_1.direct_object - 1];
 					/* GET READING MATERIAL. */
 					if (i != 0)
 					{
@@ -662,7 +662,7 @@ public class Verbs  implements Actions
 						game.dsub.rspsub_(429, odo2);
 					}
 					/* OTHERWISE DEFAULT. */
-					vars.prsvec_1.prsa = FOO;
+					vars.prsvec_1.action = FOO;
 					/* DEFUSE ROOM PROCESSORS. */
 					return ret_val;
 
@@ -674,7 +674,7 @@ public class Verbs  implements Actions
 						return ret_val;
 					}
 					/* OBJECT HANDLE? */
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) == 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.VILLBT) == 0)
 					{
 						GOTO = 42100;
 						continue loop;
@@ -684,13 +684,13 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 42100:
-					if (game.dsub.qempty_(vars.prsvec_1.prso)
-							|| (vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TAKEBT) == 0)
+					if (game.dsub.qempty_(vars.prsvec_1.direct_object)
+							|| (vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.TAKEBT) == 0)
 					{
 						GOTO = 10;
 						continue loop;
 					}
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.OPENBT) != 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.OPENBT) != 0)
 					{
 						GOTO = 42300;
 						continue loop;
@@ -707,7 +707,7 @@ public class Verbs  implements Actions
 					for (i = 1; i <= i__1; ++i)
 					{
 						/* SPILL CONTENTS. */
-						if (vars.objcts_1.ocan[i - 1] != vars.prsvec_1.prso)
+						if (vars.objcts_1.ocan[i - 1] != vars.prsvec_1.direct_object)
 						{
 //	    		GOTO = 42500;
 //	    		continue loop;
@@ -742,7 +742,7 @@ public class Verbs  implements Actions
 					/* OBJ HANDLE? */
 					i = 398;
 					/* ASSUME NOT HERE. */
-					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here))
+					if (game.dsub.qhere_(vars.prsvec_1.direct_object, vars.play_1.here))
 					{
 						i = 399;
 					}
@@ -761,8 +761,8 @@ public class Verbs  implements Actions
 						continue loop;
 					}
 					/* OBJ HANDLE? */
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.LITEBT) != 0
-							&& vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.LITEBT) != 0
+							&& vars.objcts_1.oadv[vars.prsvec_1.direct_object - 1] == vars.play_1.winner)
 					{
 						GOTO = 44100;
 						continue loop;
@@ -772,7 +772,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 44100:
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.ONBT) == 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.ONBT) == 0)
 					{
 						GOTO = 44200;
 						continue loop;
@@ -782,7 +782,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 44200:
-					vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] |= Vars.ONBT;
+					vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] |= Vars.ONBT;
 					game.dsub.rspsub_(404, odo2);
 				case 44300:
 					if (!f && game.dso5.lit_(vars.play_1.here))
@@ -801,8 +801,8 @@ public class Verbs  implements Actions
 						continue loop;
 					}
 					/* OBJ HANDLE? */
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.LITEBT) != 0
-							&& vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.LITEBT) != 0
+							&& vars.objcts_1.oadv[vars.prsvec_1.direct_object - 1] == vars.play_1.winner)
 					{
 						GOTO = 45100;
 						continue loop;
@@ -812,7 +812,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 45100:
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.ONBT) != 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.ONBT) != 0)
 					{
 						GOTO = 45200;
 						continue loop;
@@ -822,7 +822,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 45200:
-					vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] &= ~Vars.ONBT;
+					vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] &= ~Vars.ONBT;
 					game.dsub.rspsub_(405, odo2);
 				case 45300:
 					if (!game.dso5.lit_(vars.play_1.here))
@@ -840,7 +840,7 @@ public class Verbs  implements Actions
 						return ret_val;
 					}
 					/* OBJ HANDLE? */
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.CONTBT) != 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.CONTBT) != 0)
 					{
 						GOTO = 46100;
 						continue loop;
@@ -851,7 +851,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 46100:
-					if (vars.objcts_1.ocapac[vars.prsvec_1.prso - 1] != 0)
+					if (vars.objcts_1.ocapac[vars.prsvec_1.direct_object - 1] != 0)
 					{
 						GOTO = 46200;
 						continue loop;
@@ -861,7 +861,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 46200:
-					if (!((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.OPENBT) != 0))
+					if (!((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.OPENBT) != 0))
 					{
 						GOTO = 46225;
 						continue loop;
@@ -871,14 +871,14 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 46225:
-					vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] |= Vars.OPENBT;
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TRANBT) != 0
-							|| game.dsub.qempty_(vars.prsvec_1.prso))
+					vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] |= Vars.OPENBT;
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.TRANBT) != 0
+							|| game.dsub.qempty_(vars.prsvec_1.direct_object))
 					{
 						GOTO = 46300;
 						continue loop;
 					}
-					game.dso1.princo_(vars.prsvec_1.prso, 410);
+					game.dso1.princo_(vars.prsvec_1.direct_object, 410);
 					/* PRINT CONTENTS. */
 					return ret_val;
 
@@ -895,12 +895,12 @@ public class Verbs  implements Actions
 						return ret_val;
 					}
 					/* OBJ HANDLE? */
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.CONTBT) == 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.CONTBT) == 0)
 					{
 						GOTO = 46050;
 						continue loop;
 					}
-					if (vars.objcts_1.ocapac[vars.prsvec_1.prso - 1] != 0)
+					if (vars.objcts_1.ocapac[vars.prsvec_1.direct_object - 1] != 0)
 					{
 						GOTO = 47100;
 						continue loop;
@@ -910,7 +910,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 47100:
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.OPENBT) != 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.OPENBT) != 0)
 					{
 						GOTO = 47200;
 						continue loop;
@@ -921,7 +921,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 47200:
-					vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] &= ~Vars.OPENBT;
+					vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] &= ~Vars.OPENBT;
 					game.dsub.rspeak_(414);
 					/* DONE. */
 					return ret_val;
@@ -937,19 +937,19 @@ public class Verbs  implements Actions
 					/* OBJ HANDLE? */
 					i = 415;
 					/* DEFAULT CASE. */
-					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here))
+					if (game.dsub.qhere_(vars.prsvec_1.direct_object, vars.play_1.here))
 					{
 						GOTO = 48300;
 						continue loop;
 					}
 					/* IN ROOM? */
-					if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner)
+					if (vars.objcts_1.oadv[vars.prsvec_1.direct_object - 1] == vars.play_1.winner)
 					{
 						GOTO = 48200;
 						continue loop;
 					}
 					/* ON WINNER? */
-					j = vars.objcts_1.ocan[vars.prsvec_1.prso - 1];
+					j = vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1];
 					/* DOWN ONE LEVEL. */
 					if (j == 0)
 					{
@@ -1020,7 +1020,7 @@ public class Verbs  implements Actions
 				/* V130-- BOARD. WORKS WITH VEHICLES. */
 
 				case 51000:
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VEHBT) != 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.VEHBT) != 0)
 					{
 						GOTO = 51100;
 						continue loop;
@@ -1030,7 +1030,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 51100:
-					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here))
+					if (game.dsub.qhere_(vars.prsvec_1.direct_object, vars.play_1.here))
 					{
 						GOTO = 51200;
 						continue loop;
@@ -1059,18 +1059,18 @@ public class Verbs  implements Actions
 					/* OBJ HANDLE? */
 					game.dsub.rspsub_(423, odo2);
 					/* DESCRIBE. */
-					vars.advs_1.avehic[vars.play_1.winner - 1] = vars.prsvec_1.prso;
+					vars.advs_1.avehic[vars.play_1.winner - 1] = vars.prsvec_1.direct_object;
 					if (vars.play_1.winner != vars.aindex_1.player)
 					{
 						vars.objcts_1.ocan[vars.advs_1.aobj[vars.play_1.winner - 1]
-								- 1] = vars.prsvec_1.prso;
+								- 1] = vars.prsvec_1.direct_object;
 					}
 					return ret_val;
 
 				/* V131-- DISEMBARK. */
 
 				case 52000:
-					if (av == vars.prsvec_1.prso)
+					if (av == vars.prsvec_1.direct_object)
 					{
 						GOTO = 52100;
 						continue loop;
@@ -1121,7 +1121,7 @@ public class Verbs  implements Actions
 				/* V134-- FILL. STRANGE DOINGS WITH WATER. */
 
 				case 56000:
-					if (vars.prsvec_1.prsi != 0)
+					if (vars.prsvec_1.indirect_object != 0)
 					{
 						GOTO = 56050;
 						continue loop;
@@ -1134,12 +1134,12 @@ public class Verbs  implements Actions
 					}
 					game.dsub.rspeak_(516);
 					/* NOTHING TO FILL WITH. */
-					vars.prsvec_1.isParsed = false;
+					vars.prsvec_1.is_parsed = false;
 					/* YOU LOSE. */
 					return ret_val;
 
 				case 56025:
-					vars.prsvec_1.prsi = vars.oindex_1.gwate;
+					vars.prsvec_1.indirect_object = vars.oindex_1.gwate;
 					/* USE GLOBAL WATER. */
 				case 56050:
 					if (game.dsub.objact_())
@@ -1147,8 +1147,8 @@ public class Verbs  implements Actions
 						return ret_val;
 					}
 					/* OBJ HANDLE? */
-					if (vars.prsvec_1.prsi != vars.oindex_1.gwate
-							&& vars.prsvec_1.prsi != vars.oindex_1.water)
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.gwate
+							&& vars.prsvec_1.indirect_object != vars.oindex_1.water)
 					{
 						game.dsub.rspsb2_(444, odi2, odo2);
 					}
@@ -1163,19 +1163,19 @@ public class Verbs  implements Actions
 						return ret_val;
 					}
 					/* OBJ HANDLE? */
-					if (vars.prsvec_1.prso == vars.oindex_1.gwate)
+					if (vars.prsvec_1.direct_object == vars.oindex_1.gwate)
 					{
 						GOTO = 59500;
 						continue loop;
 					}
 					/* DRINK GLOBAL WATER? */
-					if (!((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.FOODBT) != 0))
+					if (!((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.FOODBT) != 0))
 					{
 						GOTO = 59400;
 						continue loop;
 					}
 					/* EDIBLE? */
-					if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] == vars.play_1.winner)
+					if (vars.objcts_1.oadv[vars.prsvec_1.direct_object - 1] == vars.play_1.winner)
 					{
 						GOTO = 59200;
 						continue loop;
@@ -1187,13 +1187,13 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 59200:
-					if (vars.prsvec_1.prsa == DRINK)
+					if (vars.prsvec_1.action == DRINK)
 					{
 						GOTO = 59300;
 						continue loop;
 					}
 					/* DRINK FOOD? */
-					game.dsub.newsta_(vars.prsvec_1.prso, 455, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 455, 0, 0, 0);
 					/* NO, IT DISAPPEARS. */
 					return ret_val;
 
@@ -1203,25 +1203,25 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 59400:
-					if (!((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.DRNKBT) != 0))
+					if (!((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.DRNKBT) != 0))
 					{
 						GOTO = 59600;
 						continue loop;
 					}
 					/* DRINKABLE? */
-					if (vars.objcts_1.ocan[vars.prsvec_1.prso - 1] == 0)
+					if (vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1] == 0)
 					{
 						GOTO = 59100;
 						continue loop;
 					}
 					/* YES, IN SOMETHING? */
-					if (vars.objcts_1.oadv[vars.objcts_1.ocan[vars.prsvec_1.prso - 1]
+					if (vars.objcts_1.oadv[vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1]
 							- 1] != vars.play_1.winner)
 					{
 						GOTO = 59100;
 						continue loop;
 					}
-					if ((vars.objcts_1.oflag2[vars.objcts_1.ocan[vars.prsvec_1.prso - 1] - 1]
+					if ((vars.objcts_1.oflag2[vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1] - 1]
 							& Vars.OPENBT) != 0)
 					{
 						GOTO = 59500;
@@ -1233,7 +1233,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 59500:
-					game.dsub.newsta_(vars.prsvec_1.prso, 458, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 458, 0, 0, 0);
 					/* GONE. */
 					return ret_val;
 
@@ -1245,7 +1245,7 @@ public class Verbs  implements Actions
 				/* V137-- BURN. COMPLICATED. */
 
 				case 60000:
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prsi - 1]
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.indirect_object - 1]
 							& Vars.FLAMBT + Vars.LITEBT + Vars.ONBT) != Vars.FLAMBT + Vars.LITEBT
 									+ Vars.ONBT)
 					{
@@ -1257,7 +1257,7 @@ public class Verbs  implements Actions
 						return ret_val;
 					}
 					/* OBJ HANDLE? */
-					if (vars.objcts_1.ocan[vars.prsvec_1.prso - 1] != vars.oindex_1.recep)
+					if (vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1] != vars.oindex_1.recep)
 					{
 						GOTO = 60050;
 						continue loop;
@@ -1269,12 +1269,12 @@ public class Verbs  implements Actions
 					}
 					/* DID IT HANDLE? */
 				case 60050:
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.BURNBT) == 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.BURNBT) == 0)
 					{
 						GOTO = 60300;
 						continue loop;
 					}
-					if (vars.objcts_1.oadv[vars.prsvec_1.prso - 1] != vars.play_1.winner)
+					if (vars.objcts_1.oadv[vars.prsvec_1.direct_object - 1] != vars.play_1.winner)
 					{
 						GOTO = 60100;
 						continue loop;
@@ -1285,9 +1285,9 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 60100:
-					j = vars.objcts_1.ocan[vars.prsvec_1.prso - 1];
+					j = vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1];
 					/* GET CONTAINER. */
-					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here)
+					if (game.dsub.qhere_(vars.prsvec_1.direct_object, vars.play_1.here)
 							|| av != 0 && j == av)
 					{
 						GOTO = 60200;
@@ -1319,7 +1319,7 @@ public class Verbs  implements Actions
 				case 60200:
 					game.dsub.rspsub_(462, odo2);
 					/* BURN IT. */
-					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, 0);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, 0);
 					return ret_val;
 
 				case 60300:
@@ -1338,7 +1338,7 @@ public class Verbs  implements Actions
 				case 63000:
 					i = 466;
 					/* CHOOSE PHRASE. */
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) != 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.VILLBT) != 0)
 					{
 						GOTO = 66100;
 						continue loop;
@@ -1360,14 +1360,14 @@ public class Verbs  implements Actions
 				/* V140-- SWING. INVERT OBJECTS, FALL THRU TO ATTACK. */
 
 				case 65000:
-					j = vars.prsvec_1.prso;
+					j = vars.prsvec_1.direct_object;
 					/* INVERT. */
-					vars.prsvec_1.prso = vars.prsvec_1.prsi;
-					vars.prsvec_1.prsi = j;
+					vars.prsvec_1.direct_object = vars.prsvec_1.indirect_object;
+					vars.prsvec_1.indirect_object = j;
 					j = odo2;
 					odo2 = odi2;
 					odi2 = j;
-					vars.prsvec_1.prsa = ATTACK;
+					vars.prsvec_1.action = ATTACK;
 					/* FOR OBJACT. */
 
 					/* V141-- ATTACK. FALL THRU TO ATTACK CODE. */
@@ -1378,7 +1378,7 @@ public class Verbs  implements Actions
 					/* COMMON MUNG/ATTACK/SWING/KILL CODE. */
 
 				case 66100:
-					if (vars.prsvec_1.prso != 0)
+					if (vars.prsvec_1.direct_object != 0)
 					{
 						GOTO = 66200;
 						continue loop;
@@ -1394,12 +1394,12 @@ public class Verbs  implements Actions
 						return ret_val;
 					}
 					/* OBJ HANDLE? */
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) != 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.VILLBT) != 0)
 					{
 						GOTO = 66300;
 						continue loop;
 					}
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.VICTBT) == 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.VICTBT) == 0)
 					{
 						game.dsub.rspsub_(470, odo2);
 					}
@@ -1408,24 +1408,24 @@ public class Verbs  implements Actions
 				case 66300:
 					j = 471;
 					/* ASSUME NO WEAPON. */
-					if (vars.prsvec_1.prsi == 0)
+					if (vars.prsvec_1.indirect_object == 0)
 					{
 						GOTO = 66500;
 						continue loop;
 					}
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prsi - 1] & Vars.WEAPBT) == 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.indirect_object - 1] & Vars.WEAPBT) == 0)
 					{
 						GOTO = 66400;
 						continue loop;
 					}
 					melee = 1;
 					/* ASSUME SWORD. */
-					if (vars.prsvec_1.prsi != vars.oindex_1.sword)
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.sword)
 					{
 						melee = 2;
 					}
 					/* MUST BE KNIFE. */
-					i = game.demons.blow_(vars.aindex_1.player, vars.prsvec_1.prso, melee, true, 0);
+					i = game.demons.blow_(vars.aindex_1.player, vars.prsvec_1.direct_object, melee, true, 0);
 					/* STRIKE BLOW. */
 					return ret_val;
 
@@ -1501,7 +1501,7 @@ public class Verbs  implements Actions
 				/* V151-- HELLO */
 
 				case 80000:
-					if (vars.prsvec_1.prso != 0)
+					if (vars.prsvec_1.direct_object != 0)
 					{
 						GOTO = 80100;
 						continue loop;
@@ -1513,7 +1513,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 80100:
-					if (vars.prsvec_1.prso != vars.oindex_1.aviat)
+					if (vars.prsvec_1.direct_object != vars.oindex_1.aviat)
 					{
 						GOTO = 80200;
 						continue loop;
@@ -1524,7 +1524,7 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 80200:
-					if (vars.prsvec_1.prso != vars.oindex_1.sailo)
+					if (vars.prsvec_1.direct_object != vars.oindex_1.sailo)
 					{
 						GOTO = 80300;
 						continue loop;
@@ -1555,7 +1555,7 @@ public class Verbs  implements Actions
 					/* OBJ HANDLE? */
 					i = 354;
 					/* ASSUME VILLAIN. */
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1]
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1]
 							& Vars.VILLBT + Vars.ACTRBT) == 0)
 					{
 						i = 355;
@@ -1573,12 +1573,12 @@ public class Verbs  implements Actions
 						return ret_val;
 					}
 					/* OBJ HANDLE? */
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.DOORBT) == 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.DOORBT) == 0)
 					{
 						GOTO = 81300;
 						continue loop;
 					}
-					if (!((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.OPENBT) != 0))
+					if (!((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.OPENBT) != 0))
 					{
 						GOTO = 81200;
 						continue loop;
@@ -1594,18 +1594,18 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 81300:
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VEHBT) != 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.VEHBT) != 0)
 					{
 						GOTO = 81400;
 						continue loop;
 					}
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.OPENBT) != 0
-							|| (vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TRANBT) != 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.OPENBT) != 0
+							|| (vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.TRANBT) != 0)
 					{
 						GOTO = 81400;
 						continue loop;
 					}
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.CONTBT) != 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.CONTBT) != 0)
 					{
 						GOTO = 81200;
 						continue loop;
@@ -1615,13 +1615,13 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 81400:
-					if (game.dsub.qempty_(vars.prsvec_1.prso))
+					if (game.dsub.qempty_(vars.prsvec_1.direct_object))
 					{
 						GOTO = 81500;
 						continue loop;
 					}
 					/* VEH OR SEE IN. EMPTY? */
-					game.dso1.princo_(vars.prsvec_1.prso, 573);
+					game.dso1.princo_(vars.prsvec_1.direct_object, 573);
 					/* NO, LIST CONTENTS. */
 					return ret_val;
 
@@ -1655,9 +1655,9 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 83100:
-					vars.prsvec_1.prsi = vars.oindex_1.pump;
+					vars.prsvec_1.indirect_object = vars.oindex_1.pump;
 					/* BECOMES INFLATE */
-					vars.prsvec_1.prsa = INFLATE;
+					vars.prsvec_1.action = INFLATE;
 					/* X WITH PUMP. */
 					GOTO = 22000;
 					continue loop;
@@ -1682,12 +1682,12 @@ public class Verbs  implements Actions
 				case 87000:
 					i = vars.xsrch_1.xup;
 					/* ASSUME UP. */
-					if (vars.prsvec_1.prsa == CLIMB_DOWN)
+					if (vars.prsvec_1.action == CLIMB_DOWN)
 					{
 						i = vars.xsrch_1.xdown;
 					}
 					/* UNLESS CLIMB DN. */
-					f = (vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.CLMBBT) != 0;
+					f = (vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.CLMBBT) != 0;
 					if (f && game.dso3.findxt_(i, vars.play_1.here))
 					{
 						GOTO = 87500;
@@ -1705,9 +1705,9 @@ public class Verbs  implements Actions
 						i = 524;
 					}
 					/* VARIETY OF JOKES. */
-					if (!f && (vars.prsvec_1.prso == vars.oindex_1.wall
-							|| vars.prsvec_1.prso >= vars.oindex_1.wnort
-									&& vars.prsvec_1.prso <= vars.oindex_1.wnort + 3))
+					if (!f && (vars.prsvec_1.direct_object == vars.oindex_1.wall
+							|| vars.prsvec_1.direct_object >= vars.oindex_1.wnort
+									&& vars.prsvec_1.direct_object <= vars.oindex_1.wnort + 3))
 					{
 						i = 656;
 					}
@@ -1716,9 +1716,9 @@ public class Verbs  implements Actions
 					return ret_val;
 
 				case 87500:
-					vars.prsvec_1.prsa = WALK;
+					vars.prsvec_1.action = WALK;
 					/* WALK */
-					vars.prsvec_1.prso = i;
+					vars.prsvec_1.direct_object = i;
 					/* IN SPECIFIED DIR. */
 					ret_val = dverb2.walk_();
 					return ret_val;

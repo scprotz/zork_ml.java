@@ -160,7 +160,7 @@ public class Dso4
 		for (i = 1; i <= vars.vill_1.vlnt; ++i)
 		{
 			/* SEE IF BEST WEAPON. */
-			if (vars.vill_1.villns[i - 1] == v && vars.prsvec_1.prsi == vars.vill_1.vbest[i - 1])
+			if (vars.vill_1.villns[i - 1] == v && vars.prsvec_1.indirect_object == vars.vill_1.vbest[i - 1])
 			{
 				/* Computing MAX */
 				i__2 = 1;

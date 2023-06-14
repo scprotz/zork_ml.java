@@ -57,7 +57,7 @@ public class Actors implements Actions
 				/* A1-- ROBOT. PROCESS MOST COMMANDS GIVEN TO ROBOT. */
 
 				case 1000:
-					if (vars.prsvec_1.prsa != RAISE || vars.prsvec_1.prso != vars.oindex_1.rcage)
+					if (vars.prsvec_1.action != RAISE || vars.prsvec_1.direct_object != vars.oindex_1.rcage)
 					{
 
 						{
@@ -84,9 +84,9 @@ public class Actors implements Actions
 					return ret_val;
 
 				case 1200:
-					if (vars.prsvec_1.prsa != DRINK && vars.prsvec_1.prsa != EAT)
+					if (vars.prsvec_1.action != DRINK && vars.prsvec_1.action != EAT)
 					{
-						if (vars.prsvec_1.prsa != READ)
+						if (vars.prsvec_1.action != READ)
 						{
 							{
 								GOTO = 1400;
@@ -103,10 +103,10 @@ public class Actors implements Actions
 					return ret_val;
 
 				case 1400:
-					if (vars.prsvec_1.prsa == WALK || vars.prsvec_1.prsa == TAKE
-							|| vars.prsvec_1.prsa == DROP || vars.prsvec_1.prsa == PUT
-							|| vars.prsvec_1.prsa == PUSH || vars.prsvec_1.prsa == THROW
-							|| vars.prsvec_1.prsa == TURN || vars.prsvec_1.prsa == LEAP)
+					if (vars.prsvec_1.action == WALK || vars.prsvec_1.action == TAKE
+							|| vars.prsvec_1.action == DROP || vars.prsvec_1.action == PUT
+							|| vars.prsvec_1.action == PUSH || vars.prsvec_1.action == THROW
+							|| vars.prsvec_1.action == TURN || vars.prsvec_1.action == LEAP)
 					{
 						return false;
 					}
@@ -130,7 +130,7 @@ public class Actors implements Actions
 					return ret_val;
 
 				case 2100:
-					if (vars.prsvec_1.prsa != WALK)
+					if (vars.prsvec_1.action != WALK)
 					{
 						{
 							GOTO = 2200;
@@ -141,11 +141,11 @@ public class Actors implements Actions
 					i = 784;
 					/* ASSUME WONT. */
 					if (vars.play_1.here == vars.rindex_1.scorr
-							&& (vars.prsvec_1.prso == vars.xsrch_1.xnorth
-									|| vars.prsvec_1.prso == vars.xsrch_1.xenter)
+							&& (vars.prsvec_1.direct_object == vars.xsrch_1.xnorth
+									|| vars.prsvec_1.direct_object == vars.xsrch_1.xenter)
 							|| vars.play_1.here == vars.rindex_1.ncorr
-									&& (vars.prsvec_1.prso == vars.xsrch_1.xsouth
-											|| vars.prsvec_1.prso == vars.xsrch_1.xenter))
+									&& (vars.prsvec_1.direct_object == vars.xsrch_1.xsouth
+											|| vars.prsvec_1.direct_object == vars.xsrch_1.xenter))
 					{
 						i = 785;
 					}
@@ -153,13 +153,13 @@ public class Actors implements Actions
 					return ret_val;
 
 				case 2200:
-					if (vars.prsvec_1.prsa == TAKE || vars.prsvec_1.prsa == DROP
-							|| vars.prsvec_1.prsa == PUT || vars.prsvec_1.prsa == THROW
-							|| vars.prsvec_1.prsa == PUSH || vars.prsvec_1.prsa == TURN
-							|| vars.prsvec_1.prsa == SPIN || vars.prsvec_1.prsa == TURN_TO
-							|| vars.prsvec_1.prsa == FOLLOW || vars.prsvec_1.prsa == STAY
-							|| vars.prsvec_1.prsa == OPEN || vars.prsvec_1.prsa == CLOSE
-							|| vars.prsvec_1.prsa == KILL)
+					if (vars.prsvec_1.action == TAKE || vars.prsvec_1.action == DROP
+							|| vars.prsvec_1.action == PUT || vars.prsvec_1.action == THROW
+							|| vars.prsvec_1.action == PUSH || vars.prsvec_1.action == TURN
+							|| vars.prsvec_1.action == SPIN || vars.prsvec_1.action == TURN_TO
+							|| vars.prsvec_1.action == FOLLOW || vars.prsvec_1.action == STAY
+							|| vars.prsvec_1.action == OPEN || vars.prsvec_1.action == CLOSE
+							|| vars.prsvec_1.action == KILL)
 					{
 						return false;
 					}

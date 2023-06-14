@@ -154,14 +154,14 @@ public class Dsub implements Actions
 	boolean objact_()
 	{
 		/* ASSUME WINS. */
-		if (vars.prsvec_1.prsi != 0 && game.objcts.oappli_(vars.objcts_1.oactio[vars.prsvec_1.prsi - 1], 0))
+		if (vars.prsvec_1.indirect_object != 0 && game.objcts.oappli_(vars.objcts_1.oactio[vars.prsvec_1.indirect_object - 1], 0))
 		{
 			return true;
 		}
 		/* YES, LET IT HANDLE. */
 
 		/* DIR OBJECT? */
-		if (vars.prsvec_1.prso != 0 && game.objcts.oappli_(vars.objcts_1.oactio[vars.prsvec_1.prso - 1], 0))
+		if (vars.prsvec_1.direct_object != 0 && game.objcts.oappli_(vars.objcts_1.oactio[vars.prsvec_1.direct_object - 1], 0))
 		{
 			return true;
 		}
@@ -486,16 +486,16 @@ public class Dsub implements Actions
 		ret_val = true;
 
 		/* ASSUME WINS. */
-		if (vars.prsvec_1.prso < vars.xsrch_1.xmin)
+		if (vars.prsvec_1.direct_object < vars.xsrch_1.xmin)
 		{
 			GOTO = 50;
 		}
 		if (GOTO != 50)
 		{
 			/* IF DIRECTION, */
-			vars.screen_1.fromdr = vars.prsvec_1.prso;
+			vars.screen_1.fromdr = vars.prsvec_1.direct_object;
 			/* SAVE AND */
-			vars.prsvec_1.prso = 0;
+			vars.prsvec_1.direct_object = 0;
 			/* CLEAR. */
 		}
 		GOTO = 50;
@@ -512,7 +512,7 @@ public class Dsub implements Actions
 				/* PLAYER JUST MOVE? */
 				rspeak_(2);
 				/* NO, JUST SAY DONE. */
-				vars.prsvec_1.prsa = WALK_IN;
+				vars.prsvec_1.action = WALK_IN;
 				/* SET UP WALK IN ACTION. */
 				return ret_val;
 
@@ -560,7 +560,7 @@ public class Dsub implements Actions
 					continue;
 				}
 				/* IF GOT DESC, SKIP. */
-				vars.prsvec_1.prsa = LOOK;
+				vars.prsvec_1.action = LOOK;
 				/* PRETEND LOOK AROUND. */
 				if (!rappli_(ra))
 				{
@@ -568,7 +568,7 @@ public class Dsub implements Actions
 					continue;
 				}
 				/* ROOM HANDLES, NEW DESC? */
-				vars.prsvec_1.prsa = FOO;
+				vars.prsvec_1.action = FOO;
 				/* NOP PARSER. */
 				GOTO = 500;
 				continue;
@@ -594,7 +594,7 @@ public class Dsub implements Actions
 					return ret_val;
 				}
 				/* ANYTHING MORE? */
-				vars.prsvec_1.prsa = WALK_IN;
+				vars.prsvec_1.action = WALK_IN;
 				/* GIVE HIM A SURPISE. */
 				if (!rappli_(ra))
 				{
@@ -602,7 +602,7 @@ public class Dsub implements Actions
 					continue;
 				}
 				/* ROOM HANDLES, NEW DESC? */
-				vars.prsvec_1.prsa = FOO;
+				vars.prsvec_1.action = FOO;
 				return ret_val;
 			}
 		} while (true);

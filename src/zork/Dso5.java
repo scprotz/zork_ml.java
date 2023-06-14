@@ -36,7 +36,7 @@ public class Dso5 implements Actions
 
 		ret_val = true;
 		/* ASSUME WINS. */
-		if (vars.prsvec_1.prsa == CLOSE)
+		if (vars.prsvec_1.action == CLOSE)
 		{
 			if (!((vars.objcts_1.oflag2[obj - 1] & Vars.OPENBT) != 0))
 			{
@@ -49,7 +49,7 @@ public class Dso5 implements Actions
 			return ret_val;
 		}
 		/* CLOSE? */
-		if (vars.prsvec_1.prsa != OPEN)
+		if (vars.prsvec_1.action != OPEN)
 		{
 			/* OPEN? */
 			ret_val = false;

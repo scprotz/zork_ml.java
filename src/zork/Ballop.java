@@ -30,7 +30,7 @@ public class Ballop implements Actions
 		if (GOTO != 200)
 		{
 			/* READOUT? */
-			if (vars.prsvec_1.prsa != LOOK)
+			if (vars.prsvec_1.action != LOOK)
 			{
 				return false;
 			}
@@ -71,13 +71,13 @@ public class Ballop implements Actions
 						continue;
 					}
 					/* READIN? */
-					if (vars.prsvec_1.prsa != WALK)
+					if (vars.prsvec_1.action != WALK)
 					{
 						GOTO = 300;
 						continue;
 					}
 					/* WALK? */
-					if (game.dso3.findxt_(vars.prsvec_1.prso, vars.play_1.here))
+					if (game.dso3.findxt_(vars.prsvec_1.direct_object, vars.play_1.here))
 					{
 						GOTO = 250;
 						continue;
@@ -114,8 +114,8 @@ public class Ballop implements Actions
 					return ret_val;
 
 				case 300:
-					if (vars.prsvec_1.prsa != TAKE
-							|| vars.prsvec_1.prso != vars.findex_1.binff)
+					if (vars.prsvec_1.action != TAKE
+							|| vars.prsvec_1.direct_object != vars.findex_1.binff)
 					{
 						GOTO = 350;
 						continue;
@@ -125,8 +125,8 @@ public class Ballop implements Actions
 					return ret_val;
 
 				case 350:
-					if (vars.prsvec_1.prsa != PUT
-							|| vars.prsvec_1.prsi != vars.oindex_1.recep
+					if (vars.prsvec_1.action != PUT
+							|| vars.prsvec_1.indirect_object != vars.oindex_1.recep
 							|| game.dsub.qempty_(vars.oindex_1.recep))
 					{
 						GOTO = 10;
@@ -136,7 +136,7 @@ public class Ballop implements Actions
 					return false;
 
 				case 500:
-					if (vars.prsvec_1.prsa != UNBOARD
+					if (vars.prsvec_1.action != UNBOARD
 							|| (vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RLAND) == 0)
 					{
 						GOTO = 600;
@@ -149,17 +149,17 @@ public class Ballop implements Actions
 					/* HE GOT OUT, START BALLOON. */
 					return false;
 				case 600:
-					if (vars.prsvec_1.prsa != BURN
-							|| vars.objcts_1.ocan[vars.prsvec_1.prso - 1] != vars.oindex_1.recep)
+					if (vars.prsvec_1.action != BURN
+							|| vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1] != vars.oindex_1.recep)
 					{
 						GOTO = 700;
 						continue;
 					}
-					game.dsub.rspsub_(550, vars.objcts_1.odesc2[vars.prsvec_1.prso - 1]);
+					game.dsub.rspsub_(550, vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1]);
 					/* LIGHT FIRE IN RECEP. */
 					vars.cevent_1.ctick[vars.cindex_1.cevbrn
-							- 1] = vars.objcts_1.osize[vars.prsvec_1.prso - 1] * 20;
-					vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] |= Vars.ONBT + Vars.FLAMBT
+							- 1] = vars.objcts_1.osize[vars.prsvec_1.direct_object - 1] * 20;
+					vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] |= Vars.ONBT + Vars.FLAMBT
 							+ Vars.LITEBT & ~(Vars.TAKEBT + Vars.READBT);
 					if (vars.findex_1.binff != 0)
 					{
@@ -170,13 +170,13 @@ public class Ballop implements Actions
 						game.dsub.newsta_(vars.oindex_1.blabe, 0, 0, vars.oindex_1.ballo, 0);
 					}
 					vars.findex_1.blabf = true;
-					vars.findex_1.binff = vars.prsvec_1.prso;
+					vars.findex_1.binff = vars.prsvec_1.direct_object;
 					vars.cevent_1.ctick[vars.cindex_1.cevbal - 1] = 3;
 					game.dsub.rspeak_(551);
 					return ret_val;
 
 				case 700:
-					if (vars.prsvec_1.prsa == UNBOARD && vars.findex_1.binff != 0
+					if (vars.prsvec_1.action == UNBOARD && vars.findex_1.binff != 0
 							&& (vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RLAND) != 0)
 					{
 						vars.cevent_1.ctick[vars.cindex_1.cevbal - 1] = 3;

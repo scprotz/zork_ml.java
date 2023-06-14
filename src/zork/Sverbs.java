@@ -53,14 +53,14 @@ public class Sverbs
 
 		ret_val = true;
 		/* ASSUME WINS. */
-		if (vars.prsvec_1.prso != 0)
+		if (vars.prsvec_1.direct_object != 0)
 		{
-			odo2 = vars.objcts_1.odesc2[vars.prsvec_1.prso - 1];
+			odo2 = vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1];
 		}
 		/* SET UP DESCRIPTORS. */
-		if (vars.prsvec_1.prsi != 0)
+		if (vars.prsvec_1.indirect_object != 0)
 		{
-			odi2 = vars.objcts_1.odesc2[vars.prsvec_1.prsi - 1];
+			odi2 = vars.objcts_1.odesc2[vars.prsvec_1.indirect_object - 1];
 		}
 
 		if (ri == 0)
@@ -450,7 +450,7 @@ public class Sverbs
 				case 13000:
 					i = 342;
 					/* DONT UNDERSTAND. */
-					if (vars.prsvec_1.prso == vars.oindex_1.safe)
+					if (vars.prsvec_1.direct_object == vars.oindex_1.safe)
 					{
 						i = 252;
 					}
@@ -494,8 +494,8 @@ public class Sverbs
 				/* V86-- WALK THROUGH */
 
 				case 17000:
-					if (vars.screen_1.scolrm == 0 || vars.prsvec_1.prso != vars.oindex_1.scol
-							&& (vars.prsvec_1.prso != vars.oindex_1.wnort
+					if (vars.screen_1.scolrm == 0 || vars.prsvec_1.direct_object != vars.oindex_1.scol
+							&& (vars.prsvec_1.direct_object != vars.oindex_1.wnort
 									|| vars.play_1.here != vars.rindex_1.bkbox))
 					{
 						GOTO = 17100;
@@ -503,7 +503,7 @@ public class Sverbs
 					}
 					vars.screen_1.scolac = vars.screen_1.scolrm;
 					/* WALKED THRU SCOL. */
-					vars.prsvec_1.prso = 0;
+					vars.prsvec_1.direct_object = 0;
 					/* FAKE OUT FROMDR. */
 					vars.cevent_1.ctick[vars.cindex_1.cevscl - 1] = 6;
 					/* START ALARM. */
@@ -526,7 +526,7 @@ public class Sverbs
 					{
 						/* WALK THRU PROPER WALL? */
 						if (vars.screen_1.scolwl[i - 1] == vars.play_1.here
-								&& vars.screen_1.scolwl[i] == vars.prsvec_1.prso)
+								&& vars.screen_1.scolwl[i] == vars.prsvec_1.direct_object)
 						{
 							GOTO = 17500;
 							continue loop;
@@ -535,14 +535,14 @@ public class Sverbs
 					}
 
 				case 17300:
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TAKEBT) != 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.TAKEBT) != 0)
 					{
 						GOTO = 17400;
 						continue loop;
 					}
 					i = 669;
 					/* NO, JOKE. */
-					if (vars.prsvec_1.prso == vars.oindex_1.scol)
+					if (vars.prsvec_1.direct_object == vars.oindex_1.scol)
 					{
 						i = 670;
 					}
@@ -553,7 +553,7 @@ public class Sverbs
 				case 17400:
 					i = 671;
 					/* JOKE. */
-					if (vars.objcts_1.oroom[vars.prsvec_1.prso - 1] != 0)
+					if (vars.objcts_1.oroom[vars.prsvec_1.direct_object - 1] != 0)
 					{
 						i = Supp.rnd_(5) + 552;
 					}
@@ -562,12 +562,12 @@ public class Sverbs
 					return ret_val;
 
 				case 17500:
-					vars.prsvec_1.prso = vars.screen_1.scolwl[i + 1];
+					vars.prsvec_1.direct_object = vars.screen_1.scolwl[i + 1];
 					/* THRU SCOL WALL... */
 					for (i = 1; i <= 8; i += 2)
 					{
 						/* FIND MATCHING ROOM. */
-						if (vars.prsvec_1.prso == vars.screen_1.scoldr[i - 1])
+						if (vars.prsvec_1.direct_object == vars.screen_1.scoldr[i - 1])
 						{
 							vars.screen_1.scolrm = vars.screen_1.scoldr[i];
 						}
@@ -588,7 +588,7 @@ public class Sverbs
 				case 18000:
 					i = 359;
 					/* CANT RING. */
-					if (vars.prsvec_1.prso == vars.oindex_1.bell)
+					if (vars.prsvec_1.direct_object == vars.oindex_1.bell)
 					{
 						i = 360;
 					}
@@ -600,7 +600,7 @@ public class Sverbs
 				/* V88-- BRUSH. JOKE WITH OBSCURE TRAP. */
 
 				case 19000:
-					if (vars.prsvec_1.prso == vars.oindex_1.teeth)
+					if (vars.prsvec_1.direct_object == vars.oindex_1.teeth)
 					{
 						GOTO = 19100;
 						continue loop;
@@ -611,7 +611,7 @@ public class Sverbs
 					return ret_val;
 
 				case 19100:
-					if (vars.prsvec_1.prsi != 0)
+					if (vars.prsvec_1.indirect_object != 0)
 					{
 						GOTO = 19200;
 						continue loop;
@@ -622,7 +622,7 @@ public class Sverbs
 					return ret_val;
 
 				case 19200:
-					if (vars.prsvec_1.prsi == vars.oindex_1.putty
+					if (vars.prsvec_1.indirect_object == vars.oindex_1.putty
 							&& vars.objcts_1.oadv[vars.oindex_1.putty - 1] == vars.play_1.winner)
 					{
 						GOTO = 19300;
@@ -646,14 +646,14 @@ public class Sverbs
 				/* V89-- DIG. UNLESS SHOVEL, A JOKE. */
 
 				case 20000:
-					if (vars.prsvec_1.prso == vars.oindex_1.shove)
+					if (vars.prsvec_1.direct_object == vars.oindex_1.shove)
 					{
 						return ret_val;
 					}
 					/* SHOVEL? */
 					i = 392;
 					/* ASSUME TOOL. */
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TOOLBT) == 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.TOOLBT) == 0)
 					{
 						i = 393;
 					}
@@ -686,13 +686,13 @@ public class Sverbs
 				/* V91-- LEAP. USUALLY A JOKE, WITH A CATCH. */
 
 				case 22000:
-					if (vars.prsvec_1.prso == 0)
+					if (vars.prsvec_1.direct_object == 0)
 					{
 						GOTO = 22200;
 						continue loop;
 					}
 					/* OVER SOMETHING? */
-					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here))
+					if (game.dsub.qhere_(vars.prsvec_1.direct_object, vars.play_1.here))
 					{
 						GOTO = 22100;
 						continue loop;
@@ -703,7 +703,7 @@ public class Sverbs
 					return ret_val;
 
 				case 22100:
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) == 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.VILLBT) == 0)
 					{
 						GOTO = 22300;
 						continue loop;
@@ -743,7 +743,7 @@ public class Sverbs
 				/* V92-- LOCK. */
 
 				case 23000:
-					if (vars.prsvec_1.prso == vars.oindex_1.grate
+					if (vars.prsvec_1.direct_object == vars.oindex_1.grate
 							&& vars.play_1.here == vars.rindex_1.mgrat)
 					{
 						GOTO = 23200;
@@ -765,13 +765,13 @@ public class Sverbs
 				/* V93-- UNLOCK */
 
 				case 24000:
-					if (vars.prsvec_1.prso != vars.oindex_1.grate
+					if (vars.prsvec_1.direct_object != vars.oindex_1.grate
 							|| vars.play_1.here != vars.rindex_1.mgrat)
 					{
 						GOTO = 23100;
 						continue loop;
 					}
-					if (vars.prsvec_1.prsi == vars.oindex_1.keys)
+					if (vars.prsvec_1.indirect_object == vars.oindex_1.keys)
 					{
 						GOTO = 24200;
 						continue loop;

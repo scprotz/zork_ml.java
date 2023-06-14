@@ -83,10 +83,10 @@ public class Np
 		/* Function Body */
 		ret_val = false;
 		/* ASSUME FAILS. */
-		vars.prsvec_1.prsa = 0;
+		vars.prsvec_1.action = 0;
 		/* ZERO OUTPUTS. */
-		vars.prsvec_1.prsi = 0;
-		vars.prsvec_1.prso = 0;
+		vars.prsvec_1.indirect_object = 0;
+		vars.prsvec_1.direct_object = 0;
 		int GOTO = 0;
 
 		if (!lex_(inbuf, outbuf, outlnt, vbflag))
@@ -129,9 +129,9 @@ public class Np
 					continue;
 				}
 				/* !DO SYN MATCH. */
-				if (vars.prsvec_1.prso > 0 & vars.prsvec_1.prso < vars.xsrch_1.xmin)
+				if (vars.prsvec_1.direct_object > 0 & vars.prsvec_1.direct_object < vars.xsrch_1.xmin)
 				{
-					vars.last_1.lastit = vars.prsvec_1.prso;
+					vars.last_1.lastit = vars.prsvec_1.direct_object;
 				}
 
 				/* SUCCESSFUL PARSE OR SUCCESSFUL VALIDATION */

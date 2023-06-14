@@ -58,12 +58,12 @@ public class Lightp implements Actions
 			{
 
 				case 19100:
-					if (vars.prsvec_1.prsi == vars.oindex_1.candl)
+					if (vars.prsvec_1.indirect_object == vars.oindex_1.candl)
 					{
 						return false;
 					}
 					/* IGNORE IND REFS. */
-					if (vars.prsvec_1.prsa != TURN_OFF)
+					if (vars.prsvec_1.action != TURN_OFF)
 					{
 						GOTO = 19200;
 						continue;
@@ -83,8 +83,8 @@ public class Lightp implements Actions
 					return ret_val;
 
 				case 19200:
-					if (vars.prsvec_1.prsa != BURN
-							&& vars.prsvec_1.prsa != TURN_ON)
+					if (vars.prsvec_1.action != BURN
+							&& vars.prsvec_1.action != TURN_ON)
 					{
 
 						return false;
@@ -99,7 +99,7 @@ public class Lightp implements Actions
 					return ret_val;
 
 				case 19300:
-					if (vars.prsvec_1.prsi != 0)
+					if (vars.prsvec_1.indirect_object != 0)
 					{
 						GOTO = 19400;
 						continue;
@@ -107,11 +107,11 @@ public class Lightp implements Actions
 					/* ANY FLAME? */
 					game.dsub.rspeak_(516);
 					/* NO, LOSE. */
-					vars.prsvec_1.isParsed = false;
+					vars.prsvec_1.is_parsed = false;
 					return ret_val;
 
 				case 19400:
-					if (vars.prsvec_1.prsi != vars.oindex_1.match
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.match
 							|| !((vars.objcts_1.oflag1[vars.oindex_1.match - 1] & Vars.ONBT) != 0))
 					{
 						GOTO = 19500;
@@ -131,7 +131,7 @@ public class Lightp implements Actions
 					return ret_val;
 
 				case 19500:
-					if (vars.prsvec_1.prsi != vars.oindex_1.torch
+					if (vars.prsvec_1.indirect_object != vars.oindex_1.torch
 							|| !((vars.objcts_1.oflag1[vars.oindex_1.torch - 1] & Vars.ONBT) != 0))
 					{
 						GOTO = 19600;
@@ -162,8 +162,8 @@ public class Lightp implements Actions
 					{
 						game.dsub.bug_(6, obj);
 					}
-					if (vars.prsvec_1.prsa != TURN_ON
-							|| vars.prsvec_1.prso != vars.oindex_1.match)
+					if (vars.prsvec_1.action != TURN_ON
+							|| vars.prsvec_1.direct_object != vars.oindex_1.match)
 					{
 
 						GOTO = 20500;
@@ -189,7 +189,7 @@ public class Lightp implements Actions
 					return ret_val;
 
 				case 20500:
-					if (vars.prsvec_1.prsa != TURN_OFF
+					if (vars.prsvec_1.action != TURN_OFF
 							|| (vars.objcts_1.oflag1[vars.oindex_1.match - 1] & Vars.ONBT) == 0)
 					{
 						return false;
