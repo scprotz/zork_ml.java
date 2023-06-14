@@ -301,8 +301,7 @@ public class Sverbs
 				/* V74-- VERSION. PRINT INFO. */
 
 				case 5000:
-					System.out.printf("V%1d.%1d%c\n", vars.vers_1.vmaj, vars.vers_1.vmin,
-							vars.vers_1.vedit);
+					Supp.print("V"+vars.vers_1.vmaj+"."+vars.vers_1.vmin+""+vars.vers_1.vedit+"\n");
 					vars.play_1.telflg = true;
 					return ret_val;
 
@@ -668,18 +667,18 @@ public class Sverbs
 					i = k[0] / 60;
 					j = k[0] % 60;
 
-					System.out.printf("You have been playing Dungeon for ");
+					Supp.print("You have been playing Dungeon for ");
 					if (i >= 1)
 					{
-						System.out.printf("%d hour", i);
+						Supp.print(i +" hour");
 						if (i >= 2)
-							System.out.printf("s");
-						System.out.printf(" and ");
+							Supp.print("s");
+						Supp.print(" and ");
 					}
-					System.out.printf("%d minute", j);
+					Supp.print(j +" minute");
 					if (j != 1)
-						System.out.printf("s");
-					System.out.printf(".\n");
+						Supp.print("s");
+					Supp.print(".\n");
 					vars.play_1.telflg = true;
 					return ret_val;
 
@@ -818,7 +817,7 @@ public class Sverbs
 
 					if (j != 0)
 					{
-						System.out.printf("You will be cured after %d moves.\n", i);
+						Supp.print("You will be cured after "+i+" moves.\n");
 					}
 
 					i__1 = k[0] + 478;
@@ -926,7 +925,7 @@ public class Sverbs
 					vars.findex_1.spellf = true;
 					/* TELL HIM. */
 					vars.play_1.telflg = true;
-					System.out.printf("A hollow voice replies:  \"%.6s %.6s\".\n", pp1, ch);
+					Supp.print("A hollow voice replies:  \""+new String(pp1)+" "+new String(ch)+"\".\n");
 
 					return ret_val;
 

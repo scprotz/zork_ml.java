@@ -30,7 +30,6 @@ public class Np
 		if (who + 1 == 2)
 			Supp.print(">");
 
-		System.out.flush();
 
 		// if the first char is a ! then run OS command //
 		// This is dangerous and not needed for game //

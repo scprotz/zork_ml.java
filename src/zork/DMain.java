@@ -77,14 +77,11 @@ public class DMain
 			ioe.printStackTrace();
 		}
 		
-		System.out.flush();
-		System.err.flush();
 		String word = "";
 		if (word_index < moves.length)
 		{
 			
 			word = moves[word_index];
-			System.err.println(word);
 			word_index++;
 		}
 		else

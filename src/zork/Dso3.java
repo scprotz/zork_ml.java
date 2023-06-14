@@ -150,7 +150,6 @@ public class Dso3
 			
 			game.dsub.rspeak_(q);
 			/* ASK */
-			System.out.flush();
 			String ans = DMain.getInput();
 			/* GET ANSWER */
 			if (ans.length() > 0 && (ans.charAt(0) == 'Y' || ans.charAt(0) == 'y'))

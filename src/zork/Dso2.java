@@ -153,13 +153,12 @@ public class Dso2
 
 		if (vars.findex_1.endgmf)
 		{
-			System.out.printf("Your score in the endgame ");
+			Supp.print("Your score in the endgame ");
 			if (flg)
-				System.out.printf("would be");
+				Supp.print("would be");
 			else
-				System.out.printf("is");
-			System.out.printf(" %d [total of %d points], in %d moves.\n", vars.state_1.egscor, vars.state_1.egmxsc,
-					vars.state_1.moves);
+				Supp.print("is");
+			Supp.print(" "+vars.state_1.egscor+" [total of "+vars.state_1.egmxsc+" points], in "+vars.state_1.moves+" moves.\n");
 
 			for (i = 1; i <= 5; ++i)
 			{
@@ -171,15 +170,15 @@ public class Dso2
 			}
 		}
 		/* ENDGAME? */
-		System.out.printf("Your score ");
+		Supp.print("Your score ");
 		if (flg)
-			System.out.printf("would be");
+			Supp.print("would be");
 		else
-			System.out.printf("is");
-		System.out.printf(" %d [total of %d points], in %d move", as, vars.state_1.mxscor, vars.state_1.moves);
+			Supp.print("is");
+		Supp.print(" "+as+" [total of "+vars.state_1.mxscor+" points], in "+vars.state_1.moves+" move");
 		if (vars.state_1.moves != 1)
-			System.out.printf("s");
-		System.out.printf(".\n");
+			Supp.print("s");
+		Supp.print(".\n");
 
 		for (i = 1; i <= 10; ++i)
 		{

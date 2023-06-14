@@ -20,15 +20,10 @@ public class Supp
 
 	public static void exit_()
 	{
-		System.err.println("The game is over.");
+		Supp.errorln("The game is over.");
 	    System.exit(0);
 	}
 	
-	public static void print_(String str)
-	{
-		System.out.println(str);
-	}
-
 	/* Get time in hours, minutes and seconds */
 
 	public static void itime_(int[] hrptr, int[] minptr, int[] secptr)
@@ -65,9 +60,27 @@ public class Supp
 	 * returns (if all computers had vprintf I would just it, but they
 	 * probably don't).
 	 */
+	private static StringBuilder out = new StringBuilder();
+	private static StringBuilder err = new StringBuilder();
+	
+	public static String getOut()
+	{
+		String o = out.toString();
+		out.setLength(0);
+		return o;
+	}
+	
+	public static String getErr()
+	{
+		String e = err.toString();
+		err.setLength(0);
+		return e;
+	}
+	
+	
 	public static void print(String str)
 	{
-		System.out.print(str);
+		out.append(str);
 	}
 	
 	public static void println(String str)
@@ -77,7 +90,7 @@ public class Supp
 	
 	public static void error(String str)
 	{
-		System.err.print(str);
+		err.append(str);
 	}
 	
 	public static void errorln(String str)

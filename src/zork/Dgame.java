@@ -102,8 +102,11 @@ public class Dgame implements Actions
 			/* PLAYER MOVING. */
 			vars.play_1.telflg = false;
 			/* ASSUME NOTHING TOLD. */
-
+			Supp.errorln(action);
+			System.out.print(Supp.getOut());
+			System.err.print(Supp.getErr());			
 			np.rdline_(action, vars.input_1.inbuf, 1);
+			System.out.print(Supp.getOut());
 
 			++vars.state_1.moves;
 			vars.prsvec_1.is_parsed = np.parse_(vars.input_1.inbuf, true);

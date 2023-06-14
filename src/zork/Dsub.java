@@ -73,7 +73,7 @@ public class Dsub implements Actions
 		{
 			if (res == EOF)
 			{
-				System.err.println("Error seeking database loc " + x);
+				Supp.errorln("Error seeking database loc " + x);
 				Supp.exit_();
 			}
 		}
@@ -95,7 +95,7 @@ public class Dsub implements Actions
 			{
 				if (i == EOF)
 				{
-					System.err.println("Error reading database loc " + x);
+					Supp.errorln("Error reading database loc " + x);
 					Supp.exit_();
 				}
 			}
@@ -133,7 +133,7 @@ public class Dsub implements Actions
 				{
 					if (res == EOF)
 					{
-						System.err.println("Error seeking database loc " + iloc);
+						Supp.errorln("Error seeking database loc " + iloc);
 						Supp.exit_();
 					}
 				}

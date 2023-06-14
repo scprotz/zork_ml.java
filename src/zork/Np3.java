@@ -237,8 +237,7 @@ public class Np3
 				case 5000:
 					vars.prsvec_1.action = np.parse.syntax_1.vflag & Parse.SVMASK;
 					vars.prsvec_1.direct_object = np.parse.pv_1.o1();
-					if(vars.prsvec_1.direct_object == 151)
-						System.out.print("");
+
 					/* GET DIR OBJ. */
 					vars.prsvec_1.indirect_object = np.parse.pv_1.o2();
 					/* GET IND OBJ. */
