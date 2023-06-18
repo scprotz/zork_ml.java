@@ -351,10 +351,8 @@ public class Actors implements Actions
 				case 1300:
 					if (rhere == 0)
 					{
-						{
 							GOTO = 1700;
 							continue;
-						}
 					}
 					/* ANNOUNCED. VISIBLE? */
 				case 1250:
@@ -459,10 +457,10 @@ public class Actors implements Actions
 							continue start;
 						}
 					}
-				{
+			
 					GOTO = 1700;
 					continue;
-				}
+				
 
 				case 1500:
 					i__1 = vars.objcts_1.olnt;
@@ -496,10 +494,8 @@ public class Actors implements Actions
 					}
 					if (once)
 					{
-						{
-							GOTO = 1800;
-							continue;
-						}
+						do1800();
+						return;					
 					}
 					once = !once;
 				case 1750:
@@ -512,35 +508,39 @@ public class Actors implements Actions
 					if ((vars.rooms_1.rflag[vars.hack_1.thfpos - 1]
 							& Vars.RLAND + Vars.RSACRD + Vars.REND) != Vars.RLAND)
 					{
-						{
 							GOTO = 1750;
 							continue;
-						}
 					}
 					vars.hack_1.thfflg = false;
 				/* NOT ANNOUNCED. */
-				{
+		
 					GOTO = 1025;
 					continue;
-				}
+
+				
+			}
+		} while (true);
+
+	} /* thiefd_ */
+				
 				/* ONCE MORE. */
 
 				/* ALL DONE. */
-
-				case 1800:
+public void do1800()
+{
 					if (vars.hack_1.thfpos == vars.rindex_1.treas)
 					{
 						return;
 					}
 					/* IN TREASURE ROOM? */
-					j = 591;
+					int j = 591;
 					/* NO, DROP STUFF. */
 					if (vars.hack_1.thfpos != vars.play_1.here)
 					{
 						j = 0;
 					}
-					i__1 = vars.objcts_1.olnt;
-					for (i = 1; i <= i__1; ++i)
+					int i__1 = vars.objcts_1.olnt;
+					for (int i = 1; i <= i__1; ++i)
 					{
 						if (vars.objcts_1.oadv[i - 1] != -vars.oindex_1.thief
 								|| game.dsub.prob_(70, 70) || vars.objcts_1.otval[i - 1] > 0)
@@ -554,9 +554,5 @@ public class Actors implements Actions
 
 					}
 					return;
-			}
-		} while (true);
-
-	} /* thiefd_ */
-
+	}
 }
