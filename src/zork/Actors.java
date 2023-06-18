@@ -18,11 +18,6 @@ public class Actors implements Actions
 
 	boolean aappli_(int ri)
 	{
-		/* System generated locals */
-		boolean ret_val;
-
-		/* Local variables */
-		int i;
 
 		if (ri == 0)
 		{
@@ -30,146 +25,145 @@ public class Actors implements Actions
 			return false;
 		}
 
-		int GOTO = 0;
 		/* IF ZERO, NO APP. */
-		ret_val = true;
-		/* ASSUME WINS. */
-		switch (ri)
+
+		if (ri == 1)
+			return do1000();
+
+		if (ri == 2)
+			return do2000();
+
+		// error //
+		game.dsub.bug_(11, ri);
+		return false;
+
+	}
+
+	/* A1-- ROBOT. PROCESS MOST COMMANDS GIVEN TO ROBOT. */
+
+	public boolean do1000()
+	{
+		if (vars.prsvec_1.action != RAISE || vars.prsvec_1.direct_object != vars.oindex_1.rcage)
 		{
-			case 1:
 
-				GOTO = 1000;
-				break;
-
-			case 2:
-				GOTO = 2000;
-				break;
-
-			default:
-				/* BRANCH ON ADV. */
-				game.dsub.bug_(11, ri);
-		}
-
-		do
-		{
-			switch (GOTO)
 			{
-				/* A1-- ROBOT. PROCESS MOST COMMANDS GIVEN TO ROBOT. */
-
-				case 1000:
-					if (vars.prsvec_1.action != RAISE || vars.prsvec_1.direct_object != vars.oindex_1.rcage)
-					{
-
-						{
-							GOTO = 1200;
-							continue;
-						}
-					}
-					vars.cevent_1.cflag[vars.cindex_1.cevsph - 1] = false;
-					/* ROBOT RAISED CAGE. */
-					vars.play_1.winner = vars.aindex_1.player;
-					/* RESET FOR PLAYER. */
-					game.dso2.moveto_(vars.rindex_1.cager, vars.play_1.winner);
-					/* MOVE TO NEW ROOM. */
-					game.dsub.newsta_(vars.oindex_1.cage, 567, vars.rindex_1.cager, 0, 0);
-					/* INSTALL CAGE IN ROOM. */
-					game.dsub.newsta_(vars.oindex_1.robot, 0, vars.rindex_1.cager, 0, 0);
-					/* INSTALL ROBOT IN ROOM. */
-					vars.advs_1.aroom[vars.aindex_1.arobot - 1] = vars.rindex_1.cager;
-					/* ALSO MOVE ROBOT/ADV. */
-					vars.findex_1.cagesf = true;
-					/* CAGE SOLVED. */
-					vars.objcts_1.oflag1[vars.oindex_1.robot - 1] &= ~Vars.NDSCBT;
-					vars.objcts_1.oflag1[vars.oindex_1.spher - 1] |= Vars.TAKEBT;
-					return ret_val;
-
-				case 1200:
-					if (vars.prsvec_1.action != DRINK && vars.prsvec_1.action != EAT)
-					{
-						if (vars.prsvec_1.action != READ)
-						{
-							{
-								GOTO = 1400;
-								continue;
-							}
-						}
-						/* READ, */
-						game.dsub.rspeak_(569);
-						/* JOKE. */
-						return ret_val;
-					}
-					game.dsub.rspeak_(568);
-					/* EAT OR DRINK, JOKE. */
-					return ret_val;
-
-				case 1400:
-					if (vars.prsvec_1.action == WALK || vars.prsvec_1.action == TAKE
-							|| vars.prsvec_1.action == DROP || vars.prsvec_1.action == PUT
-							|| vars.prsvec_1.action == PUSH || vars.prsvec_1.action == THROW
-							|| vars.prsvec_1.action == TURN || vars.prsvec_1.action == LEAP)
-					{
-						return false;
-					}
-					game.dsub.rspeak_(570);
-					/* JOKE. */
-					return ret_val;
-				/* AAPPLI, PAGE 3 */
-
-				/* A2-- MASTER. PROCESS MOST COMMANDS GIVEN TO MASTER. */
-
-				case 2000:
-					if ((vars.objcts_1.oflag2[vars.oindex_1.qdoor - 1] & Vars.OPENBT) != 0)
-					{
-						{
-							GOTO = 2100;
-							continue;
-						}
-					}
-					game.dsub.rspeak_(783);
-					/* NO MASTER YET. */
-					return ret_val;
-
-				case 2100:
-					if (vars.prsvec_1.action != WALK)
-					{
-						{
-							GOTO = 2200;
-							continue;
-						}
-					}
-					/* WALK? */
-					i = 784;
-					/* ASSUME WONT. */
-					if (vars.play_1.here == vars.rindex_1.scorr
-							&& (vars.prsvec_1.direct_object == vars.xsrch_1.xnorth
-									|| vars.prsvec_1.direct_object == vars.xsrch_1.xenter)
-							|| vars.play_1.here == vars.rindex_1.ncorr
-									&& (vars.prsvec_1.direct_object == vars.xsrch_1.xsouth
-											|| vars.prsvec_1.direct_object == vars.xsrch_1.xenter))
-					{
-						i = 785;
-					}
-					game.dsub.rspeak_(i);
-					return ret_val;
-
-				case 2200:
-					if (vars.prsvec_1.action == TAKE || vars.prsvec_1.action == DROP
-							|| vars.prsvec_1.action == PUT || vars.prsvec_1.action == THROW
-							|| vars.prsvec_1.action == PUSH || vars.prsvec_1.action == TURN
-							|| vars.prsvec_1.action == SPIN || vars.prsvec_1.action == TURN_TO
-							|| vars.prsvec_1.action == FOLLOW || vars.prsvec_1.action == STAY
-							|| vars.prsvec_1.action == OPEN || vars.prsvec_1.action == CLOSE
-							|| vars.prsvec_1.action == KILL)
-					{
-						return false;
-					}
-					game.dsub.rspeak_(786);
-					/* MASTER CANT DO IT. */
-					return ret_val;
+				return do1200();
 			}
-		} while (true);
-//		throw new RuntimeException("Actors.appli_ not implemneted");
-	} /* aappli_ */
+		}
+		vars.cevent_1.cflag[vars.cindex_1.cevsph - 1] = false;
+		/* ROBOT RAISED CAGE. */
+		vars.play_1.winner = vars.aindex_1.player;
+		/* RESET FOR PLAYER. */
+		game.dso2.moveto_(vars.rindex_1.cager, vars.play_1.winner);
+		/* MOVE TO NEW ROOM. */
+		game.dsub.newsta_(vars.oindex_1.cage, 567, vars.rindex_1.cager, 0, 0);
+		/* INSTALL CAGE IN ROOM. */
+		game.dsub.newsta_(vars.oindex_1.robot, 0, vars.rindex_1.cager, 0, 0);
+		/* INSTALL ROBOT IN ROOM. */
+		vars.advs_1.aroom[vars.aindex_1.arobot - 1] = vars.rindex_1.cager;
+		/* ALSO MOVE ROBOT/ADV. */
+		vars.findex_1.cagesf = true;
+		/* CAGE SOLVED. */
+		vars.objcts_1.oflag1[vars.oindex_1.robot - 1] &= ~Vars.NDSCBT;
+		vars.objcts_1.oflag1[vars.oindex_1.spher - 1] |= Vars.TAKEBT;
+		return true;
+	}
+
+	public boolean do1200()
+	{
+		if (vars.prsvec_1.action != DRINK && vars.prsvec_1.action != EAT)
+		{
+			if (vars.prsvec_1.action != READ)
+			{
+				{
+					return do1400();
+				}
+			}
+			/* READ, */
+			game.dsub.rspeak_(569);
+			/* JOKE. */
+			return true;
+		}
+		game.dsub.rspeak_(568);
+		/* EAT OR DRINK, JOKE. */
+		return true;
+	}
+
+	public boolean do1400()
+	{
+		if (vars.prsvec_1.action == WALK || vars.prsvec_1.action == TAKE
+				|| vars.prsvec_1.action == DROP || vars.prsvec_1.action == PUT
+				|| vars.prsvec_1.action == PUSH || vars.prsvec_1.action == THROW
+				|| vars.prsvec_1.action == TURN || vars.prsvec_1.action == LEAP)
+		{
+			return false;
+		}
+		game.dsub.rspeak_(570);
+		/* JOKE. */
+		return true;
+	}
+	/* AAPPLI, PAGE 3 */
+
+	/* A2-- MASTER. PROCESS MOST COMMANDS GIVEN TO MASTER. */
+
+	public boolean do2000()
+	{
+		if ((vars.objcts_1.oflag2[vars.oindex_1.qdoor - 1] & Vars.OPENBT) != 0)
+		{
+			{
+				return do2100();
+			}
+
+		}
+		game.dsub.rspeak_(783);
+		/* NO MASTER YET. */
+		return true;
+	}
+
+	public boolean do2100()
+	{
+		if (vars.prsvec_1.action != WALK)
+		{
+			{
+				return do2200();
+			}
+		}
+		/* WALK? */
+		int i = 784;
+		/* ASSUME WONT. */
+		if (vars.play_1.here == vars.rindex_1.scorr
+				&& (vars.prsvec_1.direct_object == vars.xsrch_1.xnorth
+						|| vars.prsvec_1.direct_object == vars.xsrch_1.xenter)
+				|| vars.play_1.here == vars.rindex_1.ncorr
+						&& (vars.prsvec_1.direct_object == vars.xsrch_1.xsouth
+								|| vars.prsvec_1.direct_object == vars.xsrch_1.xenter))
+		{
+			i = 785;
+		}
+		game.dsub.rspeak_(i);
+		return true;
+	}
+
+	public boolean do2200()
+	{
+		if (vars.prsvec_1.action == TAKE || vars.prsvec_1.action == DROP
+				|| vars.prsvec_1.action == PUT || vars.prsvec_1.action == THROW
+				|| vars.prsvec_1.action == PUSH || vars.prsvec_1.action == TURN
+				|| vars.prsvec_1.action == SPIN || vars.prsvec_1.action == TURN_TO
+				|| vars.prsvec_1.action == FOLLOW || vars.prsvec_1.action == STAY
+				|| vars.prsvec_1.action == OPEN || vars.prsvec_1.action == CLOSE
+				|| vars.prsvec_1.action == KILL)
+		{
+			return false;
+		}
+		game.dsub.rspeak_(786);
+		/* MASTER CANT DO IT. */
+		return true;
+	}
+//			}
+//		} while (true);
+////		throw new RuntimeException("Actors.appli_ not implemneted");
+//	} /* aappli_ */
 
 //	/* THIEFD-	INTERMOVE THIEF DEMON */
 //
