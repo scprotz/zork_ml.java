@@ -297,6 +297,15 @@ public class DInit
 		readInts(vars.rooms_1.rlnt, vars.rooms_1.rdesc2, indxfile);
 		readInts(vars.rooms_1.rlnt, vars.rooms_1.rexit, indxfile);
 		rdpartialints(vars.rooms_1.rlnt, vars.rooms_1.ractio, indxfile);
+//		System.out.println("vars.rooms_1.ractio = new int[]{");
+//		for(int m = 0; m < vars.rooms_1.ractio.length; m++)
+//		{
+//			System.out.print(vars.rooms_1.ractio[m] + ",");
+//		}
+//		System.out.println("}");
+		vars.rooms_1.ractio = new int[]{
+				0,0,0,0,1,2,0,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,11,11,11,11,11,6,0,0,7,8,9,0,0,0,10,0,0,0,0,12,12,0,13,0,0,0,0,0,0,0,0,0,0,14,0,0,0,0,0,0,0,0,0,0,15,15,16,17,18,19,0,0,20,0,0,0,0,0,0,0,0,0,21,22,0,0,0,23,0,0,25,0,27,0,0,0,0,0,0,28,28,29,0,30,0,31,0,32,0,33,0,0,0,0,0,0,0,0,0,0,0,0,34,0,35,0,58,36,0,0,37,0,0,0,0,0,24,0,0,0,0,0,0,0,26,0,48,0,0,47,42,41,40,39,38,51,45,45,44,44,43,43,39,39,39,39,46,50,49,0,0,52,53,54,55,56,57,0,59,60,0,0,0,0,0,0,0,0,0,0,}
+;
 		rdpartialints(vars.rooms_1.rlnt, vars.rooms_1.rval, indxfile);
 		readInts(vars.rooms_1.rlnt, vars.rooms_1.rflag, indxfile);
 

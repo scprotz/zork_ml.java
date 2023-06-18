@@ -25,188 +25,176 @@ public class Lightp implements Actions
 		int flobts;
 		int i;
 
-		int GOTO = 19100;
-		ret_val = true;
+///		ret_val = true;
 		/* ASSUME WINS */
 		flobts = Vars.FLAMBT + Vars.LITEBT + Vars.ONBT;
 		if (obj != vars.oindex_1.candl)
 		{
-			GOTO = 20000;
+			return do20000(obj, flobts);
 		}
 
-		if (GOTO != 20000)
+		/* CANDLE? */
+		boolean skip = false;
+		if (vars.findex_1.orcand != 0)
 		{
-			/* CANDLE? */
-			boolean skip = false;
-			if (vars.findex_1.orcand != 0)
-			{
-				skip = true;
-			}
-			if (!skip)
-			{
-				/* FIRST REF? */
-				vars.findex_1.orcand = 1;
-				/* YES, CANDLES ARE */
-				vars.cevent_1.ctick[vars.cindex_1.cevcnd - 1] = 50;
-			}
+			skip = true;
+		}
+		if (!skip)
+		{
+			/* FIRST REF? */
+			vars.findex_1.orcand = 1;
+			/* YES, CANDLES ARE */
+			vars.cevent_1.ctick[vars.cindex_1.cevcnd - 1] = 50;
 		}
 		/* BURNING WHEN SEEN. */
+		return do19100();
+	}
 
-		do
+	public boolean do19100()
+	{
+
+		if (vars.prsvec_1.indirect_object == vars.oindex_1.candl)
 		{
-			switch (GOTO)
-			{
+			return false;
+		}
+		/* IGNORE IND REFS. */
+		if (vars.prsvec_1.action != TURN_OFF)
+		{
+			return do19200();
+		}
+		/* TURN OFF? */
+		int i = 513;
+		/* ASSUME OFF. */
+		if ((vars.objcts_1.oflag1[vars.oindex_1.candl - 1] & Vars.ONBT) != 0)
+		{
+			i = 514;
+		}
+		/* IF ON, DIFFERENT. */
+		vars.cevent_1.cflag[vars.cindex_1.cevcnd - 1] = false;
+		/* DISABLE COUNTDOWN. */
+		vars.objcts_1.oflag1[vars.oindex_1.candl - 1] &= ~Vars.ONBT;
+		game.dsub.rspeak_(i);
+		return true;
+	}
 
-				case 19100:
-					if (vars.prsvec_1.indirect_object == vars.oindex_1.candl)
-					{
-						return false;
-					}
-					/* IGNORE IND REFS. */
-					if (vars.prsvec_1.action != TURN_OFF)
-					{
-						GOTO = 19200;
-						continue;
-					}
-					/* TURN OFF? */
-					i = 513;
-					/* ASSUME OFF. */
-					if ((vars.objcts_1.oflag1[vars.oindex_1.candl - 1] & Vars.ONBT) != 0)
-					{
-						i = 514;
-					}
-					/* IF ON, DIFFERENT. */
-					vars.cevent_1.cflag[vars.cindex_1.cevcnd - 1] = false;
-					/* DISABLE COUNTDOWN. */
-					vars.objcts_1.oflag1[vars.oindex_1.candl - 1] &= ~Vars.ONBT;
-					game.dsub.rspeak_(i);
-					return ret_val;
+	/* HERE FOR FALSE RETURN */
 
-				case 19200:
-					if (vars.prsvec_1.action != BURN
-							&& vars.prsvec_1.action != TURN_ON)
-					{
+	public boolean do19200()
+	{
+		if (vars.prsvec_1.action != BURN && vars.prsvec_1.action != TURN_ON)
+		{
 
-						return false;
-					}
-					if ((vars.objcts_1.oflag1[vars.oindex_1.candl - 1] & Vars.LITEBT) != 0)
-					{
-						GOTO = 19300;
-						continue;
-					}
-					game.dsub.rspeak_(515);
-					/* CANDLES TOO SHORT. */
-					return ret_val;
+			return false;
+		}
+		if ((vars.objcts_1.oflag1[vars.oindex_1.candl - 1] & Vars.LITEBT) != 0)
+		{
+			do19300();
+			return true;
+		}
+		game.dsub.rspeak_(515);
+		/* CANDLES TOO SHORT. */
+		return true;
+	}
 
-				case 19300:
-					if (vars.prsvec_1.indirect_object != 0)
-					{
-						GOTO = 19400;
-						continue;
-					}
-					/* ANY FLAME? */
-					game.dsub.rspeak_(516);
-					/* NO, LOSE. */
-					vars.prsvec_1.is_parsed = false;
-					return ret_val;
+	public void do19300()
+	{
+		if (vars.prsvec_1.indirect_object != 0)
+		{
+			do19400();
+			return;
+		}
+		/* ANY FLAME? */
+		game.dsub.rspeak_(516);
+		/* NO, LOSE. */
+		vars.prsvec_1.is_parsed = false;
+	}
 
-				case 19400:
-					if (vars.prsvec_1.indirect_object != vars.oindex_1.match
-							|| !((vars.objcts_1.oflag1[vars.oindex_1.match - 1] & Vars.ONBT) != 0))
-					{
-						GOTO = 19500;
-						continue;
-					}
-					i = 517;
-					/* ASSUME OFF. */
-					if ((vars.objcts_1.oflag1[vars.oindex_1.candl - 1] & Vars.ONBT) != 0)
-					{
-						i = 518;
-					}
-					/* IF ON, JOKE. */
-					vars.objcts_1.oflag1[vars.oindex_1.candl - 1] |= Vars.ONBT;
-					vars.cevent_1.cflag[vars.cindex_1.cevcnd - 1] = true;
-					/* RESUME COUNTDOWN. */
-					game.dsub.rspeak_(i);
-					return ret_val;
+	public void do19400()
+	{
+		if (vars.prsvec_1.indirect_object != vars.oindex_1.match
+				|| !((vars.objcts_1.oflag1[vars.oindex_1.match - 1] & Vars.ONBT) != 0))
+		{
+			do19500();
+			return;
+		}
+		int i = 517;
+		/* ASSUME OFF. */
+		if ((vars.objcts_1.oflag1[vars.oindex_1.candl - 1] & Vars.ONBT) != 0)
+		{
+			i = 518;
+		}
+		/* IF ON, JOKE. */
+		vars.objcts_1.oflag1[vars.oindex_1.candl - 1] |= Vars.ONBT;
+		vars.cevent_1.cflag[vars.cindex_1.cevcnd - 1] = true;
+		/* RESUME COUNTDOWN. */
+		game.dsub.rspeak_(i);
+	}
 
-				case 19500:
-					if (vars.prsvec_1.indirect_object != vars.oindex_1.torch
-							|| !((vars.objcts_1.oflag1[vars.oindex_1.torch - 1] & Vars.ONBT) != 0))
-					{
-						GOTO = 19600;
-						continue;
-					}
-					if ((vars.objcts_1.oflag1[vars.oindex_1.candl - 1] & Vars.ONBT) != 0)
-					{
-						GOTO = 19700;
-						continue;
-					}
-					/* ALREADY ON? */
-					game.dsub.newsta_(vars.oindex_1.candl, 521, 0, 0, 0);
-					/* NO, VAPORIZE. */
-					return ret_val;
+	public void do19500()
+	{
+		if (vars.prsvec_1.indirect_object != vars.oindex_1.torch
+				|| !((vars.objcts_1.oflag1[vars.oindex_1.torch - 1] & Vars.ONBT) != 0))
+		{
+			game.dsub.rspeak_(519);
+			/* CANT LIGHT WITH THAT. */
+			return;
+		}
+		if ((vars.objcts_1.oflag1[vars.oindex_1.candl - 1] & Vars.ONBT) != 0)
+		{
+			game.dsub.rspeak_(520);
+			/* ALREADY ON. */
+			return;
+		}
+		/* ALREADY ON? */
+		game.dsub.newsta_(vars.oindex_1.candl, 521, 0, 0, 0);
+		/* NO, VAPORIZE. */
+		return;
 
-				case 19600:
-					game.dsub.rspeak_(519);
-					/* CANT LIGHT WITH THAT. */
-					return ret_val;
+	}
 
-				case 19700:
-					game.dsub.rspeak_(520);
-					/* ALREADY ON. */
-					return ret_val;
+	public boolean do20000(int obj, int flobts)
+	{
+		if (obj != vars.oindex_1.match)
+		{
+			game.dsub.bug_(6, obj);
+		}
+		if (vars.prsvec_1.action != TURN_ON || vars.prsvec_1.direct_object != vars.oindex_1.match)
+		{
 
-				case 20000:
-					if (obj != vars.oindex_1.match)
-					{
-						game.dsub.bug_(6, obj);
-					}
-					if (vars.prsvec_1.action != TURN_ON
-							|| vars.prsvec_1.direct_object != vars.oindex_1.match)
-					{
+			return do20500(flobts);
+		}
+		if (vars.findex_1.ormtch != 0)
+		{
+			return do20100(flobts);
+		}
+		/* ANY MATCHES LEFT? */
+		game.dsub.rspeak_(183);
+		/* NO, LOSE. */
+		return true;
+	}
 
-						GOTO = 20500;
-						continue;
-					}
-					if (vars.findex_1.ormtch != 0)
-					{
-						GOTO = 20100;
-						continue;
-					}
-					/* ANY MATCHES LEFT? */
-					game.dsub.rspeak_(183);
-					/* NO, LOSE. */
-					return ret_val;
+	public boolean do20100(int flobts)
+	{
+		--vars.findex_1.ormtch;
+		/* DECREMENT NO MATCHES. */
+		vars.objcts_1.oflag1[vars.oindex_1.match - 1] |= flobts;
+		vars.cevent_1.ctick[vars.cindex_1.cevmat - 1] = 2;
+		/* COUNTDOWN. */
+		game.dsub.rspeak_(184);
+		return true;
+	}
 
-				case 20100:
-					--vars.findex_1.ormtch;
-					/* DECREMENT NO MATCHES. */
-					vars.objcts_1.oflag1[vars.oindex_1.match - 1] |= flobts;
-					vars.cevent_1.ctick[vars.cindex_1.cevmat - 1] = 2;
-					/* COUNTDOWN. */
-					game.dsub.rspeak_(184);
-					return ret_val;
-
-				case 20500:
-					if (vars.prsvec_1.action != TURN_OFF
-							|| (vars.objcts_1.oflag1[vars.oindex_1.match - 1] & Vars.ONBT) == 0)
-					{
-						return false;
-					}
-					vars.objcts_1.oflag1[vars.oindex_1.match - 1] &= ~flobts;
-					vars.cevent_1.ctick[vars.cindex_1.cevmat - 1] = 0;
-					game.dsub.rspeak_(185);
-					return ret_val;
-			}
-		} while (true);
-
-		/* HERE FOR FALSE RETURN */
-
-//	case 10:
-//	    ret_val = false;
-//	    return ret_val;
-//	    throw new RuntimeException("Lightp.lightp_ not impl");
-	} /* lightp_ */
+	public boolean do20500(int flobts)
+	{
+		if (vars.prsvec_1.action != TURN_OFF
+				|| (vars.objcts_1.oflag1[vars.oindex_1.match - 1] & Vars.ONBT) == 0)
+		{
+			return false;
+		}
+		vars.objcts_1.oflag1[vars.oindex_1.match - 1] &= ~flobts;
+		vars.cevent_1.ctick[vars.cindex_1.cevmat - 1] = 0;
+		game.dsub.rspeak_(185);
+		return true;
+	}
 
 }

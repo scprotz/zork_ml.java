@@ -27,8 +27,8 @@ public class Np
 	void rdline_(String buf, char[] buffer, int who)
 	{
 		// if this is the player, show a prompt //
-		if (who + 1 == 2)
-			Supp.print(">");
+//		if (who + 1 == 2)
+//			Supp.print(">");
 
 
 		// if the first char is a ! then run OS command //

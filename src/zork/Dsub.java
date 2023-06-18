@@ -106,7 +106,7 @@ public class Dsub implements Actions
 				break;
 			else if (i == '\n')
 			{
-				System.out.println();
+				Supp.println("");
 				
 			} else if (i == '#' && y != 0)
 			{
@@ -140,11 +140,11 @@ public class Dsub implements Actions
 				y = z;
 				z = 0;
 			} else
-				System.out.print((char) i);
+				Supp.print("" + (char) i);
 		}
 
 		if (nl != 0)
-			System.out.print("\n");
+			Supp.print("\n");
 	}
 
 	/* OBJACT-- APPLY OBJECTS FROM PARSE VECTOR */
@@ -184,7 +184,7 @@ public class Dsub implements Actions
 
 			/* Local variables */
 
-			System.out.println("PROGRAM ERROR " + a + ", PARAMETER=" + b);
+			Supp.errorln("PROGRAM ERROR " + a + ", PARAMETER=" + b);
 
 			if (vars.debug_1.dbgflg != 0)
 			{

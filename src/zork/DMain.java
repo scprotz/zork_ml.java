@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DMain
 {
@@ -21,13 +22,22 @@ public class DMain
 
 		do
 		{		
-			game.start();
+			Map<String, String> info = game.start();
+			System.out.print(info.get("output"));
+			System.out.flush();
+			System.err.print(info.get("error"));
+			System.err.flush();
 			
 			while(true)
 			{
 				String action = getInput();
-				game.step(action);
-//				game.game_();
+				info = game.step(action);
+				System.out.println(info.get("action"));
+				System.out.flush();
+				System.out.print(info.get("output"));
+				System.out.flush();
+				System.out.print(info.get("error"));
+				System.out.flush();
 			}
 		}while(true);
 

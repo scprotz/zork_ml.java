@@ -2,8 +2,10 @@ package zork;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class Dgame implements Actions
 {
@@ -81,7 +83,7 @@ public class Dgame implements Actions
 		this.actors = new Actors(vars, this);
 	}
 
-	public void start()
+	public Map<String, String> start()
 	{
 		init.init_();
 
@@ -90,10 +92,12 @@ public class Dgame implements Actions
 		dsub.rspeak_(1);
 		
 		// DESCRIBE CURRENT LOCATION. //
-		dsub.rmdesc_(3);		
+		dsub.rmdesc_(3);	
+		
+		return getInfo("");
 	}
 
-	public void step(String action)
+	public Map<String, String> step(String action)
 	{
 
 		/* NOW LOOP, READING AND EXECUTING COMMANDS. */
@@ -102,11 +106,8 @@ public class Dgame implements Actions
 			/* PLAYER MOVING. */
 			vars.play_1.telflg = false;
 			/* ASSUME NOTHING TOLD. */
-			Supp.errorln(action);
-			System.out.print(Supp.getOut());
-			System.err.print(Supp.getErr());			
 			np.rdline_(action, vars.input_1.inbuf, 1);
-			System.out.print(Supp.getOut());
+
 
 			++vars.state_1.moves;
 			vars.prsvec_1.is_parsed = np.parse_(vars.input_1.inbuf, true);
@@ -114,14 +115,14 @@ public class Dgame implements Actions
 			if (!vars.prsvec_1.is_parsed)
 			{
 				end_action();
-				return;
-			}
+				return getInfo(action);
+			} 
 
 			/* VEHICLE HANDLE? */
 			if (xvehic_(1))
 			{
 				end_action();
-				return;
+				return getInfo(action);
 			}
 
 			/* TELL? */
@@ -133,18 +134,18 @@ public class Dgame implements Actions
 					if (do300())
 					{
 						end_move();
-						return;
+						return getInfo(action);
 					}
 				}
 
 				end_action();
-				return;
+				return getInfo(action);
 			}
 
 			if (do300())
 			{
 				end_move();
-				return;
+				return getInfo(action);
 			}
 			
 			if (check_echo())
@@ -152,14 +153,27 @@ public class Dgame implements Actions
 				if (do300())
 				{
 					end_move();
-					return;
+					return getInfo(action);
 				}
 			}
 
 			end_action();
+			return getInfo(action);
 
 
 	} /* game_ */
+	
+	
+	public HashMap<String, String> getInfo(String action)
+	{
+		HashMap<String, String> info = new HashMap<String, String>();
+		
+		info.put("output", Supp.getOut());
+		info.put("error", Supp.getErr());
+		info.put("action", action);
+		
+		return info;
+	}
 
 	public boolean do300()
 	{

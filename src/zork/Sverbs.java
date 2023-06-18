@@ -994,7 +994,7 @@ public class Sverbs
 					      String user_answer = new String(vars.input_1.inbuf);
 //					      char[] z2 = vars.input_1.inbuf + vars.prsvec_1.prscon - 1;
 					      String zz2 = user_answer.substring(ans_index).trim();
-					      System.out.println(zz2);
+					      Supp.println(zz2);
 					      
 					      int zindex = 0;
 					      int z2index = 0;
