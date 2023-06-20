@@ -160,9 +160,6 @@ public class Actors implements Actions
 		/* MASTER CANT DO IT. */
 		return true;
 	}
-//			}
-//		} while (true);
-////		throw new RuntimeException("Actors.appli_ not implemneted");
 //	} /* aappli_ */
 
 //	/* THIEFD-	INTERMOVE THIEF DEMON */
@@ -171,388 +168,371 @@ public class Actors implements Actions
 
 	void thiefd_()
 	{
-		/* System generated locals */
-		int i__1, i__2;
 
-		/* Local variables */
-		int i, j, nr;
-		boolean once;
 		int rhere = 0;
 
-		int GOTO = 1025;
-
 		/* SET UP DETAIL FLAG. */
-		once = false;
+		boolean once = false;
 
-		start: do
+		do1025(rhere, once);
+	}
+
+	/* INIT FLAG. */
+	public void do1025(int rhere, boolean once)
+	{
+		rhere = vars.objcts_1.oroom[vars.oindex_1.thief - 1];
+		/* VISIBLE POS. */
+		if (rhere != 0)
 		{
-			switch (GOTO)
+			vars.hack_1.thfpos = rhere;
+		}
+
+		if (vars.hack_1.thfpos == vars.play_1.here)
+		{
+			do1100(rhere, once);
+			return;
+		}
+		/* THIEF IN WIN RM? */
+		if (vars.hack_1.thfpos != vars.rindex_1.treas)
+		{
+			do1400(rhere, once);
+			return;
+		}
+		/* THIEF NOT IN TREAS? */
+
+		/* THIEF IS IN TREASURE ROOM, AND WINNER IS NOT. */
+
+		if (rhere == 0)
+		{
+			do1050(rhere, once);
+			return;
+		}
+		/* VISIBLE? */
+		game.dsub.newsta_(vars.oindex_1.thief, 0, 0, 0, 0);
+		/* YES, VANISH. */
+		rhere = 0;
+		if (game.dsub.qhere_(vars.oindex_1.still, vars.rindex_1.treas)
+				|| vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief)
+		{
+			game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
+		}
+		do1050(rhere, once);
+		return;
+	}
+
+	public void do1050(int rhere, boolean once)
+	{
+		int i__1 = -vars.oindex_1.thief;
+		game.dso4.robadv_(i__1, vars.hack_1.thfpos, 0, 0);
+		/* DROP VALUABLES. */
+		if (game.dsub.qhere_(vars.oindex_1.egg, vars.hack_1.thfpos))
+		{
+			vars.objcts_1.oflag2[vars.oindex_1.egg - 1] |= Vars.OPENBT;
+		}
+		do1700(rhere, once);
+		return;
+	}
+
+	/* THIEF AND WINNER IN SAME ROOM. */
+
+	public void do1100(int rhere, boolean once)
+	{
+		if (vars.hack_1.thfpos == vars.rindex_1.treas)
+		{
+			do1700(rhere, once);
+			return;
+		}
+		/* IF TREAS ROOM, NOTHING. */
+		if ((vars.rooms_1.rflag[vars.hack_1.thfpos - 1] & Vars.RLIGHT) != 0)
+		{
+			do1400(rhere, once);
+			return;
+		}
+		if (vars.hack_1.thfflg)
+		{
+			do1300(rhere, once);
+			return;
+		}
+		/* THIEF ANNOUNCED? */
+		if (rhere != 0 || game.dsub.prob_(70, 70))
+		{
+			do1150(rhere, once);
+			return;
+		}
+		/* IF INVIS AND 30%. */
+		if (vars.objcts_1.ocan[vars.oindex_1.still - 1] != vars.oindex_1.thief)
+		{
+			do1700(rhere, once);
+			return;
+		}
+		/* ABORT IF NO STILLETTO. */
+		game.dsub.newsta_(vars.oindex_1.thief, 583, vars.hack_1.thfpos, 0, 0);
+		/* INSERT THIEF INTO ROOM. */
+		vars.hack_1.thfflg = true;
+		/* THIEF IS ANNOUNCED. */
+		return;
+	}
+
+	public void do1150(int rhere, boolean once)
+	{
+		if (rhere == 0 || (vars.objcts_1.oflag2[vars.oindex_1.thief - 1] & Vars.FITEBT) == 0)
+		{
+			do1200(rhere, once);
+			return;
+		}
+		if (game.dso4.winnin_(vars.oindex_1.thief, vars.play_1.winner))
+		{
+			do1175(rhere, once);
+			return;
+		}
+		/* WINNING? */
+		game.dsub.newsta_(vars.oindex_1.thief, 584, 0, 0, 0);
+		/* NO, VANISH THIEF. */
+		vars.objcts_1.oflag2[vars.oindex_1.thief - 1] &= ~Vars.FITEBT;
+		if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos)
+				|| vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief)
+		{
+			game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
+		}
+		return;
+	}
+
+	public void do1175(int rhere, boolean once)
+	{
+		if (game.dsub.prob_(90, 90))
+		{
+			do1700(rhere, once);
+			return;
+		}
+		/* 90% CHANCE TO STAY. */
+		do1200(rhere, once);
+		return;
+	}
+
+	public void do1200(int rhere, boolean once)
+	{
+		if (rhere == 0 || game.dsub.prob_(70, 70))
+		{
+			do1250(rhere, once);
+			return;
+		}
+		/* IF VISIBLE AND 30% */
+		game.dsub.newsta_(vars.oindex_1.thief, 585, 0, 0, 0);
+		/* VANISH THIEF. */
+		if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos)
+				|| vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief)
+		{
+			game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
+		}
+		return;
+	}
+
+	public void do1300(int rhere, boolean once)
+	{
+		if (rhere == 0)
+		{
+			do1700(rhere, once);
+			return;
+		}
+		do1250(rhere, once);
+		return;
+	}
+
+	/* ANNOUNCED. VISIBLE? */
+	public void do1250(int rhere, boolean once)
+	{
+		if (game.dsub.prob_(70, 70))
+		{
+			return;
+		}
+		/* 70% CHANCE TO DO NOTHING. */
+		vars.hack_1.thfflg = true;
+		int i__1 = -vars.oindex_1.thief;
+		int i__2 = -vars.oindex_1.thief;
+		int nr = game.dso4.robrm_(vars.hack_1.thfpos, 100, 0, 0, i__1)
+				+ game.dso4.robadv_(vars.play_1.winner, 0, 0, i__2);
+		int i = 586;
+		/* ROBBED EM. */
+		if (rhere != 0)
+		{
+			i = 588;
+		}
+		/* WAS HE VISIBLE? */
+		if (nr != 0)
+		{
+			++i;
+		}
+		/* DID HE GET ANYTHING? */
+		game.dsub.newsta_(vars.oindex_1.thief, i, 0, 0, 0);
+		/* VANISH THIEF. */
+		if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos)
+				|| vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief)
+		{
+			game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
+		}
+		if (nr != 0 && !game.dso5.lit_(vars.hack_1.thfpos))
+		{
+			game.dsub.game.dsub.rspeak_(406);
+		}
+		rhere = 0;
+
+		do1700(rhere, once);
+		return;
+	}
+	/* ONWARD. */
+
+	/* NOT IN ADVENTURERS ROOM. */
+	public void do1400(int rhere, boolean once)
+	{
+		game.dsub.newsta_(vars.oindex_1.thief, 0, 0, 0, 0);
+		/* VANISH. */
+		rhere = 0;
+		if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos)
+				|| vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief)
+		{
+			game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
+		}
+		if ((vars.rooms_1.rflag[vars.hack_1.thfpos - 1] & Vars.RSEEN) == 0)
+		{
+			do1700(rhere, once);
+			return;
+		}
+		int i__1 = -vars.oindex_1.thief;
+		int i = game.dso4.robrm_(vars.hack_1.thfpos, 75, 0, 0, i__1);
+		/* ROB ROOM 75%. */
+		if (vars.hack_1.thfpos < vars.rindex_1.maze1 || vars.hack_1.thfpos > vars.rindex_1.maz15
+				|| vars.play_1.here < vars.rindex_1.maze1 || vars.play_1.here > vars.rindex_1.maz15)
+		{
+			do1500(rhere, once);
+			return;
+		}
+		i__1 = vars.objcts_1.olnt;
+		for (i = 1; i <= i__1; ++i)
+		{
+			/* BOTH IN MAZE. */
+			if (!game.dsub.qhere_(i, vars.hack_1.thfpos) || game.dsub.prob_(60, 60)
+					|| (vars.objcts_1.oflag1[i - 1] & Vars.VISIBT + Vars.TAKEBT) != Vars.VISIBT
+							+ Vars.TAKEBT)
 			{
-
-				/* INIT FLAG. */
-				case 1025:
-					rhere = vars.objcts_1.oroom[vars.oindex_1.thief - 1];
-					/* VISIBLE POS. */
-					if (rhere != 0)
-					{
-						vars.hack_1.thfpos = rhere;
-					}
-
-					if (vars.hack_1.thfpos == vars.play_1.here)
-					{
-						{
-							GOTO = 1100;
-							continue;
-						}
-					}
-					/* THIEF IN WIN RM? */
-					if (vars.hack_1.thfpos != vars.rindex_1.treas)
-					{
-						{
-							GOTO = 1400;
-							continue;
-						}
-					}
-					/* THIEF NOT IN TREAS? */
-
-					/* THIEF IS IN TREASURE ROOM, AND WINNER IS NOT. */
-
-					if (rhere == 0)
-					{
-						{
-							GOTO = 1050;
-							continue;
-						}
-					}
-					/* VISIBLE? */
-					game.dsub.newsta_(vars.oindex_1.thief, 0, 0, 0, 0);
-					/* YES, VANISH. */
-					rhere = 0;
-					if (game.dsub.qhere_(vars.oindex_1.still, vars.rindex_1.treas)
-							|| vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief)
-					{
-						game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
-					}
-				case 1050:
-					i__1 = -vars.oindex_1.thief;
-					i = game.dso4.robadv_(i__1, vars.hack_1.thfpos, 0, 0);
-					/* DROP VALUABLES. */
-					if (game.dsub.qhere_(vars.oindex_1.egg, vars.hack_1.thfpos))
-					{
-						vars.objcts_1.oflag2[vars.oindex_1.egg - 1] |= Vars.OPENBT;
-					}
-				{
-					GOTO = 1700;
-					continue;
-				}
-
-				/* THIEF AND WINNER IN SAME ROOM. */
-
-				case 1100:
-					if (vars.hack_1.thfpos == vars.rindex_1.treas)
-					{
-						{
-							GOTO = 1700;
-							continue;
-						}
-					}
-					/* IF TREAS ROOM, NOTHING. */
-					if ((vars.rooms_1.rflag[vars.hack_1.thfpos - 1] & Vars.RLIGHT) != 0)
-					{
-						{
-							GOTO = 1400;
-							continue;
-						}
-					}
-					if (vars.hack_1.thfflg)
-					{
-						{
-							GOTO = 1300;
-							continue;
-						}
-					}
-					/* THIEF ANNOUNCED? */
-					if (rhere != 0 || game.dsub.prob_(70, 70))
-					{
-						{
-							GOTO = 1150;
-							continue;
-						}
-					}
-					/* IF INVIS AND 30%. */
-					if (vars.objcts_1.ocan[vars.oindex_1.still - 1] != vars.oindex_1.thief)
-					{
-						{
-							GOTO = 1700;
-							continue;
-						}
-					}
-					/* ABORT IF NO STILLETTO. */
-					game.dsub.newsta_(vars.oindex_1.thief, 583, vars.hack_1.thfpos, 0, 0);
-					/* INSERT THIEF INTO ROOM. */
-					vars.hack_1.thfflg = true;
-					/* THIEF IS ANNOUNCED. */
-					return;
-
-				case 1150:
-					if (rhere == 0
-							|| (vars.objcts_1.oflag2[vars.oindex_1.thief - 1] & Vars.FITEBT) == 0)
-					{
-						{
-							GOTO = 1200;
-							continue;
-						}
-					}
-					if (game.dso4.winnin_(vars.oindex_1.thief, vars.play_1.winner))
-					{
-						{
-							GOTO = 1175;
-							continue;
-						}
-					}
-					/* WINNING? */
-					game.dsub.newsta_(vars.oindex_1.thief, 584, 0, 0, 0);
-					/* NO, VANISH THIEF. */
-					vars.objcts_1.oflag2[vars.oindex_1.thief - 1] &= ~Vars.FITEBT;
-					if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos)
-							|| vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief)
-					{
-						game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
-					}
-					return;
-				case 1175:
-					if (game.dsub.prob_(90, 90))
-					{
-						{
-							GOTO = 1700;
-							continue;
-						}
-					}
-					/* 90% CHANCE TO STAY. */
-
-				case 1200:
-					if (rhere == 0 || game.dsub.prob_(70, 70))
-					{
-						{
-							GOTO = 1250;
-							continue;
-						}
-					}
-					/* IF VISIBLE AND 30% */
-					game.dsub.newsta_(vars.oindex_1.thief, 585, 0, 0, 0);
-					/* VANISH THIEF. */
-					if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos)
-							|| vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief)
-					{
-						game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
-					}
-					return;
-
-				case 1300:
-					if (rhere == 0)
-					{
-							GOTO = 1700;
-							continue;
-					}
-					/* ANNOUNCED. VISIBLE? */
-				case 1250:
-					if (game.dsub.prob_(70, 70))
-					{
-						return;
-					}
-					/* 70% CHANCE TO DO NOTHING. */
-					vars.hack_1.thfflg = true;
-					i__1 = -vars.oindex_1.thief;
-					i__2 = -vars.oindex_1.thief;
-					nr = game.dso4.robrm_(vars.hack_1.thfpos, 100, 0, 0, i__1)
-							+ game.dso4.robadv_(vars.play_1.winner, 0, 0, i__2);
-					i = 586;
-					/* ROBBED EM. */
-					if (rhere != 0)
-					{
-						i = 588;
-					}
-					/* WAS HE VISIBLE? */
-					if (nr != 0)
-					{
-						++i;
-					}
-					/* DID HE GET ANYTHING? */
-					game.dsub.newsta_(vars.oindex_1.thief, i, 0, 0, 0);
-					/* VANISH THIEF. */
-					if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos)
-							|| vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief)
-					{
-						game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
-					}
-					if (nr != 0 && !game.dso5.lit_(vars.hack_1.thfpos))
-					{
-						game.dsub.game.dsub.rspeak_(406);
-					}
-					rhere = 0;
-				{
-					GOTO = 1700;
-					continue;
-				}
-				/* ONWARD. */
-
-				/* NOT IN ADVENTURERS ROOM. */
-
-				case 1400:
-					game.dsub.newsta_(vars.oindex_1.thief, 0, 0, 0, 0);
-					/* VANISH. */
-					rhere = 0;
-					if (game.dsub.qhere_(vars.oindex_1.still, vars.hack_1.thfpos)
-							|| vars.objcts_1.oadv[vars.oindex_1.still - 1] == -vars.oindex_1.thief)
-					{
-						game.dsub.newsta_(vars.oindex_1.still, 0, 0, vars.oindex_1.thief, 0);
-					}
-					if ((vars.rooms_1.rflag[vars.hack_1.thfpos - 1] & Vars.RSEEN) == 0)
-					{
-						{
-							GOTO = 1700;
-							continue;
-						}
-					}
-					i__1 = -vars.oindex_1.thief;
-					i = game.dso4.robrm_(vars.hack_1.thfpos, 75, 0, 0, i__1);
-					/* ROB ROOM 75%. */
-					if (vars.hack_1.thfpos < vars.rindex_1.maze1
-							|| vars.hack_1.thfpos > vars.rindex_1.maz15
-							|| vars.play_1.here < vars.rindex_1.maze1
-							|| vars.play_1.here > vars.rindex_1.maz15)
-					{
-						{
-							GOTO = 1500;
-							continue;
-						}
-					}
-					i__1 = vars.objcts_1.olnt;
-					for (i = 1; i <= i__1; ++i)
-					{
-						/* BOTH IN MAZE. */
-						if (!game.dsub.qhere_(i, vars.hack_1.thfpos) || game.dsub.prob_(60, 60)
-								|| (vars.objcts_1.oflag1[i - 1]
-										& Vars.VISIBT + Vars.TAKEBT) != Vars.VISIBT + Vars.TAKEBT)
-						{
-							{
-								continue;
-							}
-						}
-						game.dsub.rspsub_(590, vars.objcts_1.odesc2[i - 1]);
-						/* TAKE OBJECT. */
-						if (game.dsub.prob_(40, 20))
-						{
-							{
-								GOTO = 1700;
-								continue start;
-							}
-						}
-						i__2 = -vars.oindex_1.thief;
-						game.dsub.newsta_(i, 0, 0, 0, i__2);
-						/* MOST OF THE TIME. */
-						vars.objcts_1.oflag2[i - 1] |= Vars.TCHBT;
-						{
-							GOTO = 1700;
-							continue start;
-						}
-					}
-			
-					GOTO = 1700;
-					continue;
-				
-
-				case 1500:
-					i__1 = vars.objcts_1.olnt;
-					for (i = 1; i <= i__1; ++i)
-					{
-						/* NOT IN MAZE. */
-						if (!game.dsub.qhere_(i, vars.hack_1.thfpos)
-								|| vars.objcts_1.otval[i - 1] != 0 || game.dsub.prob_(80, 60)
-								|| (vars.objcts_1.oflag1[i - 1]
-										& Vars.VISIBT + Vars.TAKEBT) != Vars.VISIBT + Vars.TAKEBT)
-						{
-							{
-								continue;
-							}
-						}
-						i__2 = -vars.oindex_1.thief;
-						game.dsub.newsta_(i, 0, 0, 0, i__2);
-						vars.objcts_1.oflag2[i - 1] |= Vars.TCHBT;
-						{
-							GOTO = 1700;
-							continue start;
-						}
-					}
-
-					/* NOW MOVE TO NEW ROOM. */
-
-				case 1700:
-					if (vars.objcts_1.oadv[vars.oindex_1.rope - 1] == -vars.oindex_1.thief)
-					{
-						vars.findex_1.domef = false;
-					}
-					if (once)
-					{
-						do1800();
-						return;					
-					}
-					once = !once;
-				case 1750:
-					--vars.hack_1.thfpos;
-					/* NEXT ROOM. */
-					if (vars.hack_1.thfpos <= 0)
-					{
-						vars.hack_1.thfpos = vars.rooms_1.rlnt;
-					}
-					if ((vars.rooms_1.rflag[vars.hack_1.thfpos - 1]
-							& Vars.RLAND + Vars.RSACRD + Vars.REND) != Vars.RLAND)
-					{
-							GOTO = 1750;
-							continue;
-					}
-					vars.hack_1.thfflg = false;
-				/* NOT ANNOUNCED. */
-		
-					GOTO = 1025;
-					continue;
-
-				
+				continue;
 			}
-		} while (true);
+			game.dsub.rspsub_(590, vars.objcts_1.odesc2[i - 1]);
+			/* TAKE OBJECT. */
+			if (game.dsub.prob_(40, 20))
+			{
+				do1700(rhere, once);
+				return;
+			}
+			int i__2 = -vars.oindex_1.thief;
+			game.dsub.newsta_(i, 0, 0, 0, i__2);
+			/* MOST OF THE TIME. */
+			vars.objcts_1.oflag2[i - 1] |= Vars.TCHBT;
+			{
+				do1700(rhere, once);
+				return;
+			}
+		}
 
-	} /* thiefd_ */
-				
-				/* ONCE MORE. */
+		do1700(rhere, once);
+		return;
+	}
 
-				/* ALL DONE. */
-public void do1800()
-{
-					if (vars.hack_1.thfpos == vars.rindex_1.treas)
-					{
-						return;
-					}
-					/* IN TREASURE ROOM? */
-					int j = 591;
-					/* NO, DROP STUFF. */
-					if (vars.hack_1.thfpos != vars.play_1.here)
-					{
-						j = 0;
-					}
-					int i__1 = vars.objcts_1.olnt;
-					for (int i = 1; i <= i__1; ++i)
-					{
-						if (vars.objcts_1.oadv[i - 1] != -vars.oindex_1.thief
-								|| game.dsub.prob_(70, 70) || vars.objcts_1.otval[i - 1] > 0)
-						{
-							{
-								continue;
-							}
-						}
-						game.dsub.newsta_(i, j, vars.hack_1.thfpos, 0, 0);
-						j = 0;
+	public void do1500(int rhere, boolean once)
+	{
+		int i__1 = vars.objcts_1.olnt;
+		for (int i = 1; i <= i__1; ++i)
+		{
+			/* NOT IN MAZE. */
+			if (!game.dsub.qhere_(i, vars.hack_1.thfpos) || vars.objcts_1.otval[i - 1] != 0
+					|| game.dsub.prob_(80, 60)
+					|| (vars.objcts_1.oflag1[i - 1] & Vars.VISIBT + Vars.TAKEBT) != Vars.VISIBT
+							+ Vars.TAKEBT)
+			{
+				{
+					continue;
+				}
+			}
+			int i__2 = -vars.oindex_1.thief;
+			game.dsub.newsta_(i, 0, 0, 0, i__2);
+			vars.objcts_1.oflag2[i - 1] |= Vars.TCHBT;
+			{
+				do1700(rhere, once);
+				return;
+			}
+		}
 
-					}
-					return;
+		do1700(rhere, once);
+		return;
+	}
+
+	/* NOW MOVE TO NEW ROOM. */
+	public void do1700(int rhere, boolean once)
+	{
+		if (vars.objcts_1.oadv[vars.oindex_1.rope - 1] == -vars.oindex_1.thief)
+		{
+			vars.findex_1.domef = false;
+		}
+		if (once)
+		{
+			do1800();
+			return;
+		}
+		once = !once;
+		do1750(rhere, once);
+		return;
+	}
+
+	public void do1750(int rhere, boolean once)
+	{
+		--vars.hack_1.thfpos;
+		/* NEXT ROOM. */
+		if (vars.hack_1.thfpos <= 0)
+		{
+			vars.hack_1.thfpos = vars.rooms_1.rlnt;
+		}
+		if ((vars.rooms_1.rflag[vars.hack_1.thfpos - 1]
+				& Vars.RLAND + Vars.RSACRD + Vars.REND) != Vars.RLAND)
+		{
+			do1750(rhere, once);
+			return;
+		}
+		vars.hack_1.thfflg = false;
+		/* NOT ANNOUNCED. */
+
+		do1025(rhere, once);
+		return;
+	}
+
+	/* ONCE MORE. */
+
+	/* ALL DONE. */
+	public void do1800()
+	{
+		if (vars.hack_1.thfpos == vars.rindex_1.treas)
+		{
+			return;
+		}
+		/* IN TREASURE ROOM? */
+		int j = 591;
+		/* NO, DROP STUFF. */
+		if (vars.hack_1.thfpos != vars.play_1.here)
+		{
+			j = 0;
+		}
+		int i__1 = vars.objcts_1.olnt;
+		for (int i = 1; i <= i__1; ++i)
+		{
+			if (vars.objcts_1.oadv[i - 1] != -vars.oindex_1.thief || game.dsub.prob_(70, 70)
+					|| vars.objcts_1.otval[i - 1] > 0)
+			{
+				{
+					continue;
+				}
+			}
+			game.dsub.newsta_(i, j, vars.hack_1.thfpos, 0, 0);
+			j = 0;
+
+		}
+		return;
 	}
 }
