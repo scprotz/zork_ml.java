@@ -1,6 +1,6 @@
 package zork;
 
-public class Sobjs implements Actions
+public class Sobjs implements Constants
 {
 	/* SOBJS- SIMPLE OBJECTS PROCESSOR */
 	/* OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP, */
@@ -314,7 +314,7 @@ public class Sobjs implements Actions
 
 				case 7000:
 					if (vars.prsvec_1.action == TAKE
-							&& vars.play_1.winner == vars.aindex_1.player)
+							&& vars.play_1.winner == PLAYER)
 					{
 
 						vars.hack_1.swdact = true;
@@ -1235,7 +1235,7 @@ public class Sobjs implements Actions
 						continue loop;
 					}
 					/* GIVE? */
-					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, vars.aindex_1.arobot);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, ROBOT);
 					/* PUT ON ROBOT. */
 					game.dsub.rspsub_(302, odo2);
 					return ret_val;

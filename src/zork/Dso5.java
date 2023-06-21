@@ -1,6 +1,6 @@
 package zork;
 
-public class Dso5 implements Actions
+public class Dso5 implements Constants
 {
 	/* COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142 */
 	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
@@ -15,18 +15,18 @@ public class Dso5 implements Actions
 	}
 
 	/* GTTIME-- GET TOTAL TIME PLAYED */
-	void gttime_(int[] t)
-	{
-		int[] h = new int[1], m = new int[1], s = new int[1];
-
-		Supp.itime_(h, m, s);
-		t[0] = h[0] * 60 + m[0] - (vars.time_1.shour[0] * 60 + vars.time_1.smin[0]);
-		if (t[0] < 0)
-		{
-			t[0] += 1440;
-		}
-		t[0] += vars.time_1.pltime;
-	} /* gttime_ */
+//	void getTime(int[] t)
+//	{
+//		int[] h = new int[1], m = new int[1], s = new int[1];
+//
+//		Supp.itime_(h, m, s);
+//		t[0] = h[0] * 60 + m[0] - (vars.time_1.shour[0] * 60 + vars.time_1.smin[0]);
+//		if (t[0] < 0)
+//		{
+//			t[0] += 1440;
+//		}
+//		t[0] += vars.time_1.pltime;
+//	} /* gttime_ */
 
 	/* OPNCLS-- PROCESS OPEN/CLOSE FOR DOORS */
 	boolean opncls_(int obj, int so, int sc)

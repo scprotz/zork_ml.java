@@ -1,6 +1,6 @@
 package zork;
 
-public class Rooms implements Actions
+public class Rooms implements Constants
 {
 	/* RAPPL1- SPECIAL PURPOSE ROOM ROUTINES, PART 1 */
 
@@ -1143,7 +1143,7 @@ public class Rooms implements Actions
 				case 36600:
 					i = 58;
 					/* SPIN HIS INSIDES. */
-					if (vars.play_1.winner != vars.aindex_1.player)
+					if (vars.play_1.winner != PLAYER)
 					{
 						i = 99;
 					}

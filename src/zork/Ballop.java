@@ -1,6 +1,6 @@
 package zork;
 
-public class Ballop implements Actions
+public class Ballop implements Constants
 {
 	/* BALLOP- BALLOON FUNCTION */
 

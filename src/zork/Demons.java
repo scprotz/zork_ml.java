@@ -1,6 +1,6 @@
 package zork;
 
-public class Demons implements Actions
+public class Demons implements Constants
 {
 	/* FIGHTD- INTERMOVE FIGHT DEMON */
 
@@ -51,7 +51,7 @@ public class Demons implements Actions
 					vars.findex_1.thfenf = false;
 				}
 				/* TURN OFF ENGROSSED. */
-				vars.advs_1.aflag[vars.aindex_1.player - 1] &= ~vars.aflags_1.astag;
+				vars.advs_1.aflag[PLAYER - 1] &= ~vars.aflags_1.astag;
 				vars.objcts_1.oflag2[obj - 1] &= ~(Vars.STAGBT + Vars.FITEBT);
 				if (vars.objcts_1.ocapac[obj - 1] >= 0 || ra == 0)
 				{
@@ -147,7 +147,7 @@ public class Demons implements Actions
 					}
 				}
 				/* SPECIAL ACTION. */
-				res = blow_(vars.aindex_1.player, j, vars.vill_1.vmelee[i - 1], false, out);
+				res = blow_(PLAYER, j, vars.vill_1.vmelee[i - 1], false, out);
 
 				/* STRIKE BLOW. */
 				if (res < 0)
@@ -261,7 +261,7 @@ public class Demons implements Actions
 						}
 						/* case 200: */
 					}
-					if (v == vars.advs_1.aobj[vars.aindex_1.player - 1])
+					if (v == vars.advs_1.aobj[PLAYER - 1])
 					{
 						GOTO = 300;
 						continue;
@@ -604,7 +604,7 @@ public class Demons implements Actions
 		/* Local variables */
 		int i, ng;
 
-		if (vars.objcts_1.oadv[vars.oindex_1.sword - 1] != vars.aindex_1.player)
+		if (vars.objcts_1.oadv[vars.oindex_1.sword - 1] != PLAYER)
 		{
 			/* DROPPED SWORD, */
 			vars.hack_1.swdact = false;

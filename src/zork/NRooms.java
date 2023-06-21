@@ -1,6 +1,6 @@
 package zork;
 
-public class NRooms implements Actions
+public class NRooms implements Constants
 {
 	/* RAPPL2- SPECIAL PURPOSE ROOM ROUTINES, PART 2 */
 

@@ -1,6 +1,6 @@
 package zork;
 
-public class Dso1
+public class Dso1 implements Constants
 {
 	Vars vars = null;
 	Dgame game = null;
@@ -106,7 +106,7 @@ public class Dso1
 
 		i = 575;
 		/* FIRST LINE. */
-		if (adv != vars.aindex_1.player)
+		if (adv != PLAYER)
 		{
 			i = 576;
 		}
@@ -147,7 +147,7 @@ public class Dso1
 		else
 		{
 			/* ANY OBJECTS? */
-			if (adv == vars.aindex_1.player)
+			if (adv == PLAYER)
 			{
 				game.dsub.rspeak_(578);
 			}

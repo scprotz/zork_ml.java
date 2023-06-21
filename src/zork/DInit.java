@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Date;
 
-public class DInit
+public class DInit implements Constants
 {
 	/* INIT-- DUNGEON INITIALIZATION SUBROUTINE */
 
@@ -128,7 +128,7 @@ public class DInit
 		vars.state_1.rwscor = 0;
 		vars.state_1.deaths = 0;
 		vars.state_1.moves = 0;
-		vars.time_1.pltime = 0;
+//		vars.time_1.pltime = 0;
 		vars.state_1.mungrm = 0;
 		vars.state_1.hs = 0;
 		vars.prsvec_1.action = 0;
@@ -260,9 +260,9 @@ public class DInit
 			/* L70: */
 		}
 
-		vars.debug_1.dbgflg = 0;
-		vars.debug_1.prsflg = 0;
-		vars.debug_1.gdtflg = 0;
+//		vars.debug_1.dbgflg = 0;
+//		vars.debug_1.prsflg = 0;
+//		vars.debug_1.gdtflg = 0;
 
 		vars.screen_1.fromdr = 0;
 		/* INIT SCOL GOODIES. */
@@ -272,111 +272,117 @@ public class DInit
 		try
 		{
 
-		/* NOW RESTORE FROM EXISTING INDEX FILE. */
-		dbfile = new RandomAccessFile(new File(LOCALTEXTFILE), "r");
+			/* NOW RESTORE FROM EXISTING INDEX FILE. */
+			dbfile = new RandomAccessFile(new File(LOCALTEXTFILE), "r");
 
-		indxfile = dbfile;
+			indxfile = dbfile;
 
-		i = readInt(indxfile);
-		j = readInt(indxfile);
-		k = readInt(indxfile);
+			i = readInt(indxfile);
+			j = readInt(indxfile);
+			k = readInt(indxfile);
 
-		/* GET VERSION. */
-		if (i != vars.vers_1.vmaj || j != vars.vers_1.vmin)
-		{
-			error1925(i, j, k);
-			return ret_val;
-		}
+			/* GET VERSION. */
+			if (i != vars.vers_1.vmaj || j != vars.vers_1.vmin)
+			{
+				error1925(i, j, k);
+				return ret_val;
+			}
 
-		vars.state_1.mxscor = readInt(indxfile);
-		vars.star_1.strbit = readInt(indxfile);
-		vars.state_1.egmxsc = readInt(indxfile);
+			vars.state_1.mxscor = readInt(indxfile);
+			vars.star_1.strbit = readInt(indxfile);
+			vars.state_1.egmxsc = readInt(indxfile);
 
-		vars.rooms_1.rlnt = readInt(indxfile);
-		readInts(vars.rooms_1.rlnt, vars.rooms_1.rdesc1, indxfile);
-		readInts(vars.rooms_1.rlnt, vars.rooms_1.rdesc2, indxfile);
-		readInts(vars.rooms_1.rlnt, vars.rooms_1.rexit, indxfile);
-		rdpartialints(vars.rooms_1.rlnt, vars.rooms_1.ractio, indxfile);
+			vars.rooms_1.rlnt = readInt(indxfile);
+			readInts(vars.rooms_1.rlnt, vars.rooms_1.rdesc1, indxfile);
+			readInts(vars.rooms_1.rlnt, vars.rooms_1.rdesc2, indxfile);
+			readInts(vars.rooms_1.rlnt, vars.rooms_1.rexit, indxfile);
+			rdpartialints(vars.rooms_1.rlnt, vars.rooms_1.ractio, indxfile);
 //		System.out.println("vars.rooms_1.ractio = new int[]{");
 //		for(int m = 0; m < vars.rooms_1.ractio.length; m++)
 //		{
 //			System.out.print(vars.rooms_1.ractio[m] + ",");
 //		}
 //		System.out.println("}");
-		vars.rooms_1.ractio = new int[]{
-				0,0,0,0,1,2,0,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,11,11,11,11,11,6,0,0,7,8,9,0,0,0,10,0,0,0,0,12,12,0,13,0,0,0,0,0,0,0,0,0,0,14,0,0,0,0,0,0,0,0,0,0,15,15,16,17,18,19,0,0,20,0,0,0,0,0,0,0,0,0,21,22,0,0,0,23,0,0,25,0,27,0,0,0,0,0,0,28,28,29,0,30,0,31,0,32,0,33,0,0,0,0,0,0,0,0,0,0,0,0,34,0,35,0,58,36,0,0,37,0,0,0,0,0,24,0,0,0,0,0,0,0,26,0,48,0,0,47,42,41,40,39,38,51,45,45,44,44,43,43,39,39,39,39,46,50,49,0,0,52,53,54,55,56,57,0,59,60,0,0,0,0,0,0,0,0,0,0,}
-;
-		rdpartialints(vars.rooms_1.rlnt, vars.rooms_1.rval, indxfile);
-		readInts(vars.rooms_1.rlnt, vars.rooms_1.rflag, indxfile);
+			vars.rooms_1.ractio = new int[] { 0, 0, 0, 0, 1, 2, 0, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 11, 11, 11, 11, 11, 6, 0, 0, 7, 8, 9, 0, 0,
+					0, 10, 0, 0, 0, 0, 12, 12, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 15, 15, 16, 17, 18, 19, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					21, 22, 0, 0, 0, 23, 0, 0, 25, 0, 27, 0, 0, 0, 0, 0, 0, 28, 28, 29, 0, 30, 0,
+					31, 0, 32, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34, 0, 35, 0, 58, 36, 0,
+					0, 37, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 26, 0, 48, 0, 0, 47, 42, 41, 40,
+					39, 38, 51, 45, 45, 44, 44, 43, 43, 39, 39, 39, 39, 46, 50, 49, 0, 0, 52, 53,
+					54, 55, 56, 57, 0, 59, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
+			rdpartialints(vars.rooms_1.rlnt, vars.rooms_1.rval, indxfile);
+			readInts(vars.rooms_1.rlnt, vars.rooms_1.rflag, indxfile);
 
-		vars.exits_1.xlnt = readInt(indxfile);
-		readInts(vars.exits_1.xlnt, vars.exits_1.travel, indxfile);
+			vars.exits_1.xlnt = readInt(indxfile);
+			readInts(vars.exits_1.xlnt, vars.exits_1.travel, indxfile);
 
-		vars.objcts_1.olnt = readInt(indxfile);
-		readInts(vars.objcts_1.olnt, vars.objcts_1.odesc1, indxfile);
-		readInts(vars.objcts_1.olnt, vars.objcts_1.odesc2, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.odesco, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oactio, indxfile);
-		readInts(vars.objcts_1.olnt, vars.objcts_1.oflag1, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oflag2, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ofval, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.otval, indxfile);
-		readInts(vars.objcts_1.olnt, vars.objcts_1.osize, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ocapac, indxfile);
-		readInts(vars.objcts_1.olnt, vars.objcts_1.oroom, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oadv, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ocan, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oread, indxfile);
+			vars.objcts_1.olnt = readInt(indxfile);
+			readInts(vars.objcts_1.olnt, vars.objcts_1.odesc1, indxfile);
+			readInts(vars.objcts_1.olnt, vars.objcts_1.odesc2, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.odesco, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oactio, indxfile);
+			readInts(vars.objcts_1.olnt, vars.objcts_1.oflag1, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oflag2, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ofval, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.otval, indxfile);
+			readInts(vars.objcts_1.olnt, vars.objcts_1.osize, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ocapac, indxfile);
+			readInts(vars.objcts_1.olnt, vars.objcts_1.oroom, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oadv, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ocan, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oread, indxfile);
 
-		vars.oroom2_1.r2lnt = readInt(indxfile);
-		readInts(vars.oroom2_1.r2lnt, vars.oroom2_1.oroom2, indxfile);
-		readInts(vars.oroom2_1.r2lnt, vars.oroom2_1.rroom2, indxfile);
+			vars.oroom2_1.r2lnt = readInt(indxfile);
+			readInts(vars.oroom2_1.r2lnt, vars.oroom2_1.oroom2, indxfile);
+			readInts(vars.oroom2_1.r2lnt, vars.oroom2_1.rroom2, indxfile);
 
-		vars.cevent_1.clnt = readInt(indxfile);
-		readInts(vars.cevent_1.clnt, vars.cevent_1.ctick, indxfile);
-		readInts(vars.cevent_1.clnt, vars.cevent_1.cactio, indxfile);
-		readFlags(vars.cevent_1.clnt, vars.cevent_1.cflag, indxfile);
+			vars.cevent_1.clnt = readInt(indxfile);
+			readInts(vars.cevent_1.clnt, vars.cevent_1.ctick, indxfile);
+			readInts(vars.cevent_1.clnt, vars.cevent_1.cactio, indxfile);
+			readFlags(vars.cevent_1.clnt, vars.cevent_1.cflag, indxfile);
 
-		vars.vill_1.vlnt = readInt(indxfile);
-		readInts(vars.vill_1.vlnt, vars.vill_1.villns, indxfile);
-		rdpartialints(vars.vill_1.vlnt, vars.vill_1.vprob, indxfile);
-		rdpartialints(vars.vill_1.vlnt, vars.vill_1.vopps, indxfile);
-		readInts(vars.vill_1.vlnt, vars.vill_1.vbest, indxfile);
-		readInts(vars.vill_1.vlnt, vars.vill_1.vmelee, indxfile);
+			vars.vill_1.vlnt = readInt(indxfile);
+			readInts(vars.vill_1.vlnt, vars.vill_1.villns, indxfile);
+			rdpartialints(vars.vill_1.vlnt, vars.vill_1.vprob, indxfile);
+			rdpartialints(vars.vill_1.vlnt, vars.vill_1.vopps, indxfile);
+			readInts(vars.vill_1.vlnt, vars.vill_1.vbest, indxfile);
+			readInts(vars.vill_1.vlnt, vars.vill_1.vmelee, indxfile);
 
-		vars.advs_1.alnt = readInt(indxfile);
-		readInts(vars.advs_1.alnt, vars.advs_1.aroom, indxfile);
-		rdpartialints(vars.advs_1.alnt, vars.advs_1.ascore, indxfile);
-		rdpartialints(vars.advs_1.alnt, vars.advs_1.avehic, indxfile);
-		readInts(vars.advs_1.alnt, vars.advs_1.aobj, indxfile);
-		readInts(vars.advs_1.alnt, vars.advs_1.aactio, indxfile);
-		readInts(vars.advs_1.alnt, vars.advs_1.astren, indxfile);
-		rdpartialints(vars.advs_1.alnt, vars.advs_1.aflag, indxfile);
+			vars.advs_1.alnt = readInt(indxfile);
+			readInts(vars.advs_1.alnt, vars.advs_1.aroom, indxfile);
+			rdpartialints(vars.advs_1.alnt, vars.advs_1.ascore, indxfile);
+			rdpartialints(vars.advs_1.alnt, vars.advs_1.avehic, indxfile);
+			readInts(vars.advs_1.alnt, vars.advs_1.aobj, indxfile);
+			readInts(vars.advs_1.alnt, vars.advs_1.aactio, indxfile);
+			readInts(vars.advs_1.alnt, vars.advs_1.astren, indxfile);
+			rdpartialints(vars.advs_1.alnt, vars.advs_1.aflag, indxfile);
 
-		vars.star_1.mbase = readInt(indxfile);
-		vars.rmsg_1.mlnt = readInt(indxfile);
-		readInts(vars.rmsg_1.mlnt, vars.rmsg_1.rtext, indxfile);
+			vars.star_1.mbase = readInt(indxfile);
+			vars.rmsg_1.mlnt = readInt(indxfile);
+			readInts(vars.rmsg_1.mlnt, vars.rmsg_1.rtext, indxfile);
 
-		/* Save location of start of message text */
-		vars.rmsg_1.mrloc = indxfile.getFilePointer();
+			/* Save location of start of message text */
+			vars.rmsg_1.mrloc = indxfile.getFilePointer();
 
-		/* INIT DONE. */
+			/* INIT DONE. */
 
-		/* THE INTERNAL DATA BASE IS NOW ESTABLISHED. */
-		/* SET UP TO PLAY THE GAME. */
+			/* THE INTERNAL DATA BASE IS NOW ESTABLISHED. */
+			/* SET UP TO PLAY THE GAME. */
 
-		Supp.srand(new Date().getTime());
+			Supp.srand(new Date().getTime());
 
-		vars.play_1.winner = vars.aindex_1.player;
-		vars.last_1.lastit = vars.advs_1.aobj[vars.aindex_1.player - 1];
-		vars.play_1.here = vars.advs_1.aroom[vars.play_1.winner - 1];
-		vars.hack_1.thfpos = vars.objcts_1.oroom[vars.oindex_1.thief - 1];
-		vars.state_1.bloc = vars.objcts_1.oroom[vars.oindex_1.ballo - 1];
-		ret_val = true;
+			vars.play_1.winner = PLAYER;
+			vars.last_1.lastit = vars.advs_1.aobj[PLAYER - 1];
+			vars.play_1.here = vars.advs_1.aroom[vars.play_1.winner - 1];
+			vars.hack_1.thfpos = vars.objcts_1.oroom[vars.oindex_1.thief - 1];
+			vars.state_1.bloc = vars.objcts_1.oroom[vars.oindex_1.ballo - 1];
+			ret_val = true;
 		}
-		catch(IOException ioe)
+		catch (IOException ioe)
 		{
-			ioe.printStackTrace();			
+			ioe.printStackTrace();
 		}
 
 		return ret_val;
@@ -410,8 +416,7 @@ public class DInit
 			Supp.println("Suddenly a sinister, wraithlike figure appears before you,");
 			Supp.println("seeming to float in the air.  In a low, sorrowful voice he says,");
 			Supp.println("\"Alas, the very nature of the world has changed, and the dungeon");
-			Supp.println(
-					"cannot be found.  All must now pass away.\"  Raising his oaken staff");
+			Supp.println("cannot be found.  All must now pass away.\"  Raising his oaken staff");
 			Supp.println("in farewell, he fades into the spreading darkness.  In his place");
 			Supp.println("appears a tastefully lettered sign reading:");
 			Supp.println("");

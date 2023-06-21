@@ -1,6 +1,6 @@
 package zork;
 
-public class Objcts implements Actions
+public class Objcts implements Constants
 {
 	/* OAPPLI- OBJECT SPECIAL ACTION ROUTINES */
 
@@ -719,7 +719,7 @@ public class Objcts implements Actions
 						continue;
 					}
 					/* TAKE? */
-					if (vars.play_1.winner != vars.aindex_1.player)
+					if (vars.play_1.winner != PLAYER)
 					{
 						GOTO = 47500;
 						continue;
@@ -737,7 +737,7 @@ public class Objcts implements Actions
 					/* YES, MOVE INTO CAGE. */
 					game.dsub.newsta_(vars.oindex_1.robot, 0, vars.rindex_1.caged, 0, 0);
 					/* MOVE ROBOT. */
-					vars.advs_1.aroom[vars.aindex_1.arobot - 1] = vars.rindex_1.caged;
+					vars.advs_1.aroom[ROBOT - 1] = vars.rindex_1.caged;
 					vars.objcts_1.oflag1[vars.oindex_1.robot - 1] |= Vars.NDSCBT;
 					vars.cevent_1.ctick[vars.cindex_1.cevsph - 1] = 10;
 					/* GET OUT IN 10 OR ELSE. */
@@ -778,7 +778,7 @@ public class Objcts implements Actions
 						continue;
 					}
 					/* A BUTTON? */
-					if (vars.play_1.winner != vars.aindex_1.player)
+					if (vars.play_1.winner != PLAYER)
 					{
 						switch (i)
 						{
@@ -1063,7 +1063,7 @@ public class Objcts implements Actions
 						continue loop;
 					}
 					/* GIVE? */
-					game.dsub.newsta_(vars.prsvec_1.direct_object, 2, 0, 0, vars.aindex_1.player);
+					game.dsub.newsta_(vars.prsvec_1.direct_object, 2, 0, 0, PLAYER);
 					/* DONE. */
 					return ret_val;
 

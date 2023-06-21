@@ -500,18 +500,6 @@ public class Vars
 
 	public aflags_ aflags_1 = new aflags_();
 
-	public class aindex_
-	{
-		final int player = 1;
-		final int arobot = 2;
-		final int amastr = 3;
-	};
-
-
-	public aindex_ aindex_1 = new aindex_();
-
-	
-	
 
 	/************** End Verbs **************/
 	
@@ -908,12 +896,12 @@ public class Vars
 
 	/******** End State Flags ************/
 	
-	public class debug_
-	{
-		int dbgflg, prsflg, gdtflg;
-	};
-
-	public debug_ debug_1 = new debug_();
+//	public class debug_
+//	{
+//		int dbgflg, prsflg, gdtflg;
+//	};
+//
+//	public debug_ debug_1 = new debug_();
 
 	public class hack_
 	{
@@ -1039,15 +1027,15 @@ public class Vars
 
 	public vers_ vers_1 = new vers_();
 
-	public class time_
-	{
-		int pltime;
-		int[] shour = new int[1];
-		int[] smin = new int[1];
-		int[] ssec = new int[1];
-	};
-
-	public time_ time_1 = new time_();
+//	public class time_
+//	{
+//		int pltime;
+//		int[] shour = new int[1];
+//		int[] smin = new int[1];
+//		int[] ssec = new int[1];
+//	};
+//
+//	public time_ time_1 = new time_();
 
 	public class hyper_
 	{

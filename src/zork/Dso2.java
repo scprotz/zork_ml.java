@@ -1,6 +1,6 @@
 package zork;
 
-public class Dso2
+public class Dso2 implements Constants
 {
 	/* MOVETO- MOVE PLAYER TO NEW ROOM */
 
@@ -44,7 +44,7 @@ public class Dso2
 				/* MOVE SHOULD SUCCEED. */
 				if ((vars.rooms_1.rflag[nr - 1] & Vars.RMUNG) == 0)
 				{
-					if (who != vars.aindex_1.player)
+					if (who != PLAYER)
 					{
 						game.dsub.newsta_(vars.advs_1.aobj[who - 1], 0, nr, 0, 0);
 					}
@@ -99,7 +99,7 @@ public class Dso2
 		/* MOVE SHOULD SUCCEED. */
 		if ((vars.rooms_1.rflag[nr - 1] & Vars.RMUNG) == 0)
 		{
-			if (who != vars.aindex_1.player)
+			if (who != PLAYER)
 			{
 				game.dsub.newsta_(vars.advs_1.aobj[who - 1], 0, nr, 0, 0);
 			}
@@ -119,7 +119,7 @@ public class Dso2
 		return ret_val;
 
 //	L600:
-//	    if (who != vars.aindex_1.player) {
+//	    if (who != PLAYER) {
 //		game.dsub.newsta_(vars.advs_1.aobj[who - 1], 0, nr, 0, 0);
 //	    }
 //	    if (j != 0) {

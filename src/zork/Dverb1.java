@@ -1,6 +1,6 @@
 package zork;
 
-public class Dverb1 implements Actions
+public class Dverb1 implements Constants
 
 {
 	/* TAKE-- BASIC TAKE SEQUENCE */

@@ -1,6 +1,6 @@
 package zork;
 
-public class Nobjs implements Actions
+public class Nobjs implements Constants
 {
 	/* NOBJS- NEW OBJECTS PROCESSOR */
 	/* OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP, */
@@ -930,7 +930,7 @@ public class Nobjs implements Actions
 						vars.objcts_1.oflag1[vars.oindex_1.odoor - 1] |= Vars.VISIBT;
 					}
 
-					if (vars.advs_1.aroom[vars.aindex_1.player - 1] != vars.rindex_1.cell)
+					if (vars.advs_1.aroom[PLAYER - 1] != vars.rindex_1.cell)
 					{
 						GOTO = 17400;
 						continue loop;
@@ -943,12 +943,12 @@ public class Nobjs implements Actions
 					}
 					/* IN RIGHT CELL? */
 					vars.objcts_1.oflag1[vars.oindex_1.odoor - 1] |= Vars.VISIBT;
-					game.dso2.moveto_(vars.rindex_1.ncell, vars.aindex_1.player);
+					game.dso2.moveto_(vars.rindex_1.ncell, PLAYER);
 					/* YES, MOVETO NCELL. */
 					GOTO = 17400;
 					continue loop;
 				case 17200:
-					game.dso2.moveto_(vars.rindex_1.pcell, vars.aindex_1.player);
+					game.dso2.moveto_(vars.rindex_1.pcell, PLAYER);
 					/* NO, MOVETO PCELL. */
 
 				case 17400:

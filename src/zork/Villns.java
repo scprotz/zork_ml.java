@@ -1,6 +1,6 @@
 package zork;
 
-public class Villns implements Actions
+public class Villns implements Constants
 {
 	/* TROLLP- TROLL FUNCTION */
 

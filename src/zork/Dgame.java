@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class Dgame implements Actions
+public class Dgame implements Constants
 {
 	/* GAME- MAIN COMMAND LOOP FOR DUNGEON */
 
@@ -102,7 +102,7 @@ public class Dgame implements Actions
 
 		/* NOW LOOP, READING AND EXECUTING COMMANDS. */
 
-			vars.play_1.winner = vars.aindex_1.player;
+			vars.play_1.winner = PLAYER;
 			/* PLAYER MOVING. */
 			vars.play_1.telflg = false;
 			/* ASSUME NOTHING TOLD. */
@@ -369,7 +369,7 @@ public class Dgame implements Actions
 		/* GIVE RESPONSE. */
 		dsub.rspeak_(i);
 //				case 2600:
-		vars.play_1.winner = vars.aindex_1.player;
+		vars.play_1.winner = PLAYER;
 		/* RESTORE STATE. */
 		vars.play_1.here = vars.advs_1.aroom[vars.play_1.winner - 1];
 //				GOTO = 350;
@@ -417,7 +417,7 @@ public class Dgame implements Actions
 	{
 		xendmv_(vars.play_1.telflg);
 		/* DO END OF MOVE. */
-		vars.play_1.winner = vars.aindex_1.player;
+		vars.play_1.winner = PLAYER;
 		/* RESTORE STATE. */
 		vars.play_1.here = vars.advs_1.aroom[vars.play_1.winner - 1];
 	}
@@ -602,7 +602,7 @@ public class Dgame implements Actions
 		for (int i = 0; i < 64; i++)
 			vars.puzzle_1.cpvec[i] = iter.next();
 
-		vars.time_1.pltime = iter.next();
+//		vars.time_1.pltime = iter.next();
 		vars.state_1.moves = iter.next();
 		vars.state_1.deaths = iter.next();
 		vars.state_1.rwscor = iter.next();

@@ -1,6 +1,6 @@
 package zork;
 
-public class Np1 implements Actions
+public class Np1 implements Constants
 {
 	/* SPARSE- START OF PARSE */
 

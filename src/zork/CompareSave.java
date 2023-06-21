@@ -231,7 +231,7 @@ public class CompareSave
 				vars.puzzle_1.cpvec[i] = readInt(reader);
 
 			// 75
-			vars.time_1.pltime = readInt(reader);
+//			vars.time_1.pltime = readInt(reader);
 			vars.state_1.moves = readInt(reader);
 			vars.state_1.deaths = readInt(reader);
 			vars.state_1.rwscor = readInt(reader);

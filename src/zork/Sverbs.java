@@ -1,6 +1,6 @@
 package zork;
 
-public class Sverbs
+public class Sverbs implements Constants
 {
 	/* SVERBS- SIMPLE VERBS PROCESSOR */
 	/* ALL VERBS IN THIS ROUTINE MUST BE INDEPENDANT */
@@ -179,10 +179,10 @@ public class Sverbs
 					game.dsub.bug_(7, ri);
 			}
 
-			if(GOTO == 0)
+			if (GOTO == 0)
 			{
 				/* ALL VERB PROCESSORS RETURN HERE TO DECLARE FAILURE. */
-	
+
 				/* case 10: */
 				ret_val = false;
 				/* LOSE. */
@@ -278,7 +278,7 @@ public class Sverbs
 				/* V73-- STAY (USED IN ENDGAME). */
 
 				case 4000:
-					if (vars.play_1.winner != vars.aindex_1.amastr)
+					if (vars.play_1.winner != MASTER)
 					{
 						GOTO = 4100;
 						continue loop;
@@ -291,7 +291,7 @@ public class Sverbs
 					return ret_val;
 
 				case 4100:
-					if (vars.play_1.winner == vars.aindex_1.player)
+					if (vars.play_1.winner == PLAYER)
 					{
 						game.dsub.rspeak_(664);
 					}
@@ -301,7 +301,8 @@ public class Sverbs
 				/* V74-- VERSION. PRINT INFO. */
 
 				case 5000:
-					Supp.print("V"+vars.vers_1.vmaj+"."+vars.vers_1.vmin+""+vars.vers_1.vedit+"\n");
+					Supp.print("V" + vars.vers_1.vmaj + "." + vars.vers_1.vmin + ""
+							+ vars.vers_1.vedit + "\n");
 					vars.play_1.telflg = true;
 					return ret_val;
 
@@ -480,7 +481,7 @@ public class Sverbs
 					/* V85-- FOLLOW (USED IN ENDGAME) */
 
 				case 16000:
-					if (vars.play_1.winner != vars.aindex_1.amastr)
+					if (vars.play_1.winner != MASTER)
 					{
 						return ret_val;
 					}
@@ -493,9 +494,10 @@ public class Sverbs
 				/* V86-- WALK THROUGH */
 
 				case 17000:
-					if (vars.screen_1.scolrm == 0 || vars.prsvec_1.direct_object != vars.oindex_1.scol
-							&& (vars.prsvec_1.direct_object != vars.oindex_1.wnort
-									|| vars.play_1.here != vars.rindex_1.bkbox))
+					if (vars.screen_1.scolrm == 0
+							|| vars.prsvec_1.direct_object != vars.oindex_1.scol
+									&& (vars.prsvec_1.direct_object != vars.oindex_1.wnort
+											|| vars.play_1.here != vars.rindex_1.bkbox))
 					{
 						GOTO = 17100;
 						continue loop;
@@ -662,7 +664,7 @@ public class Sverbs
 				/* V90-- TIME. PRINT OUT DURATION OF GAME. */
 
 				case 21000:
-					game.dso5.gttime_(k);
+//					game.dso5.getTime(k);
 					/* GET PLAY TIME. */
 					i = k[0] / 60;
 					j = k[0] % 60;
@@ -670,12 +672,12 @@ public class Sverbs
 					Supp.print("You have been playing Dungeon for ");
 					if (i >= 1)
 					{
-						Supp.print(i +" hour");
+						Supp.print(i + " hour");
 						if (i >= 2)
 							Supp.print("s");
 						Supp.print(" and ");
 					}
-					Supp.print(j +" minute");
+					Supp.print(j + " minute");
 					if (j != 1)
 						Supp.print("s");
 					Supp.print(".\n");
@@ -817,7 +819,7 @@ public class Sverbs
 
 					if (j != 0)
 					{
-						Supp.print("You will be cured after "+i+" moves.\n");
+						Supp.print("You will be cured after " + i + " moves.\n");
 					}
 
 					i__1 = k[0] + 478;
@@ -925,7 +927,8 @@ public class Sverbs
 					vars.findex_1.spellf = true;
 					/* TELL HIM. */
 					vars.play_1.telflg = true;
-					Supp.print("A hollow voice replies:  \""+new String(pp1)+" "+new String(ch)+"\".\n");
+					Supp.print("A hollow voice replies:  \"" + new String(pp1) + " "
+							+ new String(ch) + "\".\n");
 
 					return ret_val;
 
@@ -983,50 +986,51 @@ public class Sverbs
 					return ret_val;
 
 				case 27100:
-					 for (j = 1; j <= 14; j ++) 
-					 {
-					      /* CHECK ANSWERS. */
-					      if (vars.findex_1.quesno != answer[j - 1])
-					         continue;
+					for (j = 1; j <= 14; j++)
+					{
+						/* CHECK ANSWERS. */
+						if (vars.findex_1.quesno != answer[j - 1])
+							continue;
 //					      /* ONLY CHECK PROPER ANS. */
-					      String zz = ansstr[j - 1];
-					      int ans_index = vars.prsvec_1.prscon -1;
-					      String user_answer = new String(vars.input_1.inbuf);
+						String zz = ansstr[j - 1];
+						int ans_index = vars.prsvec_1.prscon - 1;
+						String user_answer = new String(vars.input_1.inbuf);
 //					      char[] z2 = vars.input_1.inbuf + vars.prsvec_1.prscon - 1;
-					      String zz2 = user_answer.substring(ans_index).trim();
-					      Supp.println(zz2);
-					      
-					      int zindex = 0;
-					      int z2index = 0;
-					      while (zindex < zz.length() && zz.charAt(zindex) != '\0' ) 
-					      {
-					         while (zz2.charAt(z2index) == ' ')
-					            z2index++;
-					         /* STRIP INPUT BLANKS. */
-					         if (zz.charAt(zindex) != zz2.charAt(z2index))
-					            continue;
-					         zindex++;
-					         z2index++;
-					      }
-					      GOTO = 27500;
-					      continue loop;
-					      /* RIGHT ANSWER. */
+						String zz2 = user_answer.substring(ans_index).trim();
+						Supp.println(zz2);
 
-					   }
+						int zindex = 0;
+						int z2index = 0;
+						while (zindex < zz.length() && zz.charAt(zindex) != '\0')
+						{
+							while (zz2.charAt(z2index) == ' ')
+								z2index++;
+							/* STRIP INPUT BLANKS. */
+							if (zz.charAt(zindex) != zz2.charAt(z2index))
+								continue;
+							zindex++;
+							z2index++;
+						}
+						GOTO = 27500;
+						continue loop;
+						/* RIGHT ANSWER. */
 
-					   vars.prsvec_1.prscon = 1;
-					   /* KILL REST OF LINE. */
-					   ++vars.findex_1.nqatt;
-					   /* WRONG, CRETIN. */
-					   if (vars.findex_1.nqatt >= 5) {
-						   GOTO = 27400;
-						   continue;
-					   }
-					   /* TOO MANY WRONG? */
-					   i__1 = vars.findex_1.nqatt + 800;
-					   game.dsub.rspeak_(i__1);
-					   /* NO, TRY AGAIN. */
-					   return ret_val;
+					}
+
+					vars.prsvec_1.prscon = 1;
+					/* KILL REST OF LINE. */
+					++vars.findex_1.nqatt;
+					/* WRONG, CRETIN. */
+					if (vars.findex_1.nqatt >= 5)
+					{
+						GOTO = 27400;
+						continue;
+					}
+					/* TOO MANY WRONG? */
+					i__1 = vars.findex_1.nqatt + 800;
+					game.dsub.rspeak_(i__1);
+					/* NO, TRY AGAIN. */
+					return ret_val;
 
 				case 27400:
 					game.dsub.rspeak_(826);

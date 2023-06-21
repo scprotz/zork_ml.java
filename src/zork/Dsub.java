@@ -2,7 +2,7 @@ package zork;
 
 import java.io.IOException;
 
-public class Dsub implements Actions
+public class Dsub implements Constants
 {
 
 	Vars vars = null;
@@ -179,20 +179,20 @@ public class Dsub implements Actions
 	void bug_(int a, int b)
 	{
 //	#ifdef DEBUG
-		if (Vars.DEBUG)
-		{
+//		if (Vars.DEBUG)
+//		{
 
 			/* Local variables */
 
 			Supp.errorln("PROGRAM ERROR " + a + ", PARAMETER=" + b);
 
-			if (vars.debug_1.dbgflg != 0)
-			{
-				return;
-			}
+//			if (vars.debug_1.dbgflg != 0)
+//			{
+//				return;
+//			}
 			Supp.exit_();
 //	#endif
-		}
+//		}
 
 	} /* bug_ */
 
@@ -274,16 +274,16 @@ public class Dsub implements Actions
 		/* DESCRIBE SAD STATE. */
 		vars.prsvec_1.prscon = 1;
 		/* STOP PARSER. */
-		if (Vars.DEBUG)
-			if (vars.debug_1.dbgflg != 0)
-			{
-				return;
-			}
+//		if (Vars.DEBUG)
+//			if (vars.debug_1.dbgflg != 0)
+//			{
+//				return;
+//			}
 
 		/* IF DBG, EXIT. */
 		vars.advs_1.avehic[vars.play_1.winner - 1] = 0;
 		/* GET RID OF VEHICLE. */
-		if (!(vars.play_1.winner == vars.aindex_1.player))
+		if (!(vars.play_1.winner == PLAYER))
 		{
 			/* HIMSELF? */
 			rspsub_(432, vars.objcts_1.odesc2[vars.advs_1.aobj[vars.play_1.winner - 1] - 1]);
@@ -504,7 +504,7 @@ public class Dsub implements Actions
 			switch (GOTO)
 			{
 			case 50:
-				if (vars.play_1.here == vars.advs_1.aroom[vars.aindex_1.player - 1])
+				if (vars.play_1.here == vars.advs_1.aroom[PLAYER - 1])
 				{
 					GOTO = 100;
 					continue;

@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class Dverb2
+public class Dverb2 implements Constants
 {
 	/* SAVE- SAVE GAME STATE */
 
@@ -43,7 +43,7 @@ public class Dverb2
 			DataOutputStream writer = new DataOutputStream(new FileOutputStream(file));
 
 			/* GET TIME. */
-			game.dso5.gttime_(j);
+//			game.dso5.getTime(j);
 
 			writeInt(writer, vars.vers_1.vmaj);
 			writeInt(writer, vars.vers_1.vmin);
@@ -170,7 +170,8 @@ public class Dverb2
 			try
 			{
 				writer.write(bytes[i]);
-			} catch (IOException e)
+			}
+			catch (IOException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -216,7 +217,7 @@ public class Dverb2
 			for (int i = 0; i < 64; i++)
 				vars.puzzle_1.cpvec[i] = reader.read();
 
-			vars.time_1.pltime = reader.read();
+//			vars.time_1.pltime = reader.read();
 			vars.state_1.moves = reader.read();
 			vars.state_1.deaths = reader.read();
 			vars.state_1.rwscor = reader.read();
@@ -307,7 +308,7 @@ public class Dverb2
 
 		ret_val = true;
 		/* ASSUME WINS. */
-		if (vars.play_1.winner != vars.aindex_1.player || game.dso5.game.dso5.lit_(vars.play_1.here)
+		if (vars.play_1.winner != PLAYER || game.dso5.game.dso5.lit_(vars.play_1.here)
 				|| game.dsub.prob_(25, 25))
 		{
 			{
@@ -848,7 +849,8 @@ public class Dverb2
 				case 10000:
 					vars.findex_1.frobzf = false;
 					/* ASSUME CANT. */
-					ldir = (vars.prsvec_1.direct_object - vars.xsrch_1.xnorth) / vars.xsrch_1.xnorth * 45;
+					ldir = (vars.prsvec_1.direct_object - vars.xsrch_1.xnorth) / vars.xsrch_1.xnorth
+							* 45;
 					/* XLATE DIR TO DEGREES. */
 					if (!vars.findex_1.mropnf || (vars.findex_1.mdir + 270) % 360 != ldir
 							&& vars.prsvec_1.direct_object != vars.xsrch_1.xexit)
@@ -959,7 +961,8 @@ public class Dverb2
 					return ret_val;
 
 				case 14100:
-					if (vars.findex_1.cphere != 52 || vars.prsvec_1.direct_object != vars.xsrch_1.xwest
+					if (vars.findex_1.cphere != 52
+							|| vars.prsvec_1.direct_object != vars.xsrch_1.xwest
 							|| !vars.findex_1.cpoutf)
 					{
 						{

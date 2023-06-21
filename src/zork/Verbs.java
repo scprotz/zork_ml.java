@@ -1,6 +1,6 @@
 package zork;
 
-public class Verbs  implements Actions
+public class Verbs  implements Constants
 {
 	/* VAPPLI- MAIN VERB PROCESSING ROUTINE */
 
@@ -1060,7 +1060,7 @@ public class Verbs  implements Actions
 					game.dsub.rspsub_(423, odo2);
 					/* DESCRIBE. */
 					vars.advs_1.avehic[vars.play_1.winner - 1] = vars.prsvec_1.direct_object;
-					if (vars.play_1.winner != vars.aindex_1.player)
+					if (vars.play_1.winner != PLAYER)
 					{
 						vars.objcts_1.ocan[vars.advs_1.aobj[vars.play_1.winner - 1]
 								- 1] = vars.prsvec_1.direct_object;
@@ -1098,7 +1098,7 @@ public class Verbs  implements Actions
 				case 52200:
 					vars.advs_1.avehic[vars.play_1.winner - 1] = 0;
 					game.dsub.rspeak_(426);
-					if (vars.play_1.winner != vars.aindex_1.player)
+					if (vars.play_1.winner != PLAYER)
 					{
 						game.dsub.newsta_(vars.advs_1.aobj[vars.play_1.winner - 1], 0,
 								vars.play_1.here, 0, 0);
@@ -1425,7 +1425,7 @@ public class Verbs  implements Actions
 						melee = 2;
 					}
 					/* MUST BE KNIFE. */
-					i = game.demons.blow_(vars.aindex_1.player, vars.prsvec_1.direct_object, melee, true, 0);
+					i = game.demons.blow_(PLAYER, vars.prsvec_1.direct_object, melee, true, 0);
 					/* STRIKE BLOW. */
 					return ret_val;
 

@@ -1,6 +1,6 @@
 package zork;
 
-public class Lightp implements Actions
+public class Lightp implements Constants
 {
 	/* LIGHTP- LIGHT PROCESSOR */
 
@@ -19,13 +19,10 @@ public class Lightp implements Actions
 	boolean lightp_(int obj)
 	{
 		/* System generated locals */
-		boolean ret_val;
 
 		/* Local variables */
 		int flobts;
-		int i;
 
-///		ret_val = true;
 		/* ASSUME WINS */
 		flobts = Vars.FLAMBT + Vars.LITEBT + Vars.ONBT;
 		if (obj != vars.oindex_1.candl)

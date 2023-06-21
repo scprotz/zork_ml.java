@@ -1,6 +1,6 @@
 package zork;
 
-public class Actors implements Actions
+public class Actors implements Constants
 {
 	/* AAPPLI- APPLICABLES FOR ADVENTURERS */
 
@@ -52,7 +52,7 @@ public class Actors implements Actions
 		}
 		vars.cevent_1.cflag[vars.cindex_1.cevsph - 1] = false;
 		/* ROBOT RAISED CAGE. */
-		vars.play_1.winner = vars.aindex_1.player;
+		vars.play_1.winner = PLAYER;
 		/* RESET FOR PLAYER. */
 		game.dso2.moveto_(vars.rindex_1.cager, vars.play_1.winner);
 		/* MOVE TO NEW ROOM. */
@@ -60,7 +60,7 @@ public class Actors implements Actions
 		/* INSTALL CAGE IN ROOM. */
 		game.dsub.newsta_(vars.oindex_1.robot, 0, vars.rindex_1.cager, 0, 0);
 		/* INSTALL ROBOT IN ROOM. */
-		vars.advs_1.aroom[vars.aindex_1.arobot - 1] = vars.rindex_1.cager;
+		vars.advs_1.aroom[ROBOT - 1] = vars.rindex_1.cager;
 		/* ALSO MOVE ROBOT/ADV. */
 		vars.findex_1.cagesf = true;
 		/* CAGE SOLVED. */
