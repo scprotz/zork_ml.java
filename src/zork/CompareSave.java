@@ -12,6 +12,9 @@ public class CompareSave
 	{
 		Vars vj = load_vars("dsave.java.dat");
 		Vars vc = load_vars("../../zork/dsave.c.dat");
+//		System.out.println(vj.findex_1);
+//		System.out.println(vc.findex_1);
+//		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
 		if (vj.findex_1.trollf != vc.findex_1.trollf)
 			System.err.println("error for vj.findex_1.		trollf");
@@ -185,6 +188,8 @@ public class CompareSave
 						+ "," + c[0] + " " + c[1] + " " + c[2] + " " + c[3]);
 				return;
 			}
+//			else
+//				System.out.println(var + ":" + j[0] + " " + j[1] + " " +j[2] + " " + j[3] );
 
 			if (j[0] == -1 && c[0] == -1)
 				break;
@@ -194,6 +199,8 @@ public class CompareSave
 //			else if(j == -1 || c == -1)
 //				throw new RuntimeException("Not the same length");
 		} while (!done);
+
+		System.out.println("Completed successfully.  Compared all " + var + " variables");
 
 	}
 
@@ -212,12 +219,12 @@ public class CompareSave
 //		   int time = readInt(reader);
 
 			// 0
-//			vars.vers_1.vmaj = 
-					readInt(reader);
-//			vars.vers_1.vmin = 
-					readInt(reader);
-//			vars.vers_1.vedit = 
-					readInt(reader);
+			System.out.println("VMAJ");
+			vars.vers_1.vmaj = readInt(reader);
+			System.out.println("VMIN");
+			vars.vers_1.vmin = readInt(reader);
+			System.out.println("VEDIT");
+			vars.vers_1.vedit = readInt(reader);
 
 			vars.play_1.winner = readInt(reader);
 			vars.play_1.here = readInt(reader);
@@ -231,7 +238,7 @@ public class CompareSave
 				vars.puzzle_1.cpvec[i] = readInt(reader);
 
 			// 75
-//			vars.time_1.pltime = readInt(reader);
+			vars.time_1.pltime = readInt(reader);
 			vars.state_1.moves = readInt(reader);
 			vars.state_1.deaths = readInt(reader);
 			vars.state_1.rwscor = readInt(reader);

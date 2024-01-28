@@ -1,6 +1,8 @@
 package zork;
 
-public class Demons implements Constants
+import java.io.IOException;
+
+public class Demons
 {
 	/* FIGHTD- INTERMOVE FIGHT DEMON */
 
@@ -17,7 +19,7 @@ public class Demons implements Constants
 		this.game = game;
 	}
 
-	void fightd_()
+	void fightd_() throws IOException
 	{
 		/* Initialized data */
 
@@ -31,44 +33,44 @@ public class Demons implements Constants
 
 		for (i = 1; i <= vars.vill_1.vlnt; ++i)
 		{
-			/* LOOP THRU VILLAINS. */
+			/* !LOOP THRU VILLAINS. */
 			vars.vill_1.vopps[i - 1] = 0;
-			/* CLEAR OPPONENT SLOT. */
+			/* !CLEAR OPPONENT SLOT. */
 			obj = vars.vill_1.villns[i - 1];
-			/* GET OBJECT NO. */
+			/* !GET OBJECT NO. */
 			ra = vars.objcts_1.oactio[obj - 1];
-			/* GET HIS ACTION. */
+			/* !GET HIS ACTION. */
 			if (vars.play_1.here != vars.objcts_1.oroom[obj - 1])
 			{
 				if (!((vars.objcts_1.oflag2[obj - 1] & Vars.FITEBT) == 0 || ra == 0))
 				{
-					vars.prsvec_1.action = FIGHT;
-					/* HAVE A FIGHT. */
+					vars.prsvec_1.prsa = vars.vindex_1.fightw;
+					/* !HAVE A FIGHT. */
 					game.objcts.oappli_(ra, 0);
 				}
 				if (obj == vars.oindex_1.thief)
 				{
 					vars.findex_1.thfenf = false;
 				}
-				/* TURN OFF ENGROSSED. */
-				vars.advs_1.aflag[PLAYER - 1] &= ~vars.aflags_1.astag;
+				/* !TURN OFF ENGROSSED. */
+				vars.advs_1.aflag[vars.aindex_1.player - 1] &= ~vars.aflags_1.astag;
 				vars.objcts_1.oflag2[obj - 1] &= ~(Vars.STAGBT + Vars.FITEBT);
 				if (vars.objcts_1.ocapac[obj - 1] >= 0 || ra == 0)
 				{
 					continue;
 				}
-				vars.prsvec_1.action = VILLAIN_ENTERED;
-				/* WAKE HIM UP. */
+				vars.prsvec_1.prsa = vars.vindex_1.inxw;
+				/* !WAKE HIM UP. */
 				game.objcts.oappli_(ra, 0);
 				vars.objcts_1.ocapac[obj - 1] = Math.abs(vars.objcts_1.ocapac[obj - 1]);
 				continue;
 			}
-			/* ADVENTURER STILL HERE? */
+			/* !ADVENTURER STILL HERE? */
 			if (obj == vars.oindex_1.thief && vars.findex_1.thfenf)
 			{
 				continue;
 			}
-			/* THIEF ENGROSSED? */
+			/* !THIEF ENGROSSED? */
 			if (vars.objcts_1.ocapac[obj - 1] >= 0)
 			{
 				if ((vars.objcts_1.oflag2[obj - 1] & Vars.FITEBT) == 0)
@@ -77,31 +79,31 @@ public class Demons implements Constants
 					{
 						continue;
 					}
-					/* NOT FIGHTING, */
-					vars.prsvec_1.action = VILLAIN_QUIT_FIGHTING;
-					/* SET UP PROBABILITY */
+					/* !NOT FIGHTING, */
+					vars.prsvec_1.prsa = vars.vindex_1.frstqw;
+					/* !SET UP PROBABILITY */
 					if (!game.objcts.oappli_(ra, 0))
 					{
 						continue;
 					}
-					/* OF FIGHTING. */
+					/* !OF FIGHTING. */
 					vars.objcts_1.oflag2[obj - 1] |= Vars.FITEBT;
 					vars.vill_1.vopps[i - 1] = obj;
-					/* SET UP OPP. */
+					/* !SET UP OPP. */
 					continue;
 				}
 				vars.vill_1.vopps[i - 1] = obj;
-				/* FIGHTING, SET UP OPP. */
+				/* !FIGHTING, SET UP OPP. */
 				continue;
 			}
-			/* YES, VILL AWAKE? */
+			/* !YES, VILL AWAKE? */
 			if (vars.vill_1.vprob[i - 1] == 0 || !game.dsub.game.dsub
 					.prob_(vars.vill_1.vprob[i - 1], vars.vill_1.vprob[i - 1]))
 			{
 				vars.vill_1.vprob[i - 1] += 10;
-				/* INCREASE WAKEUP PROB. */
+				/* !INCREASE WAKEUP PROB. */
 				continue;
-				/* NOTHING ELSE. */
+				/* !NOTHING ELSE. */
 			}
 			vars.objcts_1.ocapac[obj - 1] = Math.abs(vars.objcts_1.ocapac[obj - 1]);
 			vars.vill_1.vprob[i - 1] = 0;
@@ -109,62 +111,62 @@ public class Demons implements Constants
 			{
 				continue;
 			}
-			/* ANYTHING TO DO? */
-			vars.prsvec_1.action = VILLAIN_ENTERED;
-			/* YES, WAKE HIM UP. */
+			/* !ANYTHING TO DO? */
+			vars.prsvec_1.prsa = vars.vindex_1.inxw;
+			/* !YES, WAKE HIM UP. */
 			game.objcts.oappli_(ra, 0);
 			continue;
-			/* NOTHING ELSE HAPPENS. */
+			/* !NOTHING ELSE HAPPENS. */
 		}
 		/* FIGHTD, PAGE 3 */
 
 		/* NOW DO ACTUAL COUNTERBLOWS. */
 
 		out = 0;
-		/* ASSUME HERO OK. */
+		/* !ASSUME HERO OK. */
 		do
 		{
 			for (i = 1; i <= vars.vill_1.vlnt; ++i)
 			{
-				/* LOOP THRU OPPS. */
+				/* !LOOP THRU OPPS. */
 				j = vars.vill_1.vopps[i - 1];
 				if (j == 0)
 				{
 					continue;
 				}
-				/* SLOT EMPTY? */
+				/* !SLOT EMPTY? */
 				vars.prsvec_1.prscon = 1;
-				/* STOP CMD STREAM. */
+				/* !STOP CMD STREAM. */
 				ra = vars.objcts_1.oactio[j - 1];
 				if (ra != 0)
 				{
-					/* VILLAIN ACTION? */
-					vars.prsvec_1.action = FIGHT;
-					/* SEE IF */
+					/* !VILLAIN ACTION? */
+					vars.prsvec_1.prsa = vars.vindex_1.fightw;
+					/* !SEE IF */
 					if (game.objcts.oappli_(ra, 0))
 					{
 						continue;
 					}
 				}
-				/* SPECIAL ACTION. */
-				res = blow_(PLAYER, j, vars.vill_1.vmelee[i - 1], false, out);
+				/* !SPECIAL ACTION. */
+				res = blow_(vars.aindex_1.player, j, vars.vill_1.vmelee[i - 1], false, out);
 
-				/* STRIKE BLOW. */
+				/* !STRIKE BLOW. */
 				if (res < 0)
 				{
 					return;
 				}
-				/* IF HERO DEAD, EXIT. */
+				/* !IF HERO DEAD, EXIT. */
 				if (res == rout)
 				{
 					out = Supp.rnd_(3) + 2;
 				}
-				/* IF HERO OUT, SET FLG. */
+				/* !IF HERO OUT, SET FLG. */
 			}
 			--out;
-			/* DECREMENT OUT COUNT. */
+			/* !DECREMENT OUT COUNT. */
 		} while (out > 0);
-		/* IF STILL OUT, GO AGAIN. */
+		/* !IF STILL OUT, GO AGAIN. */
 		return;
 	} /* fightd_ */
 
@@ -180,7 +182,7 @@ public class Demons implements Constants
 			4115, 4119, 4123, 4127, 3131, 3134 };
 
 	/* BLOW- STRIKE BLOW */
-	int blow_(int h, int v, int rmk, boolean hflg, int out)
+	int blow_(int h, int v, int rmk, boolean hflg, int out) throws IOException
 	{
 		/* Initialized data */
 
@@ -203,25 +205,25 @@ public class Demons implements Constants
 		int pblose = 0;
 
 		ra = vars.objcts_1.oactio[v - 1];
-		/* GET VILLAIN ACTION, */
+		/* !GET VILLAIN ACTION, */
 		dv = vars.objcts_1.odesc2[v - 1];
-		/* DESCRIPTION. */
+		/* !DESCRIPTION. */
 		ret_val = rmiss;
 
 		int GOTO = 100;
-		/* ASSUME NO RESULT. */
+		/* !ASSUME NO RESULT. */
 		if (!hflg)
 		{
 			GOTO = 1000;
 		}
 		if (GOTO != 1000)
 		{
-			/* HERO STRIKING BLOW? */
+			/* !HERO STRIKING BLOW? */
 
 			/* HERO IS ATTACKER, VILLAIN IS DEFENDER. */
 
 			pblose = 10;
-			/* BAD LK PROB. */
+			/* !BAD LK PROB. */
 			vars.objcts_1.oflag2[v - 1] |= Vars.FITEBT;
 			boolean skip_to_100 = false;
 			if ((vars.advs_1.aflag[h - 1] & vars.aflags_1.astag) == 0)
@@ -231,7 +233,7 @@ public class Demons implements Constants
 			if (!skip_to_100)
 			{
 				game.dsub.rspeak_(591);
-				/* YES, CANT FIGHT. */
+				/* !YES, CANT FIGHT. */
 				vars.advs_1.aflag[h - 1] &= ~vars.aflags_1.astag;
 				return ret_val;
 			}
@@ -244,16 +246,16 @@ public class Demons implements Constants
 
 				case 100:
 					att = game.dso4.fights_(h, true);
-					/* GET HIS STRENGTH. */
+					/* !GET HIS STRENGTH. */
 					def = game.dso4.vilstr_(v);
-					/* GET VILL STRENGTH. */
+					/* !GET VILL STRENGTH. */
 					od = def;
 					dweap = 0;
-					/* ASSUME NO WEAPON. */
+					/* !ASSUME NO WEAPON. */
 					i__1 = vars.objcts_1.olnt;
 					for (i = 1; i <= i__1; ++i)
 					{
-						/* SEARCH VILLAIN. */
+						/* !SEARCH VILLAIN. */
 						if (vars.objcts_1.ocan[i - 1] == v
 								&& (vars.objcts_1.oflag2[i - 1] & Vars.WEAPBT) != 0)
 						{
@@ -261,32 +263,32 @@ public class Demons implements Constants
 						}
 						/* case 200: */
 					}
-					if (v == vars.advs_1.aobj[PLAYER - 1])
+					if (v == vars.advs_1.aobj[vars.aindex_1.player - 1])
 					{
 						GOTO = 300;
 						continue;
 					}
-					/* KILLING SELF? */
+					/* !KILLING SELF? */
 					if (def != 0)
 					{
 						GOTO = 2000;
 						continue;
 					}
-					/* DEFENDER ALIVE? */
+					/* !DEFENDER ALIVE? */
 					game.dsub.rspsub_(592, dv);
-					/* VILLAIN DEAD. */
+					/* !VILLAIN DEAD. */
 					return ret_val;
 
 				case 300:
 					game.dsub.jigsup_(593);
-					/* KILLING SELF. */
+					/* !KILLING SELF. */
 					return ret_val;
 
 				/* VILLAIN IS ATTACKER, HERO IS DEFENDER. */
 
 				case 1000:
 					pblose = 50;
-					/* BAD LK PROB. */
+					/* !BAD LK PROB. */
 					vars.advs_1.aflag[h - 1] &= ~vars.aflags_1.astag;
 					if ((vars.objcts_1.oflag2[v - 1] & Vars.STAGBT) == 0)
 					{
@@ -295,22 +297,22 @@ public class Demons implements Constants
 					}
 					vars.objcts_1.oflag2[v - 1] &= ~Vars.STAGBT;
 					game.dsub.rspsub_(594, dv);
-					/* DESCRIBE. */
+					/* !DESCRIBE. */
 					return ret_val;
 
 				case 1200:
 					att = game.dso4.vilstr_(v);
-					/* SET UP ATT, DEF. */
+					/* !SET UP ATT, DEF. */
 					def = game.dso4.fights_(h, true);
 					if (def <= 0)
 					{
 						return ret_val;
 					}
-					/* DONT ALLOW DEAD DEF. */
+					/* !DONT ALLOW DEAD DEF. */
 					od = game.dso4.fights_(h, false);
 					i__1 = game.dso3.fwim_(0, Vars.WEAPBT, 0, 0, h, true);
 					dweap = Math.abs(i__1);
-					/* FIND A WEAPON. */
+					/* !FIND A WEAPON. */
 					/* BLOW, PAGE 4 */
 
 					/* PARTIES ARE NOW EQUIPPED. DEF CANNOT BE ZERO. */
@@ -322,13 +324,13 @@ public class Demons implements Constants
 						GOTO = 2100;
 						continue;
 					}
-					/* DEF ALIVE? */
+					/* !DEF ALIVE? */
 					res = rkill;
 					if (hflg)
 					{
 						game.dsub.rspsub_(595, dv);
 					}
-					/* DEADER. */
+					/* !DEADER. */
 					GOTO = 3000;
 					continue;
 
@@ -348,26 +350,26 @@ public class Demons implements Constants
 						GOTO = 2400;
 						continue;
 					}
-					/* DEF <2,=2,>2 */
+					/* !DEF <2,=2,>2 */
 				case 2200:
 					att = Math.min(att, 3);
-					/* SCALE ATT. */
+					/* !SCALE ATT. */
 					tbl = def1r[att - 1];
-					/* CHOOSE TABLE. */
+					/* !CHOOSE TABLE. */
 					GOTO = 2500;
 					continue;
 
 				case 2300:
 					att = Math.min(att, 4);
-					/* SCALE ATT. */
+					/* !SCALE ATT. */
 					tbl = def2r[att - 1];
-					/* CHOOSE TABLE. */
+					/* !CHOOSE TABLE. */
 					GOTO = 2500;
 					continue;
 
 				case 2400:
 					att -= def;
-					/* SCALE ATT. */
+					/* !SCALE ATT. */
 					/* Computing MIN */
 					i__1 = 2;
 					i__2 = Math.max(-2, att);
@@ -376,21 +378,21 @@ public class Demons implements Constants
 
 				case 2500:
 					res = rvectr[tbl + Supp.rnd_(10) - 1];
-					/* GET RESULT. */
+					/* !GET RESULT. */
 					if (out == 0)
 					{
 						GOTO = 2600;
 						continue;
 					}
-					/* WAS HE OUT? */
+					/* !WAS HE OUT? */
 					if (res == rstag)
 					{
 						GOTO = 2550;
 						continue;
 					}
-					/* YES, STAG--> HES. */
+					/* !YES, STAG--> HES. */
 					res = rsit;
-					/* OTHERWISE, SITTING. */
+					/* !OTHERWISE, SITTING. */
 					GOTO = 2600;
 					continue;
 				case 2550:
@@ -402,7 +404,7 @@ public class Demons implements Constants
 					}
 
 					mi = rstate[(rmk - 1) * 9 + res];
-					/* CHOOSE TABLE ENTRY. */
+					/* !CHOOSE TABLE ENTRY. */
 					if (mi == 0)
 					{
 						GOTO = 3000;
@@ -416,7 +418,7 @@ public class Demons implements Constants
 						j = vars.objcts_1.odesc2[dweap - 1];
 					}
 					game.dsub.rspsub_(i, j);
-					/* PRESENT RESULT. */
+					/* !PRESENT RESULT. */
 					/* BLOW, PAGE 5 */
 
 					/* NOW APPLY RESULT */
@@ -458,13 +460,13 @@ public class Demons implements Constants
 					{
 						def = -def;
 					}
-					/* UNCONSCIOUS. */
+					/* !UNCONSCIOUS. */
 					GOTO = 4000;
 					continue;
 
 				case 3200:
 					def = 0;
-					/* KILLED OR SITTING DUCK. */
+					/* !KILLED OR SITTING DUCK. */
 					GOTO = 4000;
 					continue;
 
@@ -473,7 +475,7 @@ public class Demons implements Constants
 					i__1 = 0;
 					i__2 = def - 1;
 					def = Math.max(i__1, i__2);
-					/* LIGHT WOUND. */
+					/* !LIGHT WOUND. */
 					GOTO = 4000;
 					continue;
 
@@ -482,7 +484,7 @@ public class Demons implements Constants
 					i__1 = 0;
 					i__2 = def - 2;
 					def = Math.max(i__1, i__2);
-					/* SERIOUS WOUND. */
+					/* !SERIOUS WOUND. */
 					GOTO = 4000;
 					continue;
 
@@ -492,7 +494,7 @@ public class Demons implements Constants
 						GOTO = 3550;
 						continue;
 					}
-					/* STAGGERED. */
+					/* !STAGGERED. */
 					vars.advs_1.aflag[h - 1] |= vars.aflags_1.astag;
 					GOTO = 4000;
 					continue;
@@ -504,17 +506,17 @@ public class Demons implements Constants
 
 				case 3600:
 					game.dsub.newsta_(dweap, 0, vars.play_1.here, 0, 0);
-					/* LOSE WEAPON. */
+					/* !LOSE WEAPON. */
 					dweap = 0;
 					if (hflg)
 					{
 						GOTO = 4000;
 						continue;
 					}
-					/* IF HERO, DONE. */
+					/* !IF HERO, DONE. */
 					i__1 = game.dso3.fwim_(0, Vars.WEAPBT, 0, 0, h, true);
 					dweap = Math.abs(i__1);
-					/* GET NEW. */
+					/* !GET NEW. */
 					if (dweap != 0)
 					{
 						game.dsub.rspsub_(605, vars.objcts_1.odesc2[dweap - 1]);
@@ -523,33 +525,33 @@ public class Demons implements Constants
 
 				case 4000:
 					ret_val = res;
-					/* RETURN RESULT. */
+					/* !RETURN RESULT. */
 					if (!(hflg))
 					{
 						GOTO = 4500;
 						continue;
 					}
-					/* HERO? */
+					/* !HERO? */
 					vars.objcts_1.ocapac[v - 1] = def;
-					/* STORE NEW CAPACITY. */
+					/* !STORE NEW CAPACITY. */
 					if (def != 0)
 					{
 						GOTO = 4100;
 						continue;
 					}
-					/* DEAD? */
+					/* !DEAD? */
 					vars.objcts_1.oflag2[v - 1] &= ~Vars.FITEBT;
 					game.dsub.rspsub_(572, dv);
-					/* HE DIES. */
+					/* !HE DIES. */
 					game.dsub.newsta_(v, 0, 0, 0, 0);
-					/* MAKE HIM DISAPPEAR. */
+					/* !MAKE HIM DISAPPEAR. */
 					if (ra == 0)
 					{
 						return ret_val;
 					}
-					/* IF NX TO DO, EXIT. */
-					vars.prsvec_1.action = VILLAIN_DIED;
-					/* LET HIM KNOW. */
+					/* !IF NX TO DO, EXIT. */
+					vars.prsvec_1.prsa = vars.vindex_1.deadxw;
+					/* !LET HIM KNOW. */
 					game.objcts.oappli_(ra, 0);
 					return ret_val;
 
@@ -558,14 +560,14 @@ public class Demons implements Constants
 					{
 						return ret_val;
 					}
-					vars.prsvec_1.action = VILLAIN_LEFT;
-					/* LET HIM BE OUT. */
+					vars.prsvec_1.prsa = vars.vindex_1.outxw;
+					/* !LET HIM BE OUT. */
 					game.objcts.oappli_(ra, 0);
 					return ret_val;
 
 				case 4500:
 					vars.advs_1.astren[h - 1] = -10000;
-					/* ASSUME DEAD. */
+					/* !ASSUME DEAD. */
 					if (def != 0)
 					{
 						vars.advs_1.astren[h - 1] = def - od;
@@ -583,7 +585,7 @@ public class Demons implements Constants
 						return ret_val;
 					}
 					vars.advs_1.astren[h - 1] = 1 - game.dso4.fights_(h, false);
-					/* HE'S DEAD. */
+					/* !HE'S DEAD. */
 					game.dsub.jigsup_(596);
 					ret_val = -1;
 					return ret_val;
@@ -596,7 +598,7 @@ public class Demons implements Constants
 
 	/* DECLARATIONS */
 
-	void swordd_()
+	void swordd_() throws IOException
 	{
 		/* System generated locals */
 		int i__1, i__2;
@@ -604,40 +606,40 @@ public class Demons implements Constants
 		/* Local variables */
 		int i, ng;
 
-		if (vars.objcts_1.oadv[vars.oindex_1.sword - 1] != PLAYER)
+		if (vars.objcts_1.oadv[vars.oindex_1.sword - 1] != vars.aindex_1.player)
 		{
-			/* DROPPED SWORD, */
+			/* !DROPPED SWORD, */
 			vars.hack_1.swdact = false;
 			return;
 		}
-		/* HOLDING SWORD? */
+		/* !HOLDING SWORD? */
 		ng = 2;
-		/* ASSUME VILL CLOSE. */
+		/* !ASSUME VILL CLOSE. */
 		if (infest_(vars.play_1.here))
 		{
 			if (ng == vars.hack_1.swdsta)
 			{
 				return;
 			}
-			/* ANY STATE CHANGE? */
+			/* !ANY STATE CHANGE? */
 			i__2 = ng + 495;
 			game.dsub.rspeak_(i__2);
-			/* YES, TELL NEW STATE. */
+			/* !YES, TELL NEW STATE. */
 			vars.hack_1.swdsta = ng;
 			return;
 		}
-		/* VILL HERE? */
+		/* !VILL HERE? */
 		ng = 1;
 		i__1 = vars.xsrch_1.xmax;
 		i__2 = vars.xsrch_1.xmin;
 		for (i = vars.xsrch_1.xmin; i__2 < 0 ? i >= i__1 : i <= i__1; i += i__2)
 		{
-			/* NO, SEARCH ROOMS. */
+			/* !NO, SEARCH ROOMS. */
 			if (!game.dso3.findxt_(i, vars.play_1.here))
 			{
 				continue;
 			}
-			/* ROOM THAT WAY? */
+			/* !ROOM THAT WAY? */
 			switch (vars.curxt_1.xtype)
 			{
 				case 1:
@@ -649,33 +651,33 @@ public class Demons implements Constants
 				case 4:
 					break;
 			}
-			/* SEE IF ROOM AT ALL. */
+			/* !SEE IF ROOM AT ALL. */
 			if (infest_(vars.curxt_1.xroom1))
 			{
 				if (ng == vars.hack_1.swdsta)
 				{
 					return;
 				}
-				/* ANY STATE CHANGE? */
+				/* !ANY STATE CHANGE? */
 				i__2 = ng + 495;
 				game.dsub.rspeak_(i__2);
-				/* YES, TELL NEW STATE. */
+				/* !YES, TELL NEW STATE. */
 				vars.hack_1.swdsta = ng;
 				return;
 			}
-			/* CHECK ROOM. */
+			/* !CHECK ROOM. */
 		}
 		ng = 0;
-		/* NO GLOW. */
+		/* !NO GLOW. */
 
 		if (ng == vars.hack_1.swdsta)
 		{
 			return;
 		}
-		/* ANY STATE CHANGE? */
+		/* !ANY STATE CHANGE? */
 		i__2 = ng + 495;
 		game.dsub.rspeak_(i__2);
-		/* YES, TELL NEW STATE. */
+		/* !YES, TELL NEW STATE. */
 		vars.hack_1.swdsta = ng;
 		return;
 

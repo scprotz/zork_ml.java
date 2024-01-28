@@ -1,6 +1,8 @@
 package zork;
 
-public class Sobjs implements Constants
+import java.io.IOException;
+
+public class Sobjs
 {
 	/* SOBJS- SIMPLE OBJECTS PROCESSOR */
 	/* OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP, */
@@ -18,7 +20,7 @@ public class Sobjs implements Constants
 		this.game = game;
 	}
 
-	boolean sobjs_(int ri, int arg)
+	boolean sobjs_(int ri, int arg) throws IOException
 	{
 		/* System generated locals */
 		int i__1;
@@ -30,18 +32,18 @@ public class Sobjs implements Constants
 		int av;
 		int odi2 = 0, odo2 = 0;
 
-		if (vars.prsvec_1.direct_object <= 220)
+		if (vars.prsvec_1.prso <= 220)
 		{
 
-			if (vars.prsvec_1.direct_object != 0)
+			if (vars.prsvec_1.prso != 0)
 			{
-				odo2 = vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1];
+				odo2 = vars.objcts_1.odesc2[vars.prsvec_1.prso - 1];
 			}
 		}
 
-		if (vars.prsvec_1.indirect_object != 0)
+		if (vars.prsvec_1.prsi != 0)
 		{
-			odi2 = vars.objcts_1.odesc2[vars.prsvec_1.indirect_object - 1];
+			odi2 = vars.objcts_1.odesc2[vars.prsvec_1.prsi - 1];
 		}
 		av = vars.advs_1.avehic[vars.play_1.winner - 1];
 		ret_val = true;
@@ -168,44 +170,44 @@ public class Sobjs implements Constants
 					{
 						return false;
 					}
-					/* NOT INSIDE? F */
+					/* !NOT INSIDE? F */
 					game.dsub.newsta_(vars.oindex_1.gunk, 122, 0, 0, 0);
-					/* FALLS APART. */
+					/* !FALLS APART. */
 					return ret_val;
 
 				/* O2-- TROPHY CASE */
 
 				case 3000:
-					if (vars.prsvec_1.action != TAKE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
 					{
 						return false;
 					}
-					/* TAKE? */
+					/* !TAKE? */
 					game.dsub.rspeak_(128);
-					/* CANT. */
+					/* !CANT. */
 					return ret_val;
 
 				/* O3-- BOTTLE FUNCTION */
 
 				case 4000:
-					if (vars.prsvec_1.action != THROW)
+					if (vars.prsvec_1.prsa != vars.vindex_1.throww)
 					{
 						GOTO = 4100;
 						continue loop;
 					}
-					/* THROW? */
-					game.dsub.newsta_(vars.prsvec_1.direct_object, 129, 0, 0, 0);
-					/* BREAKS. */
+					/* !THROW? */
+					game.dsub.newsta_(vars.prsvec_1.prso, 129, 0, 0, 0);
+					/* !BREAKS. */
 					return ret_val;
 
 				case 4100:
-					if (vars.prsvec_1.action != MUNG)
+					if (vars.prsvec_1.prsa != vars.vindex_1.mungw)
 					{
 						return false;
 					}
-					/* MUNG? */
-					game.dsub.newsta_(vars.prsvec_1.direct_object, 131, 0, 0, 0);
-					/* BREAKS. */
+					/* !MUNG? */
+					game.dsub.newsta_(vars.prsvec_1.prso, 131, 0, 0, 0);
+					/* !BREAKS. */
 					return ret_val;
 				/* SOBJS, PAGE 4 */
 
@@ -217,32 +219,32 @@ public class Sobjs implements Constants
 						GOTO = 6100;
 						continue loop;
 					}
-					/* IN DOME? */
+					/* !IN DOME? */
 					vars.findex_1.domef = false;
-					/* NO, */
-					if (vars.prsvec_1.action != UNTIE)
+					/* !NO, */
+					if (vars.prsvec_1.prsa != vars.vindex_1.untiew)
 					{
 						GOTO = 6050;
 						continue loop;
 					}
-					/* UNTIE? */
+					/* !UNTIE? */
 					game.dsub.rspeak_(134);
-					/* CANT */
+					/* !CANT */
 					return ret_val;
 
 				case 6050:
-					if (vars.prsvec_1.action != TIE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.tiew)
 					{
 						return false;
 					}
-					/* TIE? */
+					/* !TIE? */
 					game.dsub.rspeak_(135);
-					/* CANT TIE */
+					/* !CANT TIE */
 					return ret_val;
 
 				case 6100:
-					if (vars.prsvec_1.action != TIE
-							|| vars.prsvec_1.indirect_object != vars.oindex_1.raili)
+					if (vars.prsvec_1.prsa != vars.vindex_1.tiew
+							|| vars.prsvec_1.prsi != vars.oindex_1.raili)
 					{
 						GOTO = 6200;
 						continue loop;
@@ -252,9 +254,9 @@ public class Sobjs implements Constants
 						GOTO = 6150;
 						continue loop;
 					}
-					/* ALREADY TIED? */
+					/* !ALREADY TIED? */
 					vars.findex_1.domef = true;
-					/* NO, TIE IT. */
+					/* !NO, TIE IT. */
 					vars.objcts_1.oflag1[vars.oindex_1.rope - 1] |= Vars.NDSCBT;
 					vars.objcts_1.oflag2[vars.oindex_1.rope - 1] |= Vars.CLMBBT;
 					game.dsub.newsta_(vars.oindex_1.rope, 137, vars.rindex_1.dome, 0, 0);
@@ -262,59 +264,59 @@ public class Sobjs implements Constants
 
 				case 6150:
 					game.dsub.rspeak_(136);
-					/* DUMMY. */
+					/* !DUMMY. */
 					return ret_val;
 
 				case 6200:
-					if (vars.prsvec_1.action != UNTIE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.untiew)
 					{
 						GOTO = 6300;
 						continue loop;
 					}
-					/* UNTIE? */
+					/* !UNTIE? */
 					if (vars.findex_1.domef)
 					{
 						GOTO = 6250;
 						continue loop;
 					}
-					/* TIED? */
+					/* !TIED? */
 					game.dsub.rspeak_(134);
-					/* NO, DUMMY. */
+					/* !NO, DUMMY. */
 					return ret_val;
 
 				case 6250:
 					vars.findex_1.domef = false;
-					/* YES, UNTIE IT. */
+					/* !YES, UNTIE IT. */
 					vars.objcts_1.oflag1[vars.oindex_1.rope - 1] &= ~Vars.NDSCBT;
 					vars.objcts_1.oflag2[vars.oindex_1.rope - 1] &= ~Vars.CLMBBT;
 					game.dsub.rspeak_(139);
 					return ret_val;
 
 				case 6300:
-					if (vars.findex_1.domef || vars.prsvec_1.action != DROP)
+					if (vars.findex_1.domef || vars.prsvec_1.prsa != vars.vindex_1.dropw)
 					{
 						GOTO = 6400;
 						continue loop;
 					}
-					/* DROP & UNTIED? */
+					/* !DROP & UNTIED? */
 					game.dsub.newsta_(vars.oindex_1.rope, 140, vars.rindex_1.mtorc, 0, 0);
-					/* YES, DROP. */
+					/* !YES, DROP. */
 					return ret_val;
 
 				case 6400:
-					if (vars.prsvec_1.action != TAKE || !vars.findex_1.domef)
+					if (vars.prsvec_1.prsa != vars.vindex_1.takew || !vars.findex_1.domef)
 					{
 						return false;
 					}
 					game.dsub.rspeak_(141);
-					/* TAKE & TIED. */
+					/* !TAKE & TIED. */
 					return ret_val;
 
 				/* O5-- SWORD FUNCTION */
 
 				case 7000:
-					if (vars.prsvec_1.action == TAKE
-							&& vars.play_1.winner == PLAYER)
+					if (vars.prsvec_1.prsa == vars.vindex_1.takew
+							&& vars.play_1.winner == vars.aindex_1.player)
 					{
 
 						vars.hack_1.swdact = true;
@@ -324,24 +326,24 @@ public class Sobjs implements Constants
 				/* O6-- LANTERN */
 
 				case 8000:
-					if (vars.prsvec_1.action != THROW)
+					if (vars.prsvec_1.prsa != vars.vindex_1.throww)
 					{
 						GOTO = 8100;
 						continue loop;
 					}
-					/* THROW? */
+					/* !THROW? */
 					game.dsub.newsta_(vars.oindex_1.lamp, 0, 0, 0, 0);
-					/* KILL LAMP, */
+					/* !KILL LAMP, */
 					game.dsub.newsta_(vars.oindex_1.blamp, 142, vars.play_1.here, 0, 0);
-					/* REPLACE WITH BROKEN. */
+					/* !REPLACE WITH BROKEN. */
 					return ret_val;
 
 				case 8100:
-					if (vars.prsvec_1.action == TURN_ON)
+					if (vars.prsvec_1.prsa == vars.vindex_1.trnonw)
 					{
 						vars.cevent_1.cflag[vars.cindex_1.cevlnt - 1] = true;
 					}
-					if (vars.prsvec_1.action == TURN_OFF)
+					if (vars.prsvec_1.prsa == vars.vindex_1.trnofw)
 					{
 						vars.cevent_1.cflag[vars.cindex_1.cevlnt - 1] = false;
 					}
@@ -350,34 +352,34 @@ public class Sobjs implements Constants
 				/* O7-- RUG FUNCTION */
 
 				case 9000:
-					if (vars.prsvec_1.action != RAISE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.raisew)
 					{
 						GOTO = 9100;
 						continue loop;
 					}
-					/* RAISE? */
+					/* !RAISE? */
 					game.dsub.rspeak_(143);
-					/* CANT */
+					/* !CANT */
 					return ret_val;
 
 				case 9100:
-					if (vars.prsvec_1.action != TAKE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
 					{
 						GOTO = 9200;
 						continue loop;
 					}
-					/* TAKE? */
+					/* !TAKE? */
 					game.dsub.rspeak_(144);
-					/* CANT */
+					/* !CANT */
 					return ret_val;
 
 				case 9200:
-					if (vars.prsvec_1.action != MOVE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.movew)
 					{
 						GOTO = 9300;
 						continue loop;
 					}
-					/* MOVE? */
+					/* !MOVE? */
 					i__1 = vars.findex_1.orrug + 145;
 					game.dsub.rspeak_(i__1);
 					vars.findex_1.orrug = 1;
@@ -385,7 +387,7 @@ public class Sobjs implements Constants
 					return ret_val;
 
 				case 9300:
-					if (vars.prsvec_1.action != LOOK_UNDER || vars.findex_1.orrug != 0
+					if (vars.prsvec_1.prsa != vars.vindex_1.lookuw || vars.findex_1.orrug != 0
 							|| (vars.objcts_1.oflag2[vars.oindex_1.door - 1] & Vars.OPENBT) != 0)
 					{
 						return false;
@@ -403,13 +405,13 @@ public class Sobjs implements Constants
 					{
 						game.dsub.rspeak_(162);
 					}
-					/* IF ROBBED, SAY SO. */
+					/* !IF ROBBED, SAY SO. */
 					return ret_val;
 
 				/* O9-- MIRROR */
 
 				case 14000:
-					if (vars.findex_1.mirrmf || vars.prsvec_1.action != RUB)
+					if (vars.findex_1.mirrmf || vars.prsvec_1.prsa != vars.vindex_1.rubw)
 					{
 						GOTO = 14500;
 						continue loop;
@@ -418,7 +420,7 @@ public class Sobjs implements Constants
 					i__1 = vars.objcts_1.olnt;
 					for (i = 1; i <= i__1; ++i)
 					{
-						/* INTERCHANGE OBJS. */
+						/* !INTERCHANGE OBJS. */
 						if (vars.objcts_1.oroom[i - 1] == vars.play_1.here)
 						{
 							vars.objcts_1.oroom[i - 1] = -1;
@@ -435,52 +437,52 @@ public class Sobjs implements Constants
 					}
 					game.dso2.moveto_(mroom, vars.play_1.winner);
 					game.dsub.rspeak_(163);
-					/* SHAKE WORLD. */
+					/* !SHAKE WORLD. */
 					return ret_val;
 
 				case 14500:
-					if (vars.prsvec_1.action != LOOK
-							&& vars.prsvec_1.action != LOOK_IN
-							&& vars.prsvec_1.action != EXAMINE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.lookw
+							&& vars.prsvec_1.prsa != vars.vindex_1.lookiw
+							&& vars.prsvec_1.prsa != vars.vindex_1.examiw)
 					{
 						GOTO = 14600;
 						continue loop;
 					}
 					i = 164;
-					/* MIRROR OK. */
+					/* !MIRROR OK. */
 					if (vars.findex_1.mirrmf)
 					{
 						i = 165;
 					}
-					/* MIRROR DEAD. */
+					/* !MIRROR DEAD. */
 					game.dsub.rspeak_(i);
 					return ret_val;
 
 				case 14600:
-					if (vars.prsvec_1.action != TAKE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
 					{
 						GOTO = 14700;
 						continue loop;
 					}
-					/* TAKE? */
+					/* !TAKE? */
 					game.dsub.rspeak_(166);
-					/* JOKE. */
+					/* !JOKE. */
 					return ret_val;
 
 				case 14700:
-					if (vars.prsvec_1.action != MUNG
-							&& vars.prsvec_1.action != THROW)
+					if (vars.prsvec_1.prsa != vars.vindex_1.mungw
+							&& vars.prsvec_1.prsa != vars.vindex_1.throww)
 					{
 
 						return false;
 					}
 					i = 167;
-					/* MIRROR BREAKS. */
+					/* !MIRROR BREAKS. */
 					if (vars.findex_1.mirrmf)
 					{
 						i = 168;
 					}
-					/* MIRROR ALREADY BROKEN. */
+					/* !MIRROR ALREADY BROKEN. */
 					vars.findex_1.mirrmf = true;
 					vars.findex_1.badlkf = true;
 					game.dsub.rspeak_(i);
@@ -490,109 +492,109 @@ public class Sobjs implements Constants
 				/* O10-- DUMBWAITER */
 
 				case 16000:
-					if (vars.prsvec_1.action != RAISE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.raisew)
 					{
 						GOTO = 16100;
 						continue loop;
 					}
-					/* RAISE? */
+					/* !RAISE? */
 					if (vars.findex_1.cagetf)
 					{
 						GOTO = 16400;
 						continue loop;
 					}
-					/* ALREADY AT TOP? */
+					/* !ALREADY AT TOP? */
 					game.dsub.newsta_(vars.oindex_1.tbask, 175, vars.rindex_1.tshaf, 0, 0);
-					/* NO, RAISE BASKET. */
+					/* !NO, RAISE BASKET. */
 					game.dsub.newsta_(vars.oindex_1.fbask, 0, vars.rindex_1.bshaf, 0, 0);
 					vars.findex_1.cagetf = true;
-					/* AT TOP. */
+					/* !AT TOP. */
 					return ret_val;
 
 				case 16100:
-					if (vars.prsvec_1.action != LOWER)
+					if (vars.prsvec_1.prsa != vars.vindex_1.lowerw)
 					{
 						GOTO = 16200;
 						continue loop;
 					}
-					/* LOWER? */
+					/* !LOWER? */
 					if (!vars.findex_1.cagetf)
 					{
 						GOTO = 16400;
 						continue loop;
 					}
-					/* ALREADY AT BOTTOM? */
+					/* !ALREADY AT BOTTOM? */
 					game.dsub.newsta_(vars.oindex_1.tbask, 176, vars.rindex_1.bshaf, 0, 0);
-					/* NO, LOWER BASKET. */
+					/* !NO, LOWER BASKET. */
 					game.dsub.newsta_(vars.oindex_1.fbask, 0, vars.rindex_1.tshaf, 0, 0);
 					vars.findex_1.cagetf = false;
 					if (!game.dso5.lit_(vars.play_1.here))
 					{
 						game.dsub.rspeak_(406);
 					}
-					/* IF DARK, DIE. */
+					/* !IF DARK, DIE. */
 					return ret_val;
 
 				case 16200:
-					if (vars.prsvec_1.direct_object != vars.oindex_1.fbask
-							&& vars.prsvec_1.indirect_object != vars.oindex_1.fbask)
+					if (vars.prsvec_1.prso != vars.oindex_1.fbask
+							&& vars.prsvec_1.prsi != vars.oindex_1.fbask)
 					{
 						GOTO = 16300;
 						continue loop;
 					}
 					game.dsub.rspeak_(130);
-					/* WRONG BASKET. */
+					/* !WRONG BASKET. */
 					return ret_val;
 
 				case 16300:
-					if (vars.prsvec_1.action != TAKE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.takew)
 					{
 						return false;
 					}
-					/* TAKE? */
+					/* !TAKE? */
 					game.dsub.rspeak_(177);
-					/* JOKE. */
+					/* !JOKE. */
 					return ret_val;
 
 				case 16400:
 					i__1 = Supp.rnd_(3) + 125;
 					game.dsub.rspeak_(i__1);
-					/* DUMMY. */
+					/* !DUMMY. */
 					return ret_val;
 
 				/* O11-- GHOST FUNCTION */
 
 				case 17000:
 					i = 178;
-					/* ASSUME DIRECT. */
-					if (vars.prsvec_1.direct_object != vars.oindex_1.ghost)
+					/* !ASSUME DIRECT. */
+					if (vars.prsvec_1.prso != vars.oindex_1.ghost)
 					{
 						i = 179;
 					}
-					/* IF NOT, INDIRECT. */
+					/* !IF NOT, INDIRECT. */
 					game.dsub.rspeak_(i);
 					return ret_val;
-				/* SPEAK AND EXIT. */
+				/* !SPEAK AND EXIT. */
 				/* SOBJS, PAGE 7 */
 
 				/* O12-- TUBE */
 
 				case 21000:
-					if (vars.prsvec_1.action != PUT
-							|| vars.prsvec_1.indirect_object != vars.oindex_1.tube)
+					if (vars.prsvec_1.prsa != vars.vindex_1.putw
+							|| vars.prsvec_1.prsi != vars.oindex_1.tube)
 					{
 						return false;
 					}
 					game.dsub.rspeak_(186);
-					/* CANT PUT BACK IN. */
+					/* !CANT PUT BACK IN. */
 					return ret_val;
 
 				/* O13-- CHALICE */
 
 				case 23000:
-					if (vars.prsvec_1.action != TAKE
-							|| vars.objcts_1.ocan[vars.prsvec_1.direct_object - 1] != 0
-							|| vars.objcts_1.oroom[vars.prsvec_1.direct_object - 1] != vars.rindex_1.treas
+					if (vars.prsvec_1.prsa != vars.vindex_1.takew
+							|| vars.objcts_1.ocan[vars.prsvec_1.prso - 1] != 0
+							|| vars.objcts_1.oroom[vars.prsvec_1.prso - 1] != vars.rindex_1.treas
 							|| vars.objcts_1.oroom[vars.oindex_1.thief - 1] != vars.rindex_1.treas
 							|| (vars.objcts_1.oflag2[vars.oindex_1.thief - 1] & Vars.FITEBT) == 0
 							|| !vars.hack_1.thfact)
@@ -600,48 +602,48 @@ public class Sobjs implements Constants
 						return false;
 					}
 					game.dsub.rspeak_(204);
-					/* CANT TAKE. */
+					/* !CANT TAKE. */
 					return ret_val;
 
 				/* O14-- PAINTING */
 
 				case 24000:
-					if (vars.prsvec_1.action != MUNG)
+					if (vars.prsvec_1.prsa != vars.vindex_1.mungw)
 					{
 						return false;
 					}
-					/* MUNG? */
+					/* !MUNG? */
 					game.dsub.rspeak_(205);
-					/* DESTROY PAINTING. */
-					vars.objcts_1.ofval[vars.prsvec_1.direct_object - 1] = 0;
-					vars.objcts_1.otval[vars.prsvec_1.direct_object - 1] = 0;
-					vars.objcts_1.odesc1[vars.prsvec_1.direct_object - 1] = 207;
-					vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1] = 206;
+					/* !DESTROY PAINTING. */
+					vars.objcts_1.ofval[vars.prsvec_1.prso - 1] = 0;
+					vars.objcts_1.otval[vars.prsvec_1.prso - 1] = 0;
+					vars.objcts_1.odesc1[vars.prsvec_1.prso - 1] = 207;
+					vars.objcts_1.odesc2[vars.prsvec_1.prso - 1] = 206;
 					return ret_val;
 				/* SOBJS, PAGE 8 */
 
 				/* O15-- BOLT */
 
 				case 27000:
-					if (vars.prsvec_1.action != TURN)
+					if (vars.prsvec_1.prsa != vars.vindex_1.turnw)
 					{
 						return false;
 					}
-					/* TURN BOLT? */
-					if (vars.prsvec_1.indirect_object != vars.oindex_1.wrenc)
+					/* !TURN BOLT? */
+					if (vars.prsvec_1.prsi != vars.oindex_1.wrenc)
 					{
 						GOTO = 27500;
 						continue loop;
 					}
-					/* WITH WRENCH? */
+					/* !WITH WRENCH? */
 					if (vars.findex_1.gatef)
 					{
 						GOTO = 27100;
 						continue loop;
 					}
-					/* PROPER BUTTON PUSHED? */
+					/* !PROPER BUTTON PUSHED? */
 					game.dsub.rspeak_(210);
-					/* NO, LOSE. */
+					/* !NO, LOSE. */
 					return ret_val;
 
 				case 27100:
@@ -650,9 +652,9 @@ public class Sobjs implements Constants
 						GOTO = 27200;
 						continue loop;
 					}
-					/* LOW TIDE NOW? */
+					/* !LOW TIDE NOW? */
 					vars.findex_1.lwtidf = true;
-					/* NO, EMPTY DAM. */
+					/* !NO, EMPTY DAM. */
 					game.dsub.rspeak_(211);
 					vars.objcts_1.oflag2[vars.oindex_1.coffi - 1] &= ~Vars.SCRDBT;
 					vars.objcts_1.oflag1[vars.oindex_1.trunk - 1] |= Vars.VISIBT;
@@ -663,7 +665,7 @@ public class Sobjs implements Constants
 
 				case 27200:
 					vars.findex_1.lwtidf = false;
-					/* YES, FILL DAM. */
+					/* !YES, FILL DAM. */
 					game.dsub.rspeak_(212);
 					if (game.dsub.qhere_(vars.oindex_1.trunk, vars.rindex_1.reser))
 					{
@@ -676,14 +678,14 @@ public class Sobjs implements Constants
 
 				case 27500:
 					game.dsub.rspsub_(299, odi2);
-					/* NOT WITH THAT. */
+					/* !NOT WITH THAT. */
 					return ret_val;
 
 				/* O16-- GRATING */
 
 				case 28000:
-					if (vars.prsvec_1.action != OPEN
-							&& vars.prsvec_1.action != CLOSE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.openw
+							&& vars.prsvec_1.prsa != vars.vindex_1.closew)
 					{
 
 						return false;
@@ -693,21 +695,21 @@ public class Sobjs implements Constants
 						GOTO = 28200;
 						continue loop;
 					}
-					/* UNLOCKED? */
+					/* !UNLOCKED? */
 					game.dsub.rspeak_(214);
-					/* NO, LOCKED. */
+					/* !NO, LOCKED. */
 					return ret_val;
 
 				case 28200:
 					i = 215;
-					/* UNLOCKED, VIEW FRM CLR. */
+					/* !UNLOCKED, VIEW FRM CLR. */
 					if (vars.play_1.here != vars.rindex_1.clear)
 					{
 						i = 216;
 					}
-					/* VIEW FROM BELOW. */
+					/* !VIEW FROM BELOW. */
 					ret_val = game.dso5.opncls_(vars.oindex_1.grate, i, 885);
-					/* OPEN/CLOSE. */
+					/* !OPEN/CLOSE. */
 					vars.rooms_1.rflag[vars.rindex_1.mgrat - 1] &= ~Vars.RLIGHT;
 					if ((vars.objcts_1.oflag2[vars.oindex_1.grate - 1] & Vars.OPENBT) != 0)
 					{
@@ -717,7 +719,7 @@ public class Sobjs implements Constants
 					{
 						game.dsub.rspeak_(406);
 					}
-					/* IF DARK, DIE. */
+					/* !IF DARK, DIE. */
 					return ret_val;
 
 				/* O17-- TRAP DOOR */
@@ -728,9 +730,9 @@ public class Sobjs implements Constants
 						GOTO = 29100;
 						continue loop;
 					}
-					/* FROM LIVING ROOM? */
+					/* !FROM LIVING ROOM? */
 					ret_val = game.dso5.opncls_(vars.oindex_1.door, 218, 219);
-					/* OPEN/CLOSE. */
+					/* !OPEN/CLOSE. */
 					return ret_val;
 
 				case 29100:
@@ -738,42 +740,42 @@ public class Sobjs implements Constants
 					{
 						return false;
 					}
-					/* FROM CELLAR? */
-					if (vars.prsvec_1.action != OPEN
+					/* !FROM CELLAR? */
+					if (vars.prsvec_1.prsa != vars.vindex_1.openw
 							|| (vars.objcts_1.oflag2[vars.oindex_1.door - 1] & Vars.OPENBT) != 0)
 					{
 						GOTO = 29200;
 						continue loop;
 					}
 					game.dsub.rspeak_(220);
-					/* CANT OPEN CLOSED DOOR. */
+					/* !CANT OPEN CLOSED DOOR. */
 					return ret_val;
 
 				case 29200:
 					ret_val = game.dso5.opncls_(vars.oindex_1.door, 0, 22);
-					/* NORMAL OPEN/CLOSE. */
+					/* !NORMAL OPEN/CLOSE. */
 					return ret_val;
 
 				/* O18-- DURABLE DOOR */
 
 				case 30000:
 					i = 0;
-					/* ASSUME NO APPL. */
-					if (vars.prsvec_1.action == OPEN)
+					/* !ASSUME NO APPL. */
+					if (vars.prsvec_1.prsa == vars.vindex_1.openw)
 					{
 						i = 221;
 					}
-					/* OPEN? */
-					if (vars.prsvec_1.action == BURN)
+					/* !OPEN? */
+					if (vars.prsvec_1.prsa == vars.vindex_1.burnw)
 					{
 						i = 222;
 					}
-					/* BURN? */
-					if (vars.prsvec_1.action == MUNG)
+					/* !BURN? */
+					if (vars.prsvec_1.prsa == vars.vindex_1.mungw)
 					{
 						i = Supp.rnd_(3) + 223;
 					}
-					/* MUNG? */
+					/* !MUNG? */
 					if (i == 0)
 					{
 						return false;
@@ -784,100 +786,100 @@ public class Sobjs implements Constants
 				/* O19-- MASTER SWITCH */
 
 				case 31000:
-					if (vars.prsvec_1.action != TURN)
+					if (vars.prsvec_1.prsa != vars.vindex_1.turnw)
 					{
 						return false;
 					}
-					/* TURN? */
-					if (vars.prsvec_1.indirect_object != vars.oindex_1.screw)
+					/* !TURN? */
+					if (vars.prsvec_1.prsi != vars.oindex_1.screw)
 					{
 						GOTO = 31500;
 						continue loop;
 					}
-					/* WITH SCREWDRIVER? */
+					/* !WITH SCREWDRIVER? */
 					if ((vars.objcts_1.oflag2[vars.oindex_1.machi - 1] & Vars.OPENBT) != 0)
 					{
 						GOTO = 31600;
 						continue loop;
 					}
-					/* LID UP? */
+					/* !LID UP? */
 					game.dsub.rspeak_(226);
-					/* NO, ACTIVATE. */
+					/* !NO, ACTIVATE. */
 					if (vars.objcts_1.ocan[vars.oindex_1.coal - 1] != vars.oindex_1.machi)
 					{
 						GOTO = 31400;
 						continue loop;
 					}
-					/* COAL INSIDE? */
+					/* !COAL INSIDE? */
 					game.dsub.newsta_(vars.oindex_1.coal, 0, 0, 0, 0);
-					/* KILL COAL, */
+					/* !KILL COAL, */
 					game.dsub.newsta_(vars.oindex_1.diamo, 0, 0, vars.oindex_1.machi, 0);
-					/* REPLACE WITH DIAMOND. */
+					/* !REPLACE WITH DIAMOND. */
 					return ret_val;
 
 				case 31400:
 					i__1 = vars.objcts_1.olnt;
 					for (i = 1; i <= i__1; ++i)
 					{
-						/* KILL NONCOAL OBJECTS. */
+						/* !KILL NONCOAL OBJECTS. */
 						if (vars.objcts_1.ocan[i - 1] != vars.oindex_1.machi)
 						{
 							continue;
 						}
-						/* INSIDE MACHINE? */
+						/* !INSIDE MACHINE? */
 						game.dsub.newsta_(i, 0, 0, 0, 0);
-						/* KILL OBJECT AND CONTENTS. */
+						/* !KILL OBJECT AND CONTENTS. */
 						game.dsub.newsta_(vars.oindex_1.gunk, 0, 0, vars.oindex_1.machi, 0);
-						/* REDUCE TO GUNK. */
+						/* !REDUCE TO GUNK. */
 					}
 					return ret_val;
 
 				case 31500:
 					game.dsub.rspsub_(300, odi2);
-					/* CANT TURN WITH THAT. */
+					/* !CANT TURN WITH THAT. */
 					return ret_val;
 
 				case 31600:
 					game.dsub.rspeak_(227);
-					/* LID IS UP. */
+					/* !LID IS UP. */
 					return ret_val;
 				/* SOBJS, PAGE 9 */
 
 				/* O20-- LEAK */
 
 				case 33000:
-					if (vars.prsvec_1.direct_object != vars.oindex_1.leak
-							|| vars.prsvec_1.action != PLUG
+					if (vars.prsvec_1.prso != vars.oindex_1.leak
+							|| vars.prsvec_1.prsa != vars.vindex_1.plugw
 							|| vars.findex_1.rvmnt <= 0)
 					{
 						return false;
 					}
-					if (vars.prsvec_1.indirect_object != vars.oindex_1.putty)
+					if (vars.prsvec_1.prsi != vars.oindex_1.putty)
 					{
 						GOTO = 33100;
 						continue loop;
 					}
-					/* WITH PUTTY? */
+					/* !WITH PUTTY? */
 					vars.findex_1.rvmnt = -1;
-					/* DISABLE LEAK. */
+					/* !DISABLE LEAK. */
 					vars.cevent_1.ctick[vars.cindex_1.cevmnt - 1] = 0;
 					game.dsub.rspeak_(577);
 					return ret_val;
 
 				case 33100:
 					game.dsub.rspsub_(301, odi2);
-					/* CANT WITH THAT. */
+					/* !CANT WITH THAT. */
 					return ret_val;
 
 				/* O21-- DROWNING BUTTONS */
 
 				case 34000:
-					if (vars.prsvec_1.action != PUSH)
+					if (vars.prsvec_1.prsa != vars.vindex_1.pushw)
 					{
 						return false;
 					}
-					/* PUSH? */
-					switch (vars.prsvec_1.direct_object - vars.oindex_1.rbutt + 1)
+					/* !PUSH? */
+					switch (vars.prsvec_1.prso - vars.oindex_1.rbutt + 1)
 					{
 						case 1:
 							GOTO = 34100;
@@ -893,7 +895,7 @@ public class Sobjs implements Constants
 							continue loop;
 					}
 					return false;
-				/* NOT A BUTTON. */
+				/* !NOT A BUTTON. */
 
 				case 34100:
 					vars.rooms_1.rflag[vars.play_1.here - 1] ^= Vars.RLIGHT;
@@ -907,13 +909,13 @@ public class Sobjs implements Constants
 
 				case 34200:
 					vars.findex_1.gatef = true;
-					/* RELEASE GATE. */
+					/* !RELEASE GATE. */
 					game.dsub.rspeak_(232);
 					return ret_val;
 
 				case 34300:
 					vars.findex_1.gatef = false;
-					/* INTERLOCK GATE. */
+					/* !INTERLOCK GATE. */
 					game.dsub.rspeak_(232);
 					return ret_val;
 
@@ -923,54 +925,54 @@ public class Sobjs implements Constants
 						GOTO = 34500;
 						continue loop;
 					}
-					/* LEAK ALREADY STARTED? */
+					/* !LEAK ALREADY STARTED? */
 					game.dsub.rspeak_(233);
-					/* NO, START LEAK. */
+					/* !NO, START LEAK. */
 					vars.findex_1.rvmnt = 1;
 					vars.cevent_1.ctick[vars.cindex_1.cevmnt - 1] = -1;
 					return ret_val;
 
 				case 34500:
 					game.dsub.rspeak_(234);
-					/* BUTTON JAMMED. */
+					/* !BUTTON JAMMED. */
 					return ret_val;
 
 				/* O22-- INFLATABLE BOAT */
 
 				case 36000:
-					if (vars.prsvec_1.action != INFLATE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.inflaw)
 					{
 						return false;
 					}
-					/* INFLATE? */
+					/* !INFLATE? */
 					if (vars.objcts_1.oroom[vars.oindex_1.iboat - 1] != 0)
 					{
 						GOTO = 36100;
 						continue loop;
 					}
-					/* IN ROOM? */
+					/* !IN ROOM? */
 					game.dsub.rspeak_(235);
-					/* NO, JOKE. */
+					/* !NO, JOKE. */
 					return ret_val;
 
 				case 36100:
-					if (vars.prsvec_1.indirect_object != vars.oindex_1.pump)
+					if (vars.prsvec_1.prsi != vars.oindex_1.pump)
 					{
 						GOTO = 36200;
 						continue loop;
 					}
-					/* WITH PUMP? */
+					/* !WITH PUMP? */
 					game.dsub.newsta_(vars.oindex_1.iboat, 0, 0, 0, 0);
-					/* KILL DEFL BOAT, */
+					/* !KILL DEFL BOAT, */
 					game.dsub.newsta_(vars.oindex_1.rboat, 236, vars.play_1.here, 0, 0);
-					/* REPL WITH INF. */
+					/* !REPL WITH INF. */
 					vars.findex_1.deflaf = false;
 					return ret_val;
 
 				case 36200:
 					i = 237;
-					/* JOKES. */
-					if (vars.prsvec_1.indirect_object != vars.oindex_1.lungs)
+					/* !JOKES. */
+					if (vars.prsvec_1.prsi != vars.oindex_1.lungs)
 					{
 						i = 303;
 					}
@@ -980,34 +982,34 @@ public class Sobjs implements Constants
 				/* O23-- DEFLATED BOAT */
 
 				case 37000:
-					if (vars.prsvec_1.action != INFLATE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.inflaw)
 					{
 						GOTO = 37100;
 						continue loop;
 					}
-					/* INFLATE? */
+					/* !INFLATE? */
 					game.dsub.rspeak_(238);
-					/* JOKE. */
+					/* !JOKE. */
 					return ret_val;
 
 				case 37100:
-					if (vars.prsvec_1.action != PLUG)
+					if (vars.prsvec_1.prsa != vars.vindex_1.plugw)
 					{
 						return false;
 					}
-					/* PLUG? */
-					if (vars.prsvec_1.indirect_object != vars.oindex_1.putty)
+					/* !PLUG? */
+					if (vars.prsvec_1.prsi != vars.oindex_1.putty)
 					{
 						GOTO = 33100;
 						continue loop;
 					}
-					/* WITH PUTTY? */
+					/* !WITH PUTTY? */
 					game.dsub.newsta_(vars.oindex_1.iboat, 239,
 							vars.objcts_1.oroom[vars.oindex_1.dboat - 1],
 							vars.objcts_1.ocan[vars.oindex_1.dboat - 1],
 							vars.objcts_1.oadv[vars.oindex_1.dboat - 1]);
 					game.dsub.newsta_(vars.oindex_1.dboat, 0, 0, 0, 0);
-					/* KILL DEFL BOAT, REPL. */
+					/* !KILL DEFL BOAT, REPL. */
 					return ret_val;
 				/* SOBJS, PAGE 10 */
 
@@ -1018,87 +1020,87 @@ public class Sobjs implements Constants
 					{
 						return false;
 					}
-					/* DISMISS READIN, OUT. */
-					if (vars.prsvec_1.action != BOARD
+					/* !DISMISS READIN, OUT. */
+					if (vars.prsvec_1.prsa != vars.vindex_1.boardw
 							|| vars.objcts_1.oadv[vars.oindex_1.stick - 1] != vars.play_1.winner)
 					{
 						GOTO = 38100;
 						continue loop;
 					}
 					game.dsub.newsta_(vars.oindex_1.rboat, 0, 0, 0, 0);
-					/* KILL INFL BOAT, */
+					/* !KILL INFL BOAT, */
 					game.dsub.newsta_(vars.oindex_1.dboat, 240, vars.play_1.here, 0, 0);
-					/* REPL WITH DEAD. */
+					/* !REPL WITH DEAD. */
 					vars.findex_1.deflaf = true;
 					return ret_val;
 
 				case 38100:
-					if (vars.prsvec_1.action != INFLATE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.inflaw)
 					{
 						GOTO = 38200;
 						continue loop;
 					}
-					/* INFLATE? */
+					/* !INFLATE? */
 					game.dsub.rspeak_(367);
-					/* YES, JOKE. */
+					/* !YES, JOKE. */
 					return ret_val;
 
 				case 38200:
-					if (vars.prsvec_1.action != DEFLATE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.deflaw)
 					{
 						return false;
 					}
-					/* DEFLATE? */
+					/* !DEFLATE? */
 					if (av == vars.oindex_1.rboat)
 					{
 						GOTO = 38300;
 						continue loop;
 					}
-					/* IN BOAT? */
+					/* !IN BOAT? */
 					if (vars.objcts_1.oroom[vars.oindex_1.rboat - 1] == 0)
 					{
 						GOTO = 38400;
 						continue loop;
 					}
-					/* ON GROUND? */
+					/* !ON GROUND? */
 					game.dsub.newsta_(vars.oindex_1.rboat, 0, 0, 0, 0);
-					/* KILL INFL BOAT, */
+					/* !KILL INFL BOAT, */
 					game.dsub.newsta_(vars.oindex_1.iboat, 241, vars.play_1.here, 0, 0);
-					/* REPL WITH DEFL. */
+					/* !REPL WITH DEFL. */
 					vars.findex_1.deflaf = true;
 					return ret_val;
 
 				case 38300:
 					game.dsub.rspeak_(242);
-					/* IN BOAT. */
+					/* !IN BOAT. */
 					return ret_val;
 
 				case 38400:
 					game.dsub.rspeak_(243);
-					/* NOT ON GROUND. */
+					/* !NOT ON GROUND. */
 					return ret_val;
 
 				/* O25-- BRAIDED ROPE */
 
 				case 41000:
-					if (vars.prsvec_1.action != TIE
-							|| vars.prsvec_1.direct_object != vars.oindex_1.brope
-							|| vars.prsvec_1.indirect_object != vars.oindex_1.hook1
-									&& vars.prsvec_1.indirect_object != vars.oindex_1.hook2)
+					if (vars.prsvec_1.prsa != vars.vindex_1.tiew
+							|| vars.prsvec_1.prso != vars.oindex_1.brope
+							|| vars.prsvec_1.prsi != vars.oindex_1.hook1
+									&& vars.prsvec_1.prsi != vars.oindex_1.hook2)
 					{
 						GOTO = 41500;
 						continue loop;
 					}
-					vars.findex_1.btief = vars.prsvec_1.indirect_object;
-					/* RECORD LOCATION. */
+					vars.findex_1.btief = vars.prsvec_1.prsi;
+					/* !RECORD LOCATION. */
 					vars.cevent_1.cflag[vars.cindex_1.cevbal - 1] = false;
-					/* STALL ASCENT. */
+					/* !STALL ASCENT. */
 					game.dsub.rspeak_(248);
 					return ret_val;
 
 				case 41500:
-					if (vars.prsvec_1.action != UNTIE
-							|| vars.prsvec_1.direct_object != vars.oindex_1.brope)
+					if (vars.prsvec_1.prsa != vars.vindex_1.untiew
+							|| vars.prsvec_1.prso != vars.oindex_1.brope)
 					{
 
 						return false;
@@ -1108,17 +1110,17 @@ public class Sobjs implements Constants
 						GOTO = 41600;
 						continue loop;
 					}
-					/* TIED UP? */
+					/* !TIED UP? */
 					game.dsub.rspeak_(249);
-					/* NO, JOKE. */
+					/* !NO, JOKE. */
 					return ret_val;
 
 				case 41600:
 					game.dsub.rspeak_(250);
 					vars.findex_1.btief = 0;
-					/* UNTIE. */
+					/* !UNTIE. */
 					vars.cevent_1.ctick[vars.cindex_1.cevbal - 1] = 3;
-					/* RESTART CLOCK. */
+					/* !RESTART CLOCK. */
 					vars.cevent_1.cflag[vars.cindex_1.cevbal - 1] = true;
 					return ret_val;
 
@@ -1126,28 +1128,28 @@ public class Sobjs implements Constants
 
 				case 42000:
 					i = 0;
-					/* ASSUME UNPROCESSED. */
-					if (vars.prsvec_1.action == TAKE)
+					/* !ASSUME UNPROCESSED. */
+					if (vars.prsvec_1.prsa == vars.vindex_1.takew)
 					{
 						i = 251;
 					}
-					/* TAKE? */
-					if (vars.prsvec_1.action == OPEN && vars.findex_1.safef)
+					/* !TAKE? */
+					if (vars.prsvec_1.prsa == vars.vindex_1.openw && vars.findex_1.safef)
 					{
 						i = 253;
 					}
-					/* OPEN AFTER BLAST? */
-					if (vars.prsvec_1.action == OPEN && !vars.findex_1.safef)
+					/* !OPEN AFTER BLAST? */
+					if (vars.prsvec_1.prsa == vars.vindex_1.openw && !vars.findex_1.safef)
 					{
 						i = 254;
 					}
-					/* OPEN BEFORE BLAST? */
-					if (vars.prsvec_1.action == CLOSE && vars.findex_1.safef)
+					/* !OPEN BEFORE BLAST? */
+					if (vars.prsvec_1.prsa == vars.vindex_1.closew && vars.findex_1.safef)
 					{
 						i = 253;
 					}
-					/* CLOSE AFTER? */
-					if (vars.prsvec_1.action == CLOSE && !vars.findex_1.safef)
+					/* !CLOSE AFTER? */
+					if (vars.prsvec_1.prsa == vars.vindex_1.closew && !vars.findex_1.safef)
 					{
 						i = 255;
 					}
@@ -1161,114 +1163,114 @@ public class Sobjs implements Constants
 				/* O27-- FUSE */
 
 				case 43000:
-					if (vars.prsvec_1.action != BURN)
+					if (vars.prsvec_1.prsa != vars.vindex_1.burnw)
 					{
 						return false;
 					}
-					/* BURN? */
+					/* !BURN? */
 					game.dsub.rspeak_(256);
 					vars.cevent_1.ctick[vars.cindex_1.cevfus - 1] = 2;
-					/* START COUNTDOWN. */
+					/* !START COUNTDOWN. */
 					return ret_val;
 
 				/* O28-- GNOME */
 
 				case 44000:
-					if (vars.prsvec_1.action != GIVE
-							&& vars.prsvec_1.action != THROW)
+					if (vars.prsvec_1.prsa != vars.vindex_1.givew
+							&& vars.prsvec_1.prsa != vars.vindex_1.throww)
 					{
 
 						GOTO = 44500;
 						continue loop;
 					}
-					if (vars.objcts_1.otval[vars.prsvec_1.direct_object - 1] == 0)
+					if (vars.objcts_1.otval[vars.prsvec_1.prso - 1] == 0)
 					{
 						GOTO = 44100;
 						continue loop;
 					}
-					/* TREASURE? */
+					/* !TREASURE? */
 					game.dsub.rspsub_(257, odo2);
-					/* YES, GET DOOR. */
-					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, 0);
+					/* !YES, GET DOOR. */
+					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, 0);
 					game.dsub.newsta_(vars.oindex_1.gnome, 0, 0, 0, 0);
-					/* VANISH GNOME. */
+					/* !VANISH GNOME. */
 					vars.findex_1.gnodrf = true;
 					return ret_val;
 
 				case 44100:
 					game.dsub.rspsub_(258, odo2);
-					/* NO, LOSE OBJECT. */
-					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, 0);
+					/* !NO, LOSE OBJECT. */
+					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, 0);
 					return ret_val;
 
 				case 44500:
 					game.dsub.rspeak_(259);
-					/* NERVOUS GNOME. */
+					/* !NERVOUS GNOME. */
 					if (!vars.findex_1.gnomef)
 					{
 						vars.cevent_1.ctick[vars.cindex_1.cevgno - 1] = 5;
 					}
-					/* SCHEDULE BYEBYE. */
+					/* !SCHEDULE BYEBYE. */
 					vars.findex_1.gnomef = true;
 					return ret_val;
 
 				/* O29-- COKE BOTTLES */
 
 				case 46000:
-					if (vars.prsvec_1.action != THROW
-							&& vars.prsvec_1.action != MUNG)
+					if (vars.prsvec_1.prsa != vars.vindex_1.throww
+							&& vars.prsvec_1.prsa != vars.vindex_1.mungw)
 					{
 
 						return false;
 					}
-					game.dsub.newsta_(vars.prsvec_1.direct_object, 262, 0, 0, 0);
-					/* MUNG BOTTLES. */
+					game.dsub.newsta_(vars.prsvec_1.prso, 262, 0, 0, 0);
+					/* !MUNG BOTTLES. */
 					return ret_val;
 				/* SOBJS, PAGE 11 */
 
 				/* O30-- ROBOT */
 
 				case 53000:
-					if (vars.prsvec_1.action != GIVE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.givew)
 					{
 						GOTO = 53200;
 						continue loop;
 					}
-					/* GIVE? */
-					game.dsub.newsta_(vars.prsvec_1.direct_object, 0, 0, 0, ROBOT);
-					/* PUT ON ROBOT. */
+					/* !GIVE? */
+					game.dsub.newsta_(vars.prsvec_1.prso, 0, 0, 0, vars.aindex_1.arobot);
+					/* !PUT ON ROBOT. */
 					game.dsub.rspsub_(302, odo2);
 					return ret_val;
 
 				case 53200:
-					if (vars.prsvec_1.action != MUNG
-							&& vars.prsvec_1.action != THROW)
+					if (vars.prsvec_1.prsa != vars.vindex_1.mungw
+							&& vars.prsvec_1.prsa != vars.vindex_1.throww)
 					{
 
 						return false;
 					}
 					game.dsub.newsta_(vars.oindex_1.robot, 285, 0, 0, 0);
-					/* KILL ROBOT. */
+					/* !KILL ROBOT. */
 					return ret_val;
 
 				/* O31-- GRUE */
 
 				case 56000:
-					if (vars.prsvec_1.action != EXAMINE)
+					if (vars.prsvec_1.prsa != vars.vindex_1.examiw)
 					{
 						GOTO = 56100;
 						continue loop;
 					}
-					/* EXAMINE? */
+					/* !EXAMINE? */
 					game.dsub.rspeak_(288);
 					return ret_val;
 
 				case 56100:
-					if (vars.prsvec_1.action != FIND)
+					if (vars.prsvec_1.prsa != vars.vindex_1.findw)
 					{
 						return false;
 					}
-					/* FIND? */
+					/* !FIND? */
 					game.dsub.rspeak_(289);
 					return ret_val;
 //		throw new RuntimeException("Sobjs.sobjs_ not impl");

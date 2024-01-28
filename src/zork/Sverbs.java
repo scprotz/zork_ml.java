@@ -1,6 +1,8 @@
 package zork;
 
-public class Sverbs implements Constants
+import java.io.IOException;
+
+public class Sverbs
 {
 	/* SVERBS- SIMPLE VERBS PROCESSOR */
 	/* ALL VERBS IN THIS ROUTINE MUST BE INDEPENDANT */
@@ -26,7 +28,7 @@ public class Sverbs implements Constants
 		this.verbs = verbs;
 	}
 
-	boolean sverbs_(int ri)
+	boolean sverbs_(int ri) throws IOException
 	{
 		/* Initialized data */
 
@@ -41,7 +43,7 @@ public class Sverbs implements Constants
 		/* Local variables */
 //	   final char []z, []z2;
 		char z;
-//		char z2;
+		char z2;
 		int i = 0, j;
 		int[] k = new int[1];
 		int l;
@@ -52,31 +54,31 @@ public class Sverbs implements Constants
 		int odi2 = 0, odo2 = 0;
 
 		ret_val = true;
-		/* ASSUME WINS. */
-		if (vars.prsvec_1.direct_object != 0)
+		/* !ASSUME WINS. */
+		if (vars.prsvec_1.prso != 0)
 		{
-			odo2 = vars.objcts_1.odesc2[vars.prsvec_1.direct_object - 1];
+			odo2 = vars.objcts_1.odesc2[vars.prsvec_1.prso - 1];
 		}
-		/* SET UP DESCRIPTORS. */
-		if (vars.prsvec_1.indirect_object != 0)
+		/* !SET UP DESCRIPTORS. */
+		if (vars.prsvec_1.prsi != 0)
 		{
-			odi2 = vars.objcts_1.odesc2[vars.prsvec_1.indirect_object - 1];
+			odi2 = vars.objcts_1.odesc2[vars.prsvec_1.prsi - 1];
 		}
 
 		if (ri == 0)
 		{
 			game.dsub.bug_(7, ri);
 		}
-		/* ZERO IS VERBOTEN. */
+		/* !ZERO IS VERBOTEN. */
 		if (ri <= mxnop)
 		{
 			return ret_val;
 		}
-		/* NOP? */
+		/* !NOP? */
 		if (ri > mxjoke)
 		{
 
-			/* JOKE? */
+			/* !JOKE? */
 			switch (ri - mxjoke)
 			{
 				case 1:
@@ -179,13 +181,13 @@ public class Sverbs implements Constants
 					game.dsub.bug_(7, ri);
 			}
 
-			if (GOTO == 0)
+			if(GOTO == 0)
 			{
 				/* ALL VERB PROCESSORS RETURN HERE TO DECLARE FAILURE. */
-
+	
 				/* case 10: */
 				ret_val = false;
-				/* LOSE. */
+				/* !LOSE. */
 				return ret_val;
 			}
 		}
@@ -199,16 +201,16 @@ public class Sverbs implements Constants
 
 				case 100:
 					i = jokes[ri - mxnop - 1];
-					/* GET TABLE ENTRY. */
+					/* !GET TABLE ENTRY. */
 					j = i / 1000;
-					/* ISOLATE # STRINGS. */
+					/* !ISOLATE # STRINGS. */
 					if (j != 0)
 					{
 						i = i % 1000 + Supp.rnd_(j);
 					}
-					/* IF RANDOM, CHOOSE. */
+					/* !IF RANDOM, CHOOSE. */
 					game.dsub.rspeak_(i);
-					/* PRINT JOKE. */
+					/* !PRINT JOKE. */
 					return ret_val;
 				/* SVERBS, PAGE 2A */
 
@@ -216,19 +218,19 @@ public class Sverbs implements Constants
 
 				case 65000:
 					ret_val = game.dsub.rmdesc_(2);
-					/* DESCRIBE ROOM ONLY. */
+					/* !DESCRIBE ROOM ONLY. */
 					return ret_val;
 
 				/* V66-- OBJECTS */
 
 				case 66000:
 					ret_val = game.dsub.rmdesc_(1);
-					/* DESCRIBE OBJ ONLY. */
+					/* !DESCRIBE OBJ ONLY. */
 					if (!vars.play_1.telflg)
 					{
 						game.dsub.rspeak_(138);
 					}
-					/* NO OBJECTS. */
+					/* !NO OBJECTS. */
 					return ret_val;
 
 				/* V67-- RNAME */
@@ -236,7 +238,7 @@ public class Sverbs implements Constants
 				case 67000:
 					i__1 = vars.rooms_1.rdesc2[vars.play_1.here - 1];
 					game.dsub.rspeak_(i__1);
-					/* SHORT ROOM NAME. */
+					/* !SHORT ROOM NAME. */
 					return ret_val;
 
 				/* V68-- RESERVED */
@@ -254,7 +256,7 @@ public class Sverbs implements Constants
 
 				case 1000:
 					vars.findex_1.brieff = true;
-					/* BRIEF DESCRIPTIONS. */
+					/* !BRIEF DESCRIPTIONS. */
 					vars.findex_1.superf = false;
 					game.dsub.rspeak_(326);
 					return ret_val;
@@ -263,7 +265,7 @@ public class Sverbs implements Constants
 
 				case 2000:
 					vars.findex_1.brieff = false;
-					/* LONG DESCRIPTIONS. */
+					/* !LONG DESCRIPTIONS. */
 					vars.findex_1.superf = false;
 					game.dsub.rspeak_(327);
 					return ret_val;
@@ -278,31 +280,31 @@ public class Sverbs implements Constants
 				/* V73-- STAY (USED IN ENDGAME). */
 
 				case 4000:
-					if (vars.play_1.winner != MASTER)
+					if (vars.play_1.winner != vars.aindex_1.amastr)
 					{
 						GOTO = 4100;
 						continue loop;
 					}
-					/* TELL MASTER, STAY. */
+					/* !TELL MASTER, STAY. */
 					game.dsub.rspeak_(781);
-					/* HE DOES. */
+					/* !HE DOES. */
 					vars.cevent_1.ctick[vars.cindex_1.cevfol - 1] = 0;
-					/* NOT FOLLOWING. */
+					/* !NOT FOLLOWING. */
 					return ret_val;
 
 				case 4100:
-					if (vars.play_1.winner == PLAYER)
+					if (vars.play_1.winner == vars.aindex_1.player)
 					{
 						game.dsub.rspeak_(664);
 					}
-					/* JOKE. */
+					/* !JOKE. */
 					return ret_val;
 
 				/* V74-- VERSION. PRINT INFO. */
 
 				case 5000:
-					Supp.print("V" + vars.vers_1.vmaj + "." + vars.vers_1.vmin + ""
-							+ vars.vers_1.vedit + "\n");
+					System.out.printf("V%1d.%1d%c\n", vars.vers_1.vmaj, vars.vers_1.vmin,
+							vars.vers_1.vedit);
 					vars.play_1.telflg = true;
 					return ret_val;
 
@@ -310,7 +312,7 @@ public class Sverbs implements Constants
 
 				case 6000:
 					i = 330;
-					/* ASSUME WATER. */
+					/* !ASSUME WATER. */
 					if ((vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RWATER + Vars.RFILL) == 0)
 					{
 						i = Supp.rnd_(3) + 331;
@@ -326,14 +328,14 @@ public class Sverbs implements Constants
 						GOTO = 7100;
 						continue loop;
 					}
-					/* IN BARREL? */
+					/* !IN BARREL? */
 					game.dsub.rspeak_(334);
-					/* NO, JOKE. */
+					/* !NO, JOKE. */
 					return ret_val;
 
 				case 7100:
 					game.dsub.jigsup_(335);
-					/* OVER FALLS. */
+					/* !OVER FALLS. */
 					return ret_val;
 
 				/* V77-- SINBAD ET AL. CHASE CYCLOPS, ELSE JOKE. */
@@ -346,14 +348,14 @@ public class Sverbs implements Constants
 						continue loop;
 					}
 					game.dsub.rspeak_(336);
-					/* NOT HERE, JOKE. */
+					/* !NOT HERE, JOKE. */
 					return ret_val;
 
 				case 8100:
 					game.dsub.newsta_(vars.oindex_1.cyclo, 337, 0, 0, 0);
-					/* CYCLOPS FLEES. */
+					/* !CYCLOPS FLEES. */
 					vars.findex_1.cyclof = true;
-					/* SET ALL FLAGS. */
+					/* !SET ALL FLAGS. */
 					vars.findex_1.magicf = true;
 					vars.objcts_1.oflag2[vars.oindex_1.cyclo - 1] &= ~Vars.FITEBT;
 					return ret_val;
@@ -366,19 +368,19 @@ public class Sverbs implements Constants
 						GOTO = 9100;
 						continue loop;
 					}
-					/* IN RIDDLE ROOM? */
+					/* !IN RIDDLE ROOM? */
 					vars.findex_1.riddlf = true;
-					/* YES, SOLVED IT. */
+					/* !YES, SOLVED IT. */
 					game.dsub.rspeak_(338);
 					return ret_val;
 
 				case 9100:
 					game.dsub.rspeak_(339);
-					/* WELL, WHAT? */
+					/* !WELL, WHAT? */
 					return ret_val;
 
 				/* V79-- PRAY. IF IN TEMP2, POOF */
-				/*  */
+				/* ! */
 
 				case 10000:
 					if (vars.play_1.here != vars.rindex_1.temp2)
@@ -386,25 +388,25 @@ public class Sverbs implements Constants
 						GOTO = 10050;
 						continue loop;
 					}
-					/* IN TEMPLE? */
+					/* !IN TEMPLE? */
 					if (game.dso2.moveto_(vars.rindex_1.fore1, vars.play_1.winner))
 					{
 						GOTO = 10100;
 						continue loop;
 					}
-					/* FORE1 STILL THERE? */
+					/* !FORE1 STILL THERE? */
 				case 10050:
 					game.dsub.rspeak_(340);
-					/* JOKE. */
+					/* !JOKE. */
 					return ret_val;
 
 				case 10100:
 					game.dsub.rmdesc_(3);
-					/* MOVED, DESCRIBE. */
+					/* !MOVED, DESCRIBE. */
 					return ret_val;
 
 				/* V80-- TREASURE. IF IN TEMP1, POOF */
-				/*  */
+				/* ! */
 
 				case 11000:
 					if (vars.play_1.here != vars.rindex_1.temp1)
@@ -412,20 +414,20 @@ public class Sverbs implements Constants
 						GOTO = 11050;
 						continue loop;
 					}
-					/* IN TEMPLE? */
+					/* !IN TEMPLE? */
 					if (game.dso2.moveto_(vars.rindex_1.treas, vars.play_1.winner))
 					{
 						GOTO = 10100;
 						continue loop;
 					}
-					/* TREASURE ROOM THERE? */
+					/* !TREASURE ROOM THERE? */
 				case 11050:
 					game.dsub.rspeak_(341);
-					/* NOTHING HAPPENS. */
+					/* !NOTHING HAPPENS. */
 					return ret_val;
 
 				/* V81-- TEMPLE. IF IN TREAS, POOF */
-				/*  */
+				/* ! */
 
 				case 12000:
 					if (vars.play_1.here != vars.rindex_1.treas)
@@ -433,28 +435,28 @@ public class Sverbs implements Constants
 						GOTO = 12050;
 						continue loop;
 					}
-					/* IN TREASURE? */
+					/* !IN TREASURE? */
 					if (game.dso2.moveto_(vars.rindex_1.temp1, vars.play_1.winner))
 					{
 						GOTO = 10100;
 						continue loop;
 					}
-					/* TEMP1 STILL THERE? */
+					/* !TEMP1 STILL THERE? */
 				case 12050:
 					game.dsub.rspeak_(341);
-					/* NOTHING HAPPENS. */
+					/* !NOTHING HAPPENS. */
 					return ret_val;
 
 				/* V82-- BLAST. USUALLY A JOKE. */
 
 				case 13000:
 					i = 342;
-					/* DONT UNDERSTAND. */
-					if (vars.prsvec_1.direct_object == vars.oindex_1.safe)
+					/* !DONT UNDERSTAND. */
+					if (vars.prsvec_1.prso == vars.oindex_1.safe)
 					{
 						i = 252;
 					}
-					/* JOKE FOR SAFE. */
+					/* !JOKE FOR SAFE. */
 					game.dsub.rspeak_(i);
 					return ret_val;
 
@@ -468,52 +470,51 @@ public class Sverbs implements Constants
 
 				case 15000:
 					game.dso2.score_(true);
-					/* TELLL SCORE. */
+					/* !TELLL SCORE. */
 					if (!game.dso3.yesno_(343, 0, 0))
 					{
 						return ret_val;
 					}
-					/* ASK FOR Y/N DECISION. */
+					/* !ASK FOR Y/N DECISION. */
 					Supp.exit_();
-					/* BYE. */
+					/* !BYE. */
 					/* SVERBS, PAGE 4 */
 
 					/* V85-- FOLLOW (USED IN ENDGAME) */
 
 				case 16000:
-					if (vars.play_1.winner != MASTER)
+					if (vars.play_1.winner != vars.aindex_1.amastr)
 					{
 						return ret_val;
 					}
-					/* TELL MASTER, FOLLOW. */
+					/* !TELL MASTER, FOLLOW. */
 					game.dsub.rspeak_(782);
 					vars.cevent_1.ctick[vars.cindex_1.cevfol - 1] = -1;
-					/* STARTS FOLLOWING. */
+					/* !STARTS FOLLOWING. */
 					return ret_val;
 
 				/* V86-- WALK THROUGH */
 
 				case 17000:
-					if (vars.screen_1.scolrm == 0
-							|| vars.prsvec_1.direct_object != vars.oindex_1.scol
-									&& (vars.prsvec_1.direct_object != vars.oindex_1.wnort
-											|| vars.play_1.here != vars.rindex_1.bkbox))
+					if (vars.screen_1.scolrm == 0 || vars.prsvec_1.prso != vars.oindex_1.scol
+							&& (vars.prsvec_1.prso != vars.oindex_1.wnort
+									|| vars.play_1.here != vars.rindex_1.bkbox))
 					{
 						GOTO = 17100;
 						continue loop;
 					}
 					vars.screen_1.scolac = vars.screen_1.scolrm;
-					/* WALKED THRU SCOL. */
-					vars.prsvec_1.direct_object = 0;
-					/* FAKE OUT FROMDR. */
+					/* !WALKED THRU SCOL. */
+					vars.prsvec_1.prso = 0;
+					/* !FAKE OUT FROMDR. */
 					vars.cevent_1.ctick[vars.cindex_1.cevscl - 1] = 6;
-					/* START ALARM. */
+					/* !START ALARM. */
 					game.dsub.rspeak_(668);
-					/* DISORIENT HIM. */
+					/* !DISORIENT HIM. */
 					game.dso2.moveto_(vars.screen_1.scolrm, vars.play_1.winner);
-					/* INTO ROOM. */
+					/* !INTO ROOM. */
 					game.dsub.rmdesc_(3);
-					/* DESCRIBE. */
+					/* !DESCRIBE. */
 					return ret_val;
 
 				case 17100:
@@ -522,12 +523,12 @@ public class Sverbs implements Constants
 						GOTO = 17300;
 						continue loop;
 					}
-					/* ON OTHER SIDE OF SCOL? */
+					/* !ON OTHER SIDE OF SCOL? */
 					for (i = 1; i <= 12; i += 3)
 					{
-						/* WALK THRU PROPER WALL? */
+						/* !WALK THRU PROPER WALL? */
 						if (vars.screen_1.scolwl[i - 1] == vars.play_1.here
-								&& vars.screen_1.scolwl[i] == vars.prsvec_1.direct_object)
+								&& vars.screen_1.scolwl[i] == vars.prsvec_1.prso)
 						{
 							GOTO = 17500;
 							continue loop;
@@ -536,51 +537,51 @@ public class Sverbs implements Constants
 					}
 
 				case 17300:
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.TAKEBT) != 0)
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TAKEBT) != 0)
 					{
 						GOTO = 17400;
 						continue loop;
 					}
 					i = 669;
-					/* NO, JOKE. */
-					if (vars.prsvec_1.direct_object == vars.oindex_1.scol)
+					/* !NO, JOKE. */
+					if (vars.prsvec_1.prso == vars.oindex_1.scol)
 					{
 						i = 670;
 					}
-					/* SPECIAL JOKE FOR SCOL. */
+					/* !SPECIAL JOKE FOR SCOL. */
 					game.dsub.rspsub_(i, odo2);
 					return ret_val;
 
 				case 17400:
 					i = 671;
-					/* JOKE. */
-					if (vars.objcts_1.oroom[vars.prsvec_1.direct_object - 1] != 0)
+					/* !JOKE. */
+					if (vars.objcts_1.oroom[vars.prsvec_1.prso - 1] != 0)
 					{
 						i = Supp.rnd_(5) + 552;
 					}
-					/* SPECIAL JOKES IF CARRY. */
+					/* !SPECIAL JOKES IF CARRY. */
 					game.dsub.rspeak_(i);
 					return ret_val;
 
 				case 17500:
-					vars.prsvec_1.direct_object = vars.screen_1.scolwl[i + 1];
-					/* THRU SCOL WALL... */
+					vars.prsvec_1.prso = vars.screen_1.scolwl[i + 1];
+					/* !THRU SCOL WALL... */
 					for (i = 1; i <= 8; i += 2)
 					{
-						/* FIND MATCHING ROOM. */
-						if (vars.prsvec_1.direct_object == vars.screen_1.scoldr[i - 1])
+						/* !FIND MATCHING ROOM. */
+						if (vars.prsvec_1.prso == vars.screen_1.scoldr[i - 1])
 						{
 							vars.screen_1.scolrm = vars.screen_1.scoldr[i];
 						}
 						/* case 17600: */
 					}
-					/* DECLARE NEW SCOLRM. */
+					/* !DECLARE NEW SCOLRM. */
 					vars.cevent_1.ctick[vars.cindex_1.cevscl - 1] = 0;
-					/* CANCEL ALARM. */
+					/* !CANCEL ALARM. */
 					game.dsub.rspeak_(668);
-					/* DISORIENT HIM. */
+					/* !DISORIENT HIM. */
 					game.dso2.moveto_(vars.rindex_1.bkbox, vars.play_1.winner);
-					/* BACK IN BOX ROOM. */
+					/* !BACK IN BOX ROOM. */
 					game.dsub.rmdesc_(3);
 					return ret_val;
 
@@ -588,73 +589,73 @@ public class Sverbs implements Constants
 
 				case 18000:
 					i = 359;
-					/* CANT RING. */
-					if (vars.prsvec_1.direct_object == vars.oindex_1.bell)
+					/* !CANT RING. */
+					if (vars.prsvec_1.prso == vars.oindex_1.bell)
 					{
 						i = 360;
 					}
-					/* DING, DONG. */
+					/* !DING, DONG. */
 					game.dsub.rspeak_(i);
-					/* JOKE. */
+					/* !JOKE. */
 					return ret_val;
 
 				/* V88-- BRUSH. JOKE WITH OBSCURE TRAP. */
 
 				case 19000:
-					if (vars.prsvec_1.direct_object == vars.oindex_1.teeth)
+					if (vars.prsvec_1.prso == vars.oindex_1.teeth)
 					{
 						GOTO = 19100;
 						continue loop;
 					}
-					/* BRUSH TEETH? */
+					/* !BRUSH TEETH? */
 					game.dsub.rspeak_(362);
-					/* NO, JOKE. */
+					/* !NO, JOKE. */
 					return ret_val;
 
 				case 19100:
-					if (vars.prsvec_1.indirect_object != 0)
+					if (vars.prsvec_1.prsi != 0)
 					{
 						GOTO = 19200;
 						continue loop;
 					}
-					/* WITH SOMETHING? */
+					/* !WITH SOMETHING? */
 					game.dsub.rspeak_(363);
-					/* NO, JOKE. */
+					/* !NO, JOKE. */
 					return ret_val;
 
 				case 19200:
-					if (vars.prsvec_1.indirect_object == vars.oindex_1.putty
+					if (vars.prsvec_1.prsi == vars.oindex_1.putty
 							&& vars.objcts_1.oadv[vars.oindex_1.putty - 1] == vars.play_1.winner)
 					{
 						GOTO = 19300;
 						continue loop;
 					}
 					game.dsub.rspsub_(364, odi2);
-					/* NO, JOKE. */
+					/* !NO, JOKE. */
 					return ret_val;
 
 				case 19300:
 					game.dsub.jigsup_(365);
-					/* YES, DEAD */
-					/*  */
-					/*  */
-					/*  */
-					/*  */
-					/*  */
+					/* !YES, DEAD */
+					/* ! */
+					/* ! */
+					/* ! */
+					/* ! */
+					/* ! */
 					return ret_val;
 				/* SVERBS, PAGE 5 */
 
 				/* V89-- DIG. UNLESS SHOVEL, A JOKE. */
 
 				case 20000:
-					if (vars.prsvec_1.direct_object == vars.oindex_1.shove)
+					if (vars.prsvec_1.prso == vars.oindex_1.shove)
 					{
 						return ret_val;
 					}
-					/* SHOVEL? */
+					/* !SHOVEL? */
 					i = 392;
-					/* ASSUME TOOL. */
-					if ((vars.objcts_1.oflag1[vars.prsvec_1.direct_object - 1] & Vars.TOOLBT) == 0)
+					/* !ASSUME TOOL. */
+					if ((vars.objcts_1.oflag1[vars.prsvec_1.prso - 1] & Vars.TOOLBT) == 0)
 					{
 						i = 393;
 					}
@@ -664,53 +665,53 @@ public class Sverbs implements Constants
 				/* V90-- TIME. PRINT OUT DURATION OF GAME. */
 
 				case 21000:
-//					game.dso5.getTime(k);
-					/* GET PLAY TIME. */
+					game.dso5.gttime_(k);
+					/* !GET PLAY TIME. */
 					i = k[0] / 60;
 					j = k[0] % 60;
 
-					Supp.print("You have been playing Dungeon for ");
+					System.out.printf("You have been playing Dungeon for ");
 					if (i >= 1)
 					{
-						Supp.print(i + " hour");
+						System.out.printf("%d hour", i);
 						if (i >= 2)
-							Supp.print("s");
-						Supp.print(" and ");
+							System.out.printf("s");
+						System.out.printf(" and ");
 					}
-					Supp.print(j + " minute");
+					System.out.printf("%d minute", j);
 					if (j != 1)
-						Supp.print("s");
-					Supp.print(".\n");
+						System.out.printf("s");
+					System.out.printf(".\n");
 					vars.play_1.telflg = true;
 					return ret_val;
 
 				/* V91-- LEAP. USUALLY A JOKE, WITH A CATCH. */
 
 				case 22000:
-					if (vars.prsvec_1.direct_object == 0)
+					if (vars.prsvec_1.prso == 0)
 					{
 						GOTO = 22200;
 						continue loop;
 					}
-					/* OVER SOMETHING? */
-					if (game.dsub.qhere_(vars.prsvec_1.direct_object, vars.play_1.here))
+					/* !OVER SOMETHING? */
+					if (game.dsub.qhere_(vars.prsvec_1.prso, vars.play_1.here))
 					{
 						GOTO = 22100;
 						continue loop;
 					}
-					/* HERE? */
+					/* !HERE? */
 					game.dsub.rspeak_(447);
-					/* NO, JOKE. */
+					/* !NO, JOKE. */
 					return ret_val;
 
 				case 22100:
-					if ((vars.objcts_1.oflag2[vars.prsvec_1.direct_object - 1] & Vars.VILLBT) == 0)
+					if ((vars.objcts_1.oflag2[vars.prsvec_1.prso - 1] & Vars.VILLBT) == 0)
 					{
 						GOTO = 22300;
 						continue loop;
 					}
 					game.dsub.rspsub_(448, odo2);
-					/* CANT JUMP VILLAIN. */
+					/* !CANT JUMP VILLAIN. */
 					return ret_val;
 
 				case 22200:
@@ -719,7 +720,7 @@ public class Sverbs implements Constants
 						GOTO = 22300;
 						continue loop;
 					}
-					/* DOWN EXIT? */
+					/* !DOWN EXIT? */
 					if (vars.curxt_1.xtype == vars.xpars_1.xno
 							|| vars.curxt_1.xtype == vars.xpars_1.xcond
 									&& !vars.findex_1.flags(vars.curxt_1.xflag() - 1))
@@ -730,21 +731,21 @@ public class Sverbs implements Constants
 				case 22300:
 					i__1 = Supp.rnd_(5) + 314;
 					game.dsub.rspeak_(i__1);
-					/* WHEEEE */
-					/*  */
+					/* !WHEEEE */
+					/* ! */
 					return ret_val;
 
 				case 22400:
 					i__1 = Supp.rnd_(4) + 449;
 					game.dsub.jigsup_(i__1);
-					/* FATAL LEAP. */
+					/* !FATAL LEAP. */
 					return ret_val;
 				/* SVERBS, PAGE 6 */
 
 				/* V92-- LOCK. */
 
 				case 23000:
-					if (vars.prsvec_1.direct_object == vars.oindex_1.grate
+					if (vars.prsvec_1.prso == vars.oindex_1.grate
 							&& vars.play_1.here == vars.rindex_1.mgrat)
 					{
 						GOTO = 23200;
@@ -752,85 +753,85 @@ public class Sverbs implements Constants
 					}
 				case 23100:
 					game.dsub.rspeak_(464);
-					/* NOT LOCK GRATE. */
+					/* !NOT LOCK GRATE. */
 					return ret_val;
 
 				case 23200:
 					vars.findex_1.grunlf = false;
-					/* GRATE NOW LOCKED. */
+					/* !GRATE NOW LOCKED. */
 					game.dsub.rspeak_(214);
 					vars.exits_1.travel[vars.rooms_1.rexit[vars.play_1.here - 1]] = 214;
-					/* CHANGE EXIT STATUS. */
+					/* !CHANGE EXIT STATUS. */
 					return ret_val;
 
 				/* V93-- UNLOCK */
 
 				case 24000:
-					if (vars.prsvec_1.direct_object != vars.oindex_1.grate
+					if (vars.prsvec_1.prso != vars.oindex_1.grate
 							|| vars.play_1.here != vars.rindex_1.mgrat)
 					{
 						GOTO = 23100;
 						continue loop;
 					}
-					if (vars.prsvec_1.indirect_object == vars.oindex_1.keys)
+					if (vars.prsvec_1.prsi == vars.oindex_1.keys)
 					{
 						GOTO = 24200;
 						continue loop;
 					}
-					/* GOT KEYS? */
+					/* !GOT KEYS? */
 					game.dsub.rspsub_(465, odi2);
-					/* NO, JOKE. */
+					/* !NO, JOKE. */
 					return ret_val;
 
 				case 24200:
 					vars.findex_1.grunlf = true;
-					/* UNLOCK GRATE. */
+					/* !UNLOCK GRATE. */
 					game.dsub.rspeak_(217);
 					vars.exits_1.travel[vars.rooms_1.rexit[vars.play_1.here - 1]] = 217;
-					/* CHANGE EXIT STATUS. */
+					/* !CHANGE EXIT STATUS. */
 					return ret_val;
 
 				/* V94-- DIAGNOSE. */
 
 				case 25000:
 					i = game.dso4.fights_(vars.play_1.winner, false);
-					/* GET FIGHTS STRENGTH. */
+					/* !GET FIGHTS STRENGTH. */
 					j = vars.advs_1.astren[vars.play_1.winner - 1];
-					/* GET HEALTH. */
+					/* !GET HEALTH. */
 					/* Computing MIN */
 					i__1 = i + j;
 					k[0] = Math.min(i__1, 4);
-					/* GET STATE. */
+					/* !GET STATE. */
 					if (!vars.cevent_1.cflag[vars.cindex_1.cevcur - 1])
 					{
 						j = 0;
 					}
-					/* IF NO WOUNDS. */
+					/* !IF NO WOUNDS. */
 					/* Computing MIN */
 					i__1 = 4;
 					i__2 = Math.abs(j);
 					l = Math.min(i__1, i__2);
-					/* SCALE. */
+					/* !SCALE. */
 					i__1 = l + 473;
 					game.dsub.rspeak_(i__1);
-					/* DESCRIBE HEALTH. */
+					/* !DESCRIBE HEALTH. */
 					i = (-j - 1) * 30 + vars.cevent_1.ctick[vars.cindex_1.cevcur - 1];
-					/* COMPUTE WAIT. */
+					/* !COMPUTE WAIT. */
 
 					if (j != 0)
 					{
-						Supp.print("You will be cured after " + i + " moves.\n");
+						System.out.printf("You will be cured after %d moves.\n", i);
 					}
 
 					i__1 = k[0] + 478;
 					game.dsub.rspeak_(i__1);
-					/* HOW MUCH MORE? */
+					/* !HOW MUCH MORE? */
 					if (vars.state_1.deaths != 0)
 					{
 						i__1 = vars.state_1.deaths + 482;
 						game.dsub.rspeak_(i__1);
 					}
-					/* HOW MANY DEATHS? */
+					/* !HOW MANY DEATHS? */
 					return ret_val;
 				/* SVERBS, PAGE 7 */
 
@@ -839,35 +840,36 @@ public class Sverbs implements Constants
 				case 26000:
 					for (i = 1; i <= 6; ++i)
 					{
-						/* SET UP PARSE. */
+						/* !SET UP PARSE. */
 						pp1[i - 1] = ' ';
 						pp2[i - 1] = ' ';
 						/* case 26100: */
 					}
 					wp = 1;
-					/* WORD POINTER. */
+					/* !WORD POINTER. */
 					cp = 1;
-					/* CHAR POINTER. */
+					/* !CHAR POINTER. */
 					if (vars.prsvec_1.prscon <= 1)
 					{
 						GOTO = 26300;
 						continue loop;
 					}
 					int index = 0;
-					for (z = vars.input_1.inbuf[vars.prsvec_1.prscon - 1
-							+ index]; z != '\0'; index++)
+					for (z = vars.input_1.inbuf.charAt(vars.prsvec_1.prscon - 1 + index); index < vars.input_1.inbuf.length(); index++) 
+//					for (z = vars.input_1.inbuf[vars.prsvec_1.prscon - 1
+//							+ index]; z != '\0'; index++)
 					{
-						/* PARSE INPUT */
+						/* !PARSE INPUT */
 						if (z == ',')
 						{
 							GOTO = 26300;
 							continue loop;
 						}
-						/* END OF PHRASE? */
+						/* !END OF PHRASE? */
 						if (z == ' ')
 						{
 
-							/* SPACE? */
+							/* !SPACE? */
 							if (cp != 1)
 							{
 								++wp;
@@ -879,7 +881,7 @@ public class Sverbs implements Constants
 						{
 							pp1[cp - 1] = z;
 						}
-						/* STUFF INTO HOLDER. */
+						/* !STUFF INTO HOLDER. */
 						if (wp == 2)
 						{
 							pp2[cp - 1] = z;
@@ -892,54 +894,53 @@ public class Sverbs implements Constants
 
 				case 26300:
 					vars.prsvec_1.prscon = 1;
-					/* KILL REST OF LINE. */
+					/* !KILL REST OF LINE. */
 					if (pp1[0] != ' ')
 					{
 						GOTO = 26400;
 						continue loop;
 					}
-					/* ANY INPUT? */
+					/* !ANY INPUT? */
 					game.dsub.rspeak_(856);
-					/* NO, HO HUM. */
+					/* !NO, HO HUM. */
 					return ret_val;
 
 				case 26400:
 					game.dso7.encryp_(pp1, ch);
-					/* COMPUTE RESPONSE. */
+					/* !COMPUTE RESPONSE. */
 					if (pp2[0] != ' ')
 					{
 						GOTO = 26600;
 						continue loop;
 					}
-					/* TWO PHRASES? */
+					/* !TWO PHRASES? */
 
 					if (vars.findex_1.spellf)
 					{
 						GOTO = 26550;
 						continue loop;
 					}
-					/* HE'S TRYING TO LEARN. */
+					/* !HE'S TRYING TO LEARN. */
 					if ((vars.rooms_1.rflag[vars.rindex_1.tstrs - 1] & Vars.RSEEN) == 0)
 					{
 						GOTO = 26575;
 						continue loop;
 					}
 					vars.findex_1.spellf = true;
-					/* TELL HIM. */
+					/* !TELL HIM. */
 					vars.play_1.telflg = true;
-					Supp.print("A hollow voice replies:  \"" + new String(pp1) + " "
-							+ new String(ch) + "\".\n");
+					System.out.printf("A hollow voice replies:  \"%.6s %.6s\".\n", pp1, ch);
 
 					return ret_val;
 
 				case 26550:
 					game.dsub.rspeak_(857);
-					/* HE'S GOT ONE ALREADY. */
+					/* !HE'S GOT ONE ALREADY. */
 					return ret_val;
 
 				case 26575:
 					game.dsub.rspeak_(858);
-					/* HE'S NOT IN ENDGAME. */
+					/* !HE'S NOT IN ENDGAME. */
 					return ret_val;
 
 				case 26600:
@@ -955,19 +956,19 @@ public class Sverbs implements Constants
 							GOTO = 26575;
 							continue loop;
 						}
-						/* WRONG. */
+						/* !WRONG. */
 						/* case 26700: */
 					}
 					vars.findex_1.spellf = true;
-					/* IT WORKS. */
+					/* !IT WORKS. */
 					game.dsub.rspeak_(859);
 					vars.cevent_1.ctick[vars.cindex_1.cevste - 1] = 1;
-					/* FORCE START. */
+					/* !FORCE START. */
 					return ret_val;
 
 				case 26800:
 					game.dsub.rspeak_(855);
-					/* TOO LATE. */
+					/* !TOO LATE. */
 					return ret_val;
 				/* SVERBS, PAGE 8 */
 
@@ -981,90 +982,89 @@ public class Sverbs implements Constants
 						continue loop;
 					}
 					game.dsub.rspeak_(799);
-					/* NO ONE LISTENS. */
+					/* !NO ONE LISTENS. */
 					vars.prsvec_1.prscon = 1;
 					return ret_val;
 
 				case 27100:
-					for (j = 1; j <= 14; j++)
-					{
-						/* CHECK ANSWERS. */
-						if (vars.findex_1.quesno != answer[j - 1])
-							continue;
+					 for (j = 1; j <= 14; j ++) 
+					 {
+					      /* CHECK ANSWERS. */
+					      if (vars.findex_1.quesno != answer[j - 1])
+					         continue;
 //					      /* ONLY CHECK PROPER ANS. */
-						String zz = ansstr[j - 1];
-						int ans_index = vars.prsvec_1.prscon - 1;
-						String user_answer = new String(vars.input_1.inbuf);
+					      String zz = ansstr[j - 1];
+					      int ans_index = vars.prsvec_1.prscon -1;
+					      String user_answer = new String(vars.input_1.inbuf);
 //					      char[] z2 = vars.input_1.inbuf + vars.prsvec_1.prscon - 1;
-						String zz2 = user_answer.substring(ans_index).trim();
-						Supp.println(zz2);
+					      String zz2 = user_answer.substring(ans_index).trim();
+					      System.out.println(zz2);
+					      
+					      int zindex = 0;
+					      int z2index = 0;
+					      while (zindex < zz.length() && zz.charAt(zindex) != '\0' ) 
+					      {
+					         while (zz2.charAt(z2index) == ' ')
+					            z2index++;
+					         /* STRIP INPUT BLANKS. */
+					         if (zz.charAt(zindex) != zz2.charAt(z2index))
+					            continue;
+					         zindex++;
+					         z2index++;
+					      }
+					      GOTO = 27500;
+					      continue loop;
+					      /* RIGHT ANSWER. */
 
-						int zindex = 0;
-						int z2index = 0;
-						while (zindex < zz.length() && zz.charAt(zindex) != '\0')
-						{
-							while (zz2.charAt(z2index) == ' ')
-								z2index++;
-							/* STRIP INPUT BLANKS. */
-							if (zz.charAt(zindex) != zz2.charAt(z2index))
-								continue;
-							zindex++;
-							z2index++;
-						}
-						GOTO = 27500;
-						continue loop;
-						/* RIGHT ANSWER. */
+					   }
 
-					}
-
-					vars.prsvec_1.prscon = 1;
-					/* KILL REST OF LINE. */
-					++vars.findex_1.nqatt;
-					/* WRONG, CRETIN. */
-					if (vars.findex_1.nqatt >= 5)
-					{
-						GOTO = 27400;
-						continue;
-					}
-					/* TOO MANY WRONG? */
-					i__1 = vars.findex_1.nqatt + 800;
-					game.dsub.rspeak_(i__1);
-					/* NO, TRY AGAIN. */
-					return ret_val;
+					   vars.prsvec_1.prscon = 1;
+					   /* KILL REST OF LINE. */
+					   ++vars.findex_1.nqatt;
+					   /* WRONG, CRETIN. */
+					   if (vars.findex_1.nqatt >= 5) {
+						   GOTO = 27400;
+						   continue;
+					   }
+					   /* TOO MANY WRONG? */
+					   i__1 = vars.findex_1.nqatt + 800;
+					   game.dsub.rspeak_(i__1);
+					   /* NO, TRY AGAIN. */
+					   return ret_val;
 
 				case 27400:
 					game.dsub.rspeak_(826);
-					/* ALL OVER. */
+					/* !ALL OVER. */
 					vars.cevent_1.cflag[vars.cindex_1.cevinq - 1] = false;
-					/* LOSE. */
+					/* !LOSE. */
 					return ret_val;
 
 				case 27500:
 					vars.prsvec_1.prscon = 1;
-					/* KILL REST OF LINE. */
+					/* !KILL REST OF LINE. */
 					++vars.findex_1.corrct;
-					/* GOT IT RIGHT. */
+					/* !GOT IT RIGHT. */
 					game.dsub.rspeak_(800);
-					/* HOORAY. */
+					/* !HOORAY. */
 					if (vars.findex_1.corrct >= 3)
 					{
 						GOTO = 27600;
 						continue loop;
 					}
-					/* WON TOTALLY? */
+					/* !WON TOTALLY? */
 					vars.cevent_1.ctick[vars.cindex_1.cevinq - 1] = 2;
-					/* NO, START AGAIN. */
+					/* !NO, START AGAIN. */
 					vars.findex_1.quesno = (vars.findex_1.quesno + 3) % 8;
 					vars.findex_1.nqatt = 0;
 					game.dsub.rspeak_(769);
-					/* ASK NEXT QUESTION. */
+					/* !ASK NEXT QUESTION. */
 					i__1 = vars.findex_1.quesno + 770;
 					game.dsub.rspeak_(i__1);
 					return ret_val;
 
 				case 27600:
 					game.dsub.rspeak_(827);
-					/* QUIZ OVER, */
+					/* !QUIZ OVER, */
 					vars.cevent_1.cflag[vars.cindex_1.cevinq - 1] = false;
 					vars.objcts_1.oflag2[vars.oindex_1.qdoor - 1] |= Vars.OPENBT;
 					return ret_val;

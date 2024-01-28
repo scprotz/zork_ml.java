@@ -1,6 +1,8 @@
 package zork;
 
-public class Clockr implements Constants
+import java.io.IOException;
+
+public class Clockr
 {
 	/* CEVAPP- CLOCK EVENT APPLICABLES */
 
@@ -20,7 +22,7 @@ public class Clockr implements Constants
 	static final int cndtck[] = new int[] { 50, 20, 10, 5, 0, 156, 156, 156, 157, 0 };
 	static final int lmptck[] = new int[] { 50, 30, 20, 10, 4, 0, 154, 154, 154, 154, 155, 0 };
 
-	void cevapp_(int ri)
+	void cevapp_(int ri) throws IOException
 	{
 		/* Initialized data */
 
@@ -36,7 +38,7 @@ public class Clockr implements Constants
 		{
 			return;
 		}
-		/* IGNORE DISABLED. */
+		/* !IGNORE DISABLED. */
 		switch (ri)
 		{
 			case 1:
@@ -124,16 +126,16 @@ public class Clockr implements Constants
 				case 1000:
 					/* Computing MIN */
 					i__1 = 0;
-					i__2 = vars.advs_1.astren[PLAYER - 1] + 1;
-					vars.advs_1.astren[PLAYER - 1] = Math.min(i__1, i__2);
-					/* RECOVER. */
-					if (vars.advs_1.astren[PLAYER - 1] >= 0)
+					i__2 = vars.advs_1.astren[vars.aindex_1.player - 1] + 1;
+					vars.advs_1.astren[vars.aindex_1.player - 1] = Math.min(i__1, i__2);
+					/* !RECOVER. */
+					if (vars.advs_1.astren[vars.aindex_1.player - 1] >= 0)
 					{
 						return;
 					}
-					/* FULLY RECOVERED? */
+					/* !FULLY RECOVERED? */
 					vars.cevent_1.ctick[vars.cindex_1.cevcur - 1] = 30;
-					/* NO, WAIT SOME MORE. */
+					/* !NO, WAIT SOME MORE. */
 					return;
 
 				/* CEV2-- MAINT-ROOM WITH LEAK. RAISE THE WATER LEVEL. */
@@ -143,24 +145,24 @@ public class Clockr implements Constants
 						i__1 = vars.findex_1.rvmnt / 2 + 71;
 						game.dsub.rspeak_(i__1);
 					}
-					/* DESCRIBE. */
+					/* !DESCRIBE. */
 					++vars.findex_1.rvmnt;
-					/* RAISE WATER LEVEL. */
+					/* !RAISE WATER LEVEL. */
 					if (vars.findex_1.rvmnt <= 16)
 					{
 						return;
 					}
-					/* IF NOT FULL, EXIT. */
+					/* !IF NOT FULL, EXIT. */
 					vars.cevent_1.ctick[vars.cindex_1.cevmnt - 1] = 0;
-					/* FULL, DISABLE CLOCK. */
+					/* !FULL, DISABLE CLOCK. */
 					vars.rooms_1.rflag[vars.rindex_1.maint - 1] |= Vars.RMUNG;
 					vars.rooms_1.rrand(vars.rindex_1.maint - 1, 80);
-					/* SAY IT IS FULL OF WATER. */
+					/* !SAY IT IS FULL OF WATER. */
 					if (vars.play_1.here == vars.rindex_1.maint)
 					{
 						game.dsub.jigsup_(81);
 					}
-					/* DROWN HIM IF PRESENT. */
+					/* !DROWN HIM IF PRESENT. */
 					return;
 
 				/* CEV3-- LANTERN. DESCRIBE GROWING DIMNESS. */
@@ -168,13 +170,13 @@ public class Clockr implements Constants
 					tempint[0] = vars.findex_1.orlamp;
 					litint_(vars.oindex_1.lamp, tempint, vars.cindex_1.cevlnt, lmptck, 12);
 					vars.findex_1.orlamp = tempint[0];
-					/* DO LIGHT INTERRUPT. */
+					/* !DO LIGHT INTERRUPT. */
 					return;
 
 				/* CEV4-- MATCH. OUT IT GOES. */
 				case 4000:
 					game.dsub.rspeak_(153);
-					/* MATCH IS OUT. */
+					/* !MATCH IS OUT. */
 					vars.objcts_1.oflag1[vars.oindex_1.match - 1] &= ~Vars.ONBT;
 					return;
 
@@ -183,21 +185,21 @@ public class Clockr implements Constants
 					tempint[0] = vars.findex_1.orcand;
 					litint_(vars.oindex_1.candl, tempint, vars.cindex_1.cevcnd, cndtck, 10);
 					vars.findex_1.orcand = tempint[0];
-					/* DO CANDLE INTERRUPT. */
+					/* !DO CANDLE INTERRUPT. */
 					return;
 
 				/* CEV6-- BALLOON */
 				case 6000:
 					vars.cevent_1.ctick[vars.cindex_1.cevbal - 1] = 3;
-					/* RESCHEDULE INTERRUPT. */
+					/* !RESCHEDULE INTERRUPT. */
 					f = vars.advs_1.avehic[vars.play_1.winner - 1] == vars.oindex_1.ballo;
-					/* SEE IF IN BALLOON. */
+					/* !SEE IF IN BALLOON. */
 					if (vars.state_1.bloc == vars.rindex_1.vlbot)
 					{
 						GOTO = 6800;
 						continue loop;
 					}
-					/* AT BOTTOM? */
+					/* !AT BOTTOM? */
 					if (vars.state_1.bloc == vars.rindex_1.ledg2
 							|| vars.state_1.bloc == vars.rindex_1.ledg3
 							|| vars.state_1.bloc == vars.rindex_1.ledg4
@@ -206,7 +208,7 @@ public class Clockr implements Constants
 						GOTO = 6700;
 						continue loop;
 					}
-					/* ON LEDGE? */
+					/* !ON LEDGE? */
 					if ((vars.objcts_1.oflag2[vars.oindex_1.recep - 1] & Vars.OPENBT) != 0
 							&& vars.findex_1.binff != 0)
 					{
@@ -222,16 +224,16 @@ public class Clockr implements Constants
 						GOTO = 6300;
 						continue loop;
 					}
-					/* IN VAIR1? */
+					/* !IN VAIR1? */
 					vars.state_1.bloc = vars.rindex_1.vlbot;
-					/* YES, NOW AT VLBOT. */
+					/* !YES, NOW AT VLBOT. */
 					game.dsub.newsta_(vars.oindex_1.ballo, 0, vars.state_1.bloc, 0, 0);
 					if (f)
 					{
 						GOTO = 6200;
 						continue loop;
 					}
-					/* IN BALLOON? */
+					/* !IN BALLOON? */
 					if (vars.play_1.here == vars.rindex_1.ledg2
 							|| vars.play_1.here == vars.rindex_1.ledg3
 							|| vars.play_1.here == vars.rindex_1.ledg4
@@ -239,33 +241,33 @@ public class Clockr implements Constants
 					{
 						game.dsub.rspeak_(530);
 					}
-					/* ON LEDGE, DESCRIBE. */
+					/* !ON LEDGE, DESCRIBE. */
 					return;
 
 				case 6200:
 					f = game.dso2.moveto_(vars.state_1.bloc, vars.play_1.winner);
-					/* MOVE HIM. */
+					/* !MOVE HIM. */
 					if (vars.findex_1.binff == 0)
 					{
 						GOTO = 6250;
 						continue loop;
 					}
-					/* IN BALLOON. INFLATED? */
+					/* !IN BALLOON. INFLATED? */
 					game.dsub.rspeak_(531);
-					/* YES, LANDED. */
+					/* !YES, LANDED. */
 					f = game.dsub.rmdesc_(0);
-					/* DESCRIBE. */
+					/* !DESCRIBE. */
 					return;
 
 				case 6250:
 					game.dsub.newsta_(vars.oindex_1.ballo, 532, 0, 0, 0);
-					/* NO, BALLOON & CONTENTS DIE. */
+					/* !NO, BALLOON & CONTENTS DIE. */
 					game.dsub.newsta_(vars.oindex_1.dball, 0, vars.state_1.bloc, 0, 0);
-					/* INSERT DEAD BALLOON. */
+					/* !INSERT DEAD BALLOON. */
 					vars.advs_1.avehic[vars.play_1.winner - 1] = 0;
-					/* NOT IN VEHICLE. */
+					/* !NOT IN VEHICLE. */
 					vars.cevent_1.cflag[vars.cindex_1.cevbal - 1] = false;
-					/* DISABLE INTERRUPTS. */
+					/* !DISABLE INTERRUPTS. */
 					vars.cevent_1.cflag[vars.cindex_1.cevbrn - 1] = false;
 					vars.findex_1.binff = 0;
 					vars.findex_1.btief = 0;
@@ -273,14 +275,14 @@ public class Clockr implements Constants
 
 				case 6300:
 					--vars.state_1.bloc;
-					/* NOT IN VAIR1, DESCEND. */
+					/* !NOT IN VAIR1, DESCEND. */
 					game.dsub.newsta_(vars.oindex_1.ballo, 0, vars.state_1.bloc, 0, 0);
 					if (f)
 					{
 						GOTO = 6400;
 						continue loop;
 					}
-					/* IS HE IN BALLOON? */
+					/* !IS HE IN BALLOON? */
 					if (vars.play_1.here == vars.rindex_1.ledg2
 							|| vars.play_1.here == vars.rindex_1.ledg3
 							|| vars.play_1.here == vars.rindex_1.ledg4
@@ -288,19 +290,19 @@ public class Clockr implements Constants
 					{
 						game.dsub.rspeak_(533);
 					}
-					/* IF ON LEDGE, DESCRIBE. */
+					/* !IF ON LEDGE, DESCRIBE. */
 					return;
 
 				case 6400:
 					f = game.dso2.moveto_(vars.state_1.bloc, vars.play_1.winner);
-					/* IN BALLOON, MOVE HIM. */
+					/* !IN BALLOON, MOVE HIM. */
 					game.dsub.rspeak_(534);
-					/* DESCRIBE. */
+					/* !DESCRIBE. */
 					f = game.dsub.rmdesc_(0);
 					return;
 
 				/* BALLOON IS IN MIDAIR AND IS INFLATED, UP-UP-AND-AWAY */
-				/*  */
+				/* ! */
 
 				case 6500:
 					if (vars.state_1.bloc != vars.rindex_1.vair4)
@@ -308,23 +310,23 @@ public class Clockr implements Constants
 						GOTO = 6600;
 						continue loop;
 					}
-					/* AT VAIR4? */
+					/* !AT VAIR4? */
 					vars.cevent_1.ctick[vars.cindex_1.cevbrn - 1] = 0;
 					vars.cevent_1.ctick[vars.cindex_1.cevbal - 1] = 0;
 					vars.findex_1.binff = 0;
 					vars.findex_1.btief = 0;
 					vars.state_1.bloc = vars.rindex_1.vlbot;
-					/* FALL TO BOTTOM. */
+					/* !FALL TO BOTTOM. */
 					game.dsub.newsta_(vars.oindex_1.ballo, 0, 0, 0, 0);
-					/* BALLOON & CONTENTS DIE. */
+					/* !BALLOON & CONTENTS DIE. */
 					game.dsub.newsta_(vars.oindex_1.dball, 0, vars.state_1.bloc, 0, 0);
-					/* SUBSTITUTE DEAD BALLOON. */
+					/* !SUBSTITUTE DEAD BALLOON. */
 					if (f)
 					{
 						GOTO = 6550;
 						continue loop;
 					}
-					/* WAS HE IN IT? */
+					/* !WAS HE IN IT? */
 					if (vars.play_1.here == vars.rindex_1.ledg2
 							|| vars.play_1.here == vars.rindex_1.ledg3
 							|| vars.play_1.here == vars.rindex_1.ledg4
@@ -332,24 +334,24 @@ public class Clockr implements Constants
 					{
 						game.dsub.rspeak_(535);
 					}
-					/* IF HE CAN SEE, DESCRIBE. */
+					/* !IF HE CAN SEE, DESCRIBE. */
 					return;
 
 				case 6550:
 					game.dsub.jigsup_(536);
-					/* IN BALLOON AT CRASH, DIE. */
+					/* !IN BALLOON AT CRASH, DIE. */
 					return;
 
 				case 6600:
 					++vars.state_1.bloc;
-					/* NOT AT VAIR4, GO UP. */
+					/* !NOT AT VAIR4, GO UP. */
 					game.dsub.newsta_(vars.oindex_1.ballo, 0, vars.state_1.bloc, 0, 0);
 					if (f)
 					{
 						GOTO = 6650;
 						continue loop;
 					}
-					/* IN BALLOON? */
+					/* !IN BALLOON? */
 					if (vars.play_1.here == vars.rindex_1.ledg2
 							|| vars.play_1.here == vars.rindex_1.ledg3
 							|| vars.play_1.here == vars.rindex_1.ledg4
@@ -357,14 +359,14 @@ public class Clockr implements Constants
 					{
 						game.dsub.rspeak_(537);
 					}
-					/* CAN HE SEE IT? */
+					/* !CAN HE SEE IT? */
 					return;
 
 				case 6650:
 					f = game.dso2.moveto_(vars.state_1.bloc, vars.play_1.winner);
-					/* MOVE PLAYER. */
+					/* !MOVE PLAYER. */
 					game.dsub.rspeak_(538);
-					/* DESCRIBE. */
+					/* !DESCRIBE. */
 					f = game.dsub.rmdesc_(0);
 					return;
 
@@ -372,14 +374,14 @@ public class Clockr implements Constants
 
 				case 6700:
 					vars.state_1.bloc += vars.rindex_1.vair2 - vars.rindex_1.ledg2;
-					/* MOVE TO MIDAIR. */
+					/* !MOVE TO MIDAIR. */
 					game.dsub.newsta_(vars.oindex_1.ballo, 0, vars.state_1.bloc, 0, 0);
 					if (f)
 					{
 						GOTO = 6750;
 						continue loop;
 					}
-					/* IN BALLOON? */
+					/* !IN BALLOON? */
 					if (vars.play_1.here == vars.rindex_1.ledg2
 							|| vars.play_1.here == vars.rindex_1.ledg3
 							|| vars.play_1.here == vars.rindex_1.ledg4
@@ -387,16 +389,16 @@ public class Clockr implements Constants
 					{
 						game.dsub.rspeak_(539);
 					}
-					/* NO, STRANDED. */
+					/* !NO, STRANDED. */
 					vars.cevent_1.ctick[vars.cindex_1.cevvlg - 1] = 10;
-					/* MATERIALIZE GNOME. */
+					/* !MATERIALIZE GNOME. */
 					return;
 
 				case 6750:
 					f = game.dso2.moveto_(vars.state_1.bloc, vars.play_1.winner);
-					/* MOVE TO NEW ROOM. */
+					/* !MOVE TO NEW ROOM. */
 					game.dsub.rspeak_(540);
-					/* DESCRIBE. */
+					/* !DESCRIBE. */
 					f = game.dsub.rmdesc_(0);
 					return;
 
@@ -409,15 +411,15 @@ public class Clockr implements Constants
 						return;
 					}
 					vars.state_1.bloc = vars.rindex_1.vair1;
-					/* INFLATED AND OPEN, */
+					/* !INFLATED AND OPEN, */
 					game.dsub.newsta_(vars.oindex_1.ballo, 0, vars.state_1.bloc, 0, 0);
-					/* GO UP TO VAIR1. */
+					/* !GO UP TO VAIR1. */
 					if (f)
 					{
 						GOTO = 6850;
 						continue loop;
 					}
-					/* IN BALLOON? */
+					/* !IN BALLOON? */
 					if (vars.play_1.here == vars.rindex_1.ledg2
 							|| vars.play_1.here == vars.rindex_1.ledg3
 							|| vars.play_1.here == vars.rindex_1.ledg4
@@ -425,12 +427,12 @@ public class Clockr implements Constants
 					{
 						game.dsub.rspeak_(541);
 					}
-					/* IF CAN SEE, DESCRIBE. */
+					/* !IF CAN SEE, DESCRIBE. */
 					return;
 
 				case 6850:
 					f = game.dso2.moveto_(vars.state_1.bloc, vars.play_1.winner);
-					/* MOVE PLAYER. */
+					/* !MOVE PLAYER. */
 					game.dsub.rspeak_(542);
 					f = game.dsub.rmdesc_(0);
 					return;
@@ -442,7 +444,7 @@ public class Clockr implements Constants
 					i__1 = vars.objcts_1.olnt;
 					for (i = 1; i <= i__1; ++i)
 					{
-						/* FIND BURNING OBJECT */
+						/* !FIND BURNING OBJECT */
 						if (vars.oindex_1.recep == vars.objcts_1.ocan[i - 1]
 								&& (vars.objcts_1.oflag1[i - 1] & Vars.FLAMBT) != 0)
 						{
@@ -455,14 +457,14 @@ public class Clockr implements Constants
 
 				case 7200:
 					game.dsub.newsta_(i, 0, 0, 0, 0);
-					/* VANISH OBJECT. */
+					/* !VANISH OBJECT. */
 					vars.findex_1.binff = 0;
-					/* UNINFLATED. */
+					/* !UNINFLATED. */
 					if (vars.play_1.here == vars.state_1.bloc)
 					{
 						game.dsub.rspsub_(292, vars.objcts_1.odesc2[i - 1]);
 					}
-					/* DESCRIBE. */
+					/* !DESCRIBE. */
 					return;
 
 				/* CEV8-- FUSE FUNCTION */
@@ -473,63 +475,63 @@ public class Clockr implements Constants
 						GOTO = 8500;
 						continue loop;
 					}
-					/* IGNITED BRICK? */
+					/* !IGNITED BRICK? */
 					br = vars.objcts_1.oroom[vars.oindex_1.brick - 1];
-					/* GET BRICK ROOM. */
+					/* !GET BRICK ROOM. */
 					bc = vars.objcts_1.ocan[vars.oindex_1.brick - 1];
-					/* GET CONTAINER. */
+					/* !GET CONTAINER. */
 					if (br == 0 && bc != 0)
 					{
 						br = vars.objcts_1.oroom[bc - 1];
 					}
 					game.dsub.newsta_(vars.oindex_1.fuse, 0, 0, 0, 0);
-					/* KILL FUSE. */
+					/* !KILL FUSE. */
 					game.dsub.newsta_(vars.oindex_1.brick, 0, 0, 0, 0);
-					/* KILL BRICK. */
+					/* !KILL BRICK. */
 					if (br != 0 && br != vars.play_1.here)
 					{
 						GOTO = 8100;
 						continue loop;
 					}
-					/* BRICK ELSEWHERE? */
+					/* !BRICK ELSEWHERE? */
 
 					vars.rooms_1.rflag[vars.play_1.here - 1] |= Vars.RMUNG;
 					vars.rooms_1.rrand(vars.play_1.here - 1, 114);
-					/* MUNG ROOM. */
+					/* !MUNG ROOM. */
 					game.dsub.jigsup_(150);
-					/* DEAD. */
+					/* !DEAD. */
 					return;
 
 				case 8100:
 					game.dsub.rspeak_(151);
-					/* BOOM. */
+					/* !BOOM. */
 					vars.state_1.mungrm = br;
-					/* SAVE ROOM THAT BLEW. */
+					/* !SAVE ROOM THAT BLEW. */
 					vars.cevent_1.ctick[vars.cindex_1.cevsaf - 1] = 5;
-					/* SET SAFE INTERRUPT. */
+					/* !SET SAFE INTERRUPT. */
 					if (br != vars.rindex_1.msafe)
 					{
 						GOTO = 8200;
 						continue loop;
 					}
-					/* BLEW SAFE ROOM? */
+					/* !BLEW SAFE ROOM? */
 					if (bc != vars.oindex_1.sslot)
 					{
 						return;
 					}
-					/* WAS BRICK IN SAFE? */
+					/* !WAS BRICK IN SAFE? */
 					game.dsub.newsta_(vars.oindex_1.sslot, 0, 0, 0, 0);
-					/* KILL SLOT. */
+					/* !KILL SLOT. */
 					vars.objcts_1.oflag2[vars.oindex_1.safe - 1] |= Vars.OPENBT;
 					vars.findex_1.safef = true;
-					/* INDICATE SAFE BLOWN. */
+					/* !INDICATE SAFE BLOWN. */
 					return;
 
 				case 8200:
 					i__1 = vars.objcts_1.olnt;
 					for (i = 1; i <= i__1; ++i)
 					{
-						/* BLEW WRONG ROOM. */
+						/* !BLEW WRONG ROOM. */
 						if (game.dsub.qhere_(i, br)
 								&& (vars.objcts_1.oflag1[i - 1] & Vars.TAKEBT) != 0)
 						{
@@ -541,7 +543,7 @@ public class Clockr implements Constants
 					{
 						return;
 					}
-					/* BLEW LIVING ROOM? */
+					/* !BLEW LIVING ROOM? */
 					i__1 = vars.objcts_1.olnt;
 					for (i = 1; i <= i__1; ++i)
 					{
@@ -549,7 +551,7 @@ public class Clockr implements Constants
 						{
 							game.dsub.newsta_(i, 0, 0, 0, 0);
 						}
-						/* KILL TROPHY CASE. */
+						/* !KILL TROPHY CASE. */
 						/* case 8300: */
 					}
 					return;
@@ -561,7 +563,7 @@ public class Clockr implements Constants
 						game.dsub.rspeak_(152);
 					}
 					game.dsub.newsta_(vars.oindex_1.fuse, 0, 0, 0, 0);
-					/* KILL FUSE. */
+					/* !KILL FUSE. */
 					return;
 				/* CEVAPP, PAGE 5 */
 
@@ -575,9 +577,9 @@ public class Clockr implements Constants
 						GOTO = 9100;
 						continue loop;
 					}
-					/* WAS HE THERE? */
+					/* !WAS HE THERE? */
 					game.dsub.rspeak_(110);
-					/* NO, NARROW ESCAPE. */
+					/* !NO, NARROW ESCAPE. */
 					return;
 
 				case 9100:
@@ -586,9 +588,9 @@ public class Clockr implements Constants
 						GOTO = 9200;
 						continue loop;
 					}
-					/* IN VEHICLE? */
+					/* !IN VEHICLE? */
 					game.dsub.jigsup_(111);
-					/* NO, DEAD. */
+					/* !NO, DEAD. */
 					return;
 
 				case 9200:
@@ -597,24 +599,24 @@ public class Clockr implements Constants
 						GOTO = 9300;
 						continue loop;
 					}
-					/* TIED TO LEDGE? */
+					/* !TIED TO LEDGE? */
 					game.dsub.rspeak_(112);
-					/* NO, NO PLACE TO LAND. */
+					/* !NO, NO PLACE TO LAND. */
 					return;
 
 				case 9300:
 					vars.state_1.bloc = vars.rindex_1.vlbot;
-					/* YES, CRASH BALLOON. */
+					/* !YES, CRASH BALLOON. */
 					game.dsub.newsta_(vars.oindex_1.ballo, 0, 0, 0, 0);
-					/* BALLOON & CONTENTS DIE. */
+					/* !BALLOON & CONTENTS DIE. */
 					game.dsub.newsta_(vars.oindex_1.dball, 0, vars.state_1.bloc, 0, 0);
-					/* INSERT DEAD BALLOON. */
+					/* !INSERT DEAD BALLOON. */
 					vars.findex_1.btief = 0;
 					vars.findex_1.binff = 0;
 					vars.cevent_1.cflag[vars.cindex_1.cevbal - 1] = false;
 					vars.cevent_1.cflag[vars.cindex_1.cevbrn - 1] = false;
 					game.dsub.jigsup_(113);
-					/* DEAD */
+					/* !DEAD */
 					return;
 
 				/* CEV10-- SAFE MUNG. */
@@ -627,25 +629,25 @@ public class Clockr implements Constants
 						GOTO = 10100;
 						continue loop;
 					}
-					/* IS HE PRESENT? */
+					/* !IS HE PRESENT? */
 					game.dsub.rspeak_(115);
-					/* LET HIM KNOW. */
+					/* !LET HIM KNOW. */
 					if (vars.state_1.mungrm == vars.rindex_1.msafe)
 					{
 						vars.cevent_1.ctick[vars.cindex_1.cevled - 1] = 8;
 					}
-					/* START LEDGE CLOCK. */
+					/* !START LEDGE CLOCK. */
 					return;
 
 				case 10100:
 					i = 116;
-					/* HE'S DEAD, */
+					/* !HE'S DEAD, */
 					if ((vars.rooms_1.rflag[vars.play_1.here - 1] & Vars.RHOUSE) != 0)
 					{
 						i = 117;
 					}
 					game.dsub.jigsup_(i);
-					/* LET HIM KNOW. */
+					/* !LET HIM KNOW. */
 					return;
 				/* CEVAPP, PAGE 6 */
 
@@ -660,21 +662,21 @@ public class Clockr implements Constants
 						GOTO = 11100;
 						continue loop;
 					}
-					/* IS HE ON LEDGE? */
+					/* !IS HE ON LEDGE? */
 					vars.cevent_1.ctick[vars.cindex_1.cevvlg - 1] = 1;
-					/* NO, WAIT A WHILE. */
+					/* !NO, WAIT A WHILE. */
 					return;
 
 				case 11100:
 					game.dsub.newsta_(vars.oindex_1.gnome, 118, vars.play_1.here, 0, 0);
-					/* YES, MATERIALIZE GNOME. */
+					/* !YES, MATERIALIZE GNOME. */
 					return;
 
 				/* CEV12-- VOLCANO GNOME DISAPPEARS */
 
 				case 12000:
 					game.dsub.newsta_(vars.oindex_1.gnome, 149, 0, 0, 0);
-					/* DISAPPEAR THE GNOME. */
+					/* !DISAPPEAR THE GNOME. */
 					return;
 
 				/* CEV13-- BUCKET. */
@@ -692,16 +694,16 @@ public class Clockr implements Constants
 					vars.rooms_1.rflag[vars.rindex_1.cager - 1] |= Vars.RMUNG;
 					vars.rooms_1.rrand(vars.rindex_1.cager - 1, 147);
 					game.dsub.jigsup_(148);
-					/* MUNG PLAYER. */
+					/* !MUNG PLAYER. */
 					return;
 
 				/* CEV15-- END GAME HERALD. */
 
 				case 15000:
 					vars.findex_1.endgmf = true;
-					/* WE'RE IN ENDGAME. */
+					/* !WE'RE IN ENDGAME. */
 					game.dsub.rspeak_(119);
-					/* INFORM OF ENDGAME. */
+					/* !INFORM OF ENDGAME. */
 					return;
 				/* CEVAPP, PAGE 7 */
 
@@ -725,38 +727,38 @@ public class Clockr implements Constants
 					{
 						vars.cevent_1.cflag[vars.cindex_1.cevzgi - 1] = true;
 					}
-					/* IF IN TWI, GNOME. */
+					/* !IF IN TWI, GNOME. */
 					if (vars.play_1.here == vars.rindex_1.bkvau)
 					{
 						game.dsub.jigsup_(636);
 					}
-					/* IF IN VAU, DEAD. */
+					/* !IF IN VAU, DEAD. */
 					return;
 
 				/* CEV18-- ENTER GNOME OF ZURICH */
 
 				case 18000:
 					vars.cevent_1.cflag[vars.cindex_1.cevzgo - 1] = true;
-					/* EXITS, TOO. */
+					/* !EXITS, TOO. */
 					game.dsub.newsta_(vars.oindex_1.zgnom, 0, vars.rindex_1.bktwi, 0, 0);
-					/* PLACE IN TWI. */
+					/* !PLACE IN TWI. */
 					if (vars.play_1.here == vars.rindex_1.bktwi)
 					{
 						game.dsub.rspeak_(637);
 					}
-					/* ANNOUNCE. */
+					/* !ANNOUNCE. */
 					return;
 
 				/* CEV19-- EXIT GNOME */
 
 				case 19000:
 					game.dsub.newsta_(vars.oindex_1.zgnom, 0, 0, 0, 0);
-					/* VANISH. */
+					/* !VANISH. */
 					if (vars.play_1.here == vars.rindex_1.bktwi)
 					{
 						game.dsub.rspeak_(638);
 					}
-					/* ANNOUNCE. */
+					/* !ANNOUNCE. */
 					return;
 				/* CEVAPP, PAGE 8 */
 
@@ -768,45 +770,45 @@ public class Clockr implements Constants
 						GOTO = 20200;
 						continue loop;
 					}
-					/* SPELL HIS WAY IN? */
+					/* !SPELL HIS WAY IN? */
 					if (vars.play_1.here != vars.rindex_1.crypt)
 					{
 						return;
 					}
-					/* NO, STILL IN TOMB? */
+					/* !NO, STILL IN TOMB? */
 					if (!game.dso5.lit_(vars.play_1.here))
 					{
 						GOTO = 20100;
 						continue loop;
 					}
-					/* LIGHTS OFF? */
+					/* !LIGHTS OFF? */
 					vars.cevent_1.ctick[vars.cindex_1.cevste - 1] = 3;
-					/* RESCHEDULE. */
+					/* !RESCHEDULE. */
 					return;
 
 				case 20100:
 					game.dsub.rspeak_(727);
-					/* ANNOUNCE. */
+					/* !ANNOUNCE. */
 				case 20200:
 					i__1 = vars.objcts_1.olnt;
 					for (i = 1; i <= i__1; ++i)
 					{
-						/* STRIP HIM OF OBJS. */
+						/* !STRIP HIM OF OBJS. */
 						game.dsub.newsta_(i, 0, vars.objcts_1.oroom[i - 1],
 								vars.objcts_1.ocan[i - 1], 0);
 						/* case 20300: */
 					}
-					game.dsub.newsta_(vars.oindex_1.lamp, 0, 0, 0, PLAYER);
-					/* GIVE HIM LAMP. */
-					game.dsub.newsta_(vars.oindex_1.sword, 0, 0, 0, PLAYER);
-					/* GIVE HIM SWORD. */
+					game.dsub.newsta_(vars.oindex_1.lamp, 0, 0, 0, vars.aindex_1.player);
+					/* !GIVE HIM LAMP. */
+					game.dsub.newsta_(vars.oindex_1.sword, 0, 0, 0, vars.aindex_1.player);
+					/* !GIVE HIM SWORD. */
 
 					vars.objcts_1.oflag1[vars.oindex_1.lamp
 							- 1] = (vars.objcts_1.oflag1[vars.oindex_1.lamp - 1] | Vars.LITEBT)
 									& ~Vars.ONBT;
 					vars.objcts_1.oflag2[vars.oindex_1.lamp - 1] |= Vars.TCHBT;
 					vars.cevent_1.cflag[vars.cindex_1.cevlnt - 1] = false;
-					/* LAMP IS GOOD AS NEW. */
+					/* !LAMP IS GOOD AS NEW. */
 					vars.cevent_1.ctick[vars.cindex_1.cevlnt - 1] = 350;
 					vars.findex_1.orlamp = 0;
 					vars.objcts_1.oflag2[vars.oindex_1.sword - 1] |= Vars.TCHBT;
@@ -814,38 +816,38 @@ public class Clockr implements Constants
 					vars.hack_1.swdsta = 0;
 
 					vars.hack_1.thfact = false;
-					/* THIEF GONE. */
+					/* !THIEF GONE. */
 					vars.findex_1.endgmf = true;
-					/* ENDGAME RUNNING. */
+					/* !ENDGAME RUNNING. */
 					vars.cevent_1.cflag[vars.cindex_1.cevmat - 1] = false;
-					/* MATCHES GONE, */
+					/* !MATCHES GONE, */
 					vars.cevent_1.cflag[vars.cindex_1.cevcnd - 1] = false;
-					/* CANDLES GONE. */
+					/* !CANDLES GONE. */
 
 					game.dso2.scrupd_(vars.rooms_1.rval[vars.rindex_1.crypt - 1]);
-					/* SCORE CRYPT, */
+					/* !SCORE CRYPT, */
 					vars.rooms_1.rval[vars.rindex_1.crypt - 1] = 0;
-					/* BUT ONLY ONCE. */
+					/* !BUT ONLY ONCE. */
 					f = game.dso2.moveto_(vars.rindex_1.tstrs, vars.play_1.winner);
-					/* TO TOP OF STAIRS, */
+					/* !TO TOP OF STAIRS, */
 					f = game.dsub.rmdesc_(3);
-					/* AND DESCRIBE. */
+					/* !AND DESCRIBE. */
 					return;
-				/* BAM */
-				/*  */
+				/* !BAM */
+				/* ! */
 
 				/* CEV21-- MIRROR CLOSES. */
 
 				case 21000:
 					vars.findex_1.mrpshf = false;
-					/* BUTTON IS OUT. */
+					/* !BUTTON IS OUT. */
 					vars.findex_1.mropnf = false;
-					/* MIRROR IS CLOSED. */
+					/* !MIRROR IS CLOSED. */
 					if (vars.play_1.here == vars.rindex_1.mrant)
 					{
 						game.dsub.rspeak_(728);
 					}
-					/* DESCRIBE BUTTON. */
+					/* !DESCRIBE BUTTON. */
 					if (vars.play_1.here == vars.rindex_1.inmir
 							|| game.dso6.mrhere_(vars.play_1.here) == 1)
 					{
@@ -861,19 +863,19 @@ public class Clockr implements Constants
 					{
 						game.dsub.rspeak_(730);
 					}
-					/* DESCRIBE. */
+					/* !DESCRIBE. */
 					vars.findex_1.wdopnf = false;
-					/* CLOSED. */
+					/* !CLOSED. */
 					return;
 
 				/* CEV23-- INQUISITOR'S QUESTION */
 
 				case 23000:
-					if (vars.advs_1.aroom[PLAYER - 1] != vars.rindex_1.fdoor)
+					if (vars.advs_1.aroom[vars.aindex_1.player - 1] != vars.rindex_1.fdoor)
 					{
 						return;
 					}
-					/* IF PLAYER LEFT, DIE. */
+					/* !IF PLAYER LEFT, DIE. */
 					game.dsub.rspeak_(769);
 					i__1 = vars.findex_1.quesno + 770;
 					game.dsub.rspeak_(i__1);
@@ -883,11 +885,11 @@ public class Clockr implements Constants
 				/* CEV24-- MASTER FOLLOWS */
 
 				case 24000:
-					if (vars.advs_1.aroom[MASTER - 1] == vars.play_1.here)
+					if (vars.advs_1.aroom[vars.aindex_1.amastr - 1] == vars.play_1.here)
 					{
 						return;
 					}
-					/* NO MOVEMENT, DONE. */
+					/* !NO MOVEMENT, DONE. */
 					if (vars.play_1.here != vars.rindex_1.cell
 							&& vars.play_1.here != vars.rindex_1.pcell)
 					{
@@ -898,20 +900,20 @@ public class Clockr implements Constants
 					{
 						game.dsub.rspeak_(811);
 					}
-					/* WONT GO TO CELLS. */
+					/* !WONT GO TO CELLS. */
 					vars.findex_1.follwf = false;
 					return;
 
 				case 24100:
 					vars.findex_1.follwf = true;
-					/* FOLLOWING. */
+					/* !FOLLOWING. */
 					i = 812;
-					/* ASSUME CATCHES UP. */
+					/* !ASSUME CATCHES UP. */
 					i__1 = vars.xsrch_1.xmax;
 					i__2 = vars.xsrch_1.xmin;
 					for (j = vars.xsrch_1.xmin; i__2 < 0 ? j >= i__1 : j <= i__1; j += i__2)
 					{
-						if (game.dso3.findxt_(j, vars.advs_1.aroom[MASTER - 1])
+						if (game.dso3.findxt_(j, vars.advs_1.aroom[vars.aindex_1.amastr - 1])
 								&& vars.curxt_1.xroom1 == vars.play_1.here)
 						{
 							i = 813;
@@ -920,9 +922,9 @@ public class Clockr implements Constants
 					}
 					game.dsub.rspeak_(i);
 					game.dsub.newsta_(vars.oindex_1.master, 0, vars.play_1.here, 0, 0);
-					/* MOVE MASTER OBJECT. */
-					vars.advs_1.aroom[MASTER - 1] = vars.play_1.here;
-					/* MOVE MASTER PLAYER. */
+					/* !MOVE MASTER OBJECT. */
+					vars.advs_1.aroom[vars.aindex_1.amastr - 1] = vars.play_1.here;
+					/* !MOVE MASTER PLAYER. */
 					return;
 			}
 		} while (true);
@@ -930,6 +932,7 @@ public class Clockr implements Constants
 
 	/* LITINT- LIGHT INTERRUPT PROCESSOR */
 	private void litint_(int obj, int ctr[], int cev, final int ticks[], int tickln)
+			throws IOException
 	{
 		// TODO: Light seems to be dim - need to fix?? //
 		/* Parameter adjustments */
@@ -939,9 +942,9 @@ public class Clockr implements Constants
 		/* Function Body */
 //	   ++(*ctr);
 		ctr[0] += 1;
-		/* ADVANCE STATE CNTR. */
-		vars.cevent_1.ctick[cev - 1] = ticks[ctr[0] - 1];
-		/* RESET INTERRUPT. */
+		/* !ADVANCE STATE CNTR. */
+		vars.cevent_1.ctick[cev - 1] = ticks[ctr[0]-1];
+		/* !RESET INTERRUPT. */
 		if (vars.cevent_1.ctick[cev - 1] != 0)
 		{
 			if (vars.objcts_1.oroom[obj - 1] == vars.play_1.here
@@ -951,7 +954,7 @@ public class Clockr implements Constants
 			}
 			return;
 		}
-		/* EXPIRED? */
+		/* !EXPIRED? */
 		vars.objcts_1.oflag1[obj - 1] &= ~(Vars.LITEBT + Vars.FLAMBT + Vars.ONBT);
 		if (vars.objcts_1.oroom[obj - 1] == vars.play_1.here
 				|| vars.objcts_1.oadv[obj - 1] == vars.play_1.winner)

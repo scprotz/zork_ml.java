@@ -1,6 +1,8 @@
 package zork;
 
-public class NRooms implements Constants
+import java.io.IOException;
+
+public class NRooms
 {
 	/* RAPPL2- SPECIAL PURPOSE ROOM ROUTINES, PART 2 */
 
@@ -16,7 +18,7 @@ public class NRooms implements Constants
 		this.game = game;
 	}
 
-	boolean rappl2_(int ri)
+	boolean rappl2_(int ri) throws IOException
 	{
 	    /* Initialized data */
 
@@ -69,7 +71,7 @@ public class NRooms implements Constants
 	    	{
 
 	case 38000:
-	    if (vars.prsvec_1.action == LOOK) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.lookw) {
 		lookto_(vars.rindex_1.fdoor, vars.rindex_1.mrg, 0, 682, 681);
 	    }
 	    return ret_val;
@@ -77,7 +79,7 @@ public class NRooms implements Constants
 	/* R39--	MIRROR G ROOM */
 
 	case 39000:
-	    if (vars.prsvec_1.action == WALK_IN) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.walkiw) {
 		game.dsub.jigsup_(685);
 	    }
 	    return ret_val;
@@ -85,7 +87,7 @@ public class NRooms implements Constants
 	/* R40--	MIRROR C ROOM */
 
 	case 40000:
-	    if (vars.prsvec_1.action == LOOK) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.lookw) {
 		lookto_(vars.rindex_1.mrg, vars.rindex_1.mrb, 683, 0, 681);
 	    }
 	    return ret_val;
@@ -93,7 +95,7 @@ public class NRooms implements Constants
 	/* R41--	MIRROR B ROOM */
 
 	case 41000:
-	    if (vars.prsvec_1.action == LOOK) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.lookw) {
 		lookto_(vars.rindex_1.mrc, vars.rindex_1.mra, 0, 0, 681);
 	    }
 	    return ret_val;
@@ -101,7 +103,7 @@ public class NRooms implements Constants
 	/* R42--	MIRROR A ROOM */
 
 	case 42000:
-	    if (vars.prsvec_1.action == LOOK) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.lookw) {
 		lookto_(vars.rindex_1.mrb, 0, 0, 684, 681);
 	    }
 	    return ret_val;
@@ -110,7 +112,7 @@ public class NRooms implements Constants
 	/* R43--	MIRROR C EAST/WEST */
 
 	case 43000:
-	    if (vars.prsvec_1.action == LOOK) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.lookw) {
 		ewtell_(vars.play_1.here, 683);
 	    }
 	    return ret_val;
@@ -118,7 +120,7 @@ public class NRooms implements Constants
 	/* R44--	MIRROR B EAST/WEST */
 
 	case 44000:
-	    if (vars.prsvec_1.action == LOOK) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.lookw) {
 		ewtell_(vars.play_1.here, 686);
 	    }
 	    return ret_val;
@@ -126,7 +128,7 @@ public class NRooms implements Constants
 	/* R45--	MIRROR A EAST/WEST */
 
 	case 45000:
-	    if (vars.prsvec_1.action == LOOK) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.lookw) {
 		ewtell_(vars.play_1.here, 687);
 	    }
 	    return ret_val;
@@ -134,7 +136,7 @@ public class NRooms implements Constants
 	/* R46--	INSIDE MIRROR */
 
 	case 46000:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -166,7 +168,7 @@ public class NRooms implements Constants
 	/* R47--	MIRROR EYE ROOM */
 
 	case 47000:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -192,7 +194,7 @@ public class NRooms implements Constants
 	/* R48--	INSIDE CRYPT */
 
 	case 48000:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -207,7 +209,7 @@ public class NRooms implements Constants
 	/* R49--	SOUTH CORRIDOR */
 
 	case 49000:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -227,7 +229,7 @@ public class NRooms implements Constants
 	/* R50--	BEHIND DOOR */
 
 	case 50000:
-	    if (vars.prsvec_1.action != WALK_IN) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.walkiw) {
 		GOTO = 50100; continue loop;
 	    }
 	/* WALK IN? */
@@ -237,7 +239,7 @@ public class NRooms implements Constants
 	    return ret_val;
 
 	case 50100:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -253,11 +255,11 @@ public class NRooms implements Constants
 	/* R51--	FRONT DOOR */
 
 	case 51000:
-	    if (vars.prsvec_1.action == WALK_IN) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.walkiw) {
 		vars.cevent_1.ctick[vars.cindex_1.cevfol - 1] = 0;
 	    }
 	/* IF EXITS, KILL FOLLOW. */
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -280,7 +282,7 @@ public class NRooms implements Constants
 	/* R52--	NORTH CORRIDOR */
 
 	case 52000:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -295,7 +297,7 @@ public class NRooms implements Constants
 	/* R53--	PARAPET */
 
 	case 53000:
-	    if (vars.prsvec_1.action == LOOK) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.lookw) {
 		i__1 = vars.findex_1.pnumb + 712;
 		game.dsub.rspsub_(712, i__1);
 	    }
@@ -304,7 +306,7 @@ public class NRooms implements Constants
 	/* R54--	CELL */
 
 	case 54000:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -328,7 +330,7 @@ public class NRooms implements Constants
 	/* R55--	PRISON CELL */
 
 	case 55000:
-	    if (vars.prsvec_1.action == LOOK) {
+	    if (vars.prsvec_1.prsa == vars.vindex_1.lookw) {
 		game.dsub.rspeak_(724);
 	    }
 	/* LOOK? */
@@ -337,7 +339,7 @@ public class NRooms implements Constants
 	/* R56--	NIRVANA CELL */
 
 	case 56000:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -353,7 +355,7 @@ public class NRooms implements Constants
 	/* R57--	NIRVANA AND END OF GAME */
 
 	case 57000:
-	    if (vars.prsvec_1.action != WALK_IN) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.walkiw) {
 		return ret_val;
 	    }
 	/* WALKIN? */
@@ -365,7 +367,7 @@ public class NRooms implements Constants
 	/* R58--	TOMB ROOM */
 
 	case 58000:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -380,7 +382,7 @@ public class NRooms implements Constants
 	/* R59--	PUZZLE SIDE ROOM */
 
 	case 59000:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -397,7 +399,7 @@ public class NRooms implements Constants
 	/* R60--	PUZZLE ROOM */
 
 	case 60000:
-	    if (vars.prsvec_1.action != LOOK) {
+	    if (vars.prsvec_1.prsa != vars.vindex_1.lookw) {
 		return ret_val;
 	    }
 	/* LOOK? */
@@ -424,7 +426,7 @@ public class NRooms implements Constants
 
 	/* DECLARATIONS */
 
-	private void lookto_(int nrm, int srm, int nt, int st, int ht)
+	private void lookto_(int nrm, int srm, int nt, int st, int ht) throws IOException
 	{
 	    /* System generated locals */
 	    int i__1;

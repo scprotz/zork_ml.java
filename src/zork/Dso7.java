@@ -1,5 +1,7 @@
 package zork;
 
+import java.io.IOException;
+
 public class Dso7
 {
 	/* ENCRYP--	ENCRYPT PASSWORD */
@@ -70,7 +72,7 @@ public class Dso7
 
 	/* DECLARATIONS */
 
-	void cpgoto_(int st)
+	void cpgoto_(int st) throws IOException
 	{
 	   /* System generated locals */
 	   int i__2;
@@ -99,7 +101,7 @@ public class Dso7
 	/* DECLARATIONS */
 	   static final int[] dgmoft = new int[]{ -9,-8,-7,-1,1,7,8,9 };
 
-	void cpinfo_(int rmk, int st)
+	void cpinfo_(int rmk, int st) throws IOException
 	{
 	   /* Initialized data */
 
@@ -129,9 +131,11 @@ public class Dso7
 	      }
 	   }
 
-	   Supp.print("       |"+dgm[0]+""+ dgm[0]+" "+dgm[1]+""+dgm[1]+" "+dgm[2]+""+dgm[2]+"|\n");
-	   Supp.print(" West  |"+dgm[3]+""+ dgm[3]+" .. "+dgm[4]+""+ dgm[4]+"| East\n");
-	   Supp.print("       |"+dgm[5]+""+ dgm[5]+" "+dgm[6]+""+ dgm[6]+" "+dgm[7]+""+ dgm[7]+"|\n");
+	   System.out.printf("       |%c%c %c%c %c%c|\n", dgm[0], dgm[0], dgm[1], dgm[1],
+	         dgm[2], dgm[2]);
+	   System.out.printf(" West  |%c%c .. %c%c| East\n", dgm[3], dgm[3], dgm[4], dgm[4]);
+	   System.out.printf("       |%c%c %c%c %c%c|\n", dgm[5], dgm[5], dgm[6], dgm[6],
+	         dgm[7], dgm[7]);
 
 	   if (st == 10) {
 	      game.dsub.rspeak_(870);
