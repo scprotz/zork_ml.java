@@ -62,33 +62,27 @@ public class Dsub
 			vars.play_1.telflg = true;
 
 		}
-		else
-			try
-			{
-				return rspsb2nl_(n, 0, 0, 1);
-			}
-			catch (IOException e)
-			{		
-				e.printStackTrace();
-			}
+		else			
+			return rspsb2nl_(n, 0, 0, 1);
+			
 		System.out.println(phrase);
 		return phrase;
 	} /* rspeak_ */
 
 	/* RSPSUB-- OUTPUT RANDOM MESSAGE WITH SUBSTITUTABLE ARGUMENT */
-	String rspsub_(int n, int s1) throws IOException
+	String rspsub_(int n, int s1)
 	{
 		return rspsb2nl_(n, s1, 0, 1);
 	} /* rspsub_ */
 
 	/* RSPSB2-- OUTPUT RANDOM MESSAGE WITH UP TO TWO SUBSTITUTABLE ARGUMENTS */
-	String rspsb2_(int n, int s1, int s2) throws IOException
+	String rspsb2_(int n, int s1, int s2)
 	{
 		return rspsb2nl_(n, s1, s2, 1);
 	} /* rspsb2_ */
 
 	/* rspsb2nl_ Display a substitutable message with an optional newline */
-	private String rspsb2nl_(int n, int y, int z, int nl) throws IOException
+	private String rspsb2nl_(int n, int y, int z, int nl)
 	{
 		if(n == 341)
 			System.out.print("");
@@ -132,10 +126,18 @@ public class Dsub
 
 		while (true)
 		{
-			int i;
+			int i = 0;
 
 //	      i = getc(game.init.dbfile);
-			i = game.init.dbfile.read();
+			try
+			{
+				i = game.init.dbfile.read();
+			}
+			catch (IOException e)
+			{
+				System.err.println("Problem reading init file.");
+				e.printStackTrace();
+			}
 //	ifdef DEBUG
 			if (Vars.DEBUG)
 			{
@@ -159,12 +161,19 @@ public class Dsub
 			}
 			else if (i == '#' && y != 0)
 			{
-				long iloc;
+				long iloc = 0;
 
-//	         iloc = ftell(game.init.dbfile);
-				iloc = game.init.dbfile.getFilePointer();
+				try
+				{
+					iloc = game.init.dbfile.getFilePointer();
+				}
+				catch (IOException e)
+				{
+					System.err.println("Problem reading init file.");
+					e.printStackTrace();
+				}
 				rspsb2nl_(y, 0, 0, 0);
-//		 res = fseek(game.init.dbfile, iloc, SEEK_SET);
+				
 				res = 0;
 				try
 				{
@@ -212,7 +221,7 @@ public class Dsub
 
 	/* DECLARATIONS */
 
-	boolean objact_() throws IOException
+	boolean objact_()
 	{
 		/* !ASSUME WINS. */
 		if (vars.prsvec_1.prsi != 0
@@ -239,7 +248,7 @@ public class Dsub
 
 	/* CALL BUG(NO,PAR) */
 
-	void bug_(int a, int b) throws IOException
+	void bug_(int a, int b)
 	{
 //	#ifdef DEBUG
 		if (Vars.DEBUG)
@@ -265,7 +274,7 @@ public class Dsub
 
 	/* CALL NEWSTA(OBJECT,STRING,NEWROOM,NEWCON,NEWADV) */
 
-	void newsta_(int o, int r, int rm, int cn, int ad) throws IOException
+	void newsta_(int o, int r, int rm, int cn, int ad)
 	{
 		rspeak_(r);
 		vars.objcts_1.oroom[o - 1] = rm;
@@ -325,7 +334,7 @@ public class Dsub
 	/* DECLARATIONS */
 	static final int rlist[] = new int[] { 8, 6, 36, 35, 34, 4, 34, 6, 5 };
 
-	void jigsup_(int desc) throws IOException
+	void jigsup_(int desc)
 	{
 		/* Initialized data */
 
@@ -479,7 +488,7 @@ public class Dsub
 
 	/* DECLARATIONS */
 
-	int oactor_(int obj) throws IOException
+	int oactor_(int obj)
 	{
 		/* System generated locals */
 
@@ -534,7 +543,7 @@ public class Dsub
 	/* RMDESC PRINTS A DESCRIPTION OF THE CURRENT ROOM. */
 	/* IT IS ALSO THE PROCESSOR FOR VERBS 'LOOK' AND 'EXAMINE'. */
 
-	boolean rmdesc_(int full) throws IOException
+	boolean rmdesc_(int full)
 	{
 		/* System generated locals */
 		boolean ret_val, L__1;
@@ -674,7 +683,7 @@ public class Dsub
 	} /* rmdesc_ */
 
 	/* RAPPLI- ROUTING ROUTINE FOR ROOM APPLICABLES */
-	boolean rappli_(int ri) throws IOException
+	boolean rappli_(int ri)
 	{
 		/* Initialized data */
 

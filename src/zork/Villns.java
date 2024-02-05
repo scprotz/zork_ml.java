@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Villns
 {
 	/* TROLLP- TROLL FUNCTION */
@@ -18,7 +16,7 @@ public class Villns
 		this.game = game;
 	}
 
-	boolean trollp_(int arg) throws IOException
+	boolean trollp_(int arg)
 	{
 		/* System generated locals */
 		boolean ret_val;
@@ -170,7 +168,7 @@ public class Villns
 	} /* trollp_ */
 
 	/* CYCLOP- CYCLOPS FUNCTION */
-	boolean cyclop_(int arg) throws IOException
+	boolean cyclop_(int arg)
 	{
 		/* System generated locals */
 		int i__1, i__2;
@@ -344,7 +342,7 @@ public class Villns
 	} /* cyclop_ */
 
 	/* THIEFP- THIEF FUNCTION */
-	boolean thiefp_(int arg) throws IOException
+	boolean thiefp_(int arg)
 	{
 		/* System generated locals */
 		int i__1;

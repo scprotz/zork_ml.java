@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Dso6
 {
 	/* GHERE--	IS GLOBAL ACTUALLY IN THIS ROOM? */
@@ -19,7 +17,7 @@ public class Dso6
 	}
 	
 
-	boolean ghere_(int obj, int rm) throws IOException
+	boolean ghere_(int obj, int rm)
 	{
 	   /* System generated locals */
 	   boolean ret_val;

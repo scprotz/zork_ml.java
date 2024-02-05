@@ -18,7 +18,7 @@ public class Ballop
 		this.game = game;
 	}
 
-	boolean ballop_(int arg) throws IOException
+	boolean ballop_(int arg)
 	{
 		/* System generated locals */
 		boolean ret_val;

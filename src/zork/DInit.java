@@ -84,7 +84,7 @@ public class DInit
 		}
 	}
 
-	public boolean init_() throws IOException
+	public boolean init_()
 	{
 		/* System generated locals */
 		boolean ret_val;
@@ -283,84 +283,93 @@ public class DInit
 		vars.screen_1.scolac = 0;
 		/* INIT, PAGE 4 */
 
-		/* NOW RESTORE FROM EXISTING INDEX FILE. */
-		dbfile = new RandomAccessFile(new File(LOCALTEXTFILE), "r");
-
-		indxfile = dbfile;
-
-		i = rdint(indxfile);
-		j = rdint(indxfile);
-		k = rdint(indxfile);
-
-		/* !GET VERSION. */
-		if (i != vars.vers_1.vmaj || j != vars.vers_1.vmin)
+		try
 		{
-			error1925(i, j, k);
-			return ret_val;
+
+			/* NOW RESTORE FROM EXISTING INDEX FILE. */
+			dbfile = new RandomAccessFile(new File(LOCALTEXTFILE), "r");
+
+			indxfile = dbfile;
+
+			i = rdint(indxfile);
+			j = rdint(indxfile);
+			k = rdint(indxfile);
+
+			/* !GET VERSION. */
+			if (i != vars.vers_1.vmaj || j != vars.vers_1.vmin)
+			{
+				error1925(i, j, k);
+				return ret_val;
+			}
+
+			vars.state_1.mxscor = rdint(indxfile);
+			vars.star_1.strbit = rdint(indxfile);
+			vars.state_1.egmxsc = rdint(indxfile);
+
+			vars.rooms_1.rlnt = rdint(indxfile);
+			rdints(vars.rooms_1.rlnt, vars.rooms_1.rdesc1, indxfile);
+			rdints(vars.rooms_1.rlnt, vars.rooms_1.rdesc2, indxfile);
+			rdints(vars.rooms_1.rlnt, vars.rooms_1.rexit, indxfile);
+			rdpartialints(vars.rooms_1.rlnt, vars.rooms_1.ractio, indxfile);
+			rdpartialints(vars.rooms_1.rlnt, vars.rooms_1.rval, indxfile);
+			rdints(vars.rooms_1.rlnt, vars.rooms_1.rflag, indxfile);
+
+			vars.exits_1.xlnt = rdint(indxfile);
+			rdints(vars.exits_1.xlnt, vars.exits_1.travel, indxfile);
+
+			vars.objcts_1.olnt = rdint(indxfile);
+			rdints(vars.objcts_1.olnt, vars.objcts_1.odesc1, indxfile);
+			rdints(vars.objcts_1.olnt, vars.objcts_1.odesc2, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.odesco, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oactio, indxfile);
+			rdints(vars.objcts_1.olnt, vars.objcts_1.oflag1, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oflag2, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ofval, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.otval, indxfile);
+			rdints(vars.objcts_1.olnt, vars.objcts_1.osize, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ocapac, indxfile);
+			rdints(vars.objcts_1.olnt, vars.objcts_1.oroom, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oadv, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ocan, indxfile);
+			rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oread, indxfile);
+
+			vars.oroom2_1.r2lnt = rdint(indxfile);
+			rdints(vars.oroom2_1.r2lnt, vars.oroom2_1.oroom2, indxfile);
+			rdints(vars.oroom2_1.r2lnt, vars.oroom2_1.rroom2, indxfile);
+
+			vars.cevent_1.clnt = rdint(indxfile);
+			rdints(vars.cevent_1.clnt, vars.cevent_1.ctick, indxfile);
+			rdints(vars.cevent_1.clnt, vars.cevent_1.cactio, indxfile);
+			rdflags(vars.cevent_1.clnt, vars.cevent_1.cflag, indxfile);
+
+			vars.vill_1.vlnt = rdint(indxfile);
+			rdints(vars.vill_1.vlnt, vars.vill_1.villns, indxfile);
+			rdpartialints(vars.vill_1.vlnt, vars.vill_1.vprob, indxfile);
+			rdpartialints(vars.vill_1.vlnt, vars.vill_1.vopps, indxfile);
+			rdints(vars.vill_1.vlnt, vars.vill_1.vbest, indxfile);
+			rdints(vars.vill_1.vlnt, vars.vill_1.vmelee, indxfile);
+
+			vars.advs_1.alnt = rdint(indxfile);
+			rdints(vars.advs_1.alnt, vars.advs_1.aroom, indxfile);
+			rdpartialints(vars.advs_1.alnt, vars.advs_1.ascore, indxfile);
+			rdpartialints(vars.advs_1.alnt, vars.advs_1.avehic, indxfile);
+			rdints(vars.advs_1.alnt, vars.advs_1.aobj, indxfile);
+			rdints(vars.advs_1.alnt, vars.advs_1.aactio, indxfile);
+			rdints(vars.advs_1.alnt, vars.advs_1.astren, indxfile);
+			rdpartialints(vars.advs_1.alnt, vars.advs_1.aflag, indxfile);
+
+			vars.star_1.mbase = rdint(indxfile);
+			vars.rmsg_1.mlnt = rdint(indxfile);
+			rdints(vars.rmsg_1.mlnt, vars.rmsg_1.rtext, indxfile);
+
+			/* Save location of start of message text */
+			vars.rmsg_1.mrloc = indxfile.getFilePointer();
 		}
-
-		vars.state_1.mxscor = rdint(indxfile);
-		vars.star_1.strbit = rdint(indxfile);
-		vars.state_1.egmxsc = rdint(indxfile);
-
-		vars.rooms_1.rlnt = rdint(indxfile);
-		rdints(vars.rooms_1.rlnt, vars.rooms_1.rdesc1, indxfile);
-		rdints(vars.rooms_1.rlnt, vars.rooms_1.rdesc2, indxfile);
-		rdints(vars.rooms_1.rlnt, vars.rooms_1.rexit, indxfile);
-		rdpartialints(vars.rooms_1.rlnt, vars.rooms_1.ractio, indxfile);
-		rdpartialints(vars.rooms_1.rlnt, vars.rooms_1.rval, indxfile);
-		rdints(vars.rooms_1.rlnt, vars.rooms_1.rflag, indxfile);
-
-		vars.exits_1.xlnt = rdint(indxfile);
-		rdints(vars.exits_1.xlnt, vars.exits_1.travel, indxfile);
-
-		vars.objcts_1.olnt = rdint(indxfile);
-		rdints(vars.objcts_1.olnt, vars.objcts_1.odesc1, indxfile);
-		rdints(vars.objcts_1.olnt, vars.objcts_1.odesc2, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.odesco, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oactio, indxfile);
-		rdints(vars.objcts_1.olnt, vars.objcts_1.oflag1, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oflag2, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ofval, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.otval, indxfile);
-		rdints(vars.objcts_1.olnt, vars.objcts_1.osize, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ocapac, indxfile);
-		rdints(vars.objcts_1.olnt, vars.objcts_1.oroom, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oadv, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.ocan, indxfile);
-		rdpartialints(vars.objcts_1.olnt, vars.objcts_1.oread, indxfile);
-
-		vars.oroom2_1.r2lnt = rdint(indxfile);
-		rdints(vars.oroom2_1.r2lnt, vars.oroom2_1.oroom2, indxfile);
-		rdints(vars.oroom2_1.r2lnt, vars.oroom2_1.rroom2, indxfile);
-
-		vars.cevent_1.clnt = rdint(indxfile);
-		rdints(vars.cevent_1.clnt, vars.cevent_1.ctick, indxfile);
-		rdints(vars.cevent_1.clnt, vars.cevent_1.cactio, indxfile);
-		rdflags(vars.cevent_1.clnt, vars.cevent_1.cflag, indxfile);
-
-		vars.vill_1.vlnt = rdint(indxfile);
-		rdints(vars.vill_1.vlnt, vars.vill_1.villns, indxfile);
-		rdpartialints(vars.vill_1.vlnt, vars.vill_1.vprob, indxfile);
-		rdpartialints(vars.vill_1.vlnt, vars.vill_1.vopps, indxfile);
-		rdints(vars.vill_1.vlnt, vars.vill_1.vbest, indxfile);
-		rdints(vars.vill_1.vlnt, vars.vill_1.vmelee, indxfile);
-
-		vars.advs_1.alnt = rdint(indxfile);
-		rdints(vars.advs_1.alnt, vars.advs_1.aroom, indxfile);
-		rdpartialints(vars.advs_1.alnt, vars.advs_1.ascore, indxfile);
-		rdpartialints(vars.advs_1.alnt, vars.advs_1.avehic, indxfile);
-		rdints(vars.advs_1.alnt, vars.advs_1.aobj, indxfile);
-		rdints(vars.advs_1.alnt, vars.advs_1.aactio, indxfile);
-		rdints(vars.advs_1.alnt, vars.advs_1.astren, indxfile);
-		rdpartialints(vars.advs_1.alnt, vars.advs_1.aflag, indxfile);
-
-		vars.star_1.mbase = rdint(indxfile);
-		vars.rmsg_1.mlnt = rdint(indxfile);
-		rdints(vars.rmsg_1.mlnt, vars.rmsg_1.rtext, indxfile);
-
-		/* Save location of start of message text */
-		vars.rmsg_1.mrloc = indxfile.getFilePointer();
+		catch (IOException ioe)
+		{
+			System.err.println("Problem initializating from init file.");
+			ioe.printStackTrace();
+		}
 
 		/* !INIT DONE. */
 

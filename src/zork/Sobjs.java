@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Sobjs
 {
 	/* SOBJS- SIMPLE OBJECTS PROCESSOR */
@@ -20,7 +18,7 @@ public class Sobjs
 		this.game = game;
 	}
 
-	boolean sobjs_(int ri, int arg) throws IOException
+	boolean sobjs_(int ri, int arg)
 	{
 		/* System generated locals */
 		int i__1;

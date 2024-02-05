@@ -55,23 +55,16 @@ public class Dgame
 
 	/** Dsub needs this to initialize 
 	 * @throws IOException **/
-	public static void main(String[] args) throws IOException
-	{
-		Dgame game = new Dgame();
-		game.game_();
-		Supp.exit_();
-//			{
-//				game.game_();
-//			}
-//			/* !IF INIT, PLAY GAME. */
-//			Supp.exit_();
-	}
+
 	
-	public Dgame() throws IOException
+	public Dgame()
 	{
 		this.vars = new Vars();
 		this.init = new DInit(vars);
+		
+		
 		this.init.init_();
+		
 
 		this.demons = new Demons(vars, this);
 		this.objcts = new Objcts(vars, this);
@@ -101,14 +94,16 @@ public class Dgame
 		
 	}
 
-	public void game_() throws IOException
+	public void game_()
 	{		
 
-		/* WELCOME ABOARD. */
+		// WELCOME ABOARD. //
 		dsub.rspeak_(1);
 
 
+		// Tell me about current room //
 		dsub.rmdesc_(3);
+		
 		/* !START GAME. */
 		
 //		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("speak.properties")));
@@ -126,42 +121,14 @@ public class Dgame
 //		if(i == 0)
 //			return;
 		
-		try
-		{
-			BufferedReader walkthrough = new BufferedReader(new FileReader(new File("walkthrough.properties")));
-		
-			ArrayList<String> lines = new ArrayList<String>();
-			
-			String line = "";
-			
-			while ((line = walkthrough.readLine()) != null)
-			{
-				if (line.length() != 0 && line.charAt(0) != '#')
-				{							
-					lines.add(line);
-				}
-			}		
-			
-			for(String cmd : lines)
-			{
-				System.err.println(cmd);
-				System.err.flush();
-				vars.input_1.inbuf = cmd.toUpperCase();
-				if (vars.input_1.inbuf.equals("ECHO"))
-					System.out.print("");
-				doTurn();
-			}
-		}
-		catch (FileNotFoundException fnfe)
-		{
-			fnfe.printStackTrace();
-		}				 
+			 
 	}
 	
 	
 	
-	public void doTurn() throws IOException
+	public void doTurn(String action)
 	{		
+		vars.input_1.inbuf = action.toUpperCase();
 
 		/* NOW LOOP, READING AND EXECUTING COMMANDS. */
 	
@@ -392,7 +359,7 @@ public class Dgame
 	} /* game_ */
 
 	/* XENDMV- EXECUTE END OF MOVE FUNCTIONS. */
-	private void xendmv_(boolean flag) throws IOException
+	private void xendmv_(boolean flag)
 	{
 
 		if (!(flag))
@@ -429,7 +396,7 @@ public class Dgame
 	} /* xendmv_ */
 
 	/* XVEHIC- EXECUTE VEHICLE FUNCTION */
-	private boolean xvehic_(int n) throws IOException
+	private boolean xvehic_(int n)
 	{
 		/* System generated locals */
 		boolean ret_val;

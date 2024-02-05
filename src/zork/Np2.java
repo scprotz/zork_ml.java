@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Np2
 {
 	/* GETOBJ-- FIND OBJ DESCRIBED BY ADJ, NAME PAIR */
@@ -21,7 +19,7 @@ public class Np2
 	}
 
 	/* THIS ROUTINE DETAILS ON BIT 3 OF PRSFLG */
-	int getobj_(int oidx, int aidx, int spcobj) throws IOException
+	int getobj_(int oidx, int aidx, int spcobj)
 	{
 		/* System generated locals */
 		int ret_val = 0, i__1;

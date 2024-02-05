@@ -26,7 +26,7 @@ public class Dverb2
 		this.verbs = verbs;
 	}
 
-	void savegm_() throws IOException
+	void savegm_()
 	{
 		/* Local variables */
 		int[] j = new int[1];
@@ -157,7 +157,7 @@ public class Dverb2
 		}
 	} /* savegm_ */
 
-	public void writeInt(OutputStream writer, long value) throws IOException
+	public void writeInt(OutputStream writer, long value)
 	{
 		char[] bytes = new char[4];
 		bytes[3] = (char) ((value >> 24) & 0xFF);
@@ -169,12 +169,21 @@ public class Dverb2
 		for (int i = 0; i < 4; i++)
 		{
 			int val = bytes[i];
-			writer.write(bytes[i]);
+			
+			try
+			{
+				writer.write(bytes[i]);
+			}
+			catch (IOException e)
+			{
+				System.err.println("Problem writing to save file.");
+				e.printStackTrace();
+			}
 		}
 	}
 
 	/* RESTORE- RESTORE GAME STATE */
-	void rstrgm_() throws IOException
+	void rstrgm_()
 	{
 
 		File file = new File("dsave.dat");
@@ -293,7 +302,7 @@ public class Dverb2
 
 	/* DECLARATIONS */
 
-	boolean walk_() throws IOException
+	boolean walk_()
 	{
 		/* System generated locals */
 		boolean ret_val;
@@ -546,7 +555,7 @@ public class Dverb2
 	} /* walk_ */
 
 	/* CXAPPL- CONDITIONAL EXIT PROCESSORS */
-	private int cxappl_(int ri) throws IOException
+	private int cxappl_(int ri)
 	{
 		/* System generated locals */
 		int ret_val, i__1;

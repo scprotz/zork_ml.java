@@ -20,7 +20,7 @@ public class Dso2
 
 	boolean moveto_(
 	int nr,
-	int who) throws IOException
+	int who)
 	{
 	    /* System generated locals */
 	    boolean ret_val;
@@ -135,7 +135,7 @@ public class Dso2
 	static final int[] erank = new int[] { 20, 15, 10, 5, 0 };
 
 	/* SCORE-- PRINT OUT CURRENT SCORE */
-	void score_(boolean flg) throws IOException
+	void score_(boolean flg)
 	{
 		/* Initialized data */
 

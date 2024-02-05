@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Dso5
 {
 	/* COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142 */
@@ -31,7 +29,7 @@ public class Dso5
 	} /* gttime_ */
 
 	/* OPNCLS-- PROCESS OPEN/CLOSE FOR DOORS */
-	boolean opncls_(int obj, int so, int sc) throws IOException
+	boolean opncls_(int obj, int so, int sc)
 	{
 		/* System generated locals */
 		boolean ret_val;

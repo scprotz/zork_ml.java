@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Verbs
 {
 	/* VAPPLI- MAIN VERB PROCESSING ROUTINE */
@@ -24,7 +22,7 @@ public class Verbs
 		this.sverbs = new Sverbs(vars, game, this);
 	}
 
-	public boolean vappli_(int ri) throws IOException
+	public boolean vappli_(int ri)
 	{
 		/* Initialized data */
 
@@ -1729,7 +1727,7 @@ public class Verbs
 	} /* vappli_ */
 
 	/* CLOCKD- CLOCK DEMON FOR INTERMOVE CLOCK EVENTS */
-	boolean clockd_() throws IOException
+	boolean clockd_()
 	{
 		/* System generated locals */
 		int i__1;

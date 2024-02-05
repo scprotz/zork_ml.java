@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Dso7
 {
 	/* ENCRYP--	ENCRYPT PASSWORD */
@@ -72,7 +70,7 @@ public class Dso7
 
 	/* DECLARATIONS */
 
-	void cpgoto_(int st) throws IOException
+	void cpgoto_(int st)
 	{
 	   /* System generated locals */
 	   int i__2;
@@ -101,7 +99,7 @@ public class Dso7
 	/* DECLARATIONS */
 	   static final int[] dgmoft = new int[]{ -9,-8,-7,-1,1,7,8,9 };
 
-	void cpinfo_(int rmk, int st) throws IOException
+	void cpinfo_(int rmk, int st)
 	{
 	   /* Initialized data */
 

@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Objcts
 {
 	/* OAPPLI- OBJECT SPECIAL ACTION ROUTINES */
@@ -18,7 +16,7 @@ public class Objcts
 		this.game = game;
 	}
 
-	boolean oappli_(int ri, int arg) throws IOException
+	boolean oappli_(int ri, int arg)
 	{
 		/* Initialized data */
 		int GOTO = 10;

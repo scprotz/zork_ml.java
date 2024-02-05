@@ -19,7 +19,7 @@ public class Demons
 		this.game = game;
 	}
 
-	void fightd_() throws IOException
+	void fightd_()
 	{
 		/* Initialized data */
 
@@ -182,7 +182,7 @@ public class Demons
 			4115, 4119, 4123, 4127, 3131, 3134 };
 
 	/* BLOW- STRIKE BLOW */
-	int blow_(int h, int v, int rmk, boolean hflg, int out) throws IOException
+	int blow_(int h, int v, int rmk, boolean hflg, int out)
 	{
 		/* Initialized data */
 
@@ -598,7 +598,7 @@ public class Demons
 
 	/* DECLARATIONS */
 
-	void swordd_() throws IOException
+	void swordd_()
 	{
 		/* System generated locals */
 		int i__1, i__2;

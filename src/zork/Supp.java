@@ -1,6 +1,5 @@
 package zork;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -9,7 +8,7 @@ public class Supp
 {
 	/* Terminate the game */
 
-	public static void exit_() throws IOException
+	public static void exit_()
 	{
 		System.err.println("The game is over.");
 	    System.exit(0);

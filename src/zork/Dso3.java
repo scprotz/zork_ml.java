@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Dso3
 {
 	/* FINDXT- FIND EXIT FROM ROOM */
@@ -18,7 +16,7 @@ public class Dso3
 		this.game = game;
 	}
 
-	boolean findxt_(int dir, int rm) throws IOException
+	boolean findxt_(int dir, int rm)
 	{
 		/* System generated locals */
 		boolean ret_val;
@@ -148,7 +146,7 @@ public class Dso3
 
 	/* YESNO- OBTAIN YES/NO ANSWER */
 	/* YES-IS-TRUE=YESNO(QUESTION,YES-STRING,NO-STRING) */
-	boolean yesno_(int q, int y, int n) throws IOException
+	boolean yesno_(int q, int y, int n)
 	{
 		/* Local variables */
 		do

@@ -1,7 +1,5 @@
 package 	zork;
 
-import java.io.IOException;
-
 public class Np
 {
 	Vars vars = null;
@@ -24,112 +22,12 @@ public class Np
 		this.np3 = new Np3(vars, this, game);
 	}
 	
-	/* RDLINE-	READ INPUT LINE */
-
 	
-//	void rdline_(char[] buffer, int who) throws IOException
-//	{
-//
-//
-//	    int GOTO = 5;
-//	    do
-//	    {
-//	    	switch(GOTO)
-//	    	{
-//				    /* Function Body */
-//				case 5:
-//				    switch (who + 1) 
-//				    {
-//				    	case 1:  
-//				    		GOTO = 90;
-//				    		continue;
-//				    	case 2:  
-//				    		GOTO = 10;
-//				    		continue;
-//				    }
-//	/* SEE WHO TO PROMPT FOR. */
-//				case 10:
-//					System.out.print(">");
-//					System.out.flush();
-////					try
-////					{
-////						Thread.sleep(1);
-////					}
-////					catch (InterruptedException e1)
-////					{
-////						// TODO Auto-generated catch block
-////						e1.printStackTrace();
-////					}
-//
-//	/* PROMPT FOR GAME. */
-//				case 90:
-//					System.out.flush();
-//					
-//					String buf = null;
-//					try
-//					{
-//						buf = DMain.getInput();
-//					}
-//					catch(IOException ioe)
-//					{
-//						ioe.printStackTrace();
-//						Supp.exit_();
-//					}
-//
-//					Supp.more_input();
-//
-//					if (buf.charAt(0) == '!') 
-//					{						
-//						Runtime run  = Runtime.getRuntime();
-//			            try
-//						{
-//							run.exec(buf.substring(1));
-//						}
-//						catch (IOException e)
-//						{
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-////						system(buffer + 1);
-//						GOTO = 5;
-//						continue;
-//					}
-//
-//					buf = buf.toUpperCase();
-////					zlast = buffer - 1;
-////					for (z = buffer; *z != '\0' && *z != '\n'; z++) 
-////					{
-////						if (*z != ' ')
-////							zlast = z;
-////						if (islower(*z))
-////							*z = toupper(*z);
-////					}
-////					z = zlast + 1;
-////					if (z == buffer)
-//					if(buf.length() == 0)
-//					{
-//						GOTO = 5;
-//						continue;
-//					}
-////					*z = '\0';
-//					vars.prsvec_1.prscon = 1;
-//					for(int i = 0; i < buf.length(); i++)
-//						buffer[i] = buf.charAt(i);
-//					buffer[buf.length()] = '\0';
-//					return;
-//	    	}
-//	    }
-//	    while(true);
-//
-//	/* RESTART LEX SCAN. */
-////		throw new RuntimeException("Np.rdline_ not impl.");
-//	} /* rdline_ */
-
 	/* PARSE-	TOP LEVEL PARSE ROUTINE */
 
 	/* THIS ROUTINE DETAILS ON BIT 0 OF PRSFLG */
 
-	boolean parse_(String inbuf, boolean vbflag) throws IOException	
+	boolean parse_(String inbuf, boolean vbflag)	
 	{
 		/* System generated locals */
 		int i__1;
@@ -240,7 +138,7 @@ public class Np
 				    '1', '9', '1' - 31,
 				    '-', '-', '-' - 27 };
 	
-	private boolean lex_(String inbuf, int[] outbuf, int[] op, boolean vbflag) throws IOException
+	private boolean lex_(String inbuf, int[] outbuf, int[] op, boolean vbflag)
 	{
 	    /* System generated locals */
 	    boolean ret_val;

@@ -21,7 +21,7 @@ public class Np3
 	}
 
 	/* THIS ROUTINE DETAILS ON BIT 4 OF PRSFLG */
-	boolean synmch_() throws IOException
+	boolean synmch_()
 	{
 		/* Initialized data */
 
@@ -367,7 +367,7 @@ public class Np3
 	} /* syneql_ */
 
 	/* TAKEIT-	PARSER BASED TAKE OF OBJECT */
-	private boolean takeit_(int obj, int sflag) throws IOException
+	private boolean takeit_(int obj, int sflag)
 	{
 		/* System generated locals */
 		boolean ret_val;
@@ -517,7 +517,7 @@ public class Np3
 	} /* takeit_ */
 
 	/* GWIM- GET WHAT I MEAN IN AMBIGOUS SITUATIONS */
-	private int gwim_(int sflag, int sfw1, int sfw2) throws IOException
+	private int gwim_(int sflag, int sfw1, int sfw2)
 	{
 		/* System generated locals */
 		int ret_val;

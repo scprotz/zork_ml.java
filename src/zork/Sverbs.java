@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Sverbs
 {
 	/* SVERBS- SIMPLE VERBS PROCESSOR */
@@ -28,7 +26,7 @@ public class Sverbs
 		this.verbs = verbs;
 	}
 
-	boolean sverbs_(int ri) throws IOException
+	boolean sverbs_(int ri)
 	{
 		/* Initialized data */
 

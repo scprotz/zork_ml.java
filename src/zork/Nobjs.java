@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Nobjs
 {
 	/* NOBJS- NEW OBJECTS PROCESSOR */
@@ -20,7 +18,7 @@ public class Nobjs
 		this.game = game;
 	}
 
-	boolean nobjs_(int ri, int arg) throws IOException
+	boolean nobjs_(int ri, int arg)
 	{
 		/* System generated locals */
 		int i__1, i__2;

@@ -1,7 +1,5 @@
 package zork;
 
-import java.io.IOException;
-
 public class Dso1
 {
 	Vars vars = null;
@@ -17,7 +15,7 @@ public class Dso1
 	}
 
 	/* PRINCR- PRINT CONTENTS OF ROOM */
-	void princr_(boolean full, int rm) throws IOException
+	void princr_(boolean full, int rm)
 	{
 		/* System generated locals */
 
@@ -98,7 +96,7 @@ public class Dso1
 
 	/* DECLARATIONS */
 
-	void invent_(int adv) throws IOException
+	void invent_(int adv)
 	{
 		/* System generated locals */
 		int i__1;
@@ -159,7 +157,7 @@ public class Dso1
 	} /* invent_ */
 
 	/* PRINCO- PRINT CONTENTS OF OBJECT */
-	void princo_(int obj, int desc) throws IOException
+	void princo_(int obj, int desc)
 	{
 		/* Local variables */
 		int i;
