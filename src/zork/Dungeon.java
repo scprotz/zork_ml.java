@@ -38,10 +38,6 @@ public class Dungeon
 			System.err.println("Could not read walkthrough file.");
 			ioe.printStackTrace();
 		}
-		
-		ArrayList<String> lines = new ArrayList<String>();
-			
-					
 			
 		for(String action : actions)
 		{
