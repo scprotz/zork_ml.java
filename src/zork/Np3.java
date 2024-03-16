@@ -21,7 +21,7 @@ public class Np3
 	}
 
 	/* THIS ROUTINE DETAILS ON BIT 4 OF PRSFLG */
-	boolean synmch_()
+	public boolean synmch_()
 	{
 		/* Initialized data */
 

@@ -19,7 +19,7 @@ public class Np1
 		this.game = game;
 	}
 	
-	int sparse_(int[] lbuf, int[] llnt, boolean vbflag)
+	public int sparse_(int[] lbuf, int[] llnt, boolean vbflag)
 	{
 		/* Initialized data */
 

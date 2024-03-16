@@ -1,6 +1,14 @@
-package zork;
+package zork.parser;
 
-public class Np
+import zork.Dgame;
+import zork.Np;
+import zork.Np1;
+import zork.Np2;
+import zork.Np3;
+import zork.Parse;
+import zork.Vars;
+
+public class Parser extends Np
 {
 	Vars vars = null;
 	Dgame game = null;
@@ -12,8 +20,9 @@ public class Np
 	/* COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142 */
 	/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
 	/* WRITTEN BY R. M. SUPNIK */
-	public Np(Vars vars, Dgame game)
+	public Parser(Vars vars, Dgame game)
 	{
+		super(vars, game);
 		this.vars = vars;
 		this.game = game;
 		this.parse = new Parse();
@@ -50,15 +59,10 @@ public class Np
 
 		if (!lex_(inbuf, outbuf, outlnt, vbflag))
 		{
-			System.err.println("!lex outlnt: " + outlnt[0]);
 			GOTO = 100;
 		}
-		for(int j = 0; j < outlnt[0]; j++)
-			System.out.print(outbuf[j] + ",");
-		System.out.println();
 		if (GOTO != 100)
 		{
-			System.err.println("lex outlnt: " + outlnt[0]);
 			if ((i__1 = np1.sparse_(outbuf, outlnt, vbflag)) < 0)
 			{
 				GOTO = 100;
@@ -136,7 +140,7 @@ public class Np
 
 	/* THIS ROUTINE DETAILS ON BIT 1 OF PRSFLAG */
 
-	public static final char dlimit[] = new char[] { 'A', 'Z', 'A' - 1, '1', '9', '1' - 31, '-',
+	private static final char dlimit[] = new char[] { 'A', 'Z', 'A' - 1, '1', '9', '1' - 31, '-',
 			'-', '-' - 27 };
 
 	public boolean lex_(String inbuf, int[] outbuf, int[] op, boolean vbflag)

@@ -4,13 +4,14 @@ public class Vars
 {
 	/* vars.h -- variables for dungeon */
 
-	/* These variable definitions are really ugly because they are actually
-	 * translations of FORTRAN common blocks.  In the original FORTRAN source
-	 * the common blocks were included many times by each function that
-	 * needed them; I have changed this to define them all in this one file,
-	 * and include this in every source file.  It's less modular, and it
-	 * makes everything slower to compile, but it's easier on me.
-	 * A few structures used only by the parsing routines are in parse.h.
+	/*
+	 * These variable definitions are really ugly because they are actually
+	 * translations of FORTRAN common blocks. In the original FORTRAN source the
+	 * common blocks were included many times by each function that needed them; I
+	 * have changed this to define them all in this one file, and include this in
+	 * every source file. It's less modular, and it makes everything slower to
+	 * compile, but it's easier on me. A few structures used only by the parsing
+	 * routines are in parse.h.
 	 */
 
 //	#ifndef VARS_H
@@ -19,43 +20,39 @@ public class Vars
 //	#ifndef EXTERN
 //	#define EXTERN extern
 //	#endif
-	
+
 	public static final boolean DEBUG = true;
 	public static final boolean ALLOW_GDT = true;
 
 	public class prsvec_
 	{
-	   int prsa, prsi, prso;
-	   boolean prswon;
-	   int prscon;
+		public int prsa, prsi, prso;
+		public boolean prswon;
+		public int prscon;
 	};
-
 
 	public prsvec_ prsvec_1 = new prsvec_();
 
 	public class orphs_
 	{
-	   int oflag, oact, oslot, oprep, oname;
+		public int oflag, oact, oslot, oprep, oname;
 	};
-
 
 	public orphs_ orphs_1 = new orphs_();
 //	#define orp ((int *)&orphs_1)
 
 	public class last_
 	{
-	   int lastit;
+		public int lastit;
 	};
-
 
 	public last_ last_1 = new last_();
 
 	public class play_
 	{
-	   int winner, here;
-	   boolean telflg;
+		int winner, here;
+		boolean telflg;
 	};
-
 
 	public play_ play_1 = new play_();
 
@@ -65,9 +62,9 @@ public class Vars
 				ractio[] = new int[200], rval[] = new int[200], rflag[] = new int[200];
 
 		public int rrand(int index)
-		{			
+		{
 			int i = index + 601;
-			
+
 //			int i = index - 601;
 			int array_number = i / 200;
 			switch (array_number)
@@ -79,7 +76,7 @@ public class Vars
 				case 2:
 					return rexit[i - 400];
 				case 3:
-					return ractio[i - 600];				 
+					return ractio[i - 600];
 				case 4:
 					return rval[i - 800];
 				case 5:
@@ -88,32 +85,38 @@ public class Vars
 					throw new RuntimeException("Could not find rrand index correctly.");
 			}
 		}
-		
+
 		public void rrand(int index, int value)
 		{
-			
-			int i = index + 600;			 
+
+			int i = index + 600;
 			int array_number = i / 200;
 			switch (array_number)
 			{
 				case 0:
-					rdesc1[i] = value; break;
+					rdesc1[i] = value;
+					break;
 				case 1:
-					rdesc2[i - 200] = value; break;
+					rdesc2[i - 200] = value;
+					break;
 				case 2:
-					rexit[i - 400] = value; break;
+					rexit[i - 400] = value;
+					break;
 				case 3:
-					ractio[i - 600] = value; break;
+					ractio[i - 600] = value;
+					break;
 				case 4:
-					rval[i - 800] = value; break;
+					rval[i - 800] = value;
+					break;
 				case 5:
-					rflag[i - 1000] = value; break;
+					rflag[i - 1000] = value;
+					break;
 				default:
-					throw new RuntimeException("Could not find rrand index correctly. " + index + "="+ value + " : " + array_number);
+					throw new RuntimeException("Could not find rrand index correctly. " + index
+							+ "=" + value + " : " + array_number);
 			}
 		}
 	};
-
 
 	public rooms_ rooms_1 = new rooms_();
 //	#define eqr ((int *)&rooms_1 + 1)
@@ -233,21 +236,21 @@ public class Vars
 		final int cpuzz = 190;
 	};
 
-
 	public rindex_ rindex_1 = new rindex_();
 
-	   public class xsrch_ {
-	      final int xmin = 1024; 
-	final int    		  xmax = 16384; 
-	final int    		  xdown = 10240; 
-	final int    		  xup = 9216; 
-	final int    		  xnorth = 1024; 
-	final int    		  xsouth = 5120; 
-	final int    		  xenter = 13312; 
-	final int    		  xexit = 14336; 
-	final int    		  xeast = 3072; 
-	            final int  xwest =  7168;
-	   };
+	public class xsrch_
+	{
+		public final int xmin = 1024;
+		public final int xmax = 16384;
+		public final int xdown = 10240;
+		public final int xup = 9216;
+		public final int xnorth = 1024;
+		public final int xsouth = 5120;
+		public final int xenter = 13312;
+		public final int xexit = 14336;
+		public final int xeast = 3072;
+		public final int xwest = 7168;
+	};
 //	#ifdef INIT
 //	            = { 1024, 16384, 10240, 9216, 1024, 5120, 13312, 14336, 3072, 
 //	                7168 }
@@ -256,22 +259,22 @@ public class Vars
 
 	public xsrch_ xsrch_1 = new xsrch_();
 
-	   public class objcts_
+	public class objcts_
 	{
-	      int olnt, odesc1[] = new int[220], odesc2[] = new int[220], odesco[] = new int[220], oactio[] = new int[220], 
-	               oflag1[] = new int[220], oflag2[] = new int[220], ofval[] = new int[220], otval[] = new int[220], osize[] = new int[220], 
-	               ocapac[] = new int[220], oroom[] = new int[220], oadv[] = new int[220], ocan[] = new int[220], oread[] = new int[220];
-	   };
-
+		int olnt, odesc1[] = new int[220], odesc2[] = new int[220], odesco[] = new int[220],
+				oactio[] = new int[220], oflag1[] = new int[220], oflag2[] = new int[220],
+				ofval[] = new int[220], otval[] = new int[220], osize[] = new int[220],
+				ocapac[] = new int[220], oroom[] = new int[220], oadv[] = new int[220],
+				ocan[] = new int[220], oread[] = new int[220];
+	};
 
 	public objcts_ objcts_1 = new objcts_();
 //	#define eqo ((int *)&objcts_1 + 1)
 
 	public class oroom2_
 	{
-	   int r2lnt, oroom2[] = new int[20], rroom2[] = new int[20];
+		int r2lnt, oroom2[] = new int[20], rroom2[] = new int[20];
 	};
-
 
 	public oroom2_ oroom2_1 = new oroom2_();
 
@@ -329,7 +332,7 @@ public class Vars
 		final int rug = 17;
 		final int leave = 18;
 		final int troll = 19;
-		
+
 		final int axe = 20;
 		final int rknif = 21;
 		final int keys = 23;
@@ -390,7 +393,7 @@ public class Vars
 		final int spher = 126;
 		final int sqbut = 127;
 		final int flask = 132;
-		
+
 		final int pool = 133;
 		final int saffr = 134;
 		final int bucke = 137;
@@ -418,7 +421,7 @@ public class Vars
 		final int qdoor = 173;
 		final int cdoor = 175;
 		final int num1 = 178;
-		
+
 		final int num8 = 185;
 		final int warni = 186;
 		final int cslit = 187;
@@ -432,7 +435,7 @@ public class Vars
 		final int teeth = 197;
 		final int itobj = 192;
 		final int every = 194;
-		
+
 		final int valua = 195;
 		final int oplay = 193;
 		final int wnort = 205;
@@ -454,12 +457,11 @@ public class Vars
 
 	public oindex_ oindex_1 = new oindex_();
 
-	   public class cevent_
+	public class cevent_
 	{
-	      int clnt, ctick[] = new int[25], cactio[] = new int[25];
-	      boolean cflag[] = new boolean[25];
-	   };
-
+		int clnt, ctick[] = new int[25], cactio[] = new int[25];
+		boolean cflag[] = new boolean[25];
+	};
 
 	public cevent_ cevent_1 = new cevent_();
 //	#define eqc ((int *)&cevent_1 + 1)
@@ -507,8 +509,8 @@ public class Vars
 		int alnt, aroom[] = new int[4], ascore[] = new int[4], avehic[] = new int[4],
 				aobj[] = new int[4], aactio[] = new int[4], astren[] = new int[4],
 				aflag[] = new int[4];
-	};
-;
+	};;
+
 	public advs_ advs_1 = new advs_();
 //	#define eqa ((int *)&advs_1 + 1)
 
@@ -555,7 +557,7 @@ public class Vars
 		final int alarmw = 104;
 		final int exorcw = 105;
 		final int plugw = 106;
-		
+
 		final int kickw = 107;
 		final int wavew = 108;
 		final int raisew = 109;
@@ -569,7 +571,7 @@ public class Vars
 		final int breatw = 117;
 		final int knockw = 118;
 		final int lookw = 119;
-		
+
 		final int examiw = 120;
 		final int shakew = 121;
 		final int movew = 122;
@@ -583,7 +585,7 @@ public class Vars
 		final int boardw = 130;
 		final int unboaw = 131;
 		final int takew = 132;
-		
+
 		final int invenw = 133;
 		final int fillw = 134;
 		final int eatw = 135;
@@ -597,7 +599,7 @@ public class Vars
 		final int tellw = 143;
 		final int putw = 144;
 		final int dropw = 145;
-		
+
 		final int givew = 146;
 		final int pourw = 147;
 		final int throww = 148;
@@ -612,9 +614,9 @@ public class Vars
 		final int windw = 155;
 		final int clmbw = 156;
 		final int clmbuw = 157;
-		
-		final int clmbdw = 158; 
-	    final int trntow = 159;
+
+		final int clmbdw = 158;
+		final int trntow = 159;
 	};
 //	vindex_
 //	#ifdef INIT
@@ -1015,7 +1017,6 @@ public class Vars
 
 		}
 	};
-	
 
 	public findex_ findex_1 = new findex_();
 //	#define flags ((boolean *)&findex_1)
@@ -1023,52 +1024,53 @@ public class Vars
 
 	public class debug_
 	{
-	   int dbgflg, prsflg, gdtflg;
+		int dbgflg, prsflg, gdtflg;
 	};
-
 
 	public debug_ debug_1 = new debug_();
 
 	public class hack_
 	{
-	   int thfpos;
-	   boolean thfflg, thfact, swdact;
-	   int swdsta;
+		int thfpos;
+		boolean thfflg, thfact, swdact;
+		int swdsta;
 	};
-
 
 	public hack_ hack_1 = new hack_();
 
 	public class vill_
 	{
-	   int vlnt, villns[] = new int[4], vprob[] = new int[4], vopps[] = new int[4], vbest[] = new int[4], vmelee[] = new int[4];
+		int vlnt, villns[] = new int[4], vprob[] = new int[4], vopps[] = new int[4],
+				vbest[] = new int[4], vmelee[] = new int[4];
 	};
-
 
 	public vill_ vill_1 = new vill_();
 //	#define eqv ((int *)&vill_1 + 1)
 
 	public class state_
 	{
-	   int moves, deaths, rwscor, mxscor, mxload, ltshft, bloc, mungrm, hs, 
-	           egscor, egmxsc;
+		int moves, deaths, rwscor, mxscor, mxload, ltshft, bloc, mungrm, hs, egscor, egmxsc;
 	};
-
 
 	public state_ state_1 = new state_();
 
 	public class curxt_
 	{
-	   int xtype, xroom1, xstrng, xactio, xobj;
-	   
-	   public int xflag() { return xobj; };
-	   public void xflag(int val) { xobj = val; } 
-	};
+		int xtype, xroom1, xstrng, xactio, xobj;
 
+		public int xflag()
+		{
+			return xobj;
+		};
+
+		public void xflag(int val)
+		{
+			xobj = val;
+		}
+	};
 
 	public curxt_ curxt_1 = new curxt_();
 //	#define xflag ((int *)&curxt_1 + 4)
-	
 
 	public class xpars_
 	{
@@ -1094,18 +1096,16 @@ public class Vars
 
 	public class star_
 	{
-	   int mbase, strbit;
+		int mbase, strbit;
 	};
-
 
 	public star_ star_1 = new star_();
 
 	public class input_
 	{
-	   int inlnt;
-	   String inbuf = "";
+		int inlnt;
+		String inbuf = "";
 	};
-
 
 	public input_ input_1 = new input_();
 
@@ -1115,7 +1115,7 @@ public class Vars
 		int scolrm = 0;
 		int scolac = 0;
 		int[] scoldr = new int[] { 1024, 153, 5120, 154, 3072, 152, 7168, 151 };
-		int[] scolwl = new int[]{ 151, 207, 3072, 152, 208, 7168, 153, 206, 5120, 154, 205, 1024 };
+		int[] scolwl = new int[] { 151, 207, 3072, 152, 208, 7168, 153, 206, 5120, 154, 205, 1024 };
 	};
 //	screen_
 //	#ifdef INIT
@@ -1126,19 +1126,20 @@ public class Vars
 
 	public screen_ screen_1 = new screen_();
 
-	public class rmsg_ {
-	   int mlnt;
-	   long mrloc;
-	   int[] rtext = new int[1050];
+	public class rmsg_
+	{
+		int mlnt;
+		long mrloc;
+		int[] rtext = new int[1050];
 	};
-
 
 	public rmsg_ rmsg_1 = new rmsg_();
 
-	public class vers_ {
-	   int vmaj = 2;
-	   int vmin = 7;
-	   int vedit = 'A';
+	public class vers_
+	{
+		int vmaj = 2;
+		int vmin = 7;
+		int vedit = 'A';
 	};
 //	vers_
 //	#ifdef INIT
@@ -1150,17 +1151,17 @@ public class Vars
 
 	public class time_
 	{
-	   int pltime;
-	   int[] shour = new int[1];
-	   int[] smin = new int[1];
-	   int[] ssec = new int[1];
+		int pltime;
+		int[] shour = new int[1];
+		int[] smin = new int[1];
+		int[] ssec = new int[1];
 	};
-
 
 	public time_ time_1 = new time_();
 
-	public class hyper_ {
-	   final int hfactr = 500;
+	public class hyper_
+	{
+		final int hfactr = 500;
 	};
 //	hyper_
 //	#ifdef INIT
@@ -1172,24 +1173,19 @@ public class Vars
 
 	public class exits_
 	{
-	   int xlnt, travel[] = new int[900];
+		int xlnt, travel[] = new int[900];
 	};
-
 
 	public exits_ exits_1 = new exits_();
 
-	public class puzzle_ {
-	   final int cpdr[] = new int[]{ 1024, -8, 2048, -7, 3072, 1, 4096, 9, 5120, 8, 6144, 7, 
-			      7168, -1, 8192, -9 };
-	   final int cpwl[] = new int[]{ 205, -8, 206, 8, 207, 1, 208, -1 };
-	   final int cpvec[] = new int[]{ 1,  1,  1,  1,  1,  1, 1, 1,
-			      1,  0, -1,  0,  0, -1, 0, 1,
-			      1, -1,  0,  1,  0, -2, 0, 1,
-			      1,  0,  0,  0,  0,  1, 0, 1,
-			      1, -3,  0,  0, -1, -1, 0, 1,
-			      1,  0,  0, -1,  0,  0, 0, 1,
-			      1,  1,  1,  0,  0,  0, 1, 1,
-			      1,  1,  1,  1,  1,  1, 1, 1 };
+	public class puzzle_
+	{
+		final int cpdr[] = new int[] { 1024, -8, 2048, -7, 3072, 1, 4096, 9, 5120, 8, 6144, 7, 7168,
+				-1, 8192, -9 };
+		final int cpwl[] = new int[] { 205, -8, 206, 8, 207, 1, 208, -1 };
+		final int cpvec[] = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, -1, 0, 0, -1, 0, 1, 1, -1, 0,
+				1, 0, -2, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, -3, 0, 0, -1, -1, 0, 1, 1, 0, 0, -1, 0,
+				0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 	};
 //	puzzle_
 //	#ifdef INIT
@@ -1209,8 +1205,9 @@ public class Vars
 
 	public puzzle_ puzzle_1 = new puzzle_();
 
-	public class bats_ {
-	   final int[] batdrp = new int[]{ 66, 67, 68, 69, 70, 71, 72, 65, 73 };
+	public class bats_
+	{
+		final int[] batdrp = new int[] { 66, 67, 68, 69, 70, 71, 72, 65, 73 };
 	};
 //	bats_
 //	#ifdef INIT
